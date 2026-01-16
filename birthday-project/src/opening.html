@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יום הולדת 35 לבן 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0D1B2A;
+            --bg-darker: #05101A;
+            --text-light: #F5E6D3;
+            --text-cream: #FDF8EE;
+            --star-gold: #FFD700;
+            --accent-blue: #7EB8DA;
+            --accent-warm: #E8D4C0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ===== STARS BACKGROUND ===== */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* ===== MAIN CONTENT ===== */
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 700px;
+            padding: 20px;
+        }
+        
+        /* ===== TITLE ===== */
+        .title {
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--star-gold);
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out 0.5s forwards;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* ===== MESSAGE BOX ===== */
+        .message-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+        
+        .message-box p {
+            font-size: 1rem;
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 10px;
+            opacity: 0;
+        }
+        
+        .message-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message-box p.greeting {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--star-gold);
+        }
+        
+        .message-box p.closing {
+            font-weight: 400;
+            margin-top: 15px;
+        }
+        
+        /* Text reveal animations */
+        .message-box p:nth-child(1) { animation: typeIn 0.8s ease-out 1.5s forwards; }
+        .message-box p:nth-child(2) { animation: typeIn 0.8s ease-out 2.3s forwards; }
+        .message-box p:nth-child(3) { animation: typeIn 0.8s ease-out 3.1s forwards; }
+        
+        .highlight {
+            color: var(--star-gold);
+            font-weight: 400;
+        }
+        
+        /* ===== SCENE - SPACESHIP & CHARACTERS ===== */
+        .scene-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto 15px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 3.5s forwards;
+        }
+        
+        .scene-container svg {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* ===== LAUNCH BUTTON ===== */
+        .launch-btn {
+            background: linear-gradient(135deg, var(--star-gold) 0%, #FFA500 100%);
+            color: var(--bg-dark);
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 4s forwards;
+        }
+        
+        .launch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 30px rgba(255, 215, 0, 0.6);
+        }
+        
+        .launch-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* ===== LAUNCH ANIMATION ===== */
+        .launching .scene-container {
+            animation: liftOff 2s ease-in forwards;
+        }
+        
+        .launching .content {
+            animation: fadeOutContent 1.5s ease-out forwards;
+        }
+        
+        /* ===== KEYFRAME ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes typeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes liftOff {
+            0% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-20px) scale(1.05); }
+            100% { transform: translateY(-150vh) scale(0.5); opacity: 0; }
+        }
+        
+        @keyframes fadeOutContent {
+            0% { opacity: 1; }
+            100% { opacity: 0; pointer-events: none; }
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        /* Ground for standing scene */
+        .ground-line {
+            stroke: rgba(255, 215, 0, 0.3);
+            stroke-width: 2;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .title { font-size: 1.8rem; }
+            .message-box { padding: 25px 20px; }
+            .message-box p { font-size: 1rem; }
+            .launch-btn { font-size: 1.1rem; padding: 12px 40px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- STARS BACKGROUND - 12 stars representing the journey -->
+    <svg class="stars-container" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <filter id="starGlow">
+                <feGaussianBlur stdDeviation="0.3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>
+        
+        <!-- 12 Journey Stars - well spaced -->
+        <!-- Row 1: Stars 1-4 (top) -->
+        <!-- Star 1 - יצירתיות - Gold -->
+        <polygon points="5,15 6.5,19 11,19 7.5,22 9,27 5,24 1,27 2.5,22 -1,19 3.5,19" fill="#FFD700" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 2 - לב טוב - Pink -->
+        <polygon points="28,12 29.5,16 34,16 30.5,19 32,24 28,21 24,24 25.5,19 22,16 26.5,16" fill="#FF9EB5" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 3 - תמיד שם - Purple -->
+        <polygon points="50,8 51.5,12 56,12 52.5,15 54,20 50,17 46,20 47.5,15 44,12 48.5,12" fill="#A78BFA" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="3.5s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 4 - התמדה - Blue -->
+        <polygon points="75,14 76.5,18 81,18 77.5,21 79,26 75,23 71,26 72.5,21 69,18 73.5,18" fill="#60A5FA" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="2.8s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Row 2: Stars 5-8 (middle-top) -->
+        <!-- Star 5 - מוכשרות - Yellow -->
+        <polygon points="95,18 96.5,22 101,22 97.5,25 99,30 95,27 91,30 92.5,25 89,22 93.5,22" fill="#FBBF24" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 6 - הקשבה - Green -->
+        <polygon points="12,38 13.5,42 18,42 14.5,45 16,50 12,47 8,50 9.5,45 6,42 10.5,42" fill="#34D399" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.2s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 7 - יופי - Light Pink -->
+        <polygon points="38,32 39.5,36 44,36 40.5,39 42,44 38,41 34,44 35.5,39 32,36 36.5,36" fill="#F9A8D4" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.7s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 8 - בדיחות גרועות - Light Yellow -->
+        <polygon points="62,28 63.5,32 68,32 64.5,35 66,40 62,37 58,40 59.5,35 56,32 60.5,32" fill="#FCD34D" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Row 3: Stars 9-12 (bottom) -->
+        <!-- Star 9 - סדר - Lime -->
+        <polygon points="88,42 89.5,46 94,46 90.5,49 92,54 88,51 84,54 85.5,49 82,46 86.5,46" fill="#A3E635" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.3;0.9;0.3" dur="3.1s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 10 - בוקר - Orange -->
+        <polygon points="22,55 23.5,59 28,59 24.5,62 26,67 22,64 18,67 19.5,62 16,59 20.5,59" fill="#FDBA74" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="2.6s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 11 - שגרה מתוקה - Lavender -->
+        <polygon points="50,52 51.5,56 56,56 52.5,59 54,64 50,61 46,64 47.5,59 44,56 48.5,56" fill="#C4B5FD" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Star 12 - אהבה - Red (bigger, special) -->
+        <polygon points="78,58 80,63 86,63 81.5,67 83.5,73 78,69 72.5,73 74.5,67 70,63 76,63" fill="#FF6B6B" filter="url(#starGlow)">
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+        </polygon>
+        
+        <!-- Extra decorative tiny stars -->
+        <circle cx="3" cy="70" r="0.3" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.2;0.6;0.2" dur="4s" repeatCount="indefinite"/></circle>
+        <circle cx="97" cy="65" r="0.3" fill="#fff" opacity="0.3"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
+        <circle cx="15" cy="75" r="0.2" fill="#fff" opacity="0.5"><animate attributeName="opacity" values="0.2;0.5;0.2" dur="4.5s" repeatCount="indefinite"/></circle>
+        <circle cx="85" cy="75" r="0.25" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.8s" repeatCount="indefinite"/></circle>
+        <circle cx="45" cy="72" r="0.2" fill="#fff" opacity="0.3"><animate attributeName="opacity" values="0.2;0.6;0.2" dur="4.2s" repeatCount="indefinite"/></circle>
+        <circle cx="65" cy="75" r="0.3" fill="#fff" opacity="0.4"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.3s" repeatCount="indefinite"/></circle>
+    </svg>
+    
+    <!-- MAIN CONTENT -->
+    <div class="content">
+        <!-- Title -->
+        <h1 class="title">🎂 יום הולדת 35 לבן 🎂</h1>
+        
+        <!-- Message -->
+        <div class="message-box">
+            <p class="greeting">היי בוצ,</p>
+            <p>
+                חשבתי שאת הברכה שלך הפעם אני אעשה בהשראה של משהו שאתה הכנת לי..
+                הרי ידוע שאתה מכין את הדברים הכי טובים ויפים וזה יהיה פספוס לא לנצל פרויקט כל כך יפה,
+                אז הרשתי לעצמי לעשות <span class="highlight">clone</span> ל-github שלך, 
+                לקרוא ל-<span class="highlight">bmad master</span> ולעוף אל תוך מי שאתה בשבילי - 
+                ולגלות את כל הכוכבים שמאירים לי את הדרך כבר <span class="highlight">7 שנים</span>.
+            </p>
+            <p class="closing">
+                אז שנתחיל... במסע אל תוך בן? 
+                <br>חשוב להדק חגורות. 🚀
+            </p>
+        </div>
+        
+        <!-- Scene: Spaceship on ground with Gal & Ben standing next to it -->
+        <div class="scene-container">
+            <svg viewBox="0 0 400 200" style="animation: float 4s ease-in-out infinite;">
+                <defs>
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6D3"/>
+                        <stop offset="100%" style="stop-color:#E8D4C0"/>
+                    </linearGradient>
+                    <linearGradient id="windowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7EB8DA"/>
+                        <stop offset="100%" style="stop-color:#5A9BC7"/>
+                    </linearGradient>
+                    <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFE4B5"/>
+                        <stop offset="100%" style="stop-color:#F5D5B5"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Ground line -->
+                <line x1="50" y1="175" x2="350" y2="175" class="ground-line"/>
+                
+                <!-- ===== SPACESHIP (resting on ground) ===== -->
+                <g transform="translate(130, 70)">
+                    <!-- Spaceship body - simple ellipse -->
+                    <ellipse cx="70" cy="60" rx="65" ry="32" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Dome -->
+                    <ellipse cx="70" cy="40" rx="40" ry="22" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Heart window - empty (they're outside) -->
+                    <path d="M70 25 C70 18, 58 14, 50 22 C42 30, 42 42, 70 58 C98 42, 98 30, 90 22 C82 14, 70 18, 70 25" 
+                          fill="url(#windowBlue)" stroke="#4A90A4" stroke-width="1.5"/>
+                    
+                    <!-- Wings -->
+                    <path d="M5 60 L-25 85 L-25 92 L10 72" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    <path d="M135 60 L165 85 L165 92 L130 72" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    
+                    <!-- Landing legs -->
+                    <line x1="30" y1="90" x2="20" y2="105" stroke="#C4A080" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="110" y1="90" x2="120" y2="105" stroke="#C4A080" stroke-width="3" stroke-linecap="round"/>
+                    <line x1="70" y1="92" x2="70" y2="105" stroke="#C4A080" stroke-width="3" stroke-linecap="round"/>
+                    
+                    <!-- Flag -->
+                    <line x1="70" y1="18" x2="70" y2="-5" stroke="#C4A080" stroke-width="1.5"/>
+                    <polygon points="70,-5 88,0 70,6" fill="#FFD700"/>
+                </g>
+                
+                <!-- ===== GAL (standing left of spaceship) ===== -->
+                <g transform="translate(60, 95)">
+                    <!-- Body -->
+                    <rect x="8" y="45" width="24" height="35" rx="5" fill="#5D4E37"/>
+                    
+                    <!-- Legs -->
+                    <rect x="10" y="78" width="8" height="25" rx="3" fill="#3D3D3D"/>
+                    <rect x="22" y="78" width="8" height="25" rx="3" fill="#3D3D3D"/>
+                    
+                    <!-- Arm pointing up (excited!) -->
+                    <path d="M8 50 L-5 35" stroke="#5D4E37" stroke-width="6" stroke-linecap="round"/>
+                    
+                    <!-- Head -->
+                    <circle cx="20" cy="30" r="22" fill="url(#skin)"/>
+                    
+                    <!-- Hair - BLACK -->
+                    <ellipse cx="20" cy="15" rx="20" ry="14" fill="#1a1a1a"/>
+                    <path d="M0 28 Q3 10 20 5 Q37 10 40 28" fill="#1a1a1a"/>
+                    
+                    <!-- Eyes - BROWN -->
+                    <circle cx="12" cy="30" r="3" fill="white"/>
+                    <circle cx="28" cy="30" r="3" fill="white"/>
+                    <circle cx="12" cy="31" r="2" fill="#5D4037"/>
+                    <circle cx="28" cy="31" r="2" fill="#5D4037"/>
+                    
+                    <!-- Big smile -->
+                    <path d="M10 42 Q20 52 30 42" stroke="#C4846C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+                
+                <!-- ===== BEN (standing right of spaceship) ===== -->
+                <g transform="translate(300, 95)">
+                    <!-- Body -->
+                    <rect x="8" y="45" width="24" height="35" rx="5" fill="#7A6B55"/>
+                    
+                    <!-- Legs -->
+                    <rect x="10" y="78" width="8" height="25" rx="3" fill="#4A4A4A"/>
+                    <rect x="22" y="78" width="8" height="25" rx="3" fill="#4A4A4A"/>
+                    
+                    <!-- Hand on hip (casual) -->
+                    <path d="M32 55 L42 65" stroke="#7A6B55" stroke-width="6" stroke-linecap="round"/>
+                    
+                    <!-- Head -->
+                    <circle cx="20" cy="30" r="22" fill="url(#skin)"/>
+                    
+                    <!-- Hair - BROWN -->
+                    <ellipse cx="20" cy="15" rx="20" ry="14" fill="#6B4423"/>
+                    <path d="M0 28 Q3 10 20 5 Q37 10 40 28" fill="#6B4423"/>
+                    
+                    <!-- Eyes - GREEN -->
+                    <circle cx="12" cy="30" r="3" fill="white"/>
+                    <circle cx="28" cy="30" r="3" fill="white"/>
+                    <circle cx="12" cy="31" r="2" fill="#4A8B5C"/>
+                    <circle cx="28" cy="31" r="2" fill="#4A8B5C"/>
+                    
+                    <!-- Happy smile -->
+                    <path d="M10 42 Q20 50 30 42" stroke="#C4846C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+        
+        <!-- Launch Button -->
+        <button class="launch-btn" onclick="launch()">
+            🚀 להמריא!
+        </button>
+    </div>
+    
+    <script>
+        function launch() {
+            document.body.classList.add('launching');
+            
+            // Navigate to first star after animation
+            setTimeout(() => {
+                window.location.href = 'star-01.html';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+

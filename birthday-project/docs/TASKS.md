@@ -62,9 +62,11 @@
 - לקשר כל תכונה לסיפור או זיכרון
 - סגנון הכתיבה: ייקבע תוך כדי עבודה עם גל
 
+**Opening page:** ✅ Done - `src/opening.html`
+
 **Stars to write:**
-1. ⬜ היצירתיות
-2. ⬜ הלב הטוב
+1. ✅ היצירתיות - `src/star-01.html`
+2. ⬜ הלב הטוב ← **הבא בתור!**
 3. ⬜ תמיד שם
 4. ⬜ ההתמדה
 5. ⬜ המוכשרות
@@ -200,6 +202,8 @@
 |------|-----------|-------|
 | Initial Setup | 2026-01-16 | Created docs structure, cloned reference project |
 | TASK-001 | 2026-01-16 | Concept + character design approved. See `character-demo-v4.html` |
+| Opening Page | 2026-01-17 | `src/opening.html` - דף פתיחה עם טקסט, חללית, כוכבים וכפתור המראה |
+| Star 1 | 2026-01-17 | `src/star-01.html` - כוכב היצירתיות ✅ |
 
 ---
 
