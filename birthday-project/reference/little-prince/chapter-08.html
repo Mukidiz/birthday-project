@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 8 | הוורד</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+        /* THEME COLORS - Love/Romance */
+        --primary: #FFB6C1;
+        --secondary: #E8A0A0;
+        --accent: #C77878;
+        
+        /* FIXED COLORS - NEVER CHANGE */
+        --sand: #F5E6C8;
+        --sand-light: #FDF8EE;
+        --sand-dark: #E8D4A8;
+        --text-primary: #5D4E37;
+        --text-secondary: #7A6B55;
+        --star-gold: #FFD700;
+    }
+    
+    body {
+        font-family: 'Heebo', sans-serif;
+        background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+        min-height: 100vh;
+        color: var(--text-primary);
+        overflow-x: hidden;
+    }
+    
+    /* STARS BACKGROUND */
+    .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+    .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+    
+    /* PLANET DECORATION */
+    .planet {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+        border-radius: 50%;
+        box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+        z-index: 0;
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    /* HEADER */
+    .header {
+        text-align: center;
+        padding: 40px 20px;
+        position: relative;
+        z-index: 1;
+    }
+    .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: sway 4s ease-in-out infinite; }
+    .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+    .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+    .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+    .header .mood-badge {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 20px;
+        background: var(--accent);
+        color: white;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* CONTAINER */
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+    
+    /* NAVIGATION */
+    .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+    .nav-btn {
+        background: var(--sand-light);
+        border: 2px solid var(--sand-dark);
+        padding: 12px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-family: 'Heebo', sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+    .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+    .nav-btn i { font-size: 1.2rem; }
+    
+    /* SECTIONS */
+    .section { display: none; animation: fadeIn 0.6s ease; }
+    .section.active { display: block; }
+    
+    /* CARDS */
+    .card {
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+        border: 1px solid var(--sand-dark);
+        position: relative;
+        overflow: hidden;
+    }
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    }
+    .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .card-icon {
+        width: 50px; height: 50px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem;
+        background: var(--accent);
+        color: white;
+    }
+    .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+    .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; }
+    
+    /* QUOTE BOX */
+    .quote-box {
+        background: linear-gradient(135deg, var(--sand-light), var(--sand));
+        border-right: 4px solid var(--accent);
+        padding: 20px 25px;
+        margin: 20px 0;
+        border-radius: 0 15px 15px 0;
+        font-style: italic;
+        position: relative;
+    }
+    .quote-box::before {
+        content: '\eb48';
+        font-family: 'tabler-icons';
+        position: absolute;
+        top: -10px; right: 15px;
+        font-size: 2rem;
+        color: var(--accent);
+        opacity: 0.5;
+    }
+    
+    /* REVEAL BUTTON */
+    .reveal-container { margin: 25px 0; text-align: center; }
+    .reveal-btn {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+    }
+    .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .reveal-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease, padding 0.5s ease;
+        background: var(--sand-light);
+        border-radius: 15px;
+        margin-top: 15px;
+    }
+    .reveal-content.open { max-height: 800px; padding: 25px; }
+    
+    /* SYMBOL GRID */
+    .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+    .symbol-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+    .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+    .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+    .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+    .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); }
+    .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+    
+    /* TIMELINE */
+    .timeline { position: relative; padding-right: 30px; }
+    .timeline::before {
+        content: '';
+        position: absolute;
+        right: 8px; top: 0; bottom: 0;
+        width: 3px;
+        background: linear-gradient(180deg, var(--primary), var(--accent));
+        border-radius: 3px;
+    }
+    .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        right: 0; top: 25px;
+        width: 18px; height: 18px;
+        background: white;
+        border: 3px solid var(--accent);
+        border-radius: 50%;
+    }
+    .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+    .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+    .timeline-item .emotion-tag {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 4px 12px;
+        background: var(--accent);
+        color: white;
+        border-radius: 12px;
+        font-size: 0.85rem;
+    }
+    
+    /* INTERPRETATION CARDS */
+    .interpretation-card {
+        background: var(--sand-light);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-right: 4px solid var(--accent);
+    }
+    .interpretation-card .approach-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--accent);
+        color: white;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+    .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+    .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+    
+    /* CHALLENGE CARDS */
+    .challenge-card {
+        background: var(--sand-light);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+    .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+    .challenge-icon {
+        width: 50px; height: 50px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: flex; align-items: center; justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+    }
+    .challenge-type {
+        display: inline-block;
+        padding: 3px 10px;
+        background: var(--secondary);
+        border-radius: 10px;
+        font-size: 0.8rem;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+    }
+    .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+    .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+    .hint-container { margin-top: 15px; display: none; }
+    .challenge-card.active .hint-container { display: block; }
+    .hint-btn {
+        background: white;
+        border: 1px solid var(--accent);
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-family: 'Heebo', sans-serif;
+        font-size: 0.9rem;
+        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .hint-content {
+        display: none;
+        margin-top: 10px;
+        padding: 12px;
+        background: white;
+        border-radius: 10px;
+        border-right: 3px solid var(--accent);
+    }
+    .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+    
+    /* CONNECTIONS BOX */
+    .connections-box {
+        margin-top: 30px;
+        padding: 25px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 15px;
+    }
+    .connections-box h3 { color: white; margin-bottom: 15px; }
+    .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+    .universal-message {
+        padding: 15px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        text-align: center;
+        font-style: italic;
+        color: white;
+        margin-top: 15px;
+    }
+    
+    /* FOOTER */
+    .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+    .footer i { color: var(--accent); margin: 0 5px; }
+    
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn { background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .home-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .chapter-bookmark-btn { background: white; border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+    /* BOOK NAVIGATION - Updated */
+    .book-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .book-nav-btn {
+        background: white;
+        border: 2px solid var(--accent);
+        padding: 12px 25px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+    .book-nav-btn:hover {
+        background: var(--accent);
+        color: white;
+    }
+    .book-nav-btn.home {
+        padding: 12px 15px;
+    }
+    .book-nav-btn.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    /* CHARACTER GRID */
+    .character-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+    }
+    .character-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        border: 2px solid var(--sand-dark);
+        transition: all 0.3s ease;
+    }
+    .character-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .character-card i {
+        font-size: 2.5rem;
+        color: var(--accent);
+        margin-bottom: 15px;
+    }
+    .character-card h3 {
+        color: var(--text-primary);
+        margin-bottom: 10px;
+    }
+    .character-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    /* BENEATH SECTION */
+    .beneath-section {
+        background: linear-gradient(135deg, rgba(199, 120, 120, 0.1), rgba(255, 182, 193, 0.1));
+        border-radius: 15px;
+        padding: 25px;
+        margin: 25px 0;
+        border-right: 4px solid var(--accent);
+    }
+    .beneath-section h3 {
+        color: var(--accent);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .beneath-section p {
+        color: var(--text-secondary);
+        line-height: 1.9;
+        margin-bottom: 15px;
+    }
+    
+    /* ANIMATIONS */
+    @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* PAGE TRANSITION ANIMATIONS */
+    @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.4s ease; }
+    .section.slide-right { animation: slideInRight 0.4s ease; }
+    .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+        .header h1 { font-size: 1.8rem; }
+        .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+        .card { padding: 20px; }
+        .symbol-grid { grid-template-columns: 1fr; }
+    }
+    
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+        .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+        .section { display: block !important; page-break-inside: avoid; }
+        .reveal-content { max-height: none !important; padding: 25px !important; }
+        body { background: white; }
+    }
+
+    /* ILLUSTRATION STYLES */
+    .illustration-container {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+        padding: 20px;
+    }
+    .illustration-container svg {
+        max-width: 100%;
+        height: auto;
+        filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+    }
+    .illustration-float-right {
+        float: left;
+        margin: 0 25px 15px 0;
+        max-width: 200px;
+    }
+    .illustration-float-left {
+        float: right;
+        margin: 0 0 15px 25px;
+        max-width: 200px;
+    }
+    .illustration-center {
+        display: block;
+        margin: 30px auto;
+        max-width: 350px;
+    }
+    .illustration-wide {
+        width: 100%;
+        max-width: 600px;
+        margin: 30px auto;
+        display: block;
+    }
+    .illustration-small {
+        width: 120px;
+        height: 120px;
+    }
+    @media (max-width: 600px) {
+        .illustration-float-right,
+        .illustration-float-left {
+            float: none;
+            display: block;
+            margin: 20px auto;
+            max-width: 250px;
+        }
+    }
+</style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+
+    <!-- PLANET - Always include -->
+<div class="planet"></div>
+
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+<header class="header">
+    <div class="header-icon">
+        <i class="ti ti-flower"></i>
+    </div>
+    <h1>הנסיך הקטן</h1>
+    <p class="chapter-number">פרק 8</p>
+    <p class="chapter-title">הוורד</p>
+    <span class="mood-badge"><i class="ti ti-heart"></i> אהבה ופגיעות</span>
+    
+    <!-- Main Rose Illustration -->
+    <div class="illustration-container">
+        <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px;">
+            <defs>
+                <linearGradient id="skyGrad8" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1a1a2e"/>
+                    <stop offset="50%" style="stop-color:#FFB6C1"/>
+                    <stop offset="100%" style="stop-color:#FDF8EE"/>
+                </linearGradient>
+                <linearGradient id="planetGrad8" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#F5E6C8"/>
+                    <stop offset="100%" style="stop-color:#E8D4A8"/>
+                </linearGradient>
+                <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF6B8A"/>
+                    <stop offset="50%" style="stop-color:#E84A73"/>
+                    <stop offset="100%" style="stop-color:#C73B5D"/>
+                </linearGradient>
+                <linearGradient id="roseCenterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FFD700"/>
+                    <stop offset="100%" style="stop-color:#FFA500"/>
+                </linearGradient>
+                <linearGradient id="stemGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:#4A7C3F"/>
+                    <stop offset="100%" style="stop-color:#2D5A27"/>
+                </linearGradient>
+                <filter id="roseShadow">
+                    <feDropShadow dx="2" dy="3" stdDeviation="4" flood-opacity="0.2"/>
+                </filter>
+                <filter id="glowPink">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+            
+            <!-- Background -->
+            <rect width="400" height="220" fill="url(#skyGrad8)" rx="10"/>
+            
+            <!-- Stars -->
+            <g fill="#FFD700">
+                <circle cx="30" cy="25" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+                <circle cx="80" cy="40" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+                <circle cx="150" cy="20" r="2"><animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/></circle>
+                <circle cx="250" cy="35" r="1.5"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+                <circle cx="320" cy="25" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+                <circle cx="370" cy="45" r="1.5"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
+            </g>
+            
+            <!-- Small Planet with Rose -->
+            <g transform="translate(200, 160)">
+                <!-- Planet -->
+                <circle cx="0" cy="30" r="55" fill="url(#planetGrad8)"/>
+                <ellipse cx="-20" cy="50" rx="15" ry="8" fill="#E0D098" opacity="0.5"/>
+                <ellipse cx="25" cy="35" rx="10" ry="5" fill="#D8C890" opacity="0.4"/>
+                
+                <!-- Rose Stem -->
+                <path d="M0 -25 Q5 0 0 25" stroke="url(#stemGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+                
+                <!-- Rose Leaves -->
+                <g fill="#4A7C3F">
+                    <ellipse cx="-18" cy="5" rx="12" ry="6" transform="rotate(-30 -18 5)"/>
+                    <ellipse cx="15" cy="12" rx="10" ry="5" transform="rotate(25 15 12)"/>
+                </g>
+                
+                <!-- Rose Thorns -->
+                <g fill="#2D5A27">
+                    <polygon points="-3,-5 -8,-8 -3,-3"/>
+                    <polygon points="3,8 8,5 3,10"/>
+                </g>
+                
+                <!-- The Rose Flower -->
+                <g transform="translate(0, -40)" filter="url(#roseShadow)">
+                    <!-- Outer petals -->
+                    <ellipse cx="0" cy="0" rx="22" ry="18" fill="url(#roseGrad)" transform="rotate(-15)"/>
+                    <ellipse cx="-8" cy="-5" rx="18" ry="14" fill="#FF7A95" transform="rotate(30)"/>
+                    <ellipse cx="8" cy="-5" rx="18" ry="14" fill="#FF6B8A" transform="rotate(-30)"/>
+                    <ellipse cx="0" cy="-8" rx="16" ry="12" fill="#FF8FA8"/>
+                    <!-- Inner petals -->
+                    <ellipse cx="0" cy="-3" rx="12" ry="10" fill="#FFA0B5"/>
+                    <ellipse cx="0" cy="0" rx="8" ry="6" fill="#FFB6C1"/>
+                    <!-- Center -->
+                    <circle cx="0" cy="2" r="4" fill="url(#roseCenterGrad)"/>
+                </g>
+                
+                <!-- Little Prince standing next to rose -->
+                <g transform="translate(-45, -15)">
+                    <!-- Body -->
+                    <rect x="-8" y="5" width="16" height="20" fill="#5FBAA8" rx="3"/>
+                    <!-- Scarf -->
+                    <path d="M-8 8 Q-15 15 -12 25" stroke="#FFD700" stroke-width="3" fill="none"/>
+                    <!-- Head -->
+                    <circle cx="0" cy="-5" r="10" fill="#FFE4B5"/>
+                    <!-- Hair (golden) -->
+                    <ellipse cx="0" cy="-12" rx="9" ry="6" fill="#FFD700"/>
+                    <circle cx="-6" cy="-8" r="4" fill="#FFD700"/>
+                    <circle cx="6" cy="-8" r="4" fill="#FFD700"/>
+                    <!-- Eyes looking at rose -->
+                    <circle cx="-3" cy="-6" r="2" fill="#5D4E37"/>
+                    <circle cx="3" cy="-6" r="2" fill="#5D4E37"/>
+                    <circle cx="-2" cy="-7" r="0.8" fill="white"/>
+                    <circle cx="4" cy="-7" r="0.8" fill="white"/>
+                    <!-- Gentle smile -->
+                    <path d="M-3 0 Q0 3 3 0" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                    <!-- Legs -->
+                    <rect x="-6" y="25" width="5" height="12" fill="#5D4E37" rx="2"/>
+                    <rect x="1" y="25" width="5" height="12" fill="#5D4E37" rx="2"/>
+                </g>
+                
+                <!-- Hearts floating -->
+                <g fill="#FF6B8A" opacity="0.6">
+                    <path d="M35 -50 C35 -55 30 -58 27 -55 C24 -58 19 -55 19 -50 C19 -45 27 -40 27 -40 C27 -40 35 -45 35 -50" transform="scale(0.5)">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+                        <animateTransform attributeName="transform" type="translate" values="0,0;3,-5;0,0" dur="3s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+            </g>
+            
+            <!-- Title text -->
+            <text x="200" y="205" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#5D4E37">הוורד על כוכב ב-612</text>
+        </svg>
+    </div>
+</header>
+
+<!-- MAIN CONTAINER -->
+<main class="container">
+    <!-- NAVIGATION - Always 5 tabs -->
+    <nav class="nav-container">
+        <button class="nav-btn active" data-section="summary">
+            <i class="ti ti-book"></i>
+            סיכום
+        </button>
+        <button class="nav-btn" data-section="symbols">
+            <i class="ti ti-sparkles"></i>
+            סמלים
+        </button>
+        <button class="nav-btn" data-section="journey">
+            <i class="ti ti-route"></i>
+            מסע רגשי
+        </button>
+        <button class="nav-btn" data-section="interpretations">
+            <i class="ti ti-bulb"></i>
+            פרשנויות
+        </button>
+        <button class="nav-btn" data-section="challenges">
+            <i class="ti ti-brain"></i>
+            אתגרים לגל
+        </button>
+    </nav>
+    
+    <!-- SECTION 1: SUMMARY -->
+    <section class="section active" id="summary">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="ti ti-book"></i>
+                </div>
+                <h2>סיפור האהבה הראשונה</h2>
+            </div>
+            
+            <p>
+                פרק זה הוא אחד הפרקים העמוסים ביותר מבחינה רגשית בכל הספר, ואולי גם הכואב ביותר. תחת מעטה של סיפור פשוט על פרח שצמח על כוכב קטן, סנט-אקזופרי חושף בפנינו את כל המורכבות האנושית של אהבה ראשונה: את הקסם והפליאה, את הפגיעות והגאווה, את אי-ההבנה ההדדית שמובילה בסופו של דבר לפרידה. הנסיך הקטן מספר לנו על הרגע שבו גילה שעל כוכבו צומח משהו שונה לחלוטין מכל מה שהכיר - לא עוד צמח פשוט שאפשר לעקור ולהמשיך הלאה, אלא יצור מסתורי שדרש ממנו תשומת לב מסוג חדש לגמרי.
+            </p>
+            
+            <p>
+                הוורד הגיע מזרע שנשא הרוח ממקום לא ידוע, ומרגע שהתחיל לנבוט, הנסיך הקטן הבין שמשהו יוצא דופן מתרחש. הוא צפה בו בהתפעלות כפי שצופים בנס: הניצן הירוק, עלי הכותרת שהתכוננו בסתר, התקשטות האינסופית מאחורי המסך הירוק. יש משהו מטריד בתיאור הזה - הוורד לא פשוט פרח, היא התכוננה. היא בחרה את הרגע. היא ביימה את הופעתה. וכאשר סוף סוף נחשפה לאור השמש, היא עשתה זאת בדיוק עם זריחת השמש, כאילו היא עצמה השמש שזורחת על הכוכב הקטן.
+            </p>
+            
+            <!-- Rose Blooming at Sunrise Illustration -->
+            <svg class="illustration-float-left" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="sunriseGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#FFB6C1"/>
+                        <stop offset="50%" style="stop-color:#FFD4A8"/>
+                        <stop offset="100%" style="stop-color:#FFF8DC"/>
+                    </linearGradient>
+                    <linearGradient id="budGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4A7C3F"/>
+                        <stop offset="100%" style="stop-color:#2D5A27"/>
+                    </linearGradient>
+                    <filter id="sunGlow">
+                        <feGaussianBlur stdDeviation="8" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Background -->
+                <rect width="180" height="200" fill="url(#sunriseGrad)" rx="10"/>
+                
+                <!-- Rising Sun -->
+                <g transform="translate(90, 180)">
+                    <circle cx="0" cy="0" r="35" fill="#FFD700" filter="url(#sunGlow)" opacity="0.8">
+                        <animate attributeName="cy" values="0;-10;0" dur="4s" repeatCount="indefinite"/>
+                    </circle>
+                    <!-- Sun rays -->
+                    <g stroke="#FFD700" stroke-width="2" opacity="0.5">
+                        <line x1="0" y1="-40" x2="0" y2="-55"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite"/></line>
+                        <line x1="25" y1="-35" x2="35" y2="-48" transform="rotate(30)"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s" repeatCount="indefinite"/></line>
+                        <line x1="-25" y1="-35" x2="-35" y2="-48" transform="rotate(-30)"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="1.8s" repeatCount="indefinite"/></line>
+                    </g>
+                </g>
+                
+                <!-- Ground curve (planet surface) -->
+                <path d="M0 170 Q90 150 180 170 L180 200 L0 200 Z" fill="#F5E6C8"/>
+                
+                <!-- Rose Bud Opening -->
+                <g transform="translate(90, 120)">
+                    <!-- Stem -->
+                    <path d="M0 50 Q-5 30 0 10" stroke="#4A7C3F" stroke-width="4" fill="none"/>
+                    
+                    <!-- Leaves -->
+                    <ellipse cx="-15" cy="35" rx="12" ry="5" fill="#4A7C3F" transform="rotate(-40 -15 35)"/>
+                    <ellipse cx="12" cy="40" rx="10" ry="4" fill="#5D8A66" transform="rotate(35 12 40)"/>
+                    
+                    <!-- Sepals (green parts) -->
+                    <g fill="url(#budGrad)">
+                        <ellipse cx="-12" cy="8" rx="6" ry="15" transform="rotate(-20 -12 8)"/>
+                        <ellipse cx="12" cy="8" rx="6" ry="15" transform="rotate(20 12 8)"/>
+                        <ellipse cx="0" cy="5" rx="5" ry="14"/>
+                    </g>
+                    
+                    <!-- Opening petals -->
+                    <g>
+                        <ellipse cx="-8" cy="-8" rx="10" ry="15" fill="#FF8FA8" transform="rotate(-15 -8 -8)">
+                            <animate attributeName="rx" values="8;12;8" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="8" cy="-8" rx="10" ry="15" fill="#FF7A95" transform="rotate(15 8 -8)">
+                            <animate attributeName="rx" values="8;12;8" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="-12" rx="8" ry="12" fill="#FFB6C1">
+                            <animate attributeName="ry" values="10;14;10" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                </g>
+                
+                <!-- Stars fading -->
+                <circle cx="30" cy="30" r="2" fill="#FFD700" opacity="0.3">
+                    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="4s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="150" cy="25" r="1.5" fill="#FFD700" opacity="0.3">
+                    <animate attributeName="opacity" values="0.4;0.1;0.4" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Label -->
+                <text x="90" y="192" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#5D4E37">הזריחה הראשונה</text>
+            </svg>
+
+            <div class="quote-box">
+                <p>"אה! אני בקושי התעוררתי... אני מבקשת סליחה... אני עדיין מפורפרת..."</p>
+            </div>
+            
+            <p>
+                המילים הראשונות שלה הן שקר. שקר קטן, חינני אולי, אבל שקר. היא לא "בקושי התעוררה" - היא התכוננה שעות ארוכות, בחרה כל עלה כותרת, תיאמה את הופעתה עם הזריחה. ובכל זאת, הבחירה הראשונה שלה היא להציג עצמה כפגיעה, כמי שנתפסה לא מוכנה. למה? אולי כי הפגיעות האמיתית גדולה מדי מכדי לחשוף אותה. אולי כי להודות שהשקעת מאמץ זה להודות שאכפת לך, ולהודות שאכפת לך זה לתת לאחר כוח עליך.
+            </p>
+
+            <p>
+                הנסיך הקטן, בתמימותו, לא ראה את השקר. הוא ראה רק את היופי, את ארבע הקוצים שהציגה כהגנה נגד נמרים (על כוכב שאין בו נמרים), את הדרישות הבלתי נגמרות לתשומת לב ולטיפול. הוא השקה אותה, הגן עליה מרוחות בפרוון, האזין לתלונותיה על הקור ועל הטיוטה. וככל שנתן יותר, כך היא דרשה יותר - לא מתוך אכזריות, אלא מתוך פחד. הפחד שאם תפסיק לדרוש, הוא יפסיק לתת. הפחד שאם תיחשף כפי שהיא באמת, היא לא תהיה ראויה לאהבתו.
+            </p>
+            
+            <!-- Prince Caring for Rose with Glass Dome -->
+            <svg class="illustration-float-right" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="nightSky8" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a1a2e"/>
+                        <stop offset="100%" style="stop-color:#3D5A68"/>
+                    </linearGradient>
+                    <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.3)"/>
+                        <stop offset="50%" style="stop-color:rgba(255,255,255,0.1)"/>
+                        <stop offset="100%" style="stop-color:rgba(255,255,255,0.2)"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Background - night sky -->
+                <rect width="180" height="200" fill="url(#nightSky8)" rx="10"/>
+                
+                <!-- Stars -->
+                <g fill="#FFD700">
+                    <circle cx="25" cy="25" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+                    <circle cx="155" cy="30" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="80" cy="20" r="2"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite"/></circle>
+                    <circle cx="140" cy="50" r="1.5"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="1.8s" repeatCount="indefinite"/></circle>
+                </g>
+                
+                <!-- Planet surface -->
+                <ellipse cx="90" cy="185" rx="100" ry="35" fill="#F5E6C8"/>
+                
+                <!-- Glass Dome (Paravan) -->
+                <g transform="translate(110, 130)">
+                    <path d="M-30 30 Q-35 0 0 -25 Q35 0 30 30" fill="url(#glassGrad)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                    <!-- Glass reflection -->
+                    <path d="M-20 15 Q-22 5 -15 -5" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none"/>
+                    
+                    <!-- Rose inside dome -->
+                    <g transform="translate(0, 5)">
+                        <!-- Stem -->
+                        <path d="M0 25 Q-3 15 0 5" stroke="#4A7C3F" stroke-width="3" fill="none"/>
+                        <!-- Leaves -->
+                        <ellipse cx="-10" cy="18" rx="8" ry="4" fill="#4A7C3F" transform="rotate(-35 -10 18)"/>
+                        <ellipse cx="8" cy="20" rx="6" ry="3" fill="#5D8A66" transform="rotate(30 8 20)"/>
+                        <!-- Thorns -->
+                        <polygon points="-2,12 -5,10 -2,14" fill="#2D5A27"/>
+                        
+                        <!-- Rose flower -->
+                        <g transform="translate(0, -5)">
+                            <ellipse cx="0" cy="0" rx="12" ry="10" fill="#FF6B8A"/>
+                            <ellipse cx="-4" cy="-3" rx="10" ry="8" fill="#FF7A95"/>
+                            <ellipse cx="4" cy="-3" rx="10" ry="8" fill="#FF8FA8"/>
+                            <ellipse cx="0" cy="-5" rx="8" ry="6" fill="#FFB6C1"/>
+                            <circle cx="0" cy="-2" r="3" fill="#FFD700"/>
+                        </g>
+                    </g>
+                </g>
+                
+                <!-- Little Prince with watering can -->
+                <g transform="translate(55, 125)">
+                    <!-- Body -->
+                    <rect x="-7" y="5" width="14" height="18" fill="#5FBAA8" rx="3"/>
+                    <!-- Scarf -->
+                    <path d="M7 8 Q15 12 12 22" stroke="#FFD700" stroke-width="2.5" fill="none"/>
+                    <!-- Head -->
+                    <circle cx="0" cy="-3" r="9" fill="#FFE4B5"/>
+                    <!-- Hair -->
+                    <ellipse cx="0" cy="-10" rx="8" ry="5" fill="#FFD700"/>
+                    <circle cx="-5" cy="-6" r="3" fill="#FFD700"/>
+                    <circle cx="5" cy="-6" r="3" fill="#FFD700"/>
+                    <!-- Eyes looking at rose -->
+                    <circle cx="-3" cy="-4" r="1.5" fill="#5D4E37"/>
+                    <circle cx="2" cy="-4" r="1.5" fill="#5D4E37"/>
+                    <!-- Smile -->
+                    <path d="M-2 1 Q0 3 2 1" stroke="#C4846C" stroke-width="1.2" fill="none"/>
+                    <!-- Legs -->
+                    <rect x="-5" y="23" width="4" height="10" fill="#5D4E37" rx="1"/>
+                    <rect x="1" y="23" width="4" height="10" fill="#5D4E37" rx="1"/>
+                    
+                    <!-- Arm holding watering can -->
+                    <path d="M7 10 Q15 8 20 5" stroke="#FFE4B5" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Watering can -->
+                    <g transform="translate(25, 0)">
+                        <ellipse cx="0" cy="5" rx="8" ry="6" fill="#A0A0A0"/>
+                        <rect x="-6" y="-2" width="12" height="8" fill="#909090" rx="2"/>
+                        <path d="M6 2 L15 -5" stroke="#808080" stroke-width="3"/>
+                        <!-- Water drops -->
+                        <g fill="#7FC8F8">
+                            <ellipse cx="18" cy="-3" rx="2" ry="3">
+                                <animate attributeName="cy" values="-3;15;-3" dur="1.5s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/>
+                            </ellipse>
+                            <ellipse cx="16" cy="0" rx="1.5" ry="2.5">
+                                <animate attributeName="cy" values="0;18;0" dur="1.8s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="1;0;1" dur="1.8s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </g>
+                    </g>
+                </g>
+                
+                <!-- Label -->
+                <text x="90" y="192" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#E8D4A8">הגנה ודאגה</text>
+            </svg>
+
+            <div class="quote-box">
+                <p>"היה עלי לשפוט אותה לפי מעשיה ולא לפי דבריה. היא הריחה לי ריח טוב והאירה את חיי. לא הייתי צריך לברוח!"</p>
+            </div>
+            
+            <p>
+                המשפט הזה, שהנסיך הקטן אומר בדיעבד לטייס במדבר, הוא אחד המשפטים הכואבים ביותר בספרות. הוא מכיל בתוכו את כל הטרגדיה של אהבה שהסתיימה בגלל אי-הבנה. הנסיך הקטן הבין, מאוחר מדי, שהוורד אהבה אותו - אבל לא ידעה לבטא את זה. היא הסתתרה מאחורי דרישות וגחמות, מאחורי קוצים וטענות, כי זו הייתה הדרך היחידה שהכירה להיות קרובה למישהו מבלי להסתכן בדחייה מוחלטת.
+            </p>
+
+            <p>
+                ויש כאן שאלה עמוקה יותר שסנט-אקזופרי משאיר פתוחה: האם הנסיך הקטן באמת לא הבין, או שבחר לא להבין? האם הוא ברח כי לא הצליח לפענח את המסרים המעורבים שלה, או שברח כי הפגיעות שלה עצמה הייתה יותר מדי עבורו? לפעמים אנחנו בורחים לא כי אנחנו לא אוהבים, אלא כי האהבה דורשת מאיתנו משהו שאנחנו לא בטוחים שאנחנו מסוגלים לתת.
+            </p>
+
+            <div class="beneath-section">
+                <h3><i class="ti ti-eye"></i> מה שמתחת לפני השטח</h3>
+                
+                <!-- The Farewell Illustration -->
+                <svg class="illustration-center" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="farewellSky" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2D3A4A"/>
+                            <stop offset="50%" style="stop-color:#5D4E6D"/>
+                            <stop offset="100%" style="stop-color:#C77878"/>
+                        </linearGradient>
+                        <filter id="tearGlow">
+                            <feGaussianBlur stdDeviation="1" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background - twilight -->
+                    <rect width="350" height="180" fill="url(#farewellSky)" rx="10"/>
+                    
+                    <!-- Stars -->
+                    <g fill="#FFD700">
+                        <circle cx="30" cy="25" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+                        <circle cx="100" cy="40" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="180" cy="20" r="2"><animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/></circle>
+                        <circle cx="280" cy="35" r="1.5"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+                        <circle cx="320" cy="50" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+                    </g>
+                    
+                    <!-- Planet surface -->
+                    <ellipse cx="175" cy="165" rx="180" ry="40" fill="#F5E6C8"/>
+                    
+                    <!-- The Rose - alone on the left -->
+                    <g transform="translate(100, 115)">
+                        <!-- Stem -->
+                        <path d="M0 35 Q-5 20 0 5" stroke="#4A7C3F" stroke-width="4" fill="none"/>
+                        <!-- Leaves drooping slightly -->
+                        <ellipse cx="-12" cy="25" rx="10" ry="4" fill="#4A7C3F" transform="rotate(-50 -12 25)"/>
+                        <ellipse cx="10" cy="28" rx="8" ry="3" fill="#5D8A66" transform="rotate(40 10 28)"/>
+                        <!-- Thorns -->
+                        <polygon points="-2,18 -6,15 -2,20" fill="#2D5A27"/>
+                        <polygon points="2,12 6,9 2,14" fill="#2D5A27"/>
+                        
+                        <!-- Rose flower - slightly wilted looking -->
+                        <g transform="translate(0, -10)">
+                            <ellipse cx="0" cy="0" rx="15" ry="12" fill="#E84A73" transform="rotate(-5)"/>
+                            <ellipse cx="-5" cy="-3" rx="12" ry="10" fill="#FF6B8A"/>
+                            <ellipse cx="5" cy="-3" rx="12" ry="10" fill="#FF7A95"/>
+                            <ellipse cx="0" cy="-6" rx="10" ry="8" fill="#FF8FA8"/>
+                            <ellipse cx="0" cy="-3" rx="6" ry="5" fill="#FFB6C1"/>
+                            <circle cx="0" cy="-1" r="3" fill="#FFD700"/>
+                        </g>
+                        
+                        <!-- A single tear drop (hidden, proud) -->
+                        <ellipse cx="8" cy="-5" rx="2" ry="3" fill="#7FC8F8" opacity="0.6" filter="url(#tearGlow)">
+                            <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- The Little Prince - walking away on the right -->
+                    <g transform="translate(250, 110)">
+                        <!-- Body -->
+                        <rect x="-8" y="5" width="16" height="20" fill="#5FBAA8" rx="3"/>
+                        <!-- Scarf blowing in wind -->
+                        <path d="M-8 8 Q-20 5 -25 15 Q-30 25 -20 28" stroke="#FFD700" stroke-width="3" fill="none">
+                            <animate attributeName="d" values="M-8 8 Q-20 5 -25 15 Q-30 25 -20 28;M-8 8 Q-22 3 -28 12 Q-35 22 -25 28;M-8 8 Q-20 5 -25 15 Q-30 25 -20 28" dur="3s" repeatCount="indefinite"/>
+                        </path>
+                        <!-- Head - looking down/forward -->
+                        <circle cx="0" cy="-5" r="10" fill="#FFE4B5"/>
+                        <!-- Hair -->
+                        <ellipse cx="0" cy="-12" rx="9" ry="6" fill="#FFD700"/>
+                        <circle cx="-6" cy="-8" r="4" fill="#FFD700"/>
+                        <circle cx="6" cy="-8" r="4" fill="#FFD700"/>
+                        <!-- Eyes - looking down, sad -->
+                        <ellipse cx="-3" cy="-5" rx="2" ry="1.5" fill="#5D4E37"/>
+                        <ellipse cx="3" cy="-5" rx="2" ry="1.5" fill="#5D4E37"/>
+                        <!-- Sad expression -->
+                        <path d="M-3 1 Q0 -1 3 1" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                        <!-- Legs - walking -->
+                        <rect x="-6" y="25" width="5" height="12" fill="#5D4E37" rx="2" transform="rotate(-10 -3 25)"/>
+                        <rect x="1" y="25" width="5" height="12" fill="#5D4E37" rx="2" transform="rotate(10 3 25)"/>
+                    </g>
+                    
+                    <!-- Distance between them - dashed line representing separation -->
+                    <path d="M130 130 Q175 120 220 130" stroke="#FFB6C1" stroke-width="1" stroke-dasharray="5,5" fill="none" opacity="0.5"/>
+                    
+                    <!-- Broken heart symbol floating between -->
+                    <g transform="translate(175, 90)" opacity="0.4">
+                        <path d="M0 -8 C-5 -15 -15 -15 -15 -5 C-15 5 0 15 0 15 C0 15 15 5 15 -5 C15 -15 5 -15 0 -8" fill="#E84A73"/>
+                        <!-- Crack in heart -->
+                        <path d="M0 -8 L2 0 L-2 5 L1 12" stroke="#2D3A4A" stroke-width="2" fill="none"/>
+                    </g>
+                    
+                    <!-- Caption -->
+                    <text x="175" y="173" text-anchor="middle" font-family="Heebo, sans-serif" font-size="10" fill="#5D4E37">הפרידה הכואבת</text>
+                </svg>
+                
+                <p>
+                    הפרק הזה נכתב על רקע נישואיו הסוערים של סנט-אקזופרי לקונסואלו, אשתו הסלבדורית. קונסואלו הייתה אישה יפה, דרמטית, תובענית - ממש כמו הוורד. היא דרשה תשומת לב בלתי פוסקת, התלוננה על הזנחה, יצרה סצנות. וסנט-אקזופרי, כמו הנסיך הקטן, לא תמיד הבין שמאחורי הדרמטיות מסתתרת אישה שפחדה להיות נטושה, שחוותה אובדנים קשים בחייה, שלא ידעה לבקש אהבה בצורה ישירה.
+                </p>
+                <p>
+                    הוא ברח ממנה שוב ושוב - לטיסות, להרפתקאות, לנשים אחרות. ובכל פעם שברח, הוא הרגיש את אותו צער שמרגיש הנסיך הקטן. הוא ידע שהיא אוהבת אותו, ידע שהוא אוהב אותה, אבל משהו במרחב שביניהם נשאר תמיד עכור, מלא באי-הבנות ובפציעות הדדיות.
+                </p>
+            </div>
+
+            <div class="character-grid">
+                <div class="character-card">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                        <circle cx="50" cy="50" r="45" fill="#FFB6C1" opacity="0.2"/>
+                        <!-- Beautiful Rose -->
+                        <g transform="translate(50, 55)">
+                            <!-- Stem -->
+                            <path d="M0 25 Q-4 15 0 5" stroke="#4A7C3F" stroke-width="4" fill="none"/>
+                            <!-- Leaves -->
+                            <ellipse cx="-12" cy="18" rx="10" ry="4" fill="#4A7C3F" transform="rotate(-40 -12 18)"/>
+                            <ellipse cx="10" cy="20" rx="8" ry="3" fill="#5D8A66" transform="rotate(35 10 20)"/>
+                            <!-- Thorns -->
+                            <polygon points="-2,12 -6,9 -2,14" fill="#2D5A27"/>
+                            <polygon points="2,8 6,5 2,10" fill="#2D5A27"/>
+                            <!-- Rose petals -->
+                            <g transform="translate(0, -10)">
+                                <ellipse cx="0" cy="0" rx="18" ry="14" fill="#E84A73"/>
+                                <ellipse cx="-6" cy="-4" rx="14" ry="11" fill="#FF6B8A"/>
+                                <ellipse cx="6" cy="-4" rx="14" ry="11" fill="#FF7A95"/>
+                                <ellipse cx="0" cy="-7" rx="11" ry="8" fill="#FF8FA8"/>
+                                <ellipse cx="0" cy="-4" rx="7" ry="5" fill="#FFB6C1"/>
+                                <circle cx="0" cy="-2" r="4" fill="#FFD700">
+                                    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
+                        </g>
+                    </svg>
+                    <h3>הוורד</h3>
+                    <p>היא לא רק פרח - היא מראה שמשקפת את הפחד האוניברסלי מדחייה. כל דרישה שלה היא בקשה מוסווית לאהבה, כל קוץ הוא מגן על לב רך מדי.</p>
+                </div>
+                <div class="character-card">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                        <circle cx="50" cy="50" r="45" fill="#7FC8B8" opacity="0.2"/>
+                        <!-- Little Prince -->
+                        <g transform="translate(50, 50)">
+                            <!-- Body -->
+                            <rect x="-12" y="5" width="24" height="28" fill="#5FBAA8" rx="5"/>
+                            <!-- Scarf -->
+                            <path d="M12 10 Q22 15 18 28" stroke="#FFD700" stroke-width="4" fill="none"/>
+                            <!-- Head -->
+                            <circle cx="0" cy="-10" r="16" fill="#FFE4B5"/>
+                            <!-- Golden Hair -->
+                            <ellipse cx="0" cy="-22" rx="14" ry="8" fill="#FFD700"/>
+                            <circle cx="-9" cy="-14" r="5" fill="#FFD700"/>
+                            <circle cx="9" cy="-14" r="5" fill="#FFD700"/>
+                            <circle cx="-5" cy="-8" r="3" fill="#FFD700"/>
+                            <circle cx="5" cy="-8" r="3" fill="#FFD700"/>
+                            <!-- Eyes - curious and kind -->
+                            <circle cx="-5" cy="-10" r="3" fill="#5D4E37"/>
+                            <circle cx="5" cy="-10" r="3" fill="#5D4E37"/>
+                            <circle cx="-4" cy="-11" r="1" fill="white"/>
+                            <circle cx="6" cy="-11" r="1" fill="white"/>
+                            <!-- Gentle smile -->
+                            <path d="M-5 -1 Q0 5 5 -1" stroke="#C4846C" stroke-width="2" fill="none"/>
+                        </g>
+                        <!-- Star near him -->
+                        <circle cx="80" cy="25" r="4" fill="#FFD700">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+                    <h3>הנסיך הקטן</h3>
+                    <p>הוא מייצג את האוהב הצעיר שטרם למד שאהבה אינה פשוטה. הוא רוצה לתת, אבל לא מבין עדיין את השפה המורכבת של מי שמפחד לקבל.</p>
+                </div>
+            </div>
+
+            <div class="reveal-container">
+                <button class="reveal-btn" onclick="toggleReveal(this)">
+                    <i class="ti ti-eye"></i>
+                    השכבה העמוקה ביותר
+                </button>
+                <div class="reveal-content">
+                    <p>
+                        הטרגדיה האמיתית של פרק זה אינה שהנסיך הקטן לא הבין את הוורד - אלא שהוא הבין אותה רק לאחר שעזב. ויש בזה משהו בלתי נסלח כמעט: הוא היה צריך לעזוב כדי להבין. האם זה אומר שלפעמים אי אפשר לראות את האהבה כשאנחנו בתוכה? שהקרבה עצמה מעוורת אותנו?
+                    </p>
+                    <p>
+                        ויש עוד שאלה, אפלה יותר: האם הוורד באמת אהבה את הנסיך הקטן, או שאהבה את התשומת לב שהוא נתן לה? האם יש בכלל הבדל? אנחנו נוטים לחשוב על אהבה כדבר טהור ומופשט, אבל אולי אהבה היא תמיד גם הצורך להיות נצרך, הפחד להיות בודד, הרצון שמישהו יראה אותנו. ואם כך, מי מאיתנו באמת אוהב "בטהרה"?
+                    </p>
+                    <p>
+                        הנסיך הקטן יחזור לוורד שלו בסוף הספר - אבל המחיר יהיה המוות. אולי זו הדרך של סנט-אקזופרי לומר שאהבה אמיתית דורשת מאיתנו לוותר על חיים שלמים, על זהויות שבנינו, על הגנות שהקמנו. לחזור לאהבה זה למות קצת - למות לגרסה של עצמנו שברחה.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECTION 2: SYMBOLS -->
+    <section class="section" id="symbols">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="ti ti-sparkles"></i>
+                </div>
+                <h2>סמלים ומשמעויות</h2>
+            </div>
+            <p>לחץ על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+            
+            <div class="symbol-grid">
+                <div class="symbol-card">
+                    <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="35" fill="#FFB6C1" opacity="0.2"/>
+                        <!-- Rose -->
+                        <g transform="translate(40, 45)">
+                            <path d="M0 20 Q-3 10 0 0" stroke="#4A7C3F" stroke-width="3" fill="none"/>
+                            <ellipse cx="-8" cy="12" rx="6" ry="3" fill="#4A7C3F" transform="rotate(-35 -8 12)"/>
+                            <g transform="translate(0, -8)">
+                                <ellipse cx="0" cy="0" rx="12" ry="10" fill="#FF6B8A"/>
+                                <ellipse cx="-4" cy="-2" rx="10" ry="8" fill="#FF7A95"/>
+                                <ellipse cx="4" cy="-2" rx="10" ry="8" fill="#FF8FA8"/>
+                                <ellipse cx="0" cy="-4" rx="7" ry="5" fill="#FFB6C1"/>
+                                <circle cx="0" cy="-2" r="3" fill="#FFD700"/>
+                            </g>
+                        </g>
+                    </svg>
+                    <h3>הוורד</h3>
+                    <p>יופי, עדינות, אהבה ראשונה</p>
+                    <div class="deep-meaning">
+                        <p>הוורד אינה רק אהובה - היא מראה. היא משקפת לנסיך הקטן את חוסר הביטחון שלו עצמו, את הפחד שלו מקרבה אמיתית. כל דרישה שלה היא למעשה מבחן: האם תישאר גם כשאני קשה? האם תאהב אותי גם כשאני לא מושלמת? הקשר בינה לבין הוורדים בפרק 20 מגלה שייחודיות נוצרת דרך קשר, לא דרך תכונות אובייקטיביות.</p>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="35" fill="#E8A0A0" opacity="0.2"/>
+                        <!-- Thorns -->
+                        <g transform="translate(40, 40)">
+                            <!-- Stem with thorns -->
+                            <path d="M0 -25 L0 25" stroke="#4A7C3F" stroke-width="4"/>
+                            <!-- Thorns pointing out -->
+                            <polygon points="-3,-15 -12,-18 -3,-12" fill="#2D5A27"/>
+                            <polygon points="3,-5 12,-8 3,-2" fill="#2D5A27"/>
+                            <polygon points="-3,5 -12,2 -3,8" fill="#2D5A27"/>
+                            <polygon points="3,15 12,12 3,18" fill="#2D5A27"/>
+                            <!-- Warning effect -->
+                            <circle cx="0" cy="0" r="25" fill="none" stroke="#C77878" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
+                        </g>
+                    </svg>
+                    <h3>הקוצים</h3>
+                    <p>הגנה עצמית, פחד מפגיעה</p>
+                    <div class="deep-meaning">
+                        <p>הקוצים הם הגנות פסיכולוגיות. הוורד טוענת שהם נגד נמרים - אבל אין נמרים על הכוכב. היא יודעת שהם חסרי תועלת, ובכל זאת היא צריכה אותם. זו האירוניה של הגנות רגשיות: אנחנו יודעים שהן מרחיקות את מי שאנחנו רוצים לקרב, ובכל זאת לא מצליחים לוותר עליהן. הקוצים קשורים גם לקוצים שהנסיך מזכיר בפרק 7, כשהוא שואל למה פרחים טורחים לגדל קוצים שאף אחד לא מפחד מהם.</p>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="sunriseSymbol" x1="0%" y1="100%" x2="0%" y2="0%">
+                                <stop offset="0%" style="stop-color:#FFB6C1"/>
+                                <stop offset="100%" style="stop-color:#FFF8DC"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="80" height="80" fill="url(#sunriseSymbol)" rx="35"/>
+                        <!-- Sun rising -->
+                        <g transform="translate(40, 55)">
+                            <circle cx="0" cy="0" r="18" fill="#FFD700">
+                                <animate attributeName="cy" values="5;-5;5" dur="4s" repeatCount="indefinite"/>
+                            </circle>
+                            <!-- Rays -->
+                            <g stroke="#FFD700" stroke-width="2">
+                                <line x1="0" y1="-22" x2="0" y2="-30"/>
+                                <line x1="15" y1="-15" x2="20" y2="-20" transform="rotate(30)"/>
+                                <line x1="-15" y1="-15" x2="-20" y2="-20" transform="rotate(-30)"/>
+                            </g>
+                        </g>
+                        <!-- Horizon line -->
+                        <path d="M0 55 Q40 45 80 55" stroke="#E8D4A8" stroke-width="2" fill="none"/>
+                    </svg>
+                    <h3>הזריחה</h3>
+                    <p>התחלה חדשה, התגלות</p>
+                    <div class="deep-meaning">
+                        <p>הוורד בוחרת לפרוח בדיוק עם הזריחה - לא לפניה, לא אחריה. זו לא עוד זריחה רגילה - זו הזריחה של האהבה, הרגע שבו העולם של הנסיך הקטן משתנה לעד. אבל יש בזה גם צל: זריחה היא תמיד גם תזכורת ששקיעה תבוא. מרגע שהוורד פרחה, השעון החל לתקתק לעבר הפרידה.</p>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="35" fill="#7FC8B8" opacity="0.2"/>
+                        <!-- Glass dome -->
+                        <g transform="translate(40, 45)">
+                            <path d="M-20 15 Q-25 -10 0 -25 Q25 -10 20 15" fill="rgba(255,255,255,0.3)" stroke="rgba(150,200,200,0.8)" stroke-width="2"/>
+                            <!-- Reflection -->
+                            <path d="M-12 5 Q-15 -5 -10 -12" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+                            <!-- Small rose inside -->
+                            <g transform="translate(0, 0) scale(0.5)">
+                                <path d="M0 15 Q-2 8 0 0" stroke="#4A7C3F" stroke-width="3" fill="none"/>
+                                <ellipse cx="0" cy="-8" rx="10" ry="8" fill="#FF8FA8"/>
+                                <circle cx="0" cy="-6" r="3" fill="#FFD700"/>
+                            </g>
+                        </g>
+                    </svg>
+                    <h3>הפרוון</h3>
+                    <p>הגנה, טיפול, דאגה</p>
+                    <div class="deep-meaning">
+                        <p>הפרוון שהנסיך הקטן שם על הוורד מייצג את הרצון לשמור על מי שאנחנו אוהבים מכל רע. אבל יש בו גם משהו חונק: הוורד לא ביקשה להיות מוגנת כל כך. היא רצתה לחוות את הלילה, את הקור, את העולם. לפעמים ההגנה שלנו על מי שאנחנו אוהבים היא בעצם ביטוי לפחד שלנו, לא לצרכים שלהם.</p>
+                    </div>
+                </div>
+                
+                <div class="symbol-card">
+                    <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="40" cy="40" r="35" fill="#7FC8F8" opacity="0.2"/>
+                        <!-- Watering can and drops -->
+                        <g transform="translate(40, 35)">
+                            <!-- Watering can -->
+                            <ellipse cx="-5" cy="5" rx="12" ry="10" fill="#909090"/>
+                            <rect x="-13" y="-5" width="16" height="12" fill="#A0A0A0" rx="2"/>
+                            <path d="M3 0 L18 -12" stroke="#808080" stroke-width="4"/>
+                            <!-- Handle -->
+                            <path d="M-10 -5 Q-15 -15 -5 -15 Q5 -15 0 -5" stroke="#707070" stroke-width="3" fill="none"/>
+                            <!-- Water drops falling -->
+                            <g fill="#7FC8F8">
+                                <ellipse cx="22" cy="-8" rx="3" ry="5">
+                                    <animate attributeName="cy" values="-8;20;-8" dur="1.5s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                                </ellipse>
+                                <ellipse cx="18" cy="0" rx="2" ry="4">
+                                    <animate attributeName="cy" values="0;25;0" dur="1.8s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/>
+                                </ellipse>
+                                <ellipse cx="25" cy="-3" rx="2.5" ry="4">
+                                    <animate attributeName="cy" values="-3;22;-3" dur="2s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                                </ellipse>
+                            </g>
+                        </g>
+                    </svg>
+                    <h3>ההשקיה</h3>
+                    <p>נתינה, טיפוח, אהבה יומיומית</p>
+                    <div class="deep-meaning">
+                        <p>ההשקיה היא אקט של אהבה שמתרחש כל יום, בשקט, בלי דרמה. זו האהבה האמיתית - לא הרגעים הגדולים אלא הקטנים והעקביים. הנסיך הקטן לא שם לב לחשיבותה עד שעזב. הקשר לפרק 25, שבו הטייס והנסיך מוצאים את הבאר, מדגיש שמים - כמו אהבה - יקרים רק למי שטרח לחפש אותם.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECTION 3: EMOTIONAL JOURNEY -->
+    <section class="section" id="journey">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="ti ti-route"></i>
+                </div>
+                <h2>מסע רגשי בפרק</h2>
+            </div>
+            <p>הרגשות הגלויים והחבויים שעוברים על הנסיך הקטן והוורד</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>פליאה וסקרנות</h3>
+                    <p>הנסיך הקטן מגלה שצמח מסתורי צומח על כוכבו. הוא צופה בו בקסם, לא יודע מה יצמח מהזרע הזר. יש כאן תמימות של מי שלא יודע עדיין מה מחכה לו.</p>
+                    <span class="emotion-tag">פליאה</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>התאהבות מיידית</h3>
+                    <p>כשהוורד פורחת, הנסיך הקטן מתמוגג מיופייה. הוא לא רואה את המשחק שהיא משחקת, לא שם לב שהיא מתחזה. הוא רואה רק את מה שהוא רוצה לראות - והאם זו לא תמיד הדרך שבה אנחנו מתאהבים?</p>
+                    <span class="emotion-tag">עיוורון אהבה</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>בלבול ותסכול</h3>
+                    <p>ככל שעובר הזמן, הנסיך הקטן מתקשה להבין את הוורד. היא מתלוננת, דורשת, משנה דעתה. הוא רוצה לרצות אותה אבל לא מצליח. הוא לא מבין שהתלונות שלה הן בעצם קריאות לעזרה.</p>
+                    <span class="emotion-tag">חוסר אונים</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>עייפות ותשישות</h3>
+                    <p>הנסיך הקטן מגיע לנקודה שבה הוא פשוט עייף. עייף מהדרמה, עייף מהניסיון הבלתי פוסק להבין. זו לא שנאה, זו תשישות רגשית. וכאן מתחילה ההחלטה לברוח.</p>
+                    <span class="emotion-tag">שחיקה רגשית</span>
+                </div>
+                
+                <div class="timeline-item">
+                    <h3>חרטה מאוחרת</h3>
+                    <p>רק כשהנסיך כבר רחוק, הוא מבין את מה שהחמיץ. "לא הייתי צריך לברוח" - המילים האלה נאמרות מתוך כאב עמוק של מי שמבין שאיבד משהו שאולי לא יחזור.</p>
+                    <span class="emotion-tag">געגוע וחרטה</span>
+                </div>
+            </div>
+            
+            <div class="beneath-section" style="margin-top: 25px;">
+                <h3><i class="ti ti-mood-sad"></i> הרגשות שלא נאמרו</h3>
+                <p>
+                    יש רגשות שהפרק לא מזכיר במפורש, אבל הם נוכחים בכל שורה. הבדידות של הוורד - היא בודדה על הכוכב הקטן, הפרח היחיד מסוגו, בלי שום דגם להיאחז בו. הפחד שלה מנטישה, שמסתבר כנכון כשהנסיך עוזב. והאשמה הכבדה שהנסיך הקטן נושא איתו לאחר שהבין את טעותו - אשמה שמלווה אותו בכל מסעו בין הכוכבים ומחזירה אותו בסופו של דבר הביתה.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECTION 4: INTERPRETATIONS -->
+    <section class="section" id="interpretations">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="ti ti-bulb"></i>
+                </div>
+                <h2>פרשנויות ונקודות מבט</h2>
+            </div>
+            
+            <div class="interpretation-card">
+                <span class="approach-tag">פסיכולוגיה יונגיאנית</span>
+                <h3>הוורד כאנימה</h3>
+                <p>
+                    בפסיכולוגיה היונגיאנית, האנימה היא הצד הנשי בנפש הגבר - החלק הרגשי, האינטואיטיבי, הפגיע. הוורד מייצגת את האנימה של הנסיך הקטן: היא יפה ומושכת, אבל גם תובענית ובלתי צפויה. הקשר ביניהם משקף את המאבק הפנימי שכל אדם עובר בניסיון לשלב את הצד הרגשי והשכלי בתוכו. הבריחה של הנסיך מהוורד היא בעצם בריחה מהצד הרגשי של עצמו, והמסע שלו הוא תהליך של אינטגרציה - עד שהוא מבין שצריך לחזור אליה, כלומר לחזור לעצמו השלם.
+                </p>
+            </div>
+            
+            <div class="interpretation-card">
+                <span class="approach-tag">אקזיסטנציאליזם</span>
+                <h3>חופש ואחריות באהבה</h3>
+                <p>
+                    מנקודת מבט אקזיסטנציאליסטית, הפרק עוסק בחופש ובאחריות. הנסיך הקטן בוחר לעזוב - זו בחירה חופשית. אבל עם הבחירה מגיעה האחריות, והחרטה שהוא חווה היא ההבנה שהחופש לבחור לא משחרר אותנו מהתוצאות של בחירותינו. סארטר אמר "אנחנו נידונים לחופש" - הנסיך הקטן חווה את המשמעות של משפט זה. הוא חופשי לעזוב, אבל אינו חופשי מהכאב שההחלטה מביאה. גם הוורד מפגינה חופש אקזיסטנציאלי בסיום הפרק - היא מסרבת לבכות בנוכחותו, בוחרת לשמור על כבודה גם ברגע הפרידה.
+                </p>
+            </div>
+            
+            <div class="interpretation-card">
+                <span class="approach-tag">ביוגרפי</span>
+                <h3>קונסואלו ואנטואן</h3>
+                
+                <!-- Saint-Exupéry and Consuelo Illustration -->
+                <svg class="illustration-center" viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" style="max-width: 320px; margin: 20px auto;">
+                    <defs>
+                        <linearGradient id="parisSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3D5A68"/>
+                            <stop offset="100%" style="stop-color:#C77878"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="320" height="160" fill="url(#parisSky)" rx="10"/>
+                    
+                    <!-- Stars -->
+                    <g fill="#FFD700">
+                        <circle cx="30" cy="20" r="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="100" cy="30" r="1"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/></circle>
+                        <circle cx="220" cy="25" r="1.5"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.8s" repeatCount="indefinite"/></circle>
+                        <circle cx="290" cy="35" r="1"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/></circle>
+                    </g>
+                    
+                    <!-- Eiffel Tower silhouette (simplified) -->
+                    <g transform="translate(160, 145)" fill="#2D3A4A">
+                        <path d="M0 -80 L-5 0 L5 0 Z"/>
+                        <path d="M-15 0 L-8 -50 L8 -50 L15 0 Z"/>
+                        <rect x="-4" y="-55" width="8" height="8"/>
+                        <rect x="-12" y="-25" width="24" height="5"/>
+                    </g>
+                    
+                    <!-- Antoine (the pilot/author) on left -->
+                    <g transform="translate(90, 100)">
+                        <!-- Body in pilot jacket -->
+                        <rect x="-15" y="5" width="30" height="35" fill="#5D4E37" rx="5"/>
+                        <!-- Pilot collar -->
+                        <path d="M-15 8 L-8 15 L0 10 L8 15 L15 8" fill="#4A3F2F"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="-10" r="16" fill="#FFE4B5"/>
+                        <!-- Hair (thinning, mature) -->
+                        <ellipse cx="0" cy="-22" rx="12" ry="6" fill="#6B4423"/>
+                        <!-- Eyes - looking at Consuelo -->
+                        <circle cx="-5" cy="-12" r="2.5" fill="#5D4E37"/>
+                        <circle cx="5" cy="-12" r="2.5" fill="#5D4E37"/>
+                        <!-- Slight smile -->
+                        <path d="M-5 -3 Q0 2 5 -3" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                        <!-- Holding a book/manuscript -->
+                        <rect x="12" y="20" width="15" height="20" fill="#F5E6C8" rx="2"/>
+                        <line x1="15" y1="25" x2="24" y2="25" stroke="#5D4E37" stroke-width="1"/>
+                        <line x1="15" y1="30" x2="22" y2="30" stroke="#5D4E37" stroke-width="1"/>
+                    </g>
+                    
+                    <!-- Consuelo (the rose) on right -->
+                    <g transform="translate(230, 100)">
+                        <!-- Elegant dress -->
+                        <path d="M-18 5 L-20 40 L20 40 L18 5 Z" fill="#E84A73"/>
+                        <ellipse cx="0" cy="5" rx="18" ry="8" fill="#FF6B8A"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="-12" r="15" fill="#FFE4B5"/>
+                        <!-- Dark curly hair (Consuelo was Salvadoran) -->
+                        <ellipse cx="0" cy="-22" rx="14" ry="8" fill="#2D1810"/>
+                        <circle cx="-10" cy="-15" r="5" fill="#2D1810"/>
+                        <circle cx="10" cy="-15" r="5" fill="#2D1810"/>
+                        <circle cx="-8" cy="-8" r="3" fill="#2D1810"/>
+                        <circle cx="8" cy="-8" r="3" fill="#2D1810"/>
+                        <!-- Eyes - dramatic, expressive -->
+                        <ellipse cx="-5" cy="-13" rx="3" ry="2" fill="#3D2010"/>
+                        <ellipse cx="5" cy="-13" rx="3" ry="2" fill="#3D2010"/>
+                        <!-- Red lips -->
+                        <ellipse cx="0" cy="-4" rx="5" ry="2" fill="#C73B5D"/>
+                        <!-- Earrings -->
+                        <circle cx="-14" cy="-8" r="2" fill="#FFD700"/>
+                        <circle cx="14" cy="-8" r="2" fill="#FFD700"/>
+                        <!-- Rose in hair -->
+                        <g transform="translate(12, -25) scale(0.5)">
+                            <ellipse cx="0" cy="0" rx="10" ry="8" fill="#FF6B8A"/>
+                            <ellipse cx="0" cy="-3" rx="6" ry="5" fill="#FFB6C1"/>
+                        </g>
+                    </g>
+                    
+                    <!-- Connection line between them (turbulent) -->
+                    <path d="M110 100 Q130 85 145 100 Q155 115 170 100 Q185 85 200 100 Q210 110 220 100" 
+                          stroke="#FFB6C1" stroke-width="2" fill="none" stroke-dasharray="4,2" opacity="0.6"/>
+                    
+                    <!-- Hearts and thorns between them -->
+                    <g transform="translate(160, 80)">
+                        <path d="M0 -5 C-3 -10 -8 -10 -8 -3 C-8 3 0 10 0 10 C0 10 8 3 8 -3 C8 -10 3 -10 0 -5" fill="#FF6B8A" opacity="0.7" transform="scale(0.6)"/>
+                        <!-- Small thorn -->
+                        <polygon points="-12,5 -15,2 -12,8" fill="#2D5A27" opacity="0.6"/>
+                        <polygon points="12,5 15,8 12,2" fill="#2D5A27" opacity="0.6"/>
+                    </g>
+                    
+                    <!-- Caption -->
+                    <text x="160" y="152" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#F5E6C8">אנטואן וקונסואלו, 1931-1944</text>
+                </svg>
+                
+                <p>
+                    קונסואלו סונסין, אשתו של סנט-אקזופרי, הייתה הוורד שלו. היא הייתה אמנית סלבדורית סוערת, יפה ודרמטית. הנישואים שלהם היו מלאים סערות - ריבים, פרידות, חזרות, בגידות משני הצדדים. סנט-אקזופרי ברח ממנה שוב ושוב - לטיסות מסוכנות, למלחמות, לנשים אחרות - אבל תמיד חזר. היא דרשה ממנו תשומת לב בלתי אפשרית, והוא העניק לה רק את מה שיכול, מה שאף פעם לא הספיק. כשהוא נעלם באוקטובר 1944, היא נשארה לבד - הוורד על כוכב ריק, ממתינה לנסיך שלא יחזור עוד.
+                </p>
+            </div>
+            
+            <div class="interpretation-card">
+                <span class="approach-tag">רוחני-מיסטי</span>
+                <h3>האהבה כמבחן רוחני</h3>
+                <p>
+                    מנקודת מבט רוחנית, הוורד היא מבחן שהנסיך הקטן צריך לעבור בדרך להתפתחותו. כמו במסורות מיסטיות רבות, האהבה היא לא המטרה אלא הדרך - הכלי שדרכו אנו לומדים על עצמנו. הנסיך הקטן לא יכול היה להבין את משמעות הקשר שלו עם הוורד בלי לעזוב ולחזור. הפרידה לא הייתה טעות - היא הייתה חלק הכרחי מהמסע. רק מי שאיבד יכול להבין מה איבד, ורק מי שחזר יכול להבין למה צריך לחזור. זו הסיבה שהוורד לא מתה בהיעדרו - היא המתינה, כי היא חלק מהמסע, לא רק מהסיום.
+                </p>
+            </div>
+            
+            <div class="connections-box">
+                <h3><i class="ti ti-link"></i> חיבורים ומתחים</h3>
+                <p><strong>לפרקים אחרים:</strong> פרק זה מקבל את השלמתו בפרק 20, כאשר הנסיך הקטן רואה גן מלא וורדים ומבין שהוורד שלו היא "יחידה בעולם" לא בגלל שהיא שונה, אלא בגלל שהוא בחר בה. ובפרק 21, השועל מסביר לו את מה שלא הבין בזמן - שרק מי שמאלף ומאולף יכול באמת לראות.</p>
+                <p><strong>לחיים שלנו:</strong> כולנו מכירים מערכות יחסים שבהן אי-ההבנה הייתה הדדית, שבהן שני הצדדים אהבו אבל לא ידעו לתרגם את האהבה לשפה משותפת. כולנו, אולי, ברחנו ממישהו שאהבנו כי לא ידענו איך לאהוב נכון.</p>
+                <div class="universal-message">
+                    המסר: לא תמיד אנחנו יודעים להבחין בין אהבה לבין הדרך שבה היא מתבטאת. ומי שמחכה שיבינו אותו בלי להסביר, מסתכן בכך שיישאר לבד.
+                </div>
+                <p style="margin-top: 15px;"><strong>הפרדוקס שנשאר פתוח:</strong> האם הוורד הייתה צריכה להיות פחות תובענית, או שהנסיך הקטן היה צריך להיות יותר מבין? האם שניהם אחראים באותה מידה, או שיש כאן קורבן ואשם? הספר לא נותן תשובה - כי אולי אין תשובה.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SECTION 5: THINKING CHALLENGES -->
+    <section class="section" id="challenges">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-icon">
+                    <i class="ti ti-brain"></i>
+                </div>
+                <h2>אתגרי חשיבה לגל</h2>
+            </div>
+            <p>גל, הפרק הזה עמוס בשאלות שאין להן תשובות פשוטות. הכנתי לך כמה אתגרים שידרשו ממך לצלול עמוק - כי אני יודע שזה מה שאתה אוהב. חלק מהשאלות עשויות להרגיש לא נוחות. זה בכוונה.</p>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-message-circle-question"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">שאלה פתוחה</span>
+                        <h3>מה קודם - הבנה או סליחה?</h3>
+                        <p>הנסיך הקטן אומר "לא הייתי צריך לברוח". האם ההבנה שהוא הגיע אליה מספיקה? האם הבנה בדיעבד יכולה לתקן נזק שכבר נגרם? או שאולי ההבנה היא רק הצעד הראשון, ויש משהו נוסף שצריך לקרות כדי שהכאב ישתנה?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>חשוב על ההבדל בין להבין למה מישהו עשה מה שעשה, לבין לקבל את מה שקרה. האם אפשר לסלוח בלי להבין? האם אפשר להבין בלי לסלוח?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-arrows-split"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">דילמה</span>
+                        <h3>האם הוורד צריכה להתנצל?</h3>
+                        <p>הוורד עינתה את הנסיך הקטן בדרישות ובתלונות. היא גם אהבה אותו בכל ליבה. האם מי שפעל מתוך פחד ואהבה צריך להתנצל על הדרך שבה ביטא את רגשותיו? או שהאחריות להבין מוטלת על מי שקיבל את המסרים המעורבים?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>שאל את עצמך: האם כוונה טובה פוטרת מאחריות על תוצאות? והאם מי שנפגע צריך "להבין" את הפוגע, או שיש גבול למה שמותר לדרוש מהקורבן?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-flask"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">ניסוי מחשבתי</span>
+                        <h3>מה היה קורה אילו הוורד אמרה את האמת?</h3>
+                        <p>דמיין שברגע הפריחה, הוורד הייתה אומרת: "אני מפחדת. אני לבד. אני צריכה אותך ואני לא יודעת איך לבקש את זה." האם הנסיך הקטן היה נשאר? או שאולי היה בורח מוקדם יותר, כי הפגיעות הישירה מפחידה יותר מהמשחקים?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>חשוב על הסיבה שבגללה אנשים בוחרים לא להיות ישירים. האם זה תמיד פחד מדחייה, או שלפעמים זה הבנה (מודעת או לא) שהאחר לא מוכן לשמוע?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-link"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">חיבור אישי</span>
+                        <h3>הקוצים שלך</h3>
+                        <p>גל, לכל אחד מאיתנו יש "קוצים" - הגנות שאנחנו מפעילים כשאנחנו מרגישים פגיעים. מה הקוצים שלך? באיזה מצבים אתה מגן על עצמך בדרך שדווקא מרחיקה את מי שאתה רוצה לקרב?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>קוצים יכולים להיות שתיקה, ציניות, עסקיות יתר, בדיחות במקומות לא מתאימים, או הימנעות ממפגשים. מה אתה עושה כשאתה לא רוצה שיראו שאכפת לך?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-infinity"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">פרדוקס</span>
+                        <h3>לאהוב את מה שכואב</h3>
+                        <p>הנסיך הקטן אהב את הוורד לא למרות הקשיים אלא, בצורה מוזרה, גם בגללם. הקוצים הם חלק ממנה, הגחמות הן חלק ממנה. האם אפשר לאהוב רק את החלקים הנעימים של מישהו? האם אהבה שמתעלמת מהחלקים הקשים היא אהבה אמיתית, או סתם אשליה נוחה?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>הפרדוקס: לקבל מישהו "כמו שהוא" כולל לקבל גם את מה שפוגע בנו. אבל אם משהו פוגע בנו, איך נקבל אותו? האם יש הבדל בין "לקבל" לבין "להשלים"?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <div class="challenge-icon">
+                        <i class="ti ti-alert-triangle"></i>
+                    </div>
+                    <div>
+                        <span class="challenge-type">שאלה לא נוחה</span>
+                        <h3>מתי בריחה היא הדבר הנכון?</h3>
+                        <p>אנחנו נוטים לחשוב שלהישאר באהבה זה תמיד הדבר הנכון, ושבריחה היא כישלון. אבל האם זה באמת כך? האם יש מצבים שבהם לעזוב, אפילו לעזוב מישהו שאוהבים, זה בעצם הדבר הבריא והנכון לעשות - גם בלי "סיבה טובה מספיק" בעיני אחרים?</p>
+                    </div>
+                </div>
+                <div class="hint-container">
+                    <button class="hint-btn"><i class="ti ti-lightbulb"></i> צריך רמז?</button>
+                    <div class="hint-content">
+                        <p>חשוב על ההבדל בין בריחה לבין עזיבה מודעת. האם הנסיך הקטן ברח או עזב? האם התחרטותו בדיעבד מוכיחה שטעה, או רק שהוא מרגיש אשם - ואלה לא אותו דבר?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BOOK NAVIGATION -->
+    <div class="book-nav">
+        <a href="chapter-07.html" class="book-nav-btn" id="prevChapter">
+            <i class="ti ti-arrow-right"></i>
+            פרק 07
+        </a>
+        <a href="index.html" class="book-nav-btn home">
+            <i class="ti ti-home"></i>
+        </a>
+        <a href="chapter-09.html" class="book-nav-btn" id="nextChapter">
+            פרק 09
+            <i class="ti ti-arrow-left"></i>
+        </a>
+    </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+<footer class="footer">
+    <p>
+        <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700 !important; vertical-align: middle; display: inline-block;">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        הנסיך הקטן - פרק 8 מתוך 27
+        <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700 !important; vertical-align: middle; display: inline-block;">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+    </p>
+</footer>
+
+<!-- JAVASCRIPT - Always include this exact script -->
+<script>
+    // Create stars with inline SVG for GitHub Pages compatibility
+    function createStars() {
+        const container = document.getElementById('stars');
+        for (let i = 0; i < 25; i++) {
+            const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            star.setAttribute('viewBox', '0 0 24 24');
+            star.classList.add('star');
+            const size = (Math.random() * 10 + 8) + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.fill = '#FFD700';
+            star.innerHTML = '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
+            container.appendChild(star);
+        }
+    }
+    
+    // Navigation
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const sectionId = this.dataset.section;
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            if (sectionId === 'journey') animateTimeline();
+        });
+    });
+    
+    // Reveal content
+    function toggleReveal(btn) {
+        const content = btn.nextElementSibling;
+        content.classList.toggle('open');
+        const icon = btn.querySelector('i');
+        icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+    }
+    
+    // Symbol cards
+    document.querySelectorAll('.symbol-card').forEach(card => {
+        card.addEventListener('click', () => card.classList.toggle('expanded'));
+    });
+    
+    // Challenge cards
+    document.querySelectorAll('.challenge-card').forEach(card => {
+        card.addEventListener('click', function() {
+            document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+    
+    // Hint buttons
+    document.querySelectorAll('.hint-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const hint = this.nextElementSibling;
+            hint.classList.toggle('visible');
+            this.innerHTML = hint.classList.contains('visible') 
+                ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+        });
+    });
+    
+    // Timeline animation
+    function animateTimeline() {
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.classList.remove('visible');
+            setTimeout(() => item.classList.add('visible'), index * 300);
+        });
+    }
+    
+    // Keyboard Navigation
+    document.addEventListener('keydown', function(e) {
+        // Don't trigger if user is typing in an input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        
+        const currentChapter = 8; // Current chapter number
+        const totalChapters = 27;
+        
+        switch(e.key) {
+            case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                e.preventDefault();
+                if (currentChapter < totalChapters) {
+                    const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                    window.location.href = `chapter-${nextChapter}.html`;
+                }
+                break;
+            case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                e.preventDefault();
+                if (currentChapter > 1) {
+                    const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                    window.location.href = `chapter-${prevChapter}.html`;
+                }
+                break;
+            case 'Escape': // Go to home/index
+                e.preventDefault();
+                window.location.href = 'index.html';
+                break;
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+                e.preventDefault();
+                const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                const tabIndex = parseInt(e.key) - 1;
+                if (tabIndex < tabs.length) {
+                    // Click the corresponding tab button
+                    const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                    if (tabBtn) tabBtn.click();
+                }
+                break;
+        }
+    });
+    
+        // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 8;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

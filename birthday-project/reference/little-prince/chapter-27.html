@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 27 | הסיום</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Somber blue-gray for reflection and eternity */
+            --primary: #6B8E9F;
+            --secondary: #4A6670;
+            --accent: #8BA4B0;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: glow 2s ease-in-out infinite alternate; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 1200px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(107, 142, 159, 0.1), rgba(139, 164, 176, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn { background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .home-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .chapter-bookmark-btn { background: white; border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes glow { 0% { filter: drop-shadow(0 0 5px rgba(107, 142, 159, 0.5)); } 100% { filter: drop-shadow(0 0 15px rgba(107, 142, 159, 0.9)); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-star"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 27</p>
+        <p class="chapter-title">הסיום</p>
+        <span class="mood-badge"><i class="ti ti-infinity"></i> נצח וזיכרון</span>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>שש שנים עברו מאז. הטייס מספר לנו שמעולם לא סיפר את הסיפור הזה לאיש - החברים שקיבלו את פניו שמחו לראותו חי, והוא אמר להם שזה מעייפות. עכשיו, אחרי שהצער שקט מעט, הוא עדיין לא שכח. הוא יודע שהנסיך חזר לכוכב שלו, כי למחרת בבוקר הגוף נעלם.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"ולעתים בלילות אני אוהב להקשיב לכוכבים. הם כמו חמש מאות מיליון פעמונים..."</p>
+                    <p class="quote-analysis">הטייס הפך את הכוכבים לסמל של הנסיך הקטן. מה שהיה פעם רק נקודות אור רחוקות הפך להיות מקהלה של פעמונים - כל אחד מהם עשוי להיות הכוכב שבו גר הנסיך. האבדן לא מחק את הקשר; הוא הרחיב אותו לכל היקום.</p>
+                </div>
+                
+                <p>אבל יש משהו שמטריד את הטייס. הוא שכח לצייר רצועת עור לזמם שצייר לנסיך. הכבש לעולם לא יוכל להיות קשור. והשאלה הגדולה היא: האם הכבש אכל את הוורד?</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"שום דבר ביקום אינו נשאר כשהיה אם במקום כלשהו, לא יודעים איפה, כבש שאיננו מכירים אכל, או לא אכל, ורד..."</p>
+                    <p class="quote-analysis">זו אחת הטענות הפילוסופיות העמוקות ביותר בספר. הטייס אומר שכל היקום משתנה בהתאם לשאלה הזו - שאלה שנראית טריוויאלית ("האם כבש אכל פרח?") אבל היא בעלת משמעות קוסמית. זה כי הוורד אינו סתם פרח - הוא הקשר, האהבה, מה שחשוב באמת.</p>
+                </div>
+
+                <h3>הבקשה לקורא</h3>
+                
+                <p>הטייס מסיים בבקשה אישית. הוא מבקש מכל מי שנוסע באפריקה, במדבר, ורואה ילד קטן עם שיער זהוב שצוחק ולא עונה כששואלים אותו שאלות - שיכתבו לו מיד ויספרו לו שהנסיך חזר.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"הסתכלו היטב בנוף הזה כדי שתוכלו לזהות אותו בוודאות, אם יום אחד תטיילו באפריקה, במדבר. ואם תעברו במקום הזה, אני מתחנן לפניכם, אל תמהרו, חכו קצת בדיוק מתחת לכוכב! ואז, אם ילד קטן יבוא אליכם, אם הוא צוחק, אם יש לו שיער זהוב, אם הוא לא עונה כששואלים אותו שאלות, תנחשו מי הוא. אז היו נחמדים! אל תשאירו אותי כל כך עצוב: כתבו לי מהר שהוא חזר..."</p>
+                    <p class="quote-analysis">הסיום הזה שובר את המחיצה בין הסיפור לקורא. הטייס פונה אלינו ישירות, הופך אותנו לשותפים בציפייה שלו, בתקווה שלו. אנחנו כבר לא רק קוראים - אנחנו חלק מהסיפור, שומרים על האפשרות שהנסיך יחזור.</p>
+                </div>
+
+                <h3>הציור האחרון</h3>
+
+                <p>הפרק מסתיים בתיאור של הנוף שבו הנסיך הופיע ונעלם - המקום היפה והעצוב ביותר בעולם. רק חול ומעליו כוכבים. הטייס מבקש מאיתנו להסתכל בתמונה הזו ולזכור.</p>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>פרק 27 הוא אפילוג, אבל הוא יותר מסתם סיום - הוא שינוי פרספקטיבה. עד עכשיו קראנו סיפור על נסיך קטן; עכשיו אנחנו מבינים שזה סיפור על איך להתמודד עם אבדן, עם זיכרון, עם מה שנשאר כשמישהו הולך.</p>
+                        
+                        <p>הטייס לא מחפש סגירה - הוא מחפש המשכיות. הוא לא רוצה "לסגור פרק" על הנסיך; הוא רוצה לשמור את האפשרות פתוחה, לחיות עם השאלה. זו גישה שונה מאוד מהתרבות המערבית שמדברת על "להתקדם" ו"לשחרר".</p>
+                        
+                        <p>השאלה על הכבש והוורד היא גאונית. היא נשארת פתוחה, ואנחנו - הקוראים - צריכים להחליט איך לענות עליה. אם הכבש אכל את הוורד, הסיפור הוא טרגדיה - הנסיך חזר לכוכב ריק. אם הכבש לא אכל, יש תקווה. אבל הטייס לא נותן לנו תשובה. הוא משאיר אותנו עם אי-הוודאות, עם הצורך לבחור.</p>
+                        
+                        <p>הבקשה לקורא היא מרגשת במיוחד. סן-אכזופרי לא רק מספר סיפור - הוא יוצר קהילה של אנשים שמחפשים את הנסיך, שמסתכלים בכוכבים ושומעים צחוק. כל מי שקרא את הספר הזה הוא עכשיו חלק מהקהילה הזו.</p>
+                        
+                        <p>ויש גם רובד אישי: סן-אכזופרי כתב את הספר בזמן מלחמה, רחוק מביתו, מאשתו, מצרפת. הוא נעלם בטיסה שנה אחרי שהספר יצא לאור. הבקשה "כתבו לי מהר שהוא חזר" מקבלת משמעות אחרת כשיודעים שהמחבר עצמו לא חזר. הנסיך הקטן הפך להיות, במובן מסוים, סן-אכזופרי עצמו - מישהו שעזב ולא חזר, אבל שממשיך לחיות בכוכבים, בזיכרון, בלבבות של כל מי שקרא את הספר.</p>
+                        
+                        <p>הסיום הפתוח הוא בחירה מכוונת. סן-אכזופרי לא רצה לתת לנו סגירה כי החיים לא נותנים סגירה. האנשים שאנחנו אוהבים הולכים, ואנחנו נשארים עם השאלות, עם הזיכרונות, עם הכוכבים שנשמעים כמו פעמונים.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <i class="ti ti-stars"></i>
+                        <h3>הכוכבים</h3>
+                        <p>חמש מאות מיליון פעמונים</p>
+                        <div class="deep-meaning">
+                            <p>בפרק הזה הכוכבים מקבלים את משמעותם הסופית. הם כבר לא רק נקודות אור, ולא רק מקום שבו הנסיך גר - הם צחוק, פעמונים, נוכחות של מי שאהבנו.</p>
+                            <p>הטייס אומר שכל פעם שהוא מסתכל בכוכבים, הוא שומע צחוק. זו הדרך שלו להמשיך לחיות עם הנסיך - לא לשכוח, לא "להתקדם", אלא להפוך את העולם כולו לתזכורת.</p>
+                            <p>יש כאן גם רעיון של אי-ודאות מנחמת: הטייס לא יודע באיזה כוכב הנסיך גר, אז כל כוכב עשוי להיות הכוכב שלו. במקום שזו תהיה בעיה, זו נחמה - כל היקום מלא באפשרות של הנסיך.</p>
+                            <p><strong>קשר לחיים:</strong> כשמישהו שאהבנו הולך, מה הדברים שמזכירים אותו? איך אנחנו הופכים את העולם למלא בו?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-question-mark"></i>
+                        <h3>השאלה הפתוחה</h3>
+                        <p>האם הכבש אכל את הוורד?</p>
+                        <div class="deep-meaning">
+                            <p>זו אולי השאלה המרכזית של כל הספר, והיא נשארת ללא תשובה. הטייס שכח לצייר רצועת עור לזמם, אז הכבש יכול להוריד אותו. האם הוא אכל את הוורד?</p>
+                            <p>השאלה הזו היא מבחן לקורא: מה אתה בוחר להאמין? אופטימיסטים יגידו שלא, שהנסיך שומר על הוורד. פסימיסטים יגידו שכן, שהעולם אכזרי. אבל אולי הנקודה היא לא התשובה - אלא השאלה עצמה.</p>
+                            <p>לחיות עם שאלה פתוחה זה קשה. אנחנו רוצים תשובות, ודאות, סגירה. הספר הזה מסרב לתת לנו את זה. הוא אומר: לפעמים צריך לחיות עם אי-הוודאות.</p>
+                            <p><strong>קשר לחיים:</strong> אילו שאלות בחייך נשארות פתוחות? האם אתה מסוגל לחיות איתן בלי תשובה?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-map-pin"></i>
+                        <h3>המקום במדבר</h3>
+                        <p>היפה והעצוב ביותר</p>
+                        <div class="deep-meaning">
+                            <p>הטייס מתאר את המקום שבו הנסיך הופיע ונעלם כ"הנוף היפה והעצוב ביותר בעולם". רק חול וכוכבים - שום דבר מיוחד לעין, אבל הכל מיוחד ללב.</p>
+                            <p>זה חוזר לסוד של השועל: "רואים היטב רק עם הלב". המקום הזה נראה ריק, אבל הוא מלא במשמעות. כל גרגיר חול שם הוא מקודש כי שם קרה משהו חשוב.</p>
+                            <p>הטייס מבקש מאיתנו לזכור את המקום הזה, לחפש אותו. הוא הופך קוראים לעולי רגל, מחפשי משמעות במדבר ריק.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> המדבר שהיה מקום של סכנה ומוות (פרק 26) הופך למקום קדוש, מקום של זיכרון ותקווה.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-clock"></i>
+                        <h3>שש השנים</h3>
+                        <p>הזמן שעבר</p>
+                        <div class="deep-meaning">
+                            <p>הטייס מספר שעברו שש שנים מאז המפגש עם הנסיך. שש שנים של שתיקה, של לא לספר לאיש, של לחיות עם הסוד.</p>
+                            <p>למה דווקא עכשיו הוא מספר? אולי כי "הצער שקט מעט" - מספיק כדי לדבר, אבל לא מספיק כדי לשכוח. זה מתאר משהו אמיתי על אבל: הוא לא נעלם, הוא משתנה.</p>
+                            <p>שש שנים זה גם זמן ספרותי מעניין - מספיק כדי שהסיפור יהפוך לזיכרון, לא מספיק כדי שיהפוך לאגדה. הטייס עדיין חי את הסיפור הזה, עדיין מחכה.</p>
+                            <p><strong>קשר לחיים:</strong> כמה זמן צריך לעבור עד שאפשר לספר סיפור קשה? האם יש "זמן נכון"?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-bell"></i>
+                        <h3>הפעמונים</h3>
+                        <p>הצחוק בכוכבים</p>
+                        <div class="deep-meaning">
+                            <p>הטייס שומע את הכוכבים כמו "חמש מאות מיליון פעמונים". למה פעמונים? כי הם מצלצלים, הם מזכירים, הם קוראים לנו לשים לב.</p>
+                            <p>הצחוק של הנסיך הפך לפעמונים - משהו שהיה אישי, אינטימי, הפך להיות קוסמי. כל פעם שהטייס מסתכל בשמיים, הוא שומע את הנסיך צוחק.</p>
+                            <p>זו דרך להתמודד עם אבדן: לא לנסות לשכוח, אלא להפוך את הזיכרון לחלק מהעולם. הנסיך לא רק בכוכב אחד - הוא בכל הכוכבים, בכל רגע שמסתכלים למעלה.</p>
+                            <p><strong>פרדוקס:</strong> האם זה נחמה או עינוי? להיזכר כל פעם שמסתכלים בשמיים - זה יפה או כואב? אולי שניהם.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>שתיקה ממושכת</h3>
+                        <p>שש שנים הטייס שתק. לא סיפר לאיש. החברים שמחו לראותו חי, והוא אמר להם שזו עייפות. הוא נשא את הסיפור לבד, שמר אותו כסוד.</p>
+                        <span class="emotion-tag">בדידות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הצער ששקט מעט</h3>
+                        <p>עכשיו, אחרי שש שנים, משהו השתנה. הצער לא נעלם - הוא "שקט מעט". מספיק כדי לדבר, כדי לספר, כדי לכתוב. האבל הפך לסיפור.</p>
+                        <span class="emotion-tag">קבלה חלקית</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הנחמה בכוכבים</h3>
+                        <p>הטייס מצא דרך לחיות עם האבדן: הכוכבים. כל לילה הוא יכול להסתכל למעלה ולשמוע פעמונים, צחוק. הנסיך לא נעלם - הוא בכל מקום.</p>
+                        <span class="emotion-tag">נחמה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>החרדה על הוורד</h3>
+                        <p>אבל יש משהו שלא נותן מנוחה: השאלה על הכבש והוורד. הטייס שכח לצייר רצועת עור. האם הכבש אכל את הוורד? השאלה הזו משנה הכל.</p>
+                        <span class="emotion-tag">חרדה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>התנודות</h3>
+                        <p>לפעמים הטייס אומר לעצמו: "ודאי שלא! הנסיך מכסה את הוורד כל לילה..." ולפעמים: "פעם שוכחים, ודי בפעם אחת..." והכוכבים הופכים לדמעות.</p>
+                        <span class="emotion-tag">ספק וחוסר ודאות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הפנייה לקורא</h3>
+                        <p>בסוף, הטייס פונה אלינו. הוא מבקש עזרה, שותפים לציפייה. "אם ילד קטן יבוא אליכם... כתבו לי מהר שהוא חזר." הוא לא לבד יותר - אנחנו איתו.</p>
+                        <span class="emotion-tag">תקווה משותפת</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>מתחת לטון השקט והמהורהר של הפרק מסתתר כאב עצום. הטייס איבד את החבר הכי טוב שהיה לו - אולי היחיד שבאמת הבין אותו, שראה את הפיל בתוך הבואה קונסטריקטור, שלא ביקש "להיות רציני".</p>
+                    <p>יש גם אשמה: הוא שכח לצייר את רצועת העור. טעות קטנה, אבל אולי קטלנית. הוא לא יכול לדעת אם הכבש אכל את הוורד, ואי-הידיעה הזו מכרסמת בו. כל לילה הוא בוחן את עצמו: "האם הזהרתי מספיק? האם יכולתי לעשות משהו אחרת?"</p>
+                    <p>ויש גם התנגדות לסגירה. הטייס מסרב "להתקדם", מסרב לקבל שהנסיך הלך. הוא ממשיך לחפש, להקשיב, לצפות. זה לא הכחשה - זו נאמנות. הוא נשאר נאמן לקשר גם כשהנסיך לא שם יותר.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>שלבי האבל</h3>
+                    <p>מנקודת מבט פסיכולוגית, הפרק הזה מתאר תהליך אבל מורכב ולא-ליניארי. הטייס עבר שש שנים עם הזיכרון, והוא עדיין לא "סיים" לאבול - ואולי זה בסדר.</p>
+                    <p>המודל הקלאסי של קובלר-רוס מדבר על חמישה שלבים של אבל שמסתיימים ב"קבלה". אבל הטייס מציע משהו אחר: לא קבלה במובן של שכחה או התקדמות, אלא קבלה במובן של אינטגרציה - הנסיך הפך לחלק מהעולם שלו, מהכוכבים, מהחיים.</p>
+                    <p>המחקר הפסיכולוגי העכשווי מאשר את זה: אבל בריא לא אומר לשכוח או "לסגור פרק", אלא למצוא דרך לחיות עם האדם שאיננו - לשמור על "קשר מתמשך" (continuing bond) גם אחרי המוות.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>לחיות עם אי-הוודאות</h3>
+                    <p>מנקודת מבט אקזיסטנציאליסטית, הפרק עוסק בשאלה מרכזית: איך לחיות כשאין תשובות? הטייס לא יודע אם הכבש אכל את הוורד. הוא לא יודע באיזה כוכב הנסיך. הוא לא יודע אם יראה אותו שוב.</p>
+                    <p>האקזיסטנציאליזם אומר שאי-הוודאות היא חלק מהחיים, לא באג אלא פיצ'ר. אנחנו לא יכולים לדעת הכל, לשלוט בהכל, לצפות הכל. השאלה היא מה עושים עם אי-הוודאות הזו.</p>
+                    <p>הטייס בוחר לחיות איתה, לא להילחם בה. הוא לא מנסה להכריע בשאלת הכבש - הוא חי עם שתי האפשרויות. לפעמים הכוכבים צוחקים, לפעמים הם בוכים. שתי האפשרויות קיימות בו-זמנית.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>סן-אכזופרי והיעלמות</h3>
+                    <p>הפרק הזה מקבל משמעות מיוחדת לאור הביוגרפיה של סן-אכזופרי. שנה אחרי שהספר יצא לאור, ב-1944, הוא המריא לטיסת סיור ולא חזר. המטוס שלו נמצא רק ב-2004, בים התיכון.</p>
+                    <p>הבקשה "כתבו לי מהר שהוא חזר" מקבלת משמעות אחרת כשיודעים את זה. סן-אכזופרי כתב על היעלמות - ואז נעלם בעצמו. הנסיך הקטן הפך להיות, במובן מסוים, המחבר עצמו.</p>
+                    <p>יש אפילו תיאוריה שסן-אכזופרי ידע שהוא הולך למות - שהספר הזה הוא צוואה, פרידה, הכנה. אם זה נכון, הבקשה לקורא היא גם בקשה של סן-אכזופרי עצמו: תזכרו אותי, תחפשו אותי בכוכבים.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>הנצח והזיכרון</h3>
+                    <p>ברמה רוחנית, הפרק עוסק בשאלה: מה נשאר אחרי שמישהו הולך? התשובה של הספר היא: הכל. הכוכבים, הצחוק, הפעמונים - הכל נשאר, כי הכל השתנה.</p>
+                    <p>"אתה נעשה אחראי לנצח למה שאילפת" - אמר השועל בפרק 21. הנצח הזה לא מטאפורי. הטייס באמת נשאר אחראי לנסיך, ממשיך לחפש אותו, לחכות לו, לספר עליו.</p>
+                    <p>יש כאן רעיון של תחייה דרך זיכרון: כל עוד מישהו זוכר את הנסיך, הוא קיים. כל עוד מישהו מחפש אותו במדבר, מקשיב לכוכבים, שואל על השיער הזהוב - הנסיך לא מת. הוא רק במקום אחר.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 1 - הבואה קונסטריקטור:</p>
+                        <p>הספר מתחיל בציור שמבוגרים לא הבינו ומסתיים בבקשה לחפש ילד קטן. המעגל נסגר: הטייס שהיה ילד בודד מצא חבר שהבין אותו, ועכשיו הוא מבקש מאיתנו - מבוגרים שקראו ספר ילדים - להמשיך לחפש.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 21 - השועל:</p>
+                        <p>"אתה נעשה אחראי לנצח" - האחריות הזו מתגלמת כאן במלואה. הטייס לא מתנער מהאחריות לנסיך גם אחרי שש שנים, גם אחרי שהנסיך הלך. הוא ממשיך לדאוג, לחכות, לחפש.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 26 - הפרידה:</p>
+                        <p>בפרק 26 הנסיך אמר: "בלילות תסתכל בכוכבים... וכולם יהיו חברים שלך." כאן אנחנו רואים את ההבטחה הזו מתממשת - הטייס אכן מוצא נחמה בכוכבים, שומע פעמונים, צחוק.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-star"></i>
+                        "הסתכלו היטב בנוף הזה כדי שתוכלו לזהות אותו בוודאות..."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>הספר מסתיים בשאלה פתוחה: האם הכבש אכל את הוורד? סן-אכזופרי מסרב לתת תשובה. הוא משאיר אותנו - את הקוראים - עם האחריות להחליט. אבל אולי הנקודה היא לא התשובה, אלא היכולת לחיות עם השאלה.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>הגענו לסוף המסע. פרק 27 הוא לא רק סיום של סיפור - הוא הזמנה להמשיך לחיות איתו. האתגרים הבאים מזמינים אותך לחשוב על מה נשאר אחרי שסיפור נגמר, מה נשאר אחרי שמישהו הולך.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-question-mark"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">השאלה הגדולה</span>
+                            <h3>האם הכבש אכל את הוורד?</h3>
+                            <p>זו השאלה שסן-אכזופרי משאיר פתוחה. אין תשובה נכונה - יש רק התשובה שלך. מה אתה בוחר להאמין? ומה זה אומר עליך, על האופן שבו אתה רואה את העולם?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>שים לב: השאלה היא לא "מה קרה באמת" - זה סיפור בדיוני, אין "באמת". השאלה היא מה אתה בוחר להאמין. אופטימיסטים יגידו שהנסיך שומר על הוורד. פסימיסטים יגידו שהעולם אכזרי. מה אתה?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-stars"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>הכוכבים שלך</h3>
+                            <p>לטייס, הכוכבים נשמעים כמו פעמונים בגלל הנסיך. מה הדבר שמזכיר לך מישהו שאהבת? מה הדבר שכל פעם שאתה רואה/שומע/מריח אותו, אתה נזכר?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>זה יכול להיות משהו קטן - שיר, ריח, מקום, צבע. הדברים האלה הם ה"כוכבים" שלך - תזכורות קבועות למישהו שאהבת. הם יכולים לכאוב, אבל הם גם מנחמים - הם אומרים שהקשר הזה היה אמיתי.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-clock"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>לשכוח או לזכור?</h3>
+                            <p>יש אנשים שאומרים שצריך "להתקדם" אחרי אבדן, לשחרר, לסגור פרק. הטייס בוחר אחרת - הוא ממשיך לזכור, לחכות, לחפש. איזו גישה נכונה יותר? האם בכלל יש "נכון"?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אולי אין תשובה אחת. יש אנשים שמוצאים נחמה בזיכרון, יש כאלה שמוצאים כאב. יש אנשים שצריכים "להתקדם" כדי לחיות, יש כאלה שה"התקדמות" מרגישה כמו בגידה. מה מתאים לך?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>למי אתה לא כותב?</h3>
+                            <p>הטייס שתק שש שנים - לא סיפר לאיש. יש לך סיפור שאתה לא מספר? מישהו שאתה לא מדבר איתו? משהו שאתה שומר לעצמך? למה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>לפעמים אנחנו שותקים כי זה קשה לדבר. לפעמים כי אנחנו חושבים שאף אחד לא יבין. לפעמים כי אנחנו לא רוצים להיראות "חלשים". הטייס שתק שש שנים, ואז - כתב ספר שמיליוני אנשים קראו. מה היה צריך לקרות כדי שתספר את הסיפור שלך?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>הבקשה של הטייס</h3>
+                            <p>הטייס מבקש מאיתנו לכתוב לו אם נראה ילד קטן עם שיער זהוב במדבר. נניח שראית - מה היית כותב לו? ומה אתה חושב שהוא היה עושה עם המידע הזה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>הניסוי הזה עוסק בשאלה: מה אנחנו באמת רוצים כשאנחנו מחפשים מישהו שהלך? האם אנחנו רוצים למצוא אותו? או שאנחנו רוצים להמשיך לחפש? לפעמים החיפוש עצמו הוא מה שמחזיק אותנו, לא המציאה.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-book"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>מה נשאר אחרי הספר?</h3>
+                            <p>סיימת לקרוא את הנסיך הקטן. מה נשאר איתך? איזה משפט, רעיון, דמות - תישאר איתך אחרי שתסגור את הספר? מה ה"כוכבים" שהספר הזה נתן לך?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אין תשובה נכונה. לכל קורא נשאר משהו אחר. אולי "רואים היטב רק עם הלב". אולי השועל והאילוף. אולי הפרידה. אולי השאלה על הכבש. מה שנשאר איתך - זה מה שהספר הזה אומר לך, ספציפית לך.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-26.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 26
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="#" class="book-nav-btn disabled" id="nextChapter">
+                הסוף
+                <i class="ti ti-star"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 27 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with CSS only - no SVG
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = (Math.random() * 4 + 2) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.background = '#FFD700';
+                star.style.borderRadius = '50%';
+                star.style.boxShadow = '0 0 6px 2px rgba(255, 215, 0, 0.6)';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 27; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 27;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

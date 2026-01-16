@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Character Demo V2 - Ben's Universe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a1a2a 100%);
+            --star-glow: #ffeebb;
+            --text-light: #f0e6d3;
+            --accent-gold: #ffd700;
+            --accent-pink: #ff9eb5;
+            --accent-blue: #7eb8da;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: var(--star-glow);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+        
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .character-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .character-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .character-card h2 {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+        }
+        
+        .character-card p {
+            margin-top: 15px;
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .character-svg {
+            width: 220px;
+            height: 280px;
+            margin: 0 auto;
+        }
+        
+        .spaceship-svg {
+            width: 350px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        
+        .scene-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .scene-card h2 {
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+        }
+        
+        .scene-svg {
+            width: 100%;
+            max-width: 700px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        
+        .note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .glow {
+            filter: drop-shadow(0 0 10px rgba(255, 235, 180, 0.5));
+        }
+
+        /* Stars showcase */
+        .stars-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .star-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .star-item span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>הדגמת דמויות V2 - היקום של בן</h1>
+        <p class="subtitle">גרסה משופרת | Little Prince Style</p>
+        
+        <div class="characters-grid">
+            <!-- Gal Character - V2 -->
+            <div class="character-card">
+                <svg class="character-svg" viewBox="0 0 220 280">
+                    <defs>
+                        <!-- Gal skin gradient - slightly warmer/tanned -->
+                        <linearGradient id="skinGal" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f5d5b8"/>
+                            <stop offset="100%" style="stop-color:#e8c4a0"/>
+                        </linearGradient>
+                        <!-- Dark hair -->
+                        <linearGradient id="hairGal" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a1a1a"/>
+                            <stop offset="100%" style="stop-color:#0d0d0d"/>
+                        </linearGradient>
+                        <!-- Beard gradient -->
+                        <linearGradient id="beardGal" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a1a1a"/>
+                            <stop offset="100%" style="stop-color:#0a0a0a"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Body - simple, strong presence -->
+                    <ellipse cx="110" cy="260" rx="55" ry="30" fill="#3a3a3a"/>
+                    <rect x="60" y="195" width="100" height="70" rx="15" fill="#2d2d2d"/>
+                    
+                    <!-- Neck - thicker, masculine -->
+                    <rect x="90" y="170" width="40" height="30" fill="url(#skinGal)"/>
+                    
+                    <!-- HEAD - Wide ellipse with prominent jaw -->
+                    <path d="M110 60 
+                             C155 60, 175 90, 175 120
+                             C175 145, 170 160, 160 172
+                             L155 178
+                             C145 188, 125 192, 110 192
+                             C95 192, 75 188, 65 178
+                             L60 172
+                             C50 160, 45 145, 45 120
+                             C45 90, 65 60, 110 60" 
+                          fill="url(#skinGal)"/>
+                    
+                    <!-- HAIR - Short, very short sides, neat top -->
+                    <!-- Top hair mass -->
+                    <path d="M60 85
+                             C60 55, 85 40, 110 40
+                             C135 40, 160 55, 160 85
+                             C160 75, 145 65, 110 65
+                             C75 65, 60 75, 60 85"
+                          fill="url(#hairGal)"/>
+                    <!-- Clean hairline -->
+                    <path d="M65 90 C70 70, 90 58, 110 58 C130 58, 150 70, 155 90"
+                          fill="url(#hairGal)"/>
+                    <!-- Very short sides (fade) -->
+                    <path d="M48 100 L52 85 C55 80, 58 85, 58 95 L55 110 C50 108, 48 105, 48 100" fill="url(#hairGal)" opacity="0.6"/>
+                    <path d="M172 100 L168 85 C165 80, 162 85, 162 95 L165 110 C170 108, 172 105, 172 100" fill="url(#hairGal)" opacity="0.6"/>
+                    
+                    <!-- EYEBROWS - THICK, dark, dominant - KEY FEATURE -->
+                    <path d="M70 100 
+                             C75 95, 85 93, 100 96
+                             L100 102
+                             C85 100, 75 101, 72 104 Z" 
+                          fill="#0d0d0d"/>
+                    <path d="M150 100 
+                             C145 95, 135 93, 120 96
+                             L120 102
+                             C135 100, 145 101, 148 104 Z" 
+                          fill="#0d0d0d"/>
+                    
+                    <!-- EYES - Medium size, relaxed gaze, half-smile look -->
+                    <!-- Eye whites -->
+                    <ellipse cx="85" cy="115" rx="12" ry="10" fill="white"/>
+                    <ellipse cx="135" cy="115" rx="12" ry="10" fill="white"/>
+                    <!-- Heavy eyelids -->
+                    <path d="M73 110 Q85 105, 97 110" stroke="url(#skinGal)" stroke-width="5" fill="none"/>
+                    <path d="M123 110 Q135 105, 147 110" stroke="url(#skinGal)" stroke-width="5" fill="none"/>
+                    <!-- Iris - brown -->
+                    <circle cx="85" cy="117" r="7" fill="#4a3728"/>
+                    <circle cx="135" cy="117" r="7" fill="#4a3728"/>
+                    <!-- Pupils -->
+                    <circle cx="85" cy="117" r="3.5" fill="#1a1a1a"/>
+                    <circle cx="135" cy="117" r="3.5" fill="#1a1a1a"/>
+                    <!-- Light reflection -->
+                    <circle cx="87" cy="115" r="2" fill="white" opacity="0.8"/>
+                    <circle cx="137" cy="115" r="2" fill="white" opacity="0.8"/>
+                    
+                    <!-- NOSE - Medium, straight, rounded tip -->
+                    <path d="M110 120 L110 140 Q112 145 110 148" 
+                          stroke="#d4a88a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- BEARD & MUSTACHE - Full, dense, connected -->
+                    <!-- Main beard mass - frames the face -->
+                    <path d="M60 145
+                             C55 155, 55 170, 65 185
+                             C75 198, 95 205, 110 205
+                             C125 205, 145 198, 155 185
+                             C165 170, 165 155, 160 145
+                             L158 150
+                             C160 165, 155 180, 145 190
+                             C135 198, 120 200, 110 200
+                             C100 200, 85 198, 75 190
+                             C65 180, 60 165, 62 150
+                             Z"
+                          fill="url(#beardGal)"/>
+                    <!-- Mustache -->
+                    <path d="M85 152 
+                             Q95 148, 110 148
+                             Q125 148, 135 152
+                             Q130 156, 110 158
+                             Q90 156, 85 152"
+                          fill="url(#beardGal)"/>
+                    <!-- Beard texture lines -->
+                    <path d="M90 175 L88 190" stroke="#0a0a0a" stroke-width="1" opacity="0.3"/>
+                    <path d="M110 178 L110 195" stroke="#0a0a0a" stroke-width="1" opacity="0.3"/>
+                    <path d="M130 175 L132 190" stroke="#0a0a0a" stroke-width="1" opacity="0.3"/>
+                    
+                    <!-- MOUTH - Full lips, subtle smile (poker face) -->
+                    <path d="M95 162 Q110 167, 125 162" 
+                          stroke="#b8846a" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- EARS -->
+                    <ellipse cx="47" cy="120" rx="7" ry="12" fill="url(#skinGal)"/>
+                    <ellipse cx="173" cy="120" rx="7" ry="12" fill="url(#skinGal)"/>
+                    <!-- Earring - small hoop/stud - KEY DETAIL -->
+                    <circle cx="47" cy="128" r="3" fill="none" stroke="#c0c0c0" stroke-width="1.5"/>
+                    <circle cx="48" cy="131" r="1.5" fill="#c0c0c0"/>
+                </svg>
+                <h2>גל</h2>
+                <p>
+                    קווים חזקים • מסות כבדות<br>
+                    גבות דומיננטיות • זקן מלא<br>
+                    מבט בטוח • עגיל באוזן
+                </p>
+            </div>
+            
+            <!-- Ben Character - V2 -->
+            <div class="character-card">
+                <svg class="character-svg" viewBox="0 0 220 280">
+                    <defs>
+                        <!-- Ben skin - slightly lighter -->
+                        <linearGradient id="skinBen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fce4d4"/>
+                            <stop offset="100%" style="stop-color:#f0d4c0"/>
+                        </linearGradient>
+                        <!-- Brown hair -->
+                        <linearGradient id="hairBen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#5c4033"/>
+                            <stop offset="100%" style="stop-color:#3d2817"/>
+                        </linearGradient>
+                        <!-- Light beard -->
+                        <linearGradient id="beardBen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6b5344"/>
+                            <stop offset="100%" style="stop-color:#4a3728"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Body - softer -->
+                    <ellipse cx="110" cy="260" rx="50" ry="28" fill="#4a4a4a"/>
+                    <rect x="65" y="198" width="90" height="65" rx="15" fill="#3d3d3d"/>
+                    
+                    <!-- Neck - normal -->
+                    <rect x="93" y="172" width="34" height="28" fill="url(#skinBen)"/>
+                    
+                    <!-- HEAD - Narrower ellipse, softer jaw -->
+                    <ellipse cx="110" cy="115" rx="52" ry="65" fill="url(#skinBen)"/>
+                    <!-- Softer jaw line -->
+                    <path d="M58 115 
+                             C58 150, 70 170, 85 180
+                             Q110 190, 135 180
+                             C150 170, 162 150, 162 115"
+                          fill="url(#skinBen)"/>
+                    
+                    <!-- HAIR - Short with more volume on top, softer lines -->
+                    <ellipse cx="110" cy="60" rx="48" ry="25" fill="url(#hairBen)"/>
+                    <path d="M62 80
+                             C65 50, 85 38, 110 38
+                             C135 38, 155 50, 158 80
+                             Q155 65, 110 60
+                             Q65 65, 62 80"
+                          fill="url(#hairBen)"/>
+                    <!-- Softer sides -->
+                    <path d="M58 95 Q55 80, 60 70 Q65 85, 62 100" fill="url(#hairBen)" opacity="0.7"/>
+                    <path d="M162 95 Q165 80, 160 70 Q155 85, 158 100" fill="url(#hairBen)" opacity="0.7"/>
+                    
+                    <!-- EYEBROWS - Thinner, gentle arch, soft -->
+                    <path d="M72 98 Q85 94, 98 98" 
+                          stroke="#5c4033" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M122 98 Q135 94, 148 98" 
+                          stroke="#5c4033" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- EYES - Slightly smaller, warm, more open = happy feeling -->
+                    <!-- Eye whites - rounder, more open -->
+                    <ellipse cx="85" cy="112" rx="11" ry="10" fill="white"/>
+                    <ellipse cx="135" cy="112" rx="11" ry="10" fill="white"/>
+                    <!-- Happy eye curve at bottom -->
+                    <path d="M74 115 Q85 120, 96 115" stroke="url(#skinBen)" stroke-width="3" fill="none"/>
+                    <path d="M124 115 Q135 120, 146 115" stroke="url(#skinBen)" stroke-width="3" fill="none"/>
+                    <!-- Iris - green! -->
+                    <circle cx="85" cy="112" r="6" fill="#4a8b5c"/>
+                    <circle cx="135" cy="112" r="6" fill="#4a8b5c"/>
+                    <!-- Pupils -->
+                    <circle cx="85" cy="112" r="3" fill="#1a1a1a"/>
+                    <circle cx="135" cy="112" r="3" fill="#1a1a1a"/>
+                    <!-- Light reflection -->
+                    <circle cx="87" cy="110" r="2" fill="white" opacity="0.9"/>
+                    <circle cx="137" cy="110" r="2" fill="white" opacity="0.9"/>
+                    
+                    <!-- NOSE - Small, soft tip, minimal -->
+                    <path d="M110 118 L110 132 Q111 136 110 138" 
+                          stroke="#e0b8a0" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- BEARD - Short stubble, less dense, softer line -->
+                    <path d="M70 148
+                             C65 158, 68 172, 78 182
+                             C88 190, 100 193, 110 193
+                             C120 193, 132 190, 142 182
+                             C152 172, 155 158, 150 148
+                             L148 155
+                             C150 165, 148 175, 140 182
+                             C132 188, 120 190, 110 190
+                             C100 190, 88 188, 80 182
+                             C72 175, 70 165, 72 155
+                             Z"
+                          fill="url(#beardBen)" opacity="0.6"/>
+                    <!-- Light stubble texture -->
+                    <path d="M95 165 L93 175" stroke="#5c4033" stroke-width="0.5" opacity="0.4"/>
+                    <path d="M110 168 L110 178" stroke="#5c4033" stroke-width="0.5" opacity="0.4"/>
+                    <path d="M125 165 L127 175" stroke="#5c4033" stroke-width="0.5" opacity="0.4"/>
+                    
+                    <!-- MOUTH - Clear, open smile - KEY CHARACTERISTIC -->
+                    <path d="M90 155 Q110 168, 130 155" 
+                          stroke="#c4846a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <!-- Smile teeth hint -->
+                    <path d="M95 157 Q110 163, 125 157" 
+                          fill="white" opacity="0.5"/>
+                    
+                    <!-- EARS -->
+                    <ellipse cx="58" cy="115" rx="6" ry="11" fill="url(#skinBen)"/>
+                    <ellipse cx="162" cy="115" rx="6" ry="11" fill="url(#skinBen)"/>
+                    <!-- Eyebrow piercing -->
+                    <circle cx="148" cy="95" r="2" fill="none" stroke="#c0c0c0" stroke-width="1.2"/>
+                    <circle cx="150" cy="94" r="1" fill="#c0c0c0"/>
+                </svg>
+                <h2>בן</h2>
+                <p>
+                    קווים רכים • מסות קלילות<br>
+                    גבות עדינות • זקן קצר<br>
+                    חיוך פתוח • עגיל בגבה
+                </p>
+            </div>
+        </div>
+        
+        <!-- Spaceship - Keep as is -->
+        <div class="scene-card">
+            <h2>החללית</h2>
+            <svg class="spaceship-svg floating glow" viewBox="0 0 400 200">
+                <defs>
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#f5e6d3"/>
+                        <stop offset="50%" style="stop-color:#e8d4c0"/>
+                        <stop offset="100%" style="stop-color:#d4c4b0"/>
+                    </linearGradient>
+                    <linearGradient id="windowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7eb8da"/>
+                        <stop offset="100%" style="stop-color:#5a9bc7"/>
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <circle cx="50" cy="40" r="2" fill="#ffeebb" opacity="0.8"/>
+                <circle cx="350" cy="60" r="1.5" fill="#ffeebb" opacity="0.7"/>
+                <circle cx="30" cy="150" r="1" fill="#ffeebb" opacity="0.6"/>
+                <circle cx="380" cy="140" r="2" fill="#ffeebb" opacity="0.9"/>
+                
+                <ellipse cx="200" cy="100" rx="110" ry="50" fill="url(#spaceshipBody)" stroke="#c4a080" stroke-width="2"/>
+                <ellipse cx="200" cy="70" rx="70" ry="35" fill="url(#spaceshipBody)" stroke="#c4a080" stroke-width="2"/>
+                
+                <path d="M200 55 
+                         C200 45, 185 40, 175 50 
+                         C165 60, 165 75, 200 95 
+                         C235 75, 235 60, 225 50 
+                         C215 40, 200 45, 200 55" 
+                      fill="url(#windowGlow)" stroke="#4a90a4" stroke-width="2" filter="url(#glow)"/>
+                
+                <ellipse cx="185" cy="60" rx="8" ry="5" fill="white" opacity="0.4"/>
+                
+                <circle cx="188" cy="72" r="6" fill="#5c4033"/>
+                <circle cx="212" cy="72" r="6" fill="#1a1a1a"/>
+                
+                <circle cx="120" cy="100" r="3" fill="#b4a090"/>
+                <circle cx="150" cy="95" r="3" fill="#b4a090"/>
+                <circle cx="250" cy="95" r="3" fill="#b4a090"/>
+                <circle cx="280" cy="100" r="3" fill="#b4a090"/>
+                
+                <path d="M90 100 L50 130 L50 140 L95 115" fill="#d4c4b0" stroke="#c4a080" stroke-width="1.5"/>
+                <path d="M310 100 L350 130 L350 140 L305 115" fill="#d4c4b0" stroke="#c4a080" stroke-width="1.5"/>
+                
+                <ellipse cx="160" cy="145" rx="15" ry="8" fill="#c4a080"/>
+                <ellipse cx="200" cy="148" rx="18" ry="10" fill="#c4a080"/>
+                <ellipse cx="240" cy="145" rx="15" ry="8" fill="#c4a080"/>
+                
+                <ellipse cx="160" cy="160" rx="8" ry="15" fill="#ffd700" opacity="0.8"/>
+                <ellipse cx="160" cy="165" rx="5" ry="12" fill="#ff9966" opacity="0.9"/>
+                <ellipse cx="200" cy="165" rx="10" ry="20" fill="#ffd700" opacity="0.8"/>
+                <ellipse cx="200" cy="170" rx="6" ry="15" fill="#ff9966" opacity="0.9"/>
+                <ellipse cx="240" cy="160" rx="8" ry="15" fill="#ffd700" opacity="0.8"/>
+                <ellipse cx="240" cy="165" rx="5" ry="12" fill="#ff9966" opacity="0.9"/>
+                
+                <line x1="200" y1="35" x2="200" y2="10" stroke="#c4a080" stroke-width="2"/>
+                <polygon points="200,10 230,20 200,30" fill="#ffd700"/>
+                <polygon points="215,20 218,14 221,20 227,21 222,25 224,31 218,27 212,31 214,25 209,21" fill="#ff6b6b" transform="scale(0.5) translate(410, 28)"/>
+            </svg>
+        </div>
+
+        <!-- SVG Stars showcase -->
+        <div class="scene-card" style="margin-top: 40px;">
+            <h2>הכוכבים (SVG)</h2>
+            <p style="margin-bottom: 30px; opacity: 0.8;">כל כוכב מייצג תכונה של בן - עיצוב SVG במקום אימוג'י</p>
+            
+            <div class="stars-showcase">
+                <!-- Star 1: Creativity -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ffd700"/>
+                                <stop offset="100%" style="stop-color:#ffaa00"/>
+                            </linearGradient>
+                            <filter id="starGlow1">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <polygon points="30,5 35,22 53,22 39,33 44,50 30,40 16,50 21,33 7,22 25,22" 
+                                 fill="url(#star1)" filter="url(#starGlow1)"/>
+                        <!-- Sparkle -->
+                        <circle cx="42" cy="12" r="2" fill="#fff" opacity="0.8"/>
+                    </svg>
+                    <span>יצירתיות</span>
+                </div>
+
+                <!-- Star 2: Good Heart -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ff9eb5"/>
+                                <stop offset="100%" style="stop-color:#ff6b8a"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,8 34,20 47,20 37,28 41,41 30,34 19,41 23,28 13,20 26,20" 
+                                 fill="url(#star2)" filter="url(#starGlow1)"/>
+                        <!-- Heart inside -->
+                        <path d="M30 25 C30 22, 26 20, 24 23 C22 26, 22 29, 30 35 C38 29, 38 26, 36 23 C34 20, 30 22, 30 25" 
+                              fill="#fff" opacity="0.5"/>
+                    </svg>
+                    <span>לב טוב</span>
+                </div>
+
+                <!-- Star 3: Always There -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#a78bfa"/>
+                                <stop offset="100%" style="stop-color:#7c3aed"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,6 34,21 50,21 38,31 42,46 30,37 18,46 22,31 10,21 26,21" 
+                                 fill="url(#star3)" filter="url(#starGlow1)"/>
+                    </svg>
+                    <span>תמיד שם</span>
+                </div>
+
+                <!-- Star 4: Perseverance -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#60a5fa"/>
+                                <stop offset="100%" style="stop-color:#3b82f6"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,5 35,22 53,22 39,33 44,50 30,40 16,50 21,33 7,22 25,22" 
+                                 fill="url(#star4)" filter="url(#starGlow1)"/>
+                        <!-- Arrow up symbol -->
+                        <path d="M30 20 L30 35 M25 25 L30 20 L35 25" stroke="#fff" stroke-width="2" fill="none" opacity="0.6"/>
+                    </svg>
+                    <span>התמדה</span>
+                </div>
+
+                <!-- Star 5: Talented -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fbbf24"/>
+                                <stop offset="100%" style="stop-color:#f59e0b"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- 6-pointed star for talent -->
+                        <polygon points="30,5 35,20 50,20 40,30 45,45 30,38 15,45 20,30 10,20 25,20" 
+                                 fill="url(#star5)" filter="url(#starGlow1)"/>
+                        <circle cx="30" cy="28" r="5" fill="#fff" opacity="0.4"/>
+                    </svg>
+                    <span>מוכשרות</span>
+                </div>
+
+                <!-- Star 6: Listening -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#34d399"/>
+                                <stop offset="100%" style="stop-color:#10b981"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,7 34,21 49,21 38,30 42,44 30,36 18,44 22,30 11,21 26,21" 
+                                 fill="url(#star6)" filter="url(#starGlow1)"/>
+                    </svg>
+                    <span>הקשבה</span>
+                </div>
+
+                <!-- Star 7: Beauty -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star7" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f9a8d4"/>
+                                <stop offset="100%" style="stop-color:#ec4899"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,6 34,20 48,20 38,29 42,43 30,35 18,43 22,29 12,20 26,20" 
+                                 fill="url(#star7)" filter="url(#starGlow1)"/>
+                        <!-- Sparkles -->
+                        <circle cx="40" cy="13" r="1.5" fill="#fff"/>
+                        <circle cx="20" cy="15" r="1" fill="#fff" opacity="0.7"/>
+                    </svg>
+                    <span>יופי</span>
+                </div>
+
+                <!-- Star 8: Bad Jokes -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star8" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fcd34d"/>
+                                <stop offset="100%" style="stop-color:#fbbf24"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,8 33,19 45,19 36,26 39,38 30,32 21,38 24,26 15,19 27,19" 
+                                 fill="url(#star8)" filter="url(#starGlow1)"/>
+                        <!-- Smile face hint -->
+                        <circle cx="26" cy="25" r="1.5" fill="#fff" opacity="0.6"/>
+                        <circle cx="34" cy="25" r="1.5" fill="#fff" opacity="0.6"/>
+                        <path d="M25 29 Q30 33 35 29" stroke="#fff" stroke-width="1.5" fill="none" opacity="0.5"/>
+                    </svg>
+                    <span>בדיחות גרועות</span>
+                </div>
+
+                <!-- Star 9: Order -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star9" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#a3e635"/>
+                                <stop offset="100%" style="stop-color:#84cc16"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,6 34,20 48,20 38,29 42,43 30,35 18,43 22,29 12,20 26,20" 
+                                 fill="url(#star9)" filter="url(#starGlow1)"/>
+                    </svg>
+                    <span>סדר</span>
+                </div>
+
+                <!-- Star 10: Morning -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star10" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#fdba74"/>
+                                <stop offset="100%" style="stop-color:#fb923c"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,8 33,19 45,19 36,26 39,38 30,32 21,38 24,26 15,19 27,19" 
+                                 fill="url(#star10)" filter="url(#starGlow1)"/>
+                        <!-- Sun rays hint -->
+                        <circle cx="30" cy="27" r="4" fill="#fff" opacity="0.4"/>
+                    </svg>
+                    <span>בוקר</span>
+                </div>
+
+                <!-- Star 11: Sweet Routine -->
+                <div class="star-item">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <defs>
+                            <linearGradient id="star11" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#c4b5fd"/>
+                                <stop offset="100%" style="stop-color:#a78bfa"/>
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,7 34,21 49,21 38,30 42,44 30,36 18,44 22,30 11,21 26,21" 
+                                 fill="url(#star11)" filter="url(#starGlow1)"/>
+                        <!-- Home symbol -->
+                        <path d="M25 32 L30 27 L35 32 L35 37 L25 37 Z" fill="#fff" opacity="0.5"/>
+                    </svg>
+                    <span>שגרה מתוקה</span>
+                </div>
+
+                <!-- Star 12: Love (Final) -->
+                <div class="star-item">
+                    <svg width="70" height="70" viewBox="0 0 70 70">
+                        <defs>
+                            <linearGradient id="star12" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ff6b6b"/>
+                                <stop offset="100%" style="stop-color:#ee5a5a"/>
+                            </linearGradient>
+                            <filter id="bigGlow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <!-- Larger star for finale -->
+                        <polygon points="35,5 40,25 60,25 45,38 50,58 35,47 20,58 25,38 10,25 30,25" 
+                                 fill="url(#star12)" filter="url(#bigGlow)"/>
+                        <!-- Heart inside -->
+                        <path d="M35 30 C35 26, 29 23, 26 27 C23 31, 23 35, 35 45 C47 35, 47 31, 44 27 C41 23, 35 26, 35 30" 
+                              fill="#fff" opacity="0.6"/>
+                    </svg>
+                    <span>אהבה ❤️</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Together Scene -->
+        <div class="scene-card" style="margin-top: 40px;">
+            <h2>יחד במסע</h2>
+            <svg class="scene-svg" viewBox="0 0 700 400">
+                <defs>
+                    <radialGradient id="spaceGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#1a1a3a"/>
+                        <stop offset="100%" style="stop-color:#0a0a1a"/>
+                    </radialGradient>
+                </defs>
+                <rect width="700" height="400" fill="url(#spaceGlow)"/>
+                
+                <!-- Background stars -->
+                <circle cx="50" cy="50" r="1.5" fill="#ffeebb"/>
+                <circle cx="120" cy="80" r="1" fill="#ffeebb"/>
+                <circle cx="200" cy="30" r="2" fill="#ffeebb"/>
+                <circle cx="400" cy="60" r="1.5" fill="#ffeebb"/>
+                <circle cx="520" cy="40" r="1" fill="#ffeebb"/>
+                <circle cx="620" cy="90" r="2" fill="#ffeebb"/>
+                <circle cx="80" cy="180" r="1" fill="#ffeebb"/>
+                <circle cx="650" cy="250" r="1.5" fill="#ffeebb"/>
+                <circle cx="30" cy="350" r="1" fill="#ffeebb"/>
+                <circle cx="680" cy="320" r="1" fill="#ffeebb"/>
+                
+                <!-- Quality stars around the spaceship -->
+                <!-- Star 1 -->
+                <g transform="translate(100, 100)">
+                    <polygon points="0,-18 4,-7 16,-7 7,2 10,14 0,7 -10,14 -7,2 -16,-7 -4,-7" 
+                             fill="#ffd700" filter="url(#starGlow1)"/>
+                </g>
+                
+                <!-- Star 2 -->
+                <g transform="translate(580, 90)">
+                    <polygon points="0,-15 3,-6 13,-6 6,1 8,11 0,6 -8,11 -6,1 -13,-6 -3,-6" 
+                             fill="#ff9eb5" filter="url(#starGlow1)"/>
+                </g>
+                
+                <!-- Star 3 -->
+                <g transform="translate(130, 300)">
+                    <polygon points="0,-12 3,-5 11,-5 5,1 7,9 0,5 -7,9 -5,1 -11,-5 -3,-5" 
+                             fill="#a78bfa" filter="url(#starGlow1)"/>
+                </g>
+                
+                <!-- Star 4 -->
+                <g transform="translate(560, 320)">
+                    <polygon points="0,-14 3,-5 12,-5 5,1 7,10 0,6 -7,10 -5,1 -12,-5 -3,-5" 
+                             fill="#34d399" filter="url(#starGlow1)"/>
+                </g>
+
+                <!-- Spaceship with characters -->
+                <g transform="translate(350, 200) scale(0.8)">
+                    <!-- Spaceship body -->
+                    <ellipse cx="0" cy="0" rx="100" ry="45" fill="url(#spaceshipBody)" stroke="#c4a080" stroke-width="2"/>
+                    <ellipse cx="0" cy="-28" rx="60" ry="30" fill="url(#spaceshipBody)" stroke="#c4a080" stroke-width="2"/>
+                    
+                    <!-- Heart window -->
+                    <path d="M0 -40 
+                             C0 -50, -15 -55, -25 -45 
+                             C-35 -35, -35 -20, 0 5 
+                             C35 -20, 35 -35, 25 -45 
+                             C15 -55, 0 -50, 0 -40" 
+                          fill="url(#windowGlow)" stroke="#4a90a4" stroke-width="2" filter="url(#glow)"/>
+                    
+                    <!-- Ben silhouette (left - brown hair) -->
+                    <ellipse cx="-15" cy="-28" rx="10" ry="12" fill="#5c4033"/>
+                    <ellipse cx="-15" cy="-15" rx="8" ry="5" fill="#3d3d3d"/>
+                    
+                    <!-- Gal silhouette (right - black hair, more angular) -->
+                    <ellipse cx="15" cy="-28" rx="11" ry="13" fill="#1a1a1a"/>
+                    <ellipse cx="15" cy="-14" rx="9" ry="5" fill="#2d2d2d"/>
+                    
+                    <!-- Wings -->
+                    <path d="M-85 0 L-120 30 L-120 40 L-80 15" fill="#d4c4b0" stroke="#c4a080" stroke-width="1.5"/>
+                    <path d="M85 0 L120 30 L120 40 L80 15" fill="#d4c4b0" stroke="#c4a080" stroke-width="1.5"/>
+                    
+                    <!-- Flames -->
+                    <ellipse cx="-35" cy="55" rx="7" ry="14" fill="#ffd700" opacity="0.8"/>
+                    <ellipse cx="-35" cy="60" rx="4" ry="10" fill="#ff9966" opacity="0.9"/>
+                    <ellipse cx="0" cy="60" rx="9" ry="18" fill="#ffd700" opacity="0.8"/>
+                    <ellipse cx="0" cy="65" rx="5" ry="13" fill="#ff9966" opacity="0.9"/>
+                    <ellipse cx="35" cy="55" rx="7" ry="14" fill="#ffd700" opacity="0.8"/>
+                    <ellipse cx="35" cy="60" rx="4" ry="10" fill="#ff9966" opacity="0.9"/>
+                </g>
+                
+                <!-- Trail -->
+                <path d="M200 220 Q150 250 100 320" stroke="#ffd700" stroke-width="2" stroke-dasharray="5,5" fill="none" opacity="0.4"/>
+                
+                <!-- Destination: Love star -->
+                <g transform="translate(620, 360)">
+                    <polygon points="0,-20 5,-8 18,-8 8,2 12,15 0,8 -12,15 -8,2 -18,-8 -5,-8" 
+                             fill="#ff6b6b" filter="url(#bigGlow)"/>
+                    <text x="0" y="30" text-anchor="middle" fill="#ffeebb" font-size="12" font-family="Heebo">אהבה</text>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="note">
+            <strong>💡 גרסה V2:</strong> דמויות משופרות לפי התיאור המפורט + כוכבים ב-SVG<br><br>
+            <strong>גל:</strong> קווים חזקים, גבות דומיננטיות, זקן מלא, מבט בטוח<br>
+            <strong>בן:</strong> קווים רכים, חיוך פתוח, זקן קצר, מראה נעים
+        </div>
+    </div>
+    
+    <script>
+        const starsContainer = document.getElementById('stars');
+        const numberOfStars = 100;
+        
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 3 | מאיפה הנסיך</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Mystery/Wonder palette */
+            --primary: #9370DB;
+            --secondary: #8A65D4;
+            --accent: #7B5DC7;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: sway 4s ease-in-out infinite; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 800px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(147, 112, 219, 0.1), rgba(123, 93, 199, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .home-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .home-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .chapter-bookmark-btn {
+            background: white;
+            border: 2px solid #E8A0A0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-bookmark-btn i {
+            font-size: 1.3rem;
+            color: #E8A0A0;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-bookmark-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: #C77878;
+        }
+        
+        .chapter-bookmark-btn:hover i {
+            color: #C77878;
+        }
+        
+        .chapter-bookmark-btn.bookmarked {
+            background: #E8A0A0;
+            border-color: #E8A0A0;
+        }
+        
+        .chapter-bookmark-btn.bookmarked i {
+            color: white;
+        }
+        
+        .chapter-bookmark-btn.bookmarked:hover {
+            background: #C77878;
+            border-color: #C77878;
+        }
+        
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .chapter-bookmark-btn.just-bookmarked i {
+            animation: heartPop 0.4s ease;
+        }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+
+        /* ILLUSTRATION STYLES */
+        .illustration-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+        }
+        .illustration-float-right {
+            float: left;
+            margin: 0 25px 15px 0;
+            max-width: 200px;
+        }
+        .illustration-float-left {
+            float: right;
+            margin: 0 0 15px 25px;
+            max-width: 200px;
+        }
+        .illustration-center {
+            display: block;
+            margin: 30px auto;
+            max-width: 350px;
+        }
+        .illustration-wide {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+        }
+        .illustration-small {
+            width: 120px;
+            height: 120px;
+        }
+        @media (max-width: 600px) {
+            .illustration-float-right,
+            .illustration-float-left {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-planet"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 3</p>
+        <p class="chapter-title">מאיפה הנסיך</p>
+        <span class="mood-badge"><i class="ti ti-help"></i> מסתורין והתגלות</span>
+        
+        <!-- Mystery Scene Illustration - Questions Without Answers -->
+        <div class="illustration-container">
+            <svg viewBox="0 0 450 200" xmlns="http://www.w3.org/2000/svg" style="max-width: 450px;">
+                <defs>
+                    <linearGradient id="mysterySky" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#9370DB"/>
+                        <stop offset="60%" style="stop-color:#FDF8EE"/>
+                        <stop offset="100%" style="stop-color:#F5E6C8"/>
+                    </linearGradient>
+                    <linearGradient id="princeCoatPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4169E1"/>
+                        <stop offset="100%" style="stop-color:#7B5DC7"/>
+                    </linearGradient>
+                    <filter id="mysteryGlow">
+                        <feGaussianBlur stdDeviation="3" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- Background -->
+                <rect width="450" height="200" fill="url(#mysterySky)" rx="10"/>
+                
+                <!-- Twinkling stars -->
+                <g fill="#FFD700">
+                    <circle cx="40" cy="25" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="120" cy="40" r="1.5"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+                    <circle cx="200" cy="20" r="2"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite"/></circle>
+                    <circle cx="330" cy="35" r="1.5"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="410" cy="25" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+                </g>
+                
+                <!-- Desert dunes -->
+                <path d="M0 150 Q60 130 120 145 Q180 160 240 135 Q300 110 360 145 Q420 175 450 155 L450 200 L0 200 Z" fill="#F5E6C8"/>
+                <path d="M0 170 Q80 150 160 165 Q240 180 320 160 Q380 145 450 165 L450 200 L0 200 Z" fill="#E8D4A8" opacity="0.7"/>
+                
+                <!-- Crashed airplane (left side) -->
+                <g transform="translate(90, 140) rotate(-12)">
+                    <ellipse cx="0" cy="0" rx="30" ry="7" fill="#7B5DC7" opacity="0.8"/>
+                    <ellipse cx="-20" cy="-2" rx="10" ry="5" fill="#9370DB" opacity="0.7"/>
+                    <path d="M-5 0 L-5 -20 L12 -16 L8 0" fill="#8A65D4"/>
+                    <path d="M5 0 L5 16 L-12 14 L-8 0" fill="#8A65D4"/>
+                    <path d="M25 -2 L38 -12 L38 -4 L30 0" fill="#7B5DC7"/>
+                </g>
+                
+                <!-- Pilot sitting, confused -->
+                <g transform="translate(150, 130)">
+                    <rect x="-12" y="10" width="24" height="30" fill="#5D4E37" rx="3"/>
+                    <circle cx="0" cy="-5" r="14" fill="#FFE4B5"/>
+                    <ellipse cx="0" cy="-14" rx="16" ry="9" fill="#8B4513"/>
+                    <circle cx="-5" cy="-5" r="2.5" fill="#5D4E37"/>
+                    <circle cx="5" cy="-5" r="2.5" fill="#5D4E37"/>
+                    <path d="M-4 6 Q0 4 4 6" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                    <!-- Scratching head gesture -->
+                    <path d="M12 -8 Q20 -15 18 -25" stroke="#FFE4B5" stroke-width="5" fill="none" stroke-linecap="round"/>
+                </g>
+                
+                <!-- Little Prince standing mysteriously -->
+                <g transform="translate(310, 125)">
+                    <path d="M-10 45 L-8 15 L8 15 L10 45" fill="url(#princeCoatPurple)"/>
+                    <circle cx="0" cy="5" r="12" fill="#FFE4B5"/>
+                    <ellipse cx="0" cy="-5" rx="10" ry="8" fill="#FFD700"/>
+                    <circle cx="-7" cy="-1" r="4" fill="#FFD700"/>
+                    <circle cx="7" cy="-1" r="4" fill="#FFD700"/>
+                    <circle cx="0" cy="-8" r="4" fill="#FFD700"/>
+                    <circle cx="-4" cy="4" r="2" fill="#5D4E37"/>
+                    <circle cx="4" cy="4" r="2" fill="#5D4E37"/>
+                    <path d="M-3 10 Q0 12 3 10" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                    <!-- Scarf flowing -->
+                    <path d="M-6 12 Q-22 8 -30 22" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round">
+                        <animate attributeName="d" values="M-6 12 Q-22 8 -30 22;M-6 12 Q-25 12 -32 18;M-6 12 Q-22 8 -30 22" dur="4s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+                
+                <!-- Floating question marks - mystery theme -->
+                <g fill="#9370DB" font-family="Heebo, sans-serif" font-weight="bold">
+                    <text x="220" y="60" font-size="24" opacity="0.7">?</text>
+                    <text x="250" y="85" font-size="18" opacity="0.5">?</text>
+                    <text x="190" y="95" font-size="20" opacity="0.6">?</text>
+                    <text x="270" y="50" font-size="16" opacity="0.4">?</text>
+                    <text x="230" y="110" font-size="14" opacity="0.3">?</text>
+                </g>
+                
+                <!-- Small planet hint in sky -->
+                <g transform="translate(390, 60)" filter="url(#mysteryGlow)">
+                    <circle cx="0" cy="0" r="18" fill="#E8D4A8" opacity="0.8"/>
+                    <circle cx="-5" cy="-5" r="4" fill="#D4C4A8" opacity="0.5"/>
+                    <circle cx="5" cy="5" r="3" fill="#D4C4A8" opacity="0.4"/>
+                    <!-- Tiny rose -->
+                    <line x1="0" y1="-18" x2="0" y2="-25" stroke="#228B22" stroke-width="1.5"/>
+                    <circle cx="0" cy="-27" r="4" fill="#FF69B4"/>
+                </g>
+                
+                <!-- Labels -->
+                <text x="150" y="190" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">מאיפה הוא?</text>
+                <text x="310" y="190" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">לא עונה...</text>
+            </svg>
+        </div>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <!-- The Prince Examining the Plane -->
+                <svg class="illustration-float-left" viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="planePurple" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8A65D4"/>
+                            <stop offset="100%" style="stop-color:#7B5DC7"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Background -->
+                    <rect width="160" height="180" fill="#FDF8EE" rx="10"/>
+                    
+                    <!-- Broken plane piece -->
+                    <g transform="translate(80, 120)">
+                        <ellipse cx="0" cy="0" rx="40" ry="10" fill="url(#planePurple)"/>
+                        <ellipse cx="-25" cy="-3" rx="12" ry="6" fill="#9370DB" opacity="0.7"/>
+                        <path d="M-8 0 L-8 -25 L15 -20 L10 0" fill="#8A65D4"/>
+                        <path d="M20 -3 L35 -15 L35 -5 L25 0" fill="#7B5DC7"/>
+                        <!-- Broken propeller -->
+                        <line x1="-35" y1="-5" x2="-45" y2="5" stroke="#4A4A4A" stroke-width="3"/>
+                        <line x1="-35" y1="5" x2="-45" y2="-5" stroke="#4A4A4A" stroke-width="3"/>
+                    </g>
+                    
+                    <!-- Little Prince looking curiously -->
+                    <g transform="translate(100, 75)">
+                        <path d="M-8 35 L-6 12 L6 12 L8 35" fill="#4169E1"/>
+                        <circle cx="0" cy="4" r="10" fill="#FFE4B5"/>
+                        <ellipse cx="0" cy="-4" rx="8" ry="6" fill="#FFD700"/>
+                        <circle cx="-6" cy="-1" r="3" fill="#FFD700"/>
+                        <circle cx="6" cy="-1" r="3" fill="#FFD700"/>
+                        <!-- Curious eyes looking down -->
+                        <circle cx="-3" cy="5" r="2" fill="#5D4E37"/>
+                        <circle cx="3" cy="5" r="2" fill="#5D4E37"/>
+                        <circle cx="-3" cy="6" r="0.8" fill="white"/>
+                        <circle cx="3" cy="6" r="0.8" fill="white"/>
+                        <!-- Thinking expression -->
+                        <path d="M-2 10 Q0 11 2 10" stroke="#C4846C" stroke-width="1" fill="none"/>
+                        <!-- Scarf -->
+                        <path d="M-5 10 Q-18 5 -22 18" stroke="#FFD700" stroke-width="2.5" fill="none"/>
+                    </g>
+                    
+                    <!-- Question mark -->
+                    <text x="55" y="50" font-family="Heebo, sans-serif" font-size="24" fill="#9370DB" opacity="0.7">?</text>
+                    
+                    <!-- Label -->
+                    <text x="80" y="170" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">"מה זה הדבר הזה?"</text>
+                </svg>
+                
+                <p>פרק שלישי הוא פרק של מסתורין מתסכל ומרתק כאחד. הטייס, שזה עתה פגש יצור מופלא שביקש ממנו לצייר כבשה, מנסה עכשיו להבין מי זה הנער הזה ומאיפה הוא בא. אך הנסיך הקטן הוא בריה מיוחדת - הוא שואל שאלות אינספור אך מעולם לא עונה על אף אחת. זהו פרק על הפרדוקס של תקשורת, על השאלות שאנחנו שואלים ועל אלה שאנחנו נמנעים לענות עליהן.</p>
+                
+                <p>הטייס, עדיין המום מהופעתו הפתאומית של הילד הזר במדבר, מנסה לחקור אותו. מאיפה הוא בא? איך הוא הגיע לכאן? מי הוא בכלל? אך כל שאלה שהוא שואל נבלעת בחלל, כאילו לא נשאלה כלל. הנסיך הקטן אינו מתעלם מהשאלות - הוא פשוט לא מכיר בהן כמשהו שדורש תשובה. במקום זאת, הוא מתמקד בדבר האחד שחשוב לו: הכבשה שביקש.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"כשמסתורין עמוק מדי, אי אפשר לא לציית לו."</p>
+                    <p class="quote-analysis">המשפט הזה הוא מפתח להבנת היחסים בין הטייס לנסיך. הטייס, האדם המבוגר והרציונלי, מרגיש שהוא חייב לציית למסתורין - לא כי הוא מבין אותו, אלא דווקא כי הוא לא מבין. המסתורין עצמו הוא הסמכות. זהו היפוך מוחלט של יחסי הכוח הרגילים: הילד הוא זה ששולט, לא באמצעות כוח פיזי או סמכות חברתית, אלא באמצעות האופן שבו הוא מתייחס לעולם.</p>
+                </div>
+                
+                <p>הנסיך בוחן את המטוס השבור של הטייס ושואל אותו: "מה זה הדבר הזה?" הטייס מסביר שזה מטוס - שלו - ושהוא טס בו. הנסיך מגיב בהפתעה שמחה: "מה? נפלת מן השמים?" ולאחר מכן: "זה מצחיק מאוד!" הטייס, שפגיעתו האישית עדיין טרייה, מתרגז מעט על הקלילות הזו. אך הנסיך לא מתכוון להשפיל - הוא פשוט רואה את המצב מפרספקטיבה אחרת לגמרי.</p>
+
+                <p>ואז מגיע הרגע שבו הטייס מגלה משהו מכריע. הנסיך אומר, בהתייחסו לעצמו: "אז גם אתה בא מן השמים! מאיזה כוכב אתה?" הטייס תופס מיד את ההזדמנות - סוף סוף רמז למקורו של הנער המסתורי. הוא שואל בלהיטות: "אז אתה בא מכוכב אחר?" אך הנסיך לא עונה. הוא רק מתבונן בכבשה שבקופסה, מנדנד בראשו בתמיהה, ושוקע במחשבות.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"הוא לא ענה לי אף פעם. אבל כשהנהן בראשו לאט כשהסתכל על המטוס שלי..."</p>
+                    <p class="quote-analysis">שימו לב לכך שהטייס לומד על הנסיך לא דרך תשובות, אלא דרך תגובות. הנסיך לא אומר "כן, אני בא מכוכב אחר" - הוא מנהן. זוהי תקשורת ללא מילים, שפה של מחוות ושתיקות. הטייס נאלץ להפוך לקורא שפת גוף, לפענח את מה שלא נאמר. זוהי דרך תקשורת ילדית מאוד - ויחד עם זאת, עמוקה מאוד.</p>
+                </div>
+
+                <!-- Flower with Thorns Illustration -->
+                <svg class="illustration-float-right" viewBox="0 0 150 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="roseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF69B4"/>
+                            <stop offset="100%" style="stop-color:#FF1493"/>
+                        </linearGradient>
+                        <filter id="roseGlow">
+                            <feGaussianBlur stdDeviation="2" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="150" height="180" fill="#FDF8EE" rx="10"/>
+                    
+                    <!-- Glass dome hint -->
+                    <ellipse cx="75" cy="140" rx="45" ry="10" fill="#E8D4A8" opacity="0.3"/>
+                    
+                    <!-- Stem with thorns -->
+                    <path d="M75 140 L75 60" stroke="#228B22" stroke-width="4"/>
+                    <!-- Thorns -->
+                    <path d="M75 120 L65 115" stroke="#228B22" stroke-width="2"/>
+                    <path d="M75 100 L85 95" stroke="#228B22" stroke-width="2"/>
+                    <path d="M75 80 L65 75" stroke="#228B22" stroke-width="2"/>
+                    <!-- Thorn tips (sharp) -->
+                    <circle cx="65" cy="115" r="2" fill="#2E8B57"/>
+                    <circle cx="85" cy="95" r="2" fill="#2E8B57"/>
+                    <circle cx="65" cy="75" r="2" fill="#2E8B57"/>
+                    
+                    <!-- Leaves -->
+                    <ellipse cx="60" cy="110" rx="12" ry="6" fill="#32CD32" transform="rotate(-30 60 110)"/>
+                    <ellipse cx="90" cy="90" rx="12" ry="6" fill="#32CD32" transform="rotate(30 90 90)"/>
+                    
+                    <!-- Rose flower -->
+                    <g transform="translate(75, 50)" filter="url(#roseGlow)">
+                        <ellipse cx="0" cy="0" rx="18" ry="22" fill="url(#roseGradient)"/>
+                        <ellipse cx="-8" cy="2" rx="10" ry="14" fill="#FF1493" opacity="0.8"/>
+                        <ellipse cx="8" cy="2" rx="10" ry="14" fill="#FF1493" opacity="0.8"/>
+                        <ellipse cx="0" cy="-5" rx="8" ry="10" fill="#FFB6C1"/>
+                        <circle cx="0" cy="-2" r="5" fill="#FFC0CB"/>
+                    </g>
+                    
+                    <!-- Sparkles -->
+                    <circle cx="45" cy="35" r="2" fill="#FFD700" opacity="0.7">
+                        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="105" cy="45" r="1.5" fill="#FFD700" opacity="0.6">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                    
+                    <!-- Question about thorns -->
+                    <text x="75" y="165" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">למה הקוצים?</text>
+                </svg>
+                
+                <p>לאורך כל הפרק, הנסיך עוסק בדאגה אחת מרכזית: האם הכבשה תאכל שיחים קטנים? הטייס, מבולבל, מאשר שכן - כבשים אוכלות כל מה שהן מוצאות. "גם פרחים עם קוצים?" שואל הנסיך. "כן, גם פרחים עם קוצים." הנסיך נשאר מהורהר, ושאלה חדשה צצה: "אז למה הקוצים?"</p>
+
+                <p>הטייס, עסוק בניסיון לתקן את המטוס ומודאג ממצבת הנוזלים שלו, עונה בחוסר סבלנות שהקוצים הם לשום דבר, שהם רק רשעות טהורה של הפרחים. אך הנסיך לא מקבל את התשובה הזו. הוא מתעקש: הוא מכיר פרח, פרח יחיד במינו, שמאמין שהקוצים שלו מגנים עליו מפני הכל. האם באמת הקוצים לא עוזרים?</p>
+
+                <!-- The Mushroom Person Illustration -->
+                <svg class="illustration-center" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="mushroomCap" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B4513"/>
+                            <stop offset="100%" style="stop-color:#5D3A1A"/>
+                        </linearGradient>
+                        <linearGradient id="humanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FF69B4"/>
+                            <stop offset="100%" style="stop-color:#FFE4B5"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="350" height="180" fill="#FDF8EE" rx="10"/>
+                    
+                    <!-- VS divider -->
+                    <line x1="175" y1="30" x2="175" y2="150" stroke="#E8D4A8" stroke-width="2" stroke-dasharray="5,5"/>
+                    <text x="175" y="90" text-anchor="middle" font-family="Heebo, sans-serif" font-size="14" fill="#9370DB">VS</text>
+                    
+                    <!-- Left side: The Mushroom Person -->
+                    <g transform="translate(85, 100)">
+                        <!-- Mushroom cap (head) -->
+                        <ellipse cx="0" cy="-30" rx="35" ry="20" fill="url(#mushroomCap)"/>
+                        <ellipse cx="0" cy="-25" rx="30" ry="10" fill="#A0522D"/>
+                        <!-- Spots on mushroom -->
+                        <circle cx="-15" cy="-35" r="5" fill="#F5E6C8" opacity="0.5"/>
+                        <circle cx="10" cy="-40" r="4" fill="#F5E6C8" opacity="0.4"/>
+                        <circle cx="20" cy="-30" r="3" fill="#F5E6C8" opacity="0.3"/>
+                        <!-- Stem (body) -->
+                        <rect x="-15" y="-15" width="30" height="40" fill="#F5F5DC" rx="5"/>
+                        <!-- Tired/blank face -->
+                        <circle cx="-8" cy="-5" r="3" fill="#333" opacity="0.3"/>
+                        <circle cx="8" cy="-5" r="3" fill="#333" opacity="0.3"/>
+                        <path d="M-8 10 L8 10" stroke="#8B8B8B" stroke-width="2"/>
+                        <!-- Calculator/numbers floating -->
+                        <text x="-35" y="-50" font-size="10" fill="#5D4E37" opacity="0.6">123</text>
+                        <text x="25" y="-45" font-size="8" fill="#5D4E37" opacity="0.5">456</text>
+                        <text x="-30" y="35" font-size="9" fill="#5D4E37" opacity="0.4">789</text>
+                    </g>
+                    <text x="85" y="160" text-anchor="middle" font-family="Heebo, sans-serif" font-size="10" fill="#8B4513">"אדם רציני"</text>
+                    
+                    <!-- Right side: A Real Person -->
+                    <g transform="translate(265, 100)">
+                        <!-- Head -->
+                        <circle cx="0" cy="-25" r="20" fill="#FFE4B5"/>
+                        <!-- Hair -->
+                        <ellipse cx="0" cy="-40" rx="18" ry="12" fill="#8B4513"/>
+                        <!-- Alive eyes with sparkle -->
+                        <circle cx="-7" cy="-27" r="3.5" fill="#5D4E37"/>
+                        <circle cx="7" cy="-27" r="3.5" fill="#5D4E37"/>
+                        <circle cx="-6" cy="-28" r="1.2" fill="white"/>
+                        <circle cx="8" cy="-28" r="1.2" fill="white"/>
+                        <!-- Warm smile -->
+                        <path d="M-8 -18 Q0 -12 8 -18" stroke="#C4846C" stroke-width="2" fill="none"/>
+                        <!-- Body -->
+                        <rect x="-15" y="-5" width="30" height="35" fill="#9370DB" rx="5"/>
+                        <!-- Heart visible -->
+                        <text x="0" y="15" text-anchor="middle" font-size="16" fill="#FF69B4">♥</text>
+                        <!-- Flower in hand -->
+                        <g transform="translate(25, 5)">
+                            <line x1="0" y1="0" x2="0" y2="-15" stroke="#228B22" stroke-width="2"/>
+                            <circle cx="0" cy="-18" r="6" fill="#FF69B4"/>
+                            <circle cx="0" cy="-18" r="3" fill="#FFB6C1"/>
+                        </g>
+                        <!-- Star sparkle -->
+                        <circle cx="-30" cy="-45" r="3" fill="#FFD700">
+                            <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                    <text x="265" y="160" text-anchor="middle" font-family="Heebo, sans-serif" font-size="10" fill="#9370DB">אדם אמיתי</text>
+                </svg>
+                
+                <div class="quote-box">
+                    <p class="quote-text">"אני מכיר כוכב שיש בו אדם אחד סגור-פנים, שמעולם לא הריח פרח, שמעולם לא הסתכל על כוכב, שמעולם לא אהב אף אחד. כל היום הוא רק עושה חשבונות. והוא חוזר כל היום כמוך: 'אני אדם רציני! אני אדם רציני!' וזה גורם לו להתנפח מגאווה. אבל הוא לא אדם, הוא פטרייה!"</p>
+                    <p class="quote-analysis">זוהי אחת ההאשמות החריפות ביותר בספר כולו. הנסיך לא רק מבקר את הטייס - הוא מבקר את כל המבוגרים שמתמקדים ב"דברים רציניים" (תיקון מטוסים, חישוב נוזלים) ומפספסים את מה שבאמת חשוב. הפטרייה היא ביקורת עוקצנית: יצור שגדל בחושך, ניזון מריקבון, ללא יופי וללא משמעות. המבוגר ה"רציני" אינו באמת אדם - הוא פטרייה אנושית.</p>
+                </div>
+
+                <p>הפרק מסתיים ברגע דרמטי. הנסיך הקטן, מותש מהשיחה ומדאגתו לפרח שלו, פורץ בבכי. הטייס, שהרגע הואשם בהיותו פטרייה, לא יודע מה לעשות. הוא מניח את הכלים, שוכח מהמטוס ומהמים, ומנסה לנחם את הנער. אבל איך מנחמים מישהו שאתה לא מבין?</p>
+                
+                <!-- The Prince Crying - Emotional Climax -->
+                <svg class="illustration-wide" viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="emotionalSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7B5DC7"/>
+                            <stop offset="50%" style="stop-color:#9370DB"/>
+                            <stop offset="100%" style="stop-color:#F5E6C8"/>
+                        </linearGradient>
+                        <filter id="tearGlow">
+                            <feGaussianBlur stdDeviation="1" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="450" height="180" fill="url(#emotionalSky)" rx="10"/>
+                    
+                    <!-- Stars -->
+                    <g fill="#FFD700">
+                        <circle cx="40" cy="25" r="2"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/></circle>
+                        <circle cx="120" cy="40" r="1.5"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/></circle>
+                        <circle cx="330" cy="30" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="410" cy="45" r="1.5"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
+                    </g>
+                    
+                    <!-- Desert -->
+                    <path d="M0 140 Q100 120 200 140 Q300 160 400 135 Q430 125 450 140 L450 180 L0 180 Z" fill="#F5E6C8"/>
+                    <path d="M0 155 Q80 140 180 155 Q280 170 380 150 Q420 145 450 155 L450 180 L0 180 Z" fill="#E8D4A8" opacity="0.6"/>
+                    
+                    <!-- Tools on ground (abandoned) -->
+                    <g transform="translate(130, 145)">
+                        <rect x="-20" y="0" width="8" height="25" fill="#5D4E37" rx="2" transform="rotate(-30 -16 12)"/>
+                        <rect x="5" y="5" width="15" height="6" fill="#8B8B8B" rx="1" transform="rotate(15 12 8)"/>
+                        <ellipse cx="25" cy="10" rx="8" ry="4" fill="#5D4E37" transform="rotate(-10 25 10)"/>
+                    </g>
+                    
+                    <!-- Pilot - awkward, trying to comfort -->
+                    <g transform="translate(200, 115)">
+                        <rect x="-15" y="15" width="30" height="35" fill="#5D4E37" rx="3"/>
+                        <circle cx="0" cy="0" r="16" fill="#FFE4B5"/>
+                        <ellipse cx="0" cy="-10" rx="18" ry="10" fill="#8B4513"/>
+                        <!-- Confused/worried eyes -->
+                        <circle cx="-6" cy="-2" r="3" fill="#5D4E37"/>
+                        <circle cx="6" cy="-2" r="3" fill="#5D4E37"/>
+                        <!-- Worried eyebrows -->
+                        <path d="M-10 -8 Q-6 -6 -2 -8" stroke="#6B4423" stroke-width="1.5" fill="none"/>
+                        <path d="M2 -8 Q6 -6 10 -8" stroke="#6B4423" stroke-width="1.5" fill="none"/>
+                        <!-- Uncertain mouth -->
+                        <path d="M-4 8 Q0 6 4 8" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                        <!-- Reaching out arm -->
+                        <path d="M15 20 Q35 15 50 25" stroke="#FFE4B5" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    </g>
+                    
+                    <!-- Little Prince crying -->
+                    <g transform="translate(300, 115)">
+                        <path d="M-12 50 L-10 18 L10 18 L12 50" fill="#4169E1"/>
+                        <!-- Buttons -->
+                        <circle cx="0" cy="28" r="2" fill="#FFD700"/>
+                        <circle cx="0" cy="38" r="2" fill="#FFD700"/>
+                        <circle cx="0" cy="6" r="14" fill="#FFE4B5"/>
+                        <!-- Hair (messy from emotion) -->
+                        <ellipse cx="0" cy="-5" rx="12" ry="9" fill="#FFD700"/>
+                        <circle cx="-9" cy="-2" r="4" fill="#FFD700"/>
+                        <circle cx="9" cy="-2" r="4" fill="#FFD700"/>
+                        <circle cx="0" cy="-10" r="5" fill="#FFD700"/>
+                        <!-- Crying eyes -->
+                        <path d="M-7 4 Q-5 6 -3 4" stroke="#5D4E37" stroke-width="2" fill="none"/>
+                        <path d="M3 4 Q5 6 7 4" stroke="#5D4E37" stroke-width="2" fill="none"/>
+                        <!-- Tears -->
+                        <ellipse cx="-7" cy="10" rx="2" ry="4" fill="#87CEEB" filter="url(#tearGlow)">
+                            <animate attributeName="cy" values="10;15;10" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.8;0.4;0.8" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="7" cy="12" rx="2" ry="4" fill="#87CEEB" filter="url(#tearGlow)">
+                            <animate attributeName="cy" values="12;17;12" dur="2.5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <!-- Sad mouth -->
+                        <path d="M-4 14 Q0 11 4 14" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                        <!-- Scarf (drooping) -->
+                        <path d="M-8 15 Q-25 20 -30 35" stroke="#FFD700" stroke-width="3" fill="none"/>
+                    </g>
+                    
+                    <!-- Thought bubble - the rose -->
+                    <g transform="translate(360, 45)">
+                        <ellipse cx="0" cy="0" rx="30" ry="25" fill="white" opacity="0.8" stroke="#E8D4A8" stroke-width="1"/>
+                        <circle cx="-20" cy="20" r="6" fill="white" opacity="0.7"/>
+                        <circle cx="-28" cy="35" r="4" fill="white" opacity="0.6"/>
+                        <!-- Rose inside thought -->
+                        <line x1="0" y1="10" x2="0" y2="-5" stroke="#228B22" stroke-width="2"/>
+                        <circle cx="0" cy="-10" r="8" fill="#FF69B4"/>
+                        <circle cx="0" cy="-10" r="4" fill="#FFB6C1"/>
+                    </g>
+                    
+                    <!-- Text at bottom -->
+                    <text x="225" y="175" text-anchor="middle" font-family="Heebo, sans-serif" font-size="10" fill="#5D4E37">"איך מנחמים מישהו שאתה לא מבין?"</text>
+                </svg>
+
+                <h3>מה קורה מתחת לפני השטח</h3>
+                
+                <p>בפרק הזה מתחילה להתגבש תמונת הנסיך הקטן כיצור טראגי. מאחורי השאלות התמימות לכאורה על כבשים ופרחים מסתתרת דאגה עמוקה, כמעט אובססיבית, לפרח אחד ספציפי. הוורד - שעדיין לא קיבל שם, עדיין לא סופר - כבר נוכח בכל מחשבה, בכל שאלה. הנסיך נושא איתו את הדאגה הזו לכל מקום, והיא כבדה עליו.</p>
+
+                <p>יש כאן גם רובד של אי-הבנה טראגית. הטייס והנסיך מדברים שפות שונות - לא בגלל שאחד מדבר צרפתית והשני לא, אלא כי הם חיים במציאויות שונות. הטייס חי במציאות של בעיות מעשיות: מטוס שבור, מים שנגמרים, מדבר חם. הנסיך חי במציאות של קשרים רגשיים: פרח שצריך הגנה, כבשה שעלולה לאכול אותו. שתי המציאויות הן אמיתיות, שתיהן לגיטימיות - אך הן כמעט ולא נוגעות זו בזו.</p>
+
+                <div class="character-grid">
+                    <div class="character-card">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                            <circle cx="50" cy="50" r="45" fill="#9370DB" opacity="0.15"/>
+                            <!-- Body/Coat -->
+                            <path d="M35 90 L38 55 L62 55 L65 90" fill="#4169E1"/>
+                            <!-- Buttons -->
+                            <circle cx="50" cy="65" r="2.5" fill="#FFD700"/>
+                            <circle cx="50" cy="78" r="2.5" fill="#FFD700"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="40" r="16" fill="#FFE4B5"/>
+                            <!-- Wild golden hair -->
+                            <ellipse cx="50" cy="28" rx="14" ry="10" fill="#FFD700"/>
+                            <circle cx="38" cy="32" r="5" fill="#FFD700"/>
+                            <circle cx="62" cy="32" r="5" fill="#FFD700"/>
+                            <circle cx="45" cy="22" r="4" fill="#FFD700"/>
+                            <circle cx="55" cy="22" r="4" fill="#FFD700"/>
+                            <circle cx="50" cy="20" r="5" fill="#FFD700"/>
+                            <!-- Curious/intense eyes -->
+                            <circle cx="44" cy="38" r="3" fill="#5D4E37"/>
+                            <circle cx="56" cy="38" r="3" fill="#5D4E37"/>
+                            <circle cx="44" cy="37" r="1" fill="white"/>
+                            <circle cx="56" cy="37" r="1" fill="white"/>
+                            <!-- Thoughtful expression -->
+                            <path d="M46 48 Q50 50 54 48" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                            <!-- Scarf -->
+                            <path d="M40 52 Q28 50 22 62" stroke="#FFD700" stroke-width="3" fill="none"/>
+                            <!-- Question mark above -->
+                            <text x="68" y="25" font-size="14" fill="#9370DB" opacity="0.6">?</text>
+                        </svg>
+                        <h3>הנסיך הקטן</h3>
+                        <p>נער מסתורי ששואל שאלות בלי לענות על אף אחת. דאגתו לפרח שלו חזקה מכל שיקול אחר, ואי-הסבלנות שלו כלפי "דברים רציניים" היא מוחלטת.</p>
+                        <p class="symbolic-role">מייצג את הלב שמסרב להתפשר</p>
+                    </div>
+                    <div class="character-card">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                            <circle cx="50" cy="50" r="45" fill="#9370DB" opacity="0.15"/>
+                            <!-- Body -->
+                            <rect x="35" y="55" width="30" height="32" fill="#5D4E37" rx="5"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="40" r="18" fill="#FFE4B5"/>
+                            <!-- Aviator cap -->
+                            <ellipse cx="50" cy="30" rx="20" ry="12" fill="#8B4513"/>
+                            <ellipse cx="50" cy="34" rx="18" ry="8" fill="#A0522D"/>
+                            <!-- Goggles on forehead -->
+                            <ellipse cx="42" cy="35" rx="7" ry="5" fill="#333" stroke="#FFD700" stroke-width="1"/>
+                            <ellipse cx="58" cy="35" rx="7" ry="5" fill="#333" stroke="#FFD700" stroke-width="1"/>
+                            <rect x="48" y="33" width="4" height="4" fill="#FFD700"/>
+                            <!-- Eyes (confused) -->
+                            <circle cx="44" cy="42" r="2.5" fill="#5D4E37"/>
+                            <circle cx="56" cy="42" r="2.5" fill="#5D4E37"/>
+                            <!-- Confused eyebrows -->
+                            <path d="M40 38 Q44 36 48 38" stroke="#6B4423" stroke-width="1.5" fill="none"/>
+                            <path d="M52 38 Q56 36 60 38" stroke="#6B4423" stroke-width="1.5" fill="none"/>
+                            <!-- Uncertain mouth -->
+                            <path d="M46 50 Q50 48 54 50" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                            <!-- Scarf -->
+                            <path d="M35 55 Q25 60 20 75" stroke="#E74C3C" stroke-width="4" fill="none"/>
+                            <!-- Question marks around -->
+                            <text x="72" y="35" font-size="12" fill="#9370DB" opacity="0.5">?</text>
+                            <text x="18" y="45" font-size="10" fill="#9370DB" opacity="0.4">?</text>
+                        </svg>
+                        <h3>הטייס</h3>
+                        <p>אדם מבוגר שניסה לשמור על ילדותו, אך עדיין נתפס ל"דברים רציניים". הוא מתוסכל מהשאלות ללא תשובות, אך גם מוקסם מהן.</p>
+                        <p class="symbolic-role">מייצג את הגשר בין שני העולמות</p>
+                    </div>
+                </div>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>שאלת הקוצים היא מפתח לכל הספר. הנסיך שואל למה פרחים מפתחים קוצים אם הקוצים לא באמת מגנים עליהם. זוהי שאלה על מנגנוני הגנה שלא עובדים - ועל היצורים שמאמינים בהם בכל זאת.</p>
+                        
+                        <p>הוורד של הנסיך - שנלמד עליו בהמשך - מתהדר בקוציו. הוא מאמין שהם הופכים אותו לחזק, לבלתי פגיע. אך הנסיך יודע שכבשה יכולה לאכול פרח עם קוצים באותה קלות שהיא אוכלת פרח בלעדיהם. הקוצים הם אשליה של הגנה, מסכה של עוצמה.</p>
+                        
+                        <p>וכאן מגיע הפרדוקס המכאיב: האם לומר לוורד שהקוצים שלו חסרי תועלת? האם לנפץ לו את האשליה? או שאולי האשליה עצמה היא סוג של הגנה - לא מפני כבשים, אלא מפני היאוש שבהכרה בפגיעות המוחלטת? הנסיך בוכה כי הוא תפוס בין שתי אמיתות בלתי אפשריות.</p>
+
+                        <p>ויש עוד שאלה: מי באמת הוורד? האם הוורד הוא רק פרח, או שהוא מייצג מישהו אמיתי בחייו של סן-אכזופרי? אשתו קונסואלו הייתה ידועה כאישה יפה, גאה, ובעלת "קוצים" רבים. האם הספר כולו הוא מכתב אהבה מוסווה?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#9370DB" opacity="0.15"/>
+                            <!-- Multiple question marks floating -->
+                            <text x="40" y="35" text-anchor="middle" font-size="28" fill="#9370DB" font-family="Heebo, sans-serif">?</text>
+                            <text x="22" y="50" font-size="16" fill="#8A65D4" opacity="0.6">?</text>
+                            <text x="58" y="55" font-size="18" fill="#7B5DC7" opacity="0.7">?</text>
+                            <text x="35" y="65" font-size="12" fill="#9370DB" opacity="0.4">?</text>
+                            <!-- Arrow going nowhere -->
+                            <path d="M15 68 Q30 60 25 75" stroke="#7A6B55" stroke-width="1.5" fill="none" stroke-dasharray="3,2"/>
+                        </svg>
+                        <h3>שאלות ללא תשובות</h3>
+                        <p>הנסיך שואל אינספור שאלות אך מעולם לא עונה על אף אחת</p>
+                        <div class="deep-meaning">
+                            <p>השאלות ללא תשובות הן מעין מראה: הן מאלצות את הנשאל להתמודד עם אי-הוודאות. הנסיך לא עונה לא כי הוא לא יודע - אלא כי התשובות אינן חשובות לו. מה חשוב לו? רק מה שקשור לפרח שלו. כל שאר השאלות הן רעש.</p>
+                            <p>במובן עמוק יותר, אי-התשובות מייצגות את הפער הבלתי ניתן לגישור בין בני אדם. אנחנו יכולים לשאול ולשאול - אך לעולם לא נוכל באמת לדעת מה חווה האחר.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> השועל בפרק 21 יסביר שהקשר נוצר לא מתשובות אלא מזמן שמשקיעים יחד.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#9370DB" opacity="0.15"/>
+                            <!-- Stem with prominent thorns -->
+                            <line x1="40" y1="70" x2="40" y2="25" stroke="#228B22" stroke-width="3"/>
+                            <!-- Thorns -->
+                            <path d="M40 60 L30 55" stroke="#228B22" stroke-width="2"/>
+                            <polygon points="30,55 28,52 32,54" fill="#2E8B57"/>
+                            <path d="M40 50 L50 45" stroke="#228B22" stroke-width="2"/>
+                            <polygon points="50,45 52,42 48,44" fill="#2E8B57"/>
+                            <path d="M40 40 L30 35" stroke="#228B22" stroke-width="2"/>
+                            <polygon points="30,35 28,32 32,34" fill="#2E8B57"/>
+                            <!-- Small rose at top -->
+                            <circle cx="40" cy="20" r="10" fill="#FF69B4"/>
+                            <circle cx="40" cy="20" r="5" fill="#FFB6C1"/>
+                            <!-- Question: do they protect? -->
+                            <text x="60" y="40" font-size="14" fill="#9370DB" opacity="0.6">?</text>
+                        </svg>
+                        <h3>הקוצים של הפרחים</h3>
+                        <p>מנגנוני הגנה שאולי לא באמת מגנים</p>
+                        <div class="deep-meaning">
+                            <p>הקוצים מייצגים את כל מנגנוני ההגנה שאנחנו מפתחים - ציניות, ריחוק רגשי, יהירות. הם גורמים לנו להרגיש מוגנים, אך האם הם באמת עובדים? כבשה (כלומר, החיים) יכולה לאכול אותנו בקלות, קוצים או ללא קוצים.</p>
+                            <p>יש כאן גם שאלה על האם כדאי לנפץ אשליות מגנות. אולי הקוצים לא מגנים מפני כבשים, אך הם מגנים מפני היאוש של להרגיש חשוף לחלוטין.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> בפרק 8 נפגוש את הוורד ואת הקוצים שלו באופן ישיר, ונבין את ה"רשעות" שלו.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <filter id="uniqueGlow">
+                                    <feGaussianBlur stdDeviation="2" result="blur"/>
+                                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                </filter>
+                            </defs>
+                            <circle cx="40" cy="40" r="35" fill="#FF69B4" opacity="0.1"/>
+                            <!-- Glass dome hint -->
+                            <ellipse cx="40" cy="65" rx="25" ry="5" fill="#E8D4A8" opacity="0.4"/>
+                            <path d="M15 65 Q15 30 40 20 Q65 30 65 65" fill="none" stroke="#87CEEB" stroke-width="1.5" opacity="0.3"/>
+                            <!-- Special rose -->
+                            <g filter="url(#uniqueGlow)">
+                                <line x1="40" y1="60" x2="40" y2="35" stroke="#228B22" stroke-width="2"/>
+                                <ellipse cx="40" cy="28" rx="12" ry="15" fill="#FF69B4"/>
+                                <ellipse cx="35" cy="30" rx="6" ry="10" fill="#FF1493" opacity="0.8"/>
+                                <ellipse cx="45" cy="30" rx="6" ry="10" fill="#FF1493" opacity="0.8"/>
+                                <circle cx="40" cy="26" r="5" fill="#FFB6C1"/>
+                            </g>
+                            <!-- Sparkles - special -->
+                            <circle cx="58" cy="25" r="3" fill="#FFD700">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="22" cy="30" r="2" fill="#FFD700">
+                                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        <h3>הפרח היחיד</h3>
+                        <p>הפרח שהנסיך דואג לו יותר מלכל דבר אחר</p>
+                        <div class="deep-meaning">
+                            <p>הפרח עדיין לא תואר, עדיין לא קיבל שם - אבל הוא כבר המרכז של עולמו של הנסיך. כל שאלה על כבשים ושיחים היא בעצם שאלה עליו. זהו אובייקט של אהבה כה עוצמתית שהיא כמעט בלתי נסבלת.</p>
+                            <p>הפרח גם מסמל את מה שמחזיק אותנו בחיים - הדבר האחד שאנחנו מוכנים לעשות הכל בשבילו, גם אם אחרים לא מבינים למה.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> הוורד יתגלה במלואו בפרקים 8-9, והשאלה אם הכבשה תאכל אותו תחזור בסוף הספר.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#8B4513" opacity="0.1"/>
+                            <!-- Mushroom -->
+                            <ellipse cx="40" cy="35" rx="25" ry="15" fill="#8B4513"/>
+                            <ellipse cx="40" cy="40" rx="20" ry="8" fill="#A0522D"/>
+                            <!-- Spots -->
+                            <circle cx="30" cy="30" r="4" fill="#F5E6C8" opacity="0.5"/>
+                            <circle cx="48" cy="28" r="3" fill="#F5E6C8" opacity="0.4"/>
+                            <circle cx="40" cy="35" r="2" fill="#F5E6C8" opacity="0.3"/>
+                            <!-- Stem with blank face (representing soulless adult) -->
+                            <rect x="32" y="45" width="16" height="25" fill="#F5F5DC" rx="3"/>
+                            <!-- Blank/dead eyes -->
+                            <circle cx="36" cy="52" r="2" fill="#333" opacity="0.2"/>
+                            <circle cx="44" cy="52" r="2" fill="#333" opacity="0.2"/>
+                            <!-- Flat line mouth -->
+                            <line x1="36" y1="60" x2="44" y2="60" stroke="#8B8B8B" stroke-width="1.5"/>
+                            <!-- Numbers floating (obsessed with calculations) -->
+                            <text x="18" y="25" font-size="8" fill="#5D4E37" opacity="0.5">123</text>
+                            <text x="55" y="55" font-size="7" fill="#5D4E37" opacity="0.4">456</text>
+                        </svg>
+                        <h3>הפטרייה</h3>
+                        <p>האדם ה"רציני" שהנסיך מתאר בבוז</p>
+                        <div class="deep-meaning">
+                            <p>הפטרייה היא מטפורה עוקצנית ומדויקת: יצור שגדל בחושך ובלחות, ניזון מריקבון, ללא יופי פנימי או חיצוני. האדם ה"רציני" שעושה רק חשבונות, שמעולם לא הריח פרח או הסתכל על כוכב - הוא לא באמת אדם. הוא רק צורה של חיים, ללא תוכן.</p>
+                            <p>זוהי הביקורת החריפה ביותר שסן-אכזופרי מפנה כלפי המבוגרים: לא שהם רעים, אלא שהם לא באמת חיים.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> בפרקים 10-15 נפגוש מבוגרים אחרים שהם סוגים שונים של "פטריות" - המלך, השאפתן, השיכור, איש העסקים, הגאוגרף.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#9370DB" opacity="0.15"/>
+                            <!-- Crashed plane at angle -->
+                            <g transform="translate(40, 45) rotate(-20)">
+                                <ellipse cx="0" cy="0" rx="28" ry="7" fill="#8A65D4"/>
+                                <ellipse cx="-18" cy="-2" rx="8" ry="4" fill="#9370DB" opacity="0.7"/>
+                                <!-- Wings (bent) -->
+                                <path d="M-5 0 L-5 -18 L10 -14 L6 0" fill="#7B5DC7"/>
+                                <path d="M5 0 L5 15 L-10 13 L-6 0" fill="#7B5DC7"/>
+                                <!-- Tail -->
+                                <path d="M22 -2 L32 -10 L32 -3 L25 0" fill="#8A65D4"/>
+                                <!-- Broken propeller -->
+                                <line x1="-28" y1="-4" x2="-36" y2="4" stroke="#4A4A4A" stroke-width="2"/>
+                                <line x1="-28" y1="4" x2="-36" y2="-4" stroke="#4A4A4A" stroke-width="2"/>
+                            </g>
+                            <!-- Sand dune -->
+                            <ellipse cx="40" cy="68" rx="30" ry="8" fill="#F5E6C8"/>
+                            <!-- This is what brought them together -->
+                            <circle cx="60" cy="20" r="3" fill="#FFD700">
+                                <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        <h3>המטוס השבור</h3>
+                        <p>סמל לפגיעות של הטייס ולמפגש בין שני עולמות</p>
+                        <div class="deep-meaning">
+                            <p>המטוס השבור הוא מה שהביא את הטייס למדבר, אך הוא גם מה שמאפשר את המפגש. בלי השבר, לא הייתה פגישה. זהו עקרון עמוק: לפעמים הדברים שנראים לנו כאסונות הם בעצם פתחים להזדמנויות שלא היינו מוצאים אחרת.</p>
+                            <p>הנסיך מגיב לנפילה ב"זה מצחיק מאוד!" - לא מתוך אכזריות, אלא מתוך פרספקטיבה שרואה את הקומי באופן שבו בני אדם "נופלים מן השמים".</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> המטוס יתוקן בסוף הספר, וזה יהיה סימן לסיום המפגש.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>סקרנות נלהבת</h3>
+                        <p>הטייס מנסה להבין מי הנער המסתורי שהופיע משום מקום. הוא שואל שאלות, מחפש רמזים, מנסה לפענח את החידה. יש בזה התרגשות של חוקר.</p>
+                        <span class="emotion-tag">תשוקה לדעת</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>תסכול גובר</h3>
+                        <p>השאלות נותרות ללא תשובה. הנסיך מתעלם מכל ניסיון לחקירה, ממוקד רק בכבשה שלו ובשאלות שלו. הטייס מרגיש שהוא מדבר לקיר.</p>
+                        <span class="emotion-tag">חוסר אונים</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>רגע של תובנה</h3>
+                        <p>הנהנון של הנסיך מגלה לטייס שהוא באמת בא מכוכב אחר. זהו רגע של "אהא!" - לא תשובה מילולית, אלא הבנה שבאה מקריאת שפת גוף.</p>
+                        <span class="emotion-tag">התגלות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>עימות מכאיב</h3>
+                        <p>הנסיך מאשים את הטייס בהיותו כמו "פטרייה" - אדם רציני שלא מבין את מה שבאמת חשוב. ההאשמה כואבת כי יש בה אמת.</p>
+                        <span class="emotion-tag">עלבון ובחינה עצמית</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>בכי ומבוכה</h3>
+                        <p>הנסיך פורץ בבכי, והטייס לא יודע מה לעשות. הוא מניח את הכלים, שוכח מהמטוס, ומנסה לנחם - אך איך מנחמים מישהו שאתה לא מבין?</p>
+                        <span class="emotion-tag">חמלה מבולבלת</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>מתחת לפני השטח של הפרק מתחבאים רגשות עזים משני הצדדים. הנסיך חווה חרדה קיומית לגורל הפרח שלו - חרדה כל כך גדולה שהיא מונעת ממנו לראות כל דבר אחר. הטייס חווה פגיעה כפולה: גם מההתעלמות מהשאלות שלו, וגם מההאשמה בהיותו "פטרייה". עמוק בתוכו, הוא מפחד שההאשמה נכונה - שגם הוא הפך למבוגר חסר דמיון.</p>
+                    <p>ויש רגש נוסף, שקט יותר: התחלה של קשר. למרות התסכול ואי-ההבנה, משהו מתחיל לצמוח בין השניים. הטייס לא עוזב, לא מתייאש. הוא נשאר, מנסה להבין, ובסופו של דבר - מניח את הכלים כדי לנחם.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>התמודדות עם חרדה דרך התמקדות</h3>
+                    <p>הנסיך הקטן מציג דפוס פסיכולוגי מוכר: כשאנחנו חווים חרדה גדולה, אנחנו נוטים להתמקד באובססיביות בדבר אחד. כל שאלותיו של הנסיך הן בעצם וריאציות על שאלה אחת: האם הפרח שלי בטוח? הוא לא יכול לחשוב על שום דבר אחר כי החרדה הזו ממלאת את כל חלל התודעה שלו. זהו מנגנון הגנה: על ידי התמקדות בבעיה ספציפית (האם כבשים אוכלות פרחים?), הוא מנסה להרגיש שליטה על מצב שהוא לא יכול באמת לשלוט בו.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>הבדידות הבסיסית של הקיום</h3>
+                    <p>הפער בתקשורת בין הנסיך לטייס מדגים את הבדידות הקיומית של כל אדם. אנחנו לכודים בתוך התודעה שלנו, ואף פעם לא יכולים באמת להעביר את החוויה הפנימית שלנו לאחר. הנסיך לא עונה על שאלות כי התשובות שלו לא יכולות באמת להיות מובנות. איך יסביר לטייס מה זה להיות אחראי לפרח יחיד בכל היקום? איך ימסור את עוצמת הדאגה, הפחד, האהבה? המילים לא מספיקות. ולכן - שתיקה.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>סן-אכזופרי והפרח/האישה שלו</h3>
+                    <p>קונסואלו, אשתו של סן-אכזופרי, הייתה אישה סלוודורית יפה, סוערת, ומלאת "קוצים". מערכת היחסים שלהם הייתה סוערת - מלאת אהבה ומריבות, פרידות ואיחודים. כשסן-אכזופרי כתב את "הנסיך הקטן" בניו יורק, הוא היה רחוק ממנה. השאלה "האם הכבשה תאכל את הפרח?" היא אולי שאלה על האם האהבה שלו תשרוד את המרחק, את הזמן, את המלחמה. הקוצים של הוורד הם הקוצים של קונסואלו - מנגנוני ההגנה שלה, הגאווה שלה, הדרך שלה להרחיק אנשים בזמן שהיא זקוקה להם יותר מכל.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>המסע הפנימי ושאלות ללא תשובות</h3>
+                    <p>במסורות רוחניות רבות, הדרך להארה עוברת דרך שאלות ללא תשובות. הזן בודהיזם משתמש בקואנים - חידות פרדוקסליות שנועדו לשבור את החשיבה הלוגית ולפתוח מרחב לתודעה אחרת. הנסיך, בדרכו שלו, מציע לטייס קואן: "למה הקוצים?" זו לא שאלה שיש לה תשובה לוגית. הקוצים "לשום דבר" - אך גם הם משהו. התשובה לא חשובה; מה שחשוב הוא המרחב שנפתח כשאנחנו מודים שאיננו יודעים.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים קודמים:</p>
+                        <p>הטייס מזכיר שוב את עניין הציור - כשהנסיך מהנהן בראשו, הטייס מזהה את סוג ה"תקשורת ללא מילים" שהוא עצמו ניסה ליצור עם ציור הבואה קונסטריקטור. הוא סוף סוף פוגש מישהו שיודע "לראות".</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים הבאים:</p>
+                        <p>שאלת הכבשה והפרח תחזור בפרק האחרון של הספר, כשהטייס יתהה אם הכבשה אכלה את הוורד. הפרק הזה זורע את הזרע לסיום הטראגי-מסתורי של הסיפור.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-star"></i>
+                        "כשמסתורין עמוק מדי, אי אפשר לא לציית לו."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>הנסיך מאשים את הטייס בכך שהוא "אדם רציני" שלא מבין מה באמת חשוב - אך הנסיך עצמו כל כך רציני לגבי הפרח שלו שהוא לא יכול לראות שום דבר אחר. האם יש הבדל בין "רצינות" של מבוגר ל"רצינות" של נסיך קטן? או שכולנו, בסופו של דבר, אובססיביים לגבי משהו - והשאלה היא רק לגבי מה?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>הפרק הזה עמוס בשאלות שלא נענות. בוא נשאל כמה שאלות משלנו - שאלות שאין להן תשובה אחת נכונה, אלא הרבה תשובות אפשריות. הרשה לעצמך להרגיש את אי-הנוחות של לא-לדעת.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-link"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>הקוצים שלך</h3>
+                            <p>לכולנו יש "קוצים" - מנגנוני הגנה שאנחנו מפתחים כדי להרגיש בטוחים. מה הקוצים שלך? ציניות? הומור? ריחוק רגשי? יהירות אינטלקטואלית? והשאלה הקשה יותר: האם הם באמת מגנים עליך, או שהם רק גורמים לך להרגיש מוגן?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על הפעם האחרונה שמישהו ניסה להתקרב אליך ואתה הרחקת אותו. איך עשית את זה? מה אמרת, או לא אמרת? זה כנראה אחד הקוצים שלך.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>האם אתה פטרייה?</h3>
+                            <p>הנסיך מתאר אדם שמעולם לא הריח פרח, לא הסתכל על כוכב, לא אהב אף אחד - רק עשה חשבונות. מתי בפעם האחרונה באמת הרחת פרח? (לא חטפת ריח בדרך, אלא עצרת, התכופפת, והרחת?) מתי הסתכלת על כוכבים - לא צילמת, לא בדקת אפליקציה, אלא פשוט הסתכלת?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אם אתה מתקשה לזכור מתי בפעם האחרונה עשית את הדברים האלה - זו כבר תשובה משמעותית. לא צריך להאשים את עצמך, אבל כדאי לשים לב.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>התשובה שבשתיקה</h3>
+                            <p>הנסיך לא עונה על שאלות - ובכל זאת הטייס לומד ממנו יותר מכל שיחה רגילה. איך זה ייתכן? האם אפשר לתקשר יותר טוב דרך מה שלא אומרים? האם יש משהו בשתיקה שמילים הורסות?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על רגעים של קרבה אמיתית שחווית - עם חבר, בן משפחה, בן זוג. כמה מהם היו רגעים של שיחה, וכמה היו רגעים של שתיקה משותפת?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>אם היית הטייס</h3>
+                            <p>נער מסתורי מופיע לפניך במדבר, שואל שאלות מוזרות, מתעלם מכל שאלה שאתה שואל, ובסוף מאשים אותך בכך שאתה "פטרייה" ופורץ בבכי. מה היית עושה? האם היית מנסה לנחם? להסביר? להתווכח? לעזוב?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>שים לב: הטייס מניח את הכלים. הוא לא מתווכח, לא מסביר, לא מתגונן. הוא פשוט עוצר את מה שהוא עושה ופונה לנער. למה זו הייתה התגובה הנכונה?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>לספר או לשתוק?</h3>
+                            <p>הנסיך יודע שהקוצים של הפרח שלו לא באמת מגנים עליו. האם הוא צריך לספר לפרח? מצד אחד - זו האמת, והפרח חי באשליה. מצד שני - האשליה הזו אולי נותנת לפרח תחושת ביטחון ומשמעות. מה עדיף: אמת מכאיבה או אשליה מנחמת?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על מישהו שאתה אוהב שחי עם אשליה כלשהי לגבי עצמו - אולי שהוא מוכשר במשהו שהוא לא, או שמישהו אוהב אותו כשזה לא בטוח. האם היית מנפץ את האשליה?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-message-circle-question"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>מה באמת חשוב?</h3>
+                            <p>הנסיך טוען שהטייס עוסק ב"דברים רציניים" שלא באמת חשובים, במקום לעסוק במה שבאמת חשוב (כמו פרחים וכוכבים). אבל המטוס השבור והמים שנגמרים הם עניין של חיים ומוות. האם הנסיך צודק שזה לא חשוב? או שיש פריבילגיה מסוימת ביכולת להתעלם מצרכים בסיסיים?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>מאסלו דיבר על פירמידת הצרכים - שקשה לעסוק בצרכים "גבוהים" כשהצרכים הבסיסיים לא מסופקים. האם הנסיך חי מחוץ לפירמידה הזו? או שהוא פשוט לא מבין אותה?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-02.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 02
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-04.html" class="book-nav-btn" id="nextChapter">
+                פרק 04
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 3 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with inline SVG for GitHub Pages compatibility
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                star.setAttribute('viewBox', '0 0 24 24');
+                star.classList.add('star');
+                const size = (Math.random() * 10 + 8) + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.fill = '#FFD700';
+                star.innerHTML = '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 3; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 3;
+        
+        function getBookmarks() {
+            try {
+                const stored = localStorage.getItem(BOOKMARKS_KEY);
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        
+        function saveBookmarks(bookmarks) {
+            try {
+                localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+            } catch (e) {
+                console.warn('Could not save bookmarks');
+            }
+        }
+        
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark');
+            if (!btn) return;
+            
+            const bookmarks = getBookmarks();
+            const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            
+            updateBookmarkButton(btn, isBookmarked);
+            
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks();
+                const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                
+                if (index > -1) {
+                    bookmarks.splice(index, 1);
+                    updateBookmarkButton(btn, false);
+                } else {
+                    bookmarks.push(CURRENT_CHAPTER);
+                    updateBookmarkButton(btn, true);
+                    btn.classList.add('just-bookmarked');
+                    setTimeout(() => btn.classList.remove('just-bookmarked'), 400);
+                }
+                
+                saveBookmarks(bookmarks);
+            });
+        }
+        
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) {
+                btn.classList.add('bookmarked');
+                icon.className = 'ti ti-heart-filled';
+                btn.title = 'הסר מהמועדפים';
+            } else {
+                btn.classList.remove('bookmarked');
+                icon.className = 'ti ti-heart';
+                btn.title = 'הוסף למועדפים';
+            }
+        }
+        
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

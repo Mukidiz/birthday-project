@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 18 | פרח במדבר</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Grey/Blue palette for melancholy */
+            --primary: #7B8B9A;
+            --secondary: #5A6A7A;
+            --accent: #8899AA;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: glow 2s ease-in-out infinite alternate; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 800px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(123, 139, 154, 0.1), rgba(136, 153, 170, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn { background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .home-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .chapter-bookmark-btn { background: white; border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* DESERT VISUAL */
+        .desert-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #E8D4A8, #D4C4A0);
+            border-radius: 20px;
+            color: var(--text-primary);
+        }
+        .desert-elements {
+            display: flex;
+            align-items: flex-end;
+            gap: 40px;
+            padding: 20px;
+        }
+        .desert-flower {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 3rem;
+            color: #E8A0A0;
+        }
+        .desert-flower .petals {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        .desert-sand {
+            height: 3px;
+            width: 200px;
+            background: linear-gradient(90deg, transparent, #C4B090, transparent);
+            border-radius: 2px;
+        }
+        .desert-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes glow { 0% { filter: drop-shadow(0 0 5px rgba(123, 139, 154, 0.5)); } 100% { filter: drop-shadow(0 0 15px rgba(123, 139, 154, 0.9)); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-flower"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 18</p>
+        <p class="chapter-title">פרח במדבר</p>
+        <span class="mood-badge"><i class="ti ti-wind"></i> בדידות וחולף</span>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>הנסיך הקטן חצה את המדבר. הוא הלך והלך בחולות האינסופיים, תחת שמש צורבת, בחיפוש אחר בני אדם. במהלך כל מסעו במדבר, הוא פגש רק פרח אחד - פרח קטן ועלוב, עם שלושה עלי כותרת בלבד. פרח של לא-כלום, פרח שאין בו שום דבר מיוחד.</p>
+                
+                <p>"שלום," אמר הנסיך הקטן. "שלום," ענה הפרח. הנסיך הסתכל מסביב. המדבר היה ריק לחלוטין - רק חול, שמש, ושקט מוחלט. הוא שאל את הפרח: "איפה בני האדם?"</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"בני האדם? קיימים, אני מאמינה, שישה או שבעה. ראיתי אותם לפני שנים רבות. אבל אי אפשר לדעת איפה למצוא אותם. הרוח נושאת אותם. אין להם שורשים, וזה מאוד מקשה עליהם."</p>
+                    <p class="quote-analysis">בשורה אחת, הפרח הפשוט אומר את אחת האמירות העמוקות ביותר בספר כולו. בני האדם חסרי שורשים. הם נישאים ברוח - לא בוחרים, לא נשארים, לא מתחברים באמת. הפרח, שמושרש באדמה, רואה את זה בבהירות שבני אדם לא יכולים לראות בעצמם.</p>
+                </div>
+                
+                <p>"שלום," אמר הנסיך והמשיך בדרכו. זה כל הפרק. שיחה קצרה, פגישה חולפת, ואז - פרידה. הנסיך הקטן ממשיך לחפש בני אדם, והפרח נשאר לבדו במדבר, מחכה לרוח הבאה, לגשם הבא, לנוכח הבא שאולי יעבור.</p>
+
+                <div class="desert-visual">
+                    <div class="desert-elements">
+                        <div class="desert-flower">
+                            <i class="ti ti-flower"></i>
+                            <span class="petals">שלושה עלי כותרת</span>
+                        </div>
+                    </div>
+                    <div class="desert-sand"></div>
+                    <div class="desert-label">פרח אחד באמצע הריק</div>
+                </div>
+
+                <h3>מה קורה מתחת לפני השטח</h3>
+                
+                <p>הפרק הזה הוא הקצר ביותר בספר, ודווקא בגלל זה - הוא אחד העמוקים ביותר. סן-אכזופרי לא כתב פרק קצר כי לא היה לו מה לומר. הוא כתב פרק קצר כי יש דברים שצריך לומר בשקט, בקיצור, בלי הסברים. הפגישה עם הפרח היא כמו הבזק - רגע של אמת שנעלם מיד.</p>
+
+                <p>הפרח יודע משהו שהנסיך עדיין לא יודע: שבני האדם נעדרי שורשים. הם לא נשארים במקום אחד, לא מתחייבים, לא מתעמקים. הם כמו עלים ברוח - נישאים לכל מקום, לא שולטים בגורלם. הפרח, לעומת זאת, מושרש. הוא לא יכול לזוז, אבל הוא יודע מי הוא ואיפה הוא.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"אין להם שורשים, וזה מאוד מקשה עליהם."</p>
+                    <p class="quote-analysis">המילה "מקשה" היא מפתח. הפרח לא שופט, לא מבקר. הוא פשוט מציין עובדה - חוסר השורשים מקשה על בני האדם. מקשה על מה? על למצוא אותם? על להיות מאושרים? על להתחבר? אולי על הכל. בלי שורשים, הכל קשה יותר.</p>
+                </div>
+
+                <p>יש גם אירוניה עדינה: הנסיך עצמו עזב את הכוכב שלו, עזב את הוורד שלו. הוא נישא ברוח, עובר מכוכב לכוכב, מחפש משהו שהוא לא יודע מה. האם גם הוא חסר שורשים? האם הפרח מדבר גם עליו?</p>
+
+                <div class="character-grid">
+                    <div class="character-card">
+                        <i class="ti ti-flower"></i>
+                        <h3>הפרח במדבר</h3>
+                        <p>פרח קטן עם שלושה עלי כותרת - לא מיוחד, לא יפה במיוחד, סתם פרח. אבל דווקא הפשטות שלו נותנת לו חכמה. הוא לא מתיימר להיות משהו שהוא לא. הוא פשוט רואה את מה שיש.</p>
+                        <p class="symbolic-role">מייצג חכמה פשוטה, עדות שקטה, והבנה שבאה מהשתרשות</p>
+                    </div>
+                    <div class="character-card">
+                        <i class="ti ti-walk"></i>
+                        <h3>הנסיך העובר</h3>
+                        <p>הנסיך מגיע, שואל שאלה, ועוזב. הוא לא נשאר לשוחח, לא מתעניין בפרח עצמו - רק בבני אדם שהוא מחפש. האם הוא לא רואה את האירוניה? שהוא עצמו נישא ברוח?</p>
+                        <p class="symbolic-role">מייצג את החיפוש, את חוסר המנוחה, ואולי גם את חוסר השורשים</p>
+                    </div>
+                </div>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>הפרק הזה הוא מראה לנסיך - ולקורא. הפרח אומר שבני אדם חסרי שורשים, שהרוח נושאת אותם, שקשה למצוא אותם. אבל מי עומד מולו? הנסיך הקטן - שעזב את הכוכב שלו, את הוורד שלו, ומסתובב מכוכב לכוכב בחיפוש אחר... מה בעצם?</p>
+                        
+                        <p>הנסיך מחפש בני אדם, אבל כשהוא פוגש את הפרח - הוא לא נשאר. הוא לא מתחבר, לא מתעניין. הוא ממשיך הלאה. האם זה לא בדיוק מה שהפרח תיאר? להיות נישא ברוח, לא להישאר במקום אחד, לא לבנות קשר?</p>
+                        
+                        <p>יש כאן שאלה כואבת: האם הנסיך לומד משהו מהפגישה הזו? האם הוא שומע את מה שהפרח אומר? התשובה המיידית היא לא - הוא ממשיך לחפש, ממשיך לנוע. אבל אולי המילים נשארות איתו, מהדהדות, מחכות לרגע שבו הוא יהיה מוכן לשמוע.</p>
+                        
+                        <p>ואולי השאלה הקשה ביותר: מה עושים כשמבינים שאין לנו שורשים? האם אפשר לבחור להשתרש? האם אפשר להחליט להישאר, להתחייב, לבנות - או שאנחנו תמיד נישאים ברוח, גם כשאנחנו חושבים שאנחנו בוחרים?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <i class="ti ti-flower"></i>
+                        <h3>הפרח הפשוט</h3>
+                        <p>שלושה עלי כותרת, לא יותר</p>
+                        <div class="deep-meaning">
+                            <p>הפרח במדבר הוא ההפך הגמור מהוורד על הכוכב של הנסיך. הוורד היה יפה, מיוחד, גאה. הפרח במדבר הוא פשוט, צנוע, לא מתיימר. אבל דווקא הפשטות שלו נותנת לו משהו שלוורד אין - בהירות.</p>
+                            <p>הפרח לא עסוק ביופי שלו, לא דורש תשומת לב, לא מתלונן על קוצים. הוא פשוט קיים, רואה, ואומר את האמת. אולי החכמה האמיתית באה דווקא מפשטות - מלהיות מושרש, מלא לרצות יותר מדי.</p>
+                            <p>שלושת עלי הכותרת הם גם סמל למינימליזם. הפרח הזה לא צריך יותר כדי להיות פרח. הוא לא חסר. הוא שלם בפשטותו.</p>
+                            <p><strong>קשר לחיים:</strong> מתי הפשטות נתנה לך בהירות? מתי דווקא "פחות" היה "יותר"?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-plant-off"></i>
+                        <h3>היעדר שורשים</h3>
+                        <p>בני אדם נישאים ברוח</p>
+                        <div class="deep-meaning">
+                            <p>השורשים הם הסמל המרכזי של הפרק. שורשים מעגנים, מקשרים למקום, נותנים יציבות. בלי שורשים - נישאים ברוח, לא שולטים, לא נשארים.</p>
+                            <p>הפרח מושרש ולכן הוא יציב. בני אדם לא מושרשים ולכן הם תועים. אבל יש גם צד אחר: השורשים של הפרח כובלים אותו. הוא לא יכול ללכת לשום מקום. האם חוסר שורשים הוא רק רע? או שיש בו גם חופש?</p>
+                            <p>אולי השאלה היא לא "יש שורשים או אין", אלא "לאיפה השורשים מובילים". אפשר להיות מושרש לאדם, לערכים, למשמעות - לא רק למקום פיזי.</p>
+                            <p><strong>קשר לוורד:</strong> הנסיך עזב את הוורד שלו. האם הוא עקר את השורשים שלו? או שהשורשים נשארו, גם כשהוא עזב?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-wind"></i>
+                        <h3>הרוח</h3>
+                        <p>הכוח שנושא את חסרי השורשים</p>
+                        <div class="deep-meaning">
+                            <p>הרוח היא כוח חיצוני שאי אפשר לשלוט בו. היא באה ונושאת - לא שואלת, לא מבקשת רשות. מי שאין לו שורשים, נישא איתה.</p>
+                            <p>מה הרוח מסמלת? אולי את הזמן שעובר, את הנסיבות שמשתנות, את הלחץ החברתי, את הרצונות המשתנים. כל מה שגורם לנו לזוז בלי שבחרנו באמת.</p>
+                            <p>בני אדם חושבים שהם בוחרים לאן ללכת, אבל אולי הם פשוט נישאים. הרוח של הקריירה, של הציפיות, של "מה שכולם עושים". קשה לדעת מתי באמת בחרת ומתי פשוט נישאת.</p>
+                            <p><strong>שאלה:</strong> מתי הרוח נשאה אותך? מתי הלכת לכיוון מסוים כי באמת בחרת, ומתי כי פשוט "ככה יצא"?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-sun"></i>
+                        <h3>המדבר</h3>
+                        <p>מרחב של ריקנות וחיפוש</p>
+                        <div class="deep-meaning">
+                            <p>המדבר הוא מקום של ריקנות - אין בו כמעט כלום. רק חול, שמש, ושקט. אבל דווקא בריקנות הזו אפשר לראות דברים שלא רואים במקום עמוס. פרח קטן בולט. שאלה פשוטה מהדהדת.</p>
+                            <p>המדבר הוא גם מקום של מבחן. בלי מים, בלי צל, בלי חברה - אתה נשאר עם עצמך. מי שאתה באמת, בלי המסכות, בלי ההסחות. המדבר מפשיט.</p>
+                            <p>הנסיך עובר במדבר בדרכו לכדור הארץ. זה מסע פנימי לא פחות מחיצוני - לעבור דרך הריקנות, לפגוש את הפשטות, לשמוע אמיתות שבמקומות עמוסים לא שומעים.</p>
+                            <p><strong>קשר לחיים:</strong> מתי היית במדבר שלך? רגע של ריקנות, של "אין כלום" - שדווקא בו ראית משהו חשוב?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-numbers"></i>
+                        <h3>שישה או שבעה</h3>
+                        <p>מספר לא מדויק, זיכרון מטושטש</p>
+                        <div class="deep-meaning">
+                            <p>"שישה או שבעה" - הפרח לא בטוח כמה בני אדם ראה. זה מספר קטן ולא מדויק. יש בזה משהו עצוב: בני אדם כל כך חולפים שאפילו פרח פשוט לא זוכר כמה מהם היו.</p>
+                            <p>המספר הקטן גם מדגיש את הבדידות. בכל המדבר הגדול, רק כמה בני אדם עברו פעם. והם לא נשארו - הרוח נשאה אותם. הפרח נשאר לבד.</p>
+                            <p>"לפני שנים רבות" - הזמן עבר, והפרח עדיין מחכה. עדיין לבד. עדיין זוכר את הפגישה הקצרה עם בני האדם שחלפו.</p>
+                            <p><strong>שאלה:</strong> כמה אנשים באמת נשארו בחייך? כמה רק "עברו"?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>בדידות במדבר</h3>
+                        <p>הנסיך הולך לבדו במדבר. חול בכל כיוון, שום דבר חי. הוא מחפש בני אדם, מחפש חיבור, מחפש מישהו. הבדידות מלחיצה - הוא לא מוצא את מה שהוא מחפש.</p>
+                        <span class="emotion-tag">בדידות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הפגישה עם הפרח</h3>
+                        <p>לפתע - פרח. משהו חי באמצע הריק. הנסיך מתרגש - סוף סוף מישהו לדבר איתו. גם אם זה רק פרח קטן עם שלושה עלי כותרת.</p>
+                        <span class="emotion-tag">תקווה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>השאלה</h3>
+                        <p>"איפה בני האדם?" הנסיך שואל את מה שבוער בו. הוא לא מתעניין בפרח עצמו, לא שואל איך הוא מרגיש או מה הוא חושב. הוא רק רוצה לדעת איפה למצוא את מה שהוא מחפש.</p>
+                        <span class="emotion-tag">דחיפות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>התשובה שמכאיבה</h3>
+                        <p>הפרח עונה - ראיתי אותם פעם, לפני שנים. אין להם שורשים, הרוח נושאת אותם. המילים האלה מהדהדות. הנסיך שומע משהו על בני האדם, אבל גם על עצמו.</p>
+                        <span class="emotion-tag">הכרה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הפרידה המהירה</h3>
+                        <p>"שלום," והנסיך ממשיך. הוא לא נשאר, לא מעמיק את השיחה, לא מתחבר לפרח. בדיוק כמו בני האדם שהפרח תיאר - הוא עובר, נישא ברוח, ממשיך הלאה.</p>
+                        <span class="emotion-tag">ניתוק</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>יש שקט גדול בפרק הזה. הנסיך לא מתאר מה הוא מרגיש. הוא לא אומר "הצטערתי לעזוב את הפרח" או "המילים שלו פגעו בי". הוא פשוט שואל, שומע, ועוזב. אבל השקט הזה רועש.</p>
+                    <p>אולי הנסיך לא מוכן עדיין לשמוע את מה שהפרח אומר. אולי ההכרה שגם הוא חסר שורשים, גם הוא נישא ברוח, היא קשה מדי. אז הוא ממשיך לחפש בני אדם - בלי לשים לב שהוא מתנהג בדיוק כמוהם.</p>
+                    <p>ויש גם רגש סמוי של הפרח: הוא נשאר לבד. שוב. הנסיך בא, שאל שאלה אחת, והלך. הפרח חזר לבדידות שלו במדבר. האם הוא התאכזב? האם הוא ציפה למשהו אחר?</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>חוסר עיגון וזהות נוזלית</h3>
+                    <p>מנקודת מבט פסיכולוגית, הפרק מתאר מה שזיגמונט באומן קרא "מודרניות נוזלית" - מצב שבו הזהות לא יציבה, הקשרים לא קבועים, הכל זורם ומשתנה. בני אדם חסרי שורשים הם בני אדם בלי זהות יציבה.</p>
+                    <p>הפרח מושרש ולכן הוא יודע מי הוא ואיפה הוא. בני האדם לא מושרשים, ולכן הם תמיד בתנועה, תמיד מחפשים, לא יודעים מי הם באמת. "מקשה עליהם" - קשה לבנות זהות כשאתה תמיד זז.</p>
+                    <p>הנסיך עצמו בדיוק במצב הזה: הוא עזב את הבית שלו, מסתובב ממקום למקום, לא יודע מה הוא מחפש. הוא פוגש את הפרח ושומע תיאור של עצמו - אבל עדיין לא מזהה את זה.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>החופש והניכור</h3>
+                    <p>האקזיסטנציאליסטים דיברו על "הזריקות לעולם" - אנחנו מוצאים את עצמנו קיימים בלי שבחרנו, בלי שורשים טבעיים. עלינו ליצור את המשמעות שלנו, לבחור את השורשים שלנו. אבל רוב בני האדם לא עושים את זה - הם פשוט נישאים.</p>
+                    <p>הרוח היא סמל לחיים "לא-אותנטיים" - לעשות מה שעושים, ללכת לאן שהולכים, בלי לבחור באמת. הפרח, לעומת זאת, הוא אותנטי - הוא מה שהוא, במקום שהוא, בלי להתנצל ובלי לרצות להיות משהו אחר.</p>
+                    <p>השאלה האקזיסטנציאליסטית היא: האם אפשר לבחור להשתרש? האם אפשר להפסיק להיות נישא ברוח ולהחליט - כאן, זו האדמה שלי, אלה השורשים שלי?</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>הטייס הנודד</h3>
+                    <p>סן-אכזופרי היה טייס שחי חיים של נדודים. הוא טס מארץ לארץ, לא נשאר במקום אחד, ראה את העולם מלמעלה - מנותק, זורם, תמיד בתנועה. הוא ידע מה זה להיות חסר שורשים.</p>
+                    <p>כשהוא כתב את הספר הזה, הוא היה בגלות בניו יורק, רחוק מצרפת, רחוק מהבית. הוא ידע מה זה להיות נישא ברוח ההיסטוריה, לא לשלוט בגורל שלך. הפרק הקצר הזה משקף משהו מאוד אישי.</p>
+                    <p>הפרח במדבר הוא אולי מה שסן-אכזופרי רצה להיות - מושרש, יציב, יודע מי הוא. במקום זה, הוא היה כמו בני האדם שהפרח מתאר - תמיד בתנועה, תמיד מחפש, לא נשאר מספיק זמן כדי להשתרש.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>החכמה בפשטות</h3>
+                    <p>במסורות רוחניות רבות, החכמה באה מפשטות ומהשתרשות. הנזירים, הפרושים, המתבודדים - כולם בחרו להישאר במקום אחד, להעמיק, להשתרש. הפרח במדבר הוא סוג של נזיר - לבד, פשוט, אבל רואה אמת.</p>
+                    <p>בני האדם, לעומת זאת, תמיד רצים - אחרי כסף, אחרי הצלחה, אחרי הדבר הבא. הם לא נשארים מספיק זמן כדי לראות באמת. הם "חסרי שורשים" גם ברמה הרוחנית - לא מחוברים למשהו עמוק.</p>
+                    <p>המסר הרוחני הוא פשוט: עצור. השתרש. אל תיתן לרוח לשאת אותך. מצא את המקום שלך - פיזי או רוחני - והעמק בו. רק מתוך השתרשות אפשר באמת לראות.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 17 - הנחש:</p>
+                        <p>הנחש אמר לנסיך שהוא "לבד גם בין בני האדם". הפרח ממשיך את הנושא - בני אדם חסרי שורשים, לא נשארים, קשה למצוא אותם. שני הפרקים מכינים את הנסיך לכך שכדור הארץ יהיה מקום של בדידות.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לוורד:</p>
+                        <p>הוורד של הנסיך הוא מושרש - הוא נשאר על הכוכב, לא הולך לשום מקום. הנסיך עזב אותו, נישא ברוח. האירוניה כואבת: הנסיך מחפש בני אדם, אבל השאיר מאחור את מי שחיכה לו.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-plant"></i>
+                        "אין להם שורשים, וזה מאוד מקשה עליהם."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>שורשים כובלים אבל גם מעגנים. חופש משחרר אבל גם מבודד. הפרח לא יכול לזוז אבל הוא יודע מי הוא. בני האדם יכולים ללכת לכל מקום אבל לא יודעים לאן. מה עדיף - להיות כבול ויציב, או חופשי ואבוד?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>הפרק הזה קצר אבל עמוק. הוא שואל שאלות על שורשים, על שייכות, על מה שמעגן אותנו בעולם. השאלות הבאות מזמינות אותך לחשוב על השורשים שלך - או על היעדרם.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-plant"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>השורשים שלך</h3>
+                            <p>לפרח יש שורשים שמחברים אותו לאדמה. מה השורשים שלך? מה מעגן אותך, נותן לך תחושה של "כאן הבית שלי"? זה יכול להיות מקום, אנשים, ערכים, עבודה - מה זה בשבילך?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על רגע שהרגשת "בבית" - לא בהכרח בית פיזי, אלא תחושה של שייכות, של "אני במקום הנכון". מה יצר את התחושה הזו? מה היה שם שגרם לך להרגיש מעוגן?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-wind"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>חופש מול עיגון</h3>
+                            <p>בני אדם חסרי שורשים יכולים ללכת לכל מקום - זה סוג של חופש. הפרח מושרש ולכן כבול למקום אחד. אבל הפרח נראה רגוע, ובני האדם נראים אבודים. האם חופש בלי שורשים הוא באמת חופש? או סוג אחר של כלא?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על מישהו שאתה מכיר שתמיד עובר ממקום למקום, מעבודה לעבודה, ממערכת יחסים למערכת יחסים. האם הוא נראה לך חופשי או אבוד? ומה עם מישהו שנשאר באותו מקום כל החיים - הוא כבול או מעוגן?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>האם גם אתה נישא ברוח?</h3>
+                            <p>הפרח אומר שבני אדם נישאים ברוח - הם לא באמת בוחרים לאן ללכת, הם פשוט נדחפים. כמה מההחלטות שלך היו באמת בחירות שלך, וכמה היו פשוט "ככה יצא", "כולם עושים את זה", "זה מה שציפו ממני"?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על החלטה גדולה שעשית - לימודים, עבודה, מגורים, מערכת יחסים. עכשיו שאל את עצמך: למה באמת בחרת את זה? האם היו לך סיבות אמיתיות ומעמיקות, או שפשוט "הלכת עם הזרם"?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>אם היית יכול להשתרש</h3>
+                            <p>דמיין שיש לך הזדמנות "להשתרש" - לבחור מקום, אנשים, דרך חיים, ולהתחייב להם לגמרי. לא לזוז, לא להחליף, להעמיק. איפה היית משתרש? ומה מונע ממך לעשות את זה עכשיו?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>השתרשות לא חייבת להיות פיזית. אפשר להשתרש בקשר, בקריירה, בקהילה, בתחום ידע. השאלה היא: מה היית בוחר אם ידעת שאתה צריך לבחור דבר אחד ולהעמיק בו באמת?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>הנסיך והפרח</h3>
+                            <p>הנסיך פגש את הפרח, שאל שאלה אחת, והלך. הוא לא נשאר, לא העמיק את הקשר, לא התעניין בפרח עצמו. האם הוא צדק להמשיך לחפש, או שהחמיץ משהו חשוב? האם לפעמים מה שמחפשים נמצא דווקא במקום שממנו ממהרים לעזוב?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על פגישה חולפת שהיית בה - עם אדם, עם מקום, עם רעיון. משהו שעבר מהר ולא חזר. האם יש משהו שהיית רוצה לעשות אחרת? להישאר עוד קצת, לשאול עוד שאלה, להעמיק?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-message-question"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>מה מקשה</h3>
+                            <p>הפרח אומר שחוסר השורשים "מאוד מקשה" על בני אדם. מקשה על מה? הוא לא אומר. מה אתה חושב? על מה חוסר שורשים מקשה - על אושר? על משמעות? על קשרים? על לדעת מי אתה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>הפרח משאיר את זה פתוח בכוונה. אולי התשובה שונה לכל אחד. מה קשה לך כשאתה לא מעוגן? מה קורה כשאתה מרגיש שאתה "נישא ברוח" ולא באמת בוחר?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-17.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 17
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-19.html" class="book-nav-btn" id="nextChapter">
+                פרק 19
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 18 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with CSS only - no SVG
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = (Math.random() * 4 + 2) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.background = '#FFD700';
+                star.style.borderRadius = '50%';
+                star.style.boxShadow = '0 0 6px 2px rgba(255, 215, 0, 0.6)';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 18; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 18;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

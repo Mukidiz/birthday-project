@@ -1,0 +1,231 @@
+{
+  "moods": [
+    { "id": "all", "name": "הכל", "icon": "ti-stars", "color": "#FFD700" },
+    { "id": "innocence", "name": "תמימות", "icon": "ti-heart", "color": "#98D8C8" },
+    { "id": "adventure", "name": "הרפתקה", "icon": "ti-compass", "color": "#87CEEB" },
+    { "id": "mystery", "name": "מסתורין", "icon": "ti-eye", "color": "#9370DB" },
+    { "id": "love", "name": "אהבה", "icon": "ti-heart-filled", "color": "#E8A0A0" },
+    { "id": "critique", "name": "ביקורת", "icon": "ti-mood-sad", "color": "#CD5C5C" },
+    { "id": "loneliness", "name": "בדידות", "icon": "ti-cloud", "color": "#7B8B9A" },
+    { "id": "wisdom", "name": "חוכמה", "icon": "ti-bulb", "color": "#DAA520" },
+    { "id": "farewell", "name": "פרידה", "icon": "ti-door-exit", "color": "#6B8E9F" }
+  ],
+  "chapters": [
+    {
+      "number": 1,
+      "title": "הבואה קונסטריקטור",
+      "icon": "ti-eye",
+      "color": "#98D8C8",
+      "mood": "innocence",
+      "available": true
+    },
+    {
+      "number": 2,
+      "title": "המפגש במדבר",
+      "icon": "ti-plane",
+      "color": "#87CEEB",
+      "mood": "adventure",
+      "available": true
+    },
+    {
+      "number": 3,
+      "title": "מאיפה הנסיך",
+      "icon": "ti-planet",
+      "color": "#9370DB",
+      "mood": "mystery",
+      "available": true
+    },
+    {
+      "number": 4,
+      "title": "כוכב B-612",
+      "icon": "ti-calculator",
+      "color": "#98D8C8",
+      "mood": "innocence",
+      "available": true
+    },
+    {
+      "number": 5,
+      "title": "הבאובבים",
+      "icon": "ti-tree",
+      "color": "#8FBC8F",
+      "mood": "wisdom",
+      "available": true
+    },
+    {
+      "number": 6,
+      "title": "השקיעות",
+      "icon": "ti-sun",
+      "color": "#7B8B9A",
+      "mood": "loneliness",
+      "available": true
+    },
+    {
+      "number": 7,
+      "title": "סוד הוורד",
+      "icon": "ti-lock",
+      "color": "#9370DB",
+      "mood": "mystery",
+      "available": true
+    },
+    {
+      "number": 8,
+      "title": "הוורד",
+      "icon": "ti-flower",
+      "color": "#E8A0A0",
+      "mood": "love",
+      "available": true
+    },
+    {
+      "number": 9,
+      "title": "הנסיעה",
+      "icon": "ti-door-exit",
+      "color": "#87CEEB",
+      "mood": "adventure",
+      "available": true
+    },
+    {
+      "number": 10,
+      "title": "המלך",
+      "icon": "ti-crown",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 11,
+      "title": "השאפתן",
+      "icon": "ti-award",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 12,
+      "title": "השיכור",
+      "icon": "ti-bottle",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 13,
+      "title": "איש העסקים",
+      "icon": "ti-briefcase",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 14,
+      "title": "מדליק הפנסים",
+      "icon": "ti-bulb",
+      "color": "#DAA520",
+      "mood": "wisdom",
+      "available": true
+    },
+    {
+      "number": 15,
+      "title": "הגאוגרף",
+      "icon": "ti-map",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 16,
+      "title": "כדור הארץ",
+      "icon": "ti-world",
+      "color": "#87CEEB",
+      "mood": "adventure",
+      "available": true
+    },
+    {
+      "number": 17,
+      "title": "הנחש",
+      "icon": "ti-snake",
+      "color": "#9370DB",
+      "mood": "mystery",
+      "available": true
+    },
+    {
+      "number": 18,
+      "title": "פרח במדבר",
+      "icon": "ti-flower",
+      "color": "#7B8B9A",
+      "mood": "loneliness",
+      "available": true
+    },
+    {
+      "number": 19,
+      "title": "הר ההד",
+      "icon": "ti-mountain",
+      "color": "#7B8B9A",
+      "mood": "loneliness",
+      "available": true
+    },
+    {
+      "number": 20,
+      "title": "גן הוורדים",
+      "icon": "ti-garden-cart",
+      "color": "#E8A0A0",
+      "mood": "love",
+      "available": true
+    },
+    {
+      "number": 21,
+      "title": "השועל",
+      "icon": "ti-heart",
+      "color": "#DAA520",
+      "mood": "wisdom",
+      "available": true
+    },
+    {
+      "number": 22,
+      "title": "איש המסילות",
+      "icon": "ti-train",
+      "color": "#87CEEB",
+      "mood": "adventure",
+      "available": true
+    },
+    {
+      "number": 23,
+      "title": "סוחר הגלולות",
+      "icon": "ti-clock",
+      "color": "#CD5C5C",
+      "mood": "critique",
+      "available": true
+    },
+    {
+      "number": 24,
+      "title": "הבאר",
+      "icon": "ti-search",
+      "color": "#F0E68C",
+      "mood": "wisdom",
+      "available": true
+    },
+    {
+      "number": 25,
+      "title": "הבאר והמים",
+      "icon": "ti-droplet",
+      "color": "#DAA520",
+      "mood": "wisdom",
+      "available": true
+    },
+    {
+      "number": 26,
+      "title": "הפרידה",
+      "icon": "ti-heart-broken",
+      "color": "#6B8E9F",
+      "mood": "farewell",
+      "available": true
+    },
+    {
+      "number": 27,
+      "title": "הסיום",
+      "icon": "ti-star",
+      "color": "#6B8E9F",
+      "mood": "farewell",
+      "available": true
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+# 📋 Task List - Birthday Project
+
+> **Last Updated:** 2026-01-16  
+> **Current Phase:** Planning → Content
+
+---
+
+## 🚨 IMPORTANT: How to Work on This Project
+
+### Starting a New Chat:
+1. Open new chat in Cursor
+2. Switch to **Agent Mode**
+3. Say one of:
+   - `"קרא את /Users/galelbaz/Desktop/Gals/Bens/birthday-project/docs/ והמשך במשימה הבאה ברשימה"`
+   - `"Read the birthday-project docs and continue with TASK-XXX"`
+
+### After Each Task:
+- ✅ Update this file (mark task as done)
+- ✅ Update `PROGRESS-LOG.md` with what was done
+- ✅ Update relevant docs if decisions were made
+
+---
+
+## 📊 Task Status Legend
+
+| Symbol | Meaning |
+|--------|---------|
+| ⬜ | Pending - Not started |
+| 🔄 | In Progress |
+| ✅ | Completed |
+| ⏸️ | Blocked - Waiting for input |
+| ❌ | Cancelled |
+
+---
+
+## 🎯 Phase 1: Planning & Content
+
+### TASK-001: אישור קונספט, מבנה ועיצוב דמויות ✅
+**Status:** ✅ Completed  
+**Description:** 
+- לבחור קונספט לסיפור
+- לתכנן את מבנה הפרקים/כוכבים
+- ליצור ולאשר עיצוב דמויות
+
+**Output:** 
+- ✅ `CHAPTERS-OUTLINE.md` - קונספט מסע בכוכבים, 12 כוכבים = 12 תכונות
+- ✅ `PROJECT-BRIEF.md` - עודכן עם הקונספט והדמויות
+- ✅ `src/character-demo-v4.html` - **עיצוב דמויות מאושר**
+- ✅ `ASSETS-LIST.md` - עודכן עם כללי העיצוב
+
+**Character Design Decision:**
+- סגנון: פשוט ומינימליסטי (Little Prince Style)
+- אין דמויות נפרדות - רק בתוך סצנות (חללית, כוכב)
+- ההבדל: גל = שחור/חום, בן = חום/ירוק (שיער/עיניים)
+
+---
+
+### TASK-002: כתיבת הברכה לכל פרק 🔄
+**Status:** 🔄 In Progress  
+**Description:**
+- לכתוב את הטקסט לכל כוכב/פרק
+- לקשר כל תכונה לסיפור או זיכרון
+- סגנון הכתיבה: ייקבע תוך כדי עבודה עם גל
+
+**Stars to write:**
+1. ⬜ היצירתיות
+2. ⬜ הלב הטוב
+3. ⬜ תמיד שם
+4. ⬜ ההתמדה
+5. ⬜ המוכשרות
+6. ⬜ ההקשבה
+7. ⬜ היופי
+8. ⬜ הבדיחות הגרועות
+9. ⬜ הסדר (והאי-סדר)
+10. ⬜ הבוקר
+11. ⬜ השגרה המתוקה
+12. ⬜ האהבה (סיכום)
+
+**Output:** Complete `CHAPTERS-OUTLINE.md` with full text
+
+---
+
+### TASK-003: תכנון האיורים לכל פרק ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-002  
+**Description:**
+- להגדיר איזה איור צריך לכל כוכב
+- לתאר את הסצנה הספציפית
+- לרשום רעיונות לאנימציות
+
+**Output:** Update `ASSETS-LIST.md` with detailed illustration specs
+
+---
+
+## 🎨 Phase 2: Design
+
+### TASK-004: בחירת סגנון צבעים סופי ⬜
+**Status:** ⬜ Pending  
+**Description:**
+- להכין תצוגה מקדימה של 5 אופציות הצבעים
+- לאפשר למשתמש לבחור
+- לעדכן את הסגנון הסופי
+
+**Output:** Finalize `DESIGN-SYSTEM.md` with chosen palette
+
+---
+
+### TASK-005: עיצוב הדמויות הסופי ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-001 ✅, TASK-004  
+**Description:**
+- לשפר ולסיים את ה-SVG של הדמויות
+- לוודא שהסגנון מתאים ל"הנסיך הקטן"
+- ליצור וריאציות לסצנות שונות
+
+**Output:** SVG files in `assets/illustrations/characters/`
+
+---
+
+## 💻 Phase 3: Development
+
+### TASK-006: בניית index.html ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-004  
+**Description:**
+- לבנות את העמוד הראשי
+- כולל הקדשה אישית
+- מפת מסע ויזואלית בחלל
+- ניווט לכוכבים/פרקים
+
+**Output:** `src/index.html`
+
+---
+
+### TASK-007: בניית תבנית כוכב/פרק ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-006  
+**Description:**
+- לבנות את דף הכוכב הראשון כתבנית
+- כולל איור, טקסט, אנימציות
+- ניווט בין כוכבים
+
+**Output:** `src/star-01.html`
+
+---
+
+### TASK-008: יצירת כל הכוכבים ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-007, TASK-002  
+**Description:**
+- לשכפל את התבנית לכל 12 הכוכבים
+- להכניס את התוכן הספציפי
+- להוסיף את האיורים
+
+**Output:** All `src/star-XX.html` files
+
+---
+
+### TASK-009: הכנת 5 גרסאות צבע ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-008  
+**Description:**
+- ליצור CSS variables לכל 5 הפלטות
+- לאפשר מעבר קל בין גרסאות
+- תצוגה מקדימה לבחירה סופית
+
+**Output:** Color variant CSS files or toggle
+
+---
+
+## ✨ Phase 4: Polish & Launch
+
+### TASK-010: בדיקות ותיקונים ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-009  
+**Description:**
+- לבדוק על מובייל
+- לבדוק את האנימציות
+- לתקן באגים
+
+**Output:** Working, tested website
+
+---
+
+### TASK-011: העלאה לאינטרנט ⬜
+**Status:** ⬜ Pending  
+**Depends on:** TASK-010  
+**Description:**
+- להעלות ל-GitHub Pages או שירות דומה
+- לוודא שהכל עובד
+- לשלוח קישור לבן ביום הולדת!
+
+**Output:** Live URL 🎉
+
+---
+
+## 📝 Completed Tasks Log
+
+| Task | Completed | Notes |
+|------|-----------|-------|
+| Initial Setup | 2026-01-16 | Created docs structure, cloned reference project |
+| TASK-001 | 2026-01-16 | Concept + character design approved. See `character-demo-v4.html` |
+
+---
+
+## 💡 Notes
+
+- הפרויקט מבוסס על השראה מ: `reference/little-prince/`
+- כל המסמכים נמצאים ב: `docs/`
+- הקוד יהיה ב: `src/`
+- האיורים יהיו ב: `assets/illustrations/`
+- **קונספט:** מסע בחלל - כל כוכב = תכונה של בן (12 כוכבים)
+

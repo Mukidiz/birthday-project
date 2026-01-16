@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 21 | השועל</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Warm golden palette for connection/wisdom */
+            --primary: #DAA520;
+            --secondary: #B8860B;
+            --accent: #CD853F;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: glow 2s ease-in-out infinite alternate; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 1200px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), rgba(205, 133, 63, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .home-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .home-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .chapter-bookmark-btn {
+            background: white;
+            border: 2px solid #E8A0A0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-bookmark-btn i {
+            font-size: 1.3rem;
+            color: #E8A0A0;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-bookmark-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: #C77878;
+        }
+        
+        .chapter-bookmark-btn:hover i {
+            color: #C77878;
+        }
+        
+        .chapter-bookmark-btn.bookmarked {
+            background: #E8A0A0;
+            border-color: #E8A0A0;
+        }
+        
+        .chapter-bookmark-btn.bookmarked i {
+            color: white;
+        }
+        
+        .chapter-bookmark-btn.bookmarked:hover {
+            background: #C77878;
+            border-color: #C77878;
+        }
+        
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .chapter-bookmark-btn.just-bookmarked i {
+            animation: heartPop 0.4s ease;
+        }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes glow { 0% { filter: drop-shadow(0 0 5px rgba(218, 165, 32, 0.5)); } 100% { filter: drop-shadow(0 0 15px rgba(218, 165, 32, 0.9)); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes slideInRight { 
+            from { opacity: 0; transform: translateX(-20px); } 
+            to { opacity: 1; transform: translateX(0); } 
+        }
+        @keyframes slideInLeft { 
+            from { opacity: 0; transform: translateX(20px); } 
+            to { opacity: 1; transform: translateX(0); } 
+        }
+        
+        .page-wrapper {
+            animation: pageEnter 0.5s ease forwards;
+        }
+        
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        .section.slide-right {
+            animation: slideInRight 0.4s ease;
+        }
+        .section.slide-left {
+            animation: slideInLeft 0.4s ease;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+    
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-heart"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 21</p>
+        <p class="chapter-title">השועל</p>
+        <span class="mood-badge"><i class="ti ti-heart-handshake"></i> אילוף וקשר</span>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>אז הופיע השועל. "שלום," אמר השועל. "שלום," ענה הנסיך הקטן בנימוס, והסתובב - אבל לא ראה דבר. "אני כאן," אמר הקול, "מתחת לעץ התפוח." "מי אתה?" שאל הנסיך הקטן. "אתה יפה מאוד." "אני שועל," אמר השועל.</p>
+
+                <p>"בוא לשחק איתי," הציע הנסיך הקטן. "אני כל כך עצוב." "אי אפשר לי לשחק איתך," אמר השועל. "אני לא מאולף."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"מה פירוש 'לאלף'?" שאל הנסיך.</p>
+                    <p class="quote-text">"זה דבר שנשכח הרבה מדי," אמר השועל. "פירושו 'ליצור קשרים'..."</p>
+                    <p class="quote-analysis">זוהי אחת ההגדרות העמוקות ביותר בספרות העולמית. "לאלף" אינו אילוף במובן של שליטה או הכנעה - זהו יצירת קשר, בניית מערכת יחסים הדדית. השועל מציע פרשנות שמהפכת את התפיסה הרגילה: אילוף אמיתי הופך את שני הצדדים לחיוניים זה לזה.</p>
+                </div>
+                
+                <p>"ליצור קשרים?" שאל הנסיך.</p>
+                
+                <p>"ודאי," אמר השועל. "עבורי אתה עדיין רק ילד קטן כמו מאה אלף ילדים קטנים אחרים. ואני לא צריך אותך. וגם אתה לא צריך אותי. עבורך אני רק שועל כמו מאה אלף שועלים אחרים. אבל אם תאלף אותי, אנחנו נהיה זקוקים זה לזה. אתה תהיה יחיד בשבילי בכל העולם. ואני אהיה יחיד בשבילך בכל העולם..."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"אני מתחיל להבין," אמר הנסיך הקטן. "יש פרח אחד... אני חושב שהוא אילף אותי..."</p>
+                    <p class="quote-analysis">רגע של הארה. הנסיך מבין פתאום שהוורד לא סתם היה על הכוכב שלו - הוורד יצר איתו קשר, הפך אותו למיוחד. זה לא הנסיך שאילף את הוורד, אלא ההפך. ההכרה הזו מהפכת את כל המסע שלו - הוא לא עזב את הוורד, הוא עזב את מי שאילף אותו.</p>
+                </div>
+
+                <h3>סוד ההגעה</h3>
+                
+                <p>השועל מסביר לנסיך שאילוף דורש סבלנות וטקסים. "עליך להיות סבלני מאוד," אמר. "בהתחלה תשב קצת רחוק ממני, ככה, בעשב. אני אביט בך בזווית העין, ואתה לא תאמר דבר. שפה היא מקור לאי-הבנות. אבל כל יום תוכל לשבת קצת יותר קרוב..."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"עדיף שתבוא תמיד באותה שעה," אמר השועל. "אם תבוא, למשל, בארבע אחר הצהריים, אני אתחיל להיות מאושר כבר משלוש. ככל שהשעה תתקרב, אני אהיה יותר ויותר מאושר. בארבע אני אהיה כבר נרגש ומודאג! אגלה את מחיר האושר. אבל אם תבוא בכל פעם בשעה אחרת, לעולם לא אדע מתי להלביש את לבי לחג..."</p>
+                    <p class="quote-analysis">הטקס לא סתם מארגן את הזמן - הוא יוצר ציפייה, מתח מתוק, אושר שמתחיל לפני המפגש עצמו. השועל מלמד שהשמחה אינה רק ברגע המפגש, אלא בכל תהליך ההמתנה אליו. הוודאות יוצרת שמחה; אי-הוודאות יוצרת חרדה.</p>
+                </div>
+
+                <h3>הפרידה והסוד</h3>
+
+                <p>לאחר שהנסיך אילף את השועל, הגיעה שעת הפרידה. "אה!" אמר השועל, "אני אבכה." "זו אשמתך," אמר הנסיך הקטן, "לא רציתי לעשות לך רע, אבל אתה רצית שאאלף אותך..." "ודאי," אמר השועל.</p>
+
+                <p>"אז לא הרווחת כלום!" אמר הנסיך. "הרווחתי," אמר השועל, "בגלל צבע החיטה."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"לך לראות שוב את הוורדים. תבין שהוורד שלך הוא יחיד בעולם. ואז תחזור להיפרד ממני, ואני אתן לך מתנה - סוד."</p>
+                    <p class="quote-analysis">השועל שולח את הנסיך להבין משהו בעצמו - לא מספר לו, אלא מכוון אותו לגילוי אישי. זו דרך ההוראה העמוקה ביותר: לא לתת תשובות, אלא לאפשר חוויה שמובילה להבנה.</p>
+                </div>
+
+                <p>הנסיך הלך לראות את הוורדים ואמר להם: "אתן לא דומות בכלל לוורד שלי, אתן עדיין לא כלום. איש לא אילף אתכן ואתן לא אילפתן איש. אתן כמו השועל שלי כשהיה. הוא היה רק שועל כמו מאה אלף אחרים. אבל עשיתי אותו לחבר שלי, ועכשיו הוא יחיד בעולם."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"הנה הסוד שלי. הוא פשוט מאוד: רואים היטב רק עם הלב. העיקר נסתר מן העיניים."</p>
+                    <p class="quote-analysis">זהו אולי המשפט המפורסם ביותר בספר, ואחד המשפטים המצוטטים ביותר בספרות העולמית. הוא מבטא את הרעיון שמשמעות אמיתית, ערך אמיתי, קשר אמיתי - כל אלה נסתרים מהעין הפיזית. הם נתפסים רק כשמסתכלים "עם הלב" - כלומר, עם אהבה, עם קשר רגשי, עם היכרות עמוקה.</p>
+                </div>
+
+                <p>"העיקר נסתר מן העיניים," חזר הנסיך הקטן כדי לזכור.</p>
+                
+                <p>"הזמן שהקדשת לוורד שלך - הוא שעושה את הוורד שלך כה חשוב."</p>
+                
+                <p>"הזמן שהקדשתי לוורד שלי..." חזר הנסיך כדי לזכור.</p>
+                
+                <p>"בני האדם שכחו את האמת הזו," אמר השועל. "אבל אתה לא תשכח. אתה נעשה אחראי לנצח למה שאילפת. אתה אחראי לוורד שלך..."</p>
+                
+                <p>"אני אחראי לוורד שלי..." חזר הנסיך הקטן כדי לזכור.</p>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>פרק 21 הוא לב הספר - לא רק במובן של מיקום (הוא בערך באמצע), אלא במובן של משמעות. כל מה שקרה לפני הפרק הזה היה הכנה; כל מה שיקרה אחריו יהיה תוצאה של מה שהנסיך לומד כאן.</p>
+                        
+                        <p>השועל הוא המורה האמיתי היחיד שהנסיך פוגש במסע שלו. כל השאר - המלך, השאפתן, השיכור, איש העסקים, מדליק הפנסים, הגאוגרף - הם דוגמאות לאיך לא לחיות. השועל הוא הראשון שמלמד איך כן.</p>
+                        
+                        <p>יש כאן מבנה מעגלי מדהים: השועל מלמד את הנסיך על אילוף, ובכך - מאלף אותו. התהליך שהשועל מתאר (לשבת יום אחר יום, להתקרב לאט, ליצור טקסים) הוא בדיוק מה שקורה בפרק עצמו. הקורא חווה את האילוף בזמן שקורא עליו.</p>
+                        
+                        <p>הסוד שהשועל נותן - "רואים היטב רק עם הלב" - הוא בו-זמנית פשוט ומורכב. הוא פשוט כי הוא נשמע ברור; הוא מורכב כי הוא דורש שינוי יסודי באופן שבו אנחנו תופסים את העולם. "לראות עם הלב" זה לא סתם מטאפורה - זו דרך חיים שלמה.</p>
+                        
+                        <p>ויש כאן גם מתח: השועל יודע שהאילוף יגרום לו כאב. הוא יודע שהנסיך יעזוב. ובכל זאת הוא רוצה להיות מאולף. למה? כי "צבע החיטה" - כי עדיף לחיות עם זיכרון של קשר, גם אם הוא כואב, מאשר לחיות בלי קשר בכלל. זה אומר משהו עמוק מאוד על הסיכון שבאהבה: אנחנו יודעים שזה עלול לכאוב, ובוחרים בכל זאת.</p>
+                        
+                        <p>ולבסוף, האחריות: "אתה נעשה אחראי לנצח למה שאילפת." זו לא רק התחייבות - זו הגדרה של מה זה להיות אנושי. היכולת לקחת אחריות על מישהו אחר, להיות קשור אליו "לנצח", להמשיך לדאוג גם כשזה קשה - זה מה שהופך קשר לאמיתי.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <i class="ti ti-deer"></i>
+                        <h3>השועל</h3>
+                        <p>המורה והחבר</p>
+                        <div class="deep-meaning">
+                            <p>השועל הוא אחת הדמויות המורכבות ביותר בספר. במסורות רבות, השועל מייצג ערמומיות ותחבולות. אבל כאן סן-אכזופרי הופך את הסמל: השועל הוא החכם, הישיר, האמיתי.</p>
+                            <p>השועל יודע משהו שהנסיך לא יודע - הוא יודע מה זה אילוף, מה זה קשר, מה זה לאבד ולהרוויח בו-זמנית. הוא מלמד מניסיון, לא מתאוריה.</p>
+                            <p>יש גם משהו מרגש בכך שהשועל מבקש להיות מאולף למרות שהוא יודע שזה יכאב. הוא בוחר בקשר למרות הסיכון. זו אמיצות מסוג מיוחד.</p>
+                            <p><strong>קשר לחיים:</strong> מי בחייך היה כמו השועל - מישהו שלימד אותך משהו עמוק על קשרים, גם אם השיעור היה כואב?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-link"></i>
+                        <h3>האילוף</h3>
+                        <p>יצירת קשרים</p>
+                        <div class="deep-meaning">
+                            <p>המילה "לאלף" בעברית נושאת משמעות של הכנעה, של שליטה. אבל השועל מגדיר אותה מחדש: "פירושו ליצור קשרים". זו מהפכה בהגדרה.</p>
+                            <p>אילוף אמיתי הוא הדדי - לא אחד שולט ואחד נשלט, אלא שניים שנעשים זקוקים זה לזה. "אתה תהיה יחיד בשבילי... ואני אהיה יחיד בשבילך."</p>
+                            <p>אילוף דורש זמן, סבלנות, טקסים. הוא לא קורה ברגע - הוא נבנה לאט, צעד אחר צעד, יום אחר יום. זה ההפך מהקשרים המהירים של העולם המודרני.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> הוורד "אילף" את הנסיך בלי שאף אחד קרא לזה בשם הזה. עכשיו, עם ההגדרה של השועל, הנסיך מבין מה קרה לו.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-wheat"></i>
+                        <h3>צבע החיטה</h3>
+                        <p>זכר הקשר</p>
+                        <div class="deep-meaning">
+                            <p>השועל אומר שעד עכשיו, חיטה לא הייתה משמעותית עבורו. היא זהובה, אבל מה זה אומר? אבל אחרי שיאלף את הנסיך, צבע השיער הזהוב של הנסיך יגרום לו לאהוב את צבע החיטה.</p>
+                            <p>זה עקרון עמוק: כשאנחנו מתחברים למישהו, כל העולם משתנה. צבעים, ריחות, מקומות - הכל מקבל משמעות חדשה כי הוא מזכיר את מי שאנחנו אוהבים.</p>
+                            <p>זה גם מה שנשאר אחרי שהקשר נגמר: לא האדם עצמו, אלא העולם שהוא צבע עבורנו. השדות ימשיכו להיות זהובים, וכל פעם שהשועל יראה אותם, הוא יזכור.</p>
+                            <p><strong>קשר לחיים:</strong> איזה "צבע חיטה" יש לך? איזה דבר יומיומי - שיר, ריח, מקום - מזכיר לך מישהו שאהבת?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-clock-hour-4"></i>
+                        <h3>השעה הקבועה</h3>
+                        <p>הטקס והציפייה</p>
+                        <div class="deep-meaning">
+                            <p>השועל מבקש שהנסיך יבוא תמיד באותה שעה. למה? כי אז "אתחיל להיות מאושר כבר משלוש". הציפייה היא חלק מהאושר, לא רק המפגש עצמו.</p>
+                            <p>טקסים יוצרים מבנה, וודאות, בטחון. הם אומרים "אני יכול לסמוך על זה". בעולם כאוטי, הידיעה ש"בארבע הוא יגיע" היא עוגן.</p>
+                            <p>יש כאן גם ביקורת עדינה על החיים המודרניים שבהם הכל גמיש, הכל "כשנוכל", הכל "נראה". הגמישות הזו, אומר השועל, מונעת את האושר של הציפייה.</p>
+                            <p><strong>קשר לחיים:</strong> האם יש לך טקסים קבועים עם אנשים שאתה אוהב? מה קורה כשהם מתבטלים?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-heart-filled"></i>
+                        <h3>"רואים עם הלב"</h3>
+                        <p>הסוד הגדול</p>
+                        <div class="deep-meaning">
+                            <p>זהו הסוד שהשועל נותן לנסיך, והוא הפך לאחד המשפטים המפורסמים ביותר בספרות: "רואים היטב רק עם הלב. העיקר נסתר מן העיניים."</p>
+                            <p>מה זה אומר "לראות עם הלב"? זה אומר לראות את מה שמתחת לפני השטח. לא את המראה החיצוני, אלא את המהות. לא את מה שגלוי, אלא את מה שמסתתר.</p>
+                            <p>הוורד של הנסיך נראה כמו כל ורד אחר - אבל הוא לא. הוא מיוחד בגלל הזמן שהנסיך השקיע בו, בגלל הקשר שנוצר. את זה אי אפשר לראות בעיניים - רק "עם הלב".</p>
+                            <p><strong>פרדוקס:</strong> איך אפשר ללמד מישהו לראות עם הלב? זה משהו שצריך לחוות, לא ללמוד. ואולי זו הסיבה שהשועל שולח את הנסיך לראות את הוורדים לפני שנותן לו את הסוד - הוא רוצה שהנסיך יחווה את זה קודם.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>בדידות וצורך</h3>
+                        <p>"בוא לשחק איתי," מציע הנסיך לשועל. "אני כל כך עצוב." הנסיך מגיע למפגש הזה ממקום של בדידות, של צורך בחברה, של עצב שמחפש מנוס. הוא רוצה מישהו - כל מישהו.</p>
+                        <span class="emotion-tag">בדידות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>בלבול והבנה ראשונית</h3>
+                        <p>הנסיך לא מבין למה השועל לא יכול לשחק איתו. "מה פירוש לאלף?" - השאלה הזו פותחת עולם חדש. הוא מתחיל להבין שקשר אמיתי דורש יותר מרצון.</p>
+                        <span class="emotion-tag">סקרנות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הכרה והארה</h3>
+                        <p>"אני מתחיל להבין. יש פרח אחד... אני חושב שהוא אילף אותי..." - רגע של הארה. הנסיך מבין פתאום שהוורד יצר איתו קשר, הפך אותו למיוחד. כל המסע שלו מקבל משמעות חדשה.</p>
+                        <span class="emotion-tag">הארה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>תהליך האילוף</h3>
+                        <p>הנסיך מאלף את השועל - לאט, בסבלנות, עם טקסים. כל יום הוא מתקרב קצת יותר. זה לא קל, זה דורש זמן, אבל זה גם מלא בשמחה של ציפייה ובהתרגשות של קרבה גוברת.</p>
+                        <span class="emotion-tag">התקרבות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הפרידה והכאב</h3>
+                        <p>"אה! אני אבכה." השועל יודע שהפרידה תכאב, ובכל זאת הוא רצה את האילוף. הנסיך מרגיש אשמה - "זו אשמתך... לא רציתי לעשות לך רע." הקשר יצר גם את היכולת לכאוב.</p>
+                        <span class="emotion-tag">כאב ואשמה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הגילוי מול הוורדים</h3>
+                        <p>הנסיך רואה את הוורדים וסוף סוף מבין: הם יפים, אבל הם ריקים. הוורד שלו - עם כל הבעיות שלו - הוא היחיד בעולם. לא בגלל שהוא שונה, אלא בגלל הקשר.</p>
+                        <span class="emotion-tag">הבנה עמוקה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>קבלת הסוד והאחריות</h3>
+                        <p>"רואים היטב רק עם הלב... אתה נעשה אחראי לנצח למה שאילפת." הנסיך מקבל את החוכמה ואת הנטל. הוא יודע עכשיו מה יש לו, ומה מוטל עליו.</p>
+                        <span class="emotion-tag">חוכמה ואחריות</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>מתחת לשיחה הפילוסופית מסתתר כאב עמוק. הנסיך ברח מהוורד שלו, עזב את מי שאילף אותו. כל מה שהשועל אומר לו - על קשר, על אחריות, על הזמן שמשקיעים - מזכיר לו את מה שעשה. הוא לא סתם לומד על אילוף; הוא מבין שהוא נכשל באילוף שכבר היה לו.</p>
+                    <p>השועל, מצדו, יודע שהוא יאבד את הנסיך. הוא בוחר להתחבר בכל זאת, בוחר את הכאב, בוחר את צבע החיטה. זו אמיצות עצומה - לדעת שתכאב ובכל זאת לאהוב. השועל לא מתלונן, לא מאשים, רק מקבל. זה אולי הדבר הכי מבוגר בכל הספר.</p>
+                    <p>ויש גם רגש של תשובה: הנסיך מבין שהוא צריך לחזור. "אני אחראי לוורד שלי." זו לא רק הבנה אינטלקטואלית - זו החלטה. הוא יודע עכשיו מה הוא צריך לעשות, גם אם זה קשה, גם אם זה אומר לעזוב.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>תורת ההתקשרות</h3>
+                    <p>מנקודת מבט פסיכולוגית, הפרק הזה הוא אחד התיאורים המדויקים ביותר של יצירת קשר בטוח. השועל מתאר בדיוק את מה שפסיכולוגים יקראו מאוחר יותר "attachment" - היכולת ליצור קשר עמוק עם אחר.</p>
+                    <p>התהליך שהשועל מתאר - לשבת קרוב יותר כל יום, ליצור טקסים, להיות צפוי ועקבי - אלה בדיוק המרכיבים של יצירת ביטחון ביחסים. הוא מתאר איך נבנה אמון: לאט, בסבלנות, עם חזרתיות.</p>
+                    <p>יש גם תיאור מדויק של מה קורה כשאנחנו מתקשרים: האחר הופך מ"מאה אלף אחרים" ליחיד. זו לא אשליה - זו תוצאה של השקעה, של זמן, של קשב. הקשר יוצר את הייחודיות.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>יצירת משמעות דרך קשר</h3>
+                    <p>מנקודת מבט אקזיסטנציאליסטית, הפרק עוסק בשאלה: איך אנחנו יוצרים משמעות בעולם שאין בו משמעות מובנית? התשובה של השועל היא: דרך קשרים.</p>
+                    <p>החיטה לא משמעותית מעצמה. הוורד לא מיוחד מעצמו. אנחנו - הקשרים שלנו, ההשקעה שלנו, הבחירות שלנו - אנחנו שיוצרים את המשמעות. "הזמן שהקדשת לוורד שלך - הוא שעושה את הוורד שלך כה חשוב."</p>
+                    <p>זו גם תשובה לבדידות האקזיסטנציאלית: כן, אנחנו לבד ביקום, אבל אנחנו יכולים לבחור להתחבר. הבחירה הזו - לאלף ולהיות מאולף - היא מה שנותן לחיים משמעות.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>סן-אכזופרי והקשרים שלו</h3>
+                    <p>סן-אכזופרי כתב את הספר כשהוא היה רחוק מאשתו קונסואלו, רחוק מצרפת, רחוק מכל מה שאהב. הפרק הזה משקף אולי את הגעגוע הזה, את ההבנה שהקשרים שלנו הם מה שעושה את החיים בעלי ערך.</p>
+                    <p>הוורד בספר מבוסס לפחות בחלקו על קונסואלו - יפה, תובענית, מורכבת. סן-אכזופרי עזב אותה שוב ושוב לטיסות שלו, למלחמה שלו. ואולי הפרק הזה הוא הכרה: "אני אחראי לוורד שלי."</p>
+                    <p>יש גם משהו אישי בדמות השועל - החכם הבודד שיודע הרבה על קשרים אבל חי לבד. אולי סן-אכזופרי ראה את עצמו ככה - מישהו שמבין את חשיבות הקשר אבל מתקשה לשמור עליו.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>הקשר כקדושה</h3>
+                    <p>ברמה רוחנית, הפרק מציע שקשר אמיתי הוא דבר קדוש. "אתה נעשה אחראי לנצח" - זו התחייבות שחורגת מעבר לרגע, לזמן, אפילו למוות. זו אחריות נצחית.</p>
+                    <p>"רואים היטב רק עם הלב" - זה גם רעיון רוחני עמוק. העיניים רואות את הגשמי, את החיצוני. הלב רואה את הפנימי, את הנשמה, את מה ש"נסתר מן העיניים" - את האלוהי שבאחר.</p>
+                    <p>יש גם רעיון של קדושה דרך טקס: השעה הקבועה, ההגעה המדויקת, החזרתיות - אלה מרכיבים של פולחן. הקשר האנושי מקבל כאן ממד של קדושה, של טקס, של משהו שחורג מהיומיומי.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 8 - הוורד:</p>
+                        <p>הפרק הזה מסביר למפרע את כל מה שקרה עם הוורד. הוורד לא היה סתם פרח - הוא אילף את הנסיך, הפך אותו למישהו שיש לו קשר. העזיבה של הנסיך מקבלת כאן משמעות חדשה: הוא לא עזב סתם פרח, הוא עזב את מי שאילף אותו.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 20 - גן הוורדים:</p>
+                        <p>בפרק 20 הנסיך ראה חמשת אלפים ורדים והרגיש אבוד - חשב שהוורד שלו לא מיוחד. הפרק הזה נותן לו את התשובה: הוורד שלו מיוחד לא כי הוא שונה, אלא כי הוא שלו, כי הוא השקיע בו זמן.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרק 19 - ההד:</p>
+                        <p>השועל הוא ההפך מההד. ההד רק חוזר על מה שאומרים לו - השועל יוצר משהו חדש, מלמד, נותן. ההד לא יכול להיות מאולף כי הוא ריק. השועל יכול כי יש בו תוכן, חוכמה, יכולת לתת ולקבל.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-heart"></i>
+                        "הזמן שהקדשת לוורד שלך - הוא שעושה את הוורד שלך כה חשוב."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>לאלף מישהו זה להפוך אותו ליחיד בעולם - אבל זה גם ליצור את האפשרות לכאב. ככל שמישהו יותר מיוחד, ככה האבדן שלו יותר כואב. האם עדיף לא לאלף ולא לכאוב? השועל אומר שלא - כי צבע החיטה שווה את הדמעות.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>פרק 21 הוא לב הספר, והשאלות שהוא מעלה הן מהשאלות הכי חשובות בחיים: מה זה קשר אמיתי? למה אנחנו מתחברים לאנשים מסוימים? מה המחיר של אהבה? האתגרים הבאים מזמינים אותך לחשוב על האילופים בחייך.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-link"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>מי אילף אותך?</h3>
+                            <p>השועל אומר שאילוף הוא הדדי - שני הצדדים נעשים זקוקים זה לזה. חשוב על מישהו שאילף אותך - מישהו שהפך את העולם שלך לאחר. איך זה קרה? האם זה היה תהליך מודע או שזה פשוט קרה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אילוף לא חייב להיות רומנטי. הורים מאלפים ילדים (ולהפך). חברים מאלפים זה את זה. אפילו מורה יכול לאלף תלמיד. הסימן הוא שאחרי הקשר הזה, משהו בעולם השתנה עבורך - צבע, מקום, שיר - כי הוא מזכיר את האדם הזה.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>לבחור בכאב</h3>
+                            <p>השועל יודע שהנסיך יעזוב ושזה יכאב. בכל זאת הוא רוצה להיות מאולף - "בגלל צבע החיטה". האם הבחירה הזו הגיונית? האם היית בוחר קשר שאתה יודע שיסתיים בכאב?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על זה: כל קשר אנושי יסתיים - בפרידה או במוות. אם נחליט לא להתחבר כדי לא לכאוב, נחיה חיים ריקים. השועל אומר שהזיכרון, הצבע החדש שהעולם מקבל, שווה את הכאב. האם אתה מסכים?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>את מי הזנחת?</h3>
+                            <p>"אתה נעשה אחראי לנצח למה שאילפת." האחריות הזו היא לנצח - לא לזמן מוגבל. האם יש מישהו שאילפת ושאתה לא לוקח עליו אחריות? מישהו שעזבת, התרחקת ממנו, שכחת?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>זו שאלה קשה כי היא מאלצת אותנו להתמודד עם הכישלונות שלנו ביחסים. לא כל עזיבה היא הזנחה - לפעמים פרידה היא הדבר הנכון. אבל לפעמים אנחנו עוזבים כי זה קל יותר, לא כי זה נכון. מה ההבדל?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>לראות עם הלב</h3>
+                            <p>"רואים היטב רק עם הלב." בחר אדם שאתה מכיר וננסה לראות אותו "עם הלב" - לא את המראה החיצוני, לא את מה שהוא אומר, אלא את מה שמתחת. מה אתה רואה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>לראות עם הלב זה לשאול: מה האדם הזה מפחד ממנו? מה הוא באמת רוצה? מה כואב לו? מה משמח אותו? מה הוא לא אומר? לראות עם הלב זה לראות את מה שהאדם מסתיר, לא רק את מה שהוא מראה.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>הטקס לעומת הגמישות</h3>
+                            <p>השועל מבקש שהנסיך יבוא "תמיד באותה שעה" - טקס קבוע. אבל בחיים המודרניים, גמישות נחשבת לערך. מה עדיף: לוחות זמנים קבועים שיוצרים ציפייה, או גמישות שמאפשרת חופש?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אולי זה לא או/או. אולי צריך שניהם: טקסים מסוימים שהם קבועים ובלתי ניתנים לשינוי (ארוחת שישי, שיחה יומית), וגמישות בשאר. השאלה היא מה הופך משהו לטקס - מה מספיק חשוב כדי להיות קבוע?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-door-exit"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>מהו צבע החיטה שלך?</h3>
+                            <p>לשועל, צבע החיטה יזכיר את הנסיך לנצח. מה הדבר שמזכיר לך מישהו שאהבת? איזה צבע, ריח, שיר, מקום - משתנה לנצח כי הוא קשור לאדם מסוים?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>זה יכול להיות משהו קטן ויומיומי: ריח של קפה שמזכיר סבתא, שיר שמזכיר חבר ישן, צבע שמזכיר את הבית. הדברים האלה הם הוכחה שאילפנו ואולפנו - שהעולם שלנו השתנה בגלל מישהו אחר.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-20.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 20
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-22.html" class="book-nav-btn" id="nextChapter">
+                פרק 22
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 21 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    </div><!-- END page-wrapper -->
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with CSS only - no SVG
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = (Math.random() * 4 + 2) + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.background = '#FFD700';
+                star.style.borderRadius = '50%';
+                star.style.boxShadow = '0 0 6px 2px rgba(255, 215, 0, 0.6)';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation with directional slide animation
+        let currentTabIndex = 0;
+        const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+        
+        document.querySelectorAll('.nav-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                const newIndex = tabs.indexOf(sectionId);
+                const direction = newIndex > currentTabIndex ? 'slide-right' : 'slide-left';
+                
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.section').forEach(s => {
+                    s.classList.remove('active', 'slide-right', 'slide-left');
+                });
+                
+                const newSection = document.getElementById(sectionId);
+                newSection.classList.add('active', direction);
+                
+                currentTabIndex = newIndex;
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 21; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 21;
+        
+        function getBookmarks() {
+            try {
+                const stored = localStorage.getItem(BOOKMARKS_KEY);
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        
+        function saveBookmarks(bookmarks) {
+            try {
+                localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+            } catch (e) {
+                console.warn('Could not save bookmarks');
+            }
+        }
+        
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark');
+            if (!btn) return;
+            
+            const bookmarks = getBookmarks();
+            const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            
+            updateBookmarkButton(btn, isBookmarked);
+            
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks();
+                const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                
+                if (index > -1) {
+                    bookmarks.splice(index, 1);
+                    updateBookmarkButton(btn, false);
+                } else {
+                    bookmarks.push(CURRENT_CHAPTER);
+                    updateBookmarkButton(btn, true);
+                    btn.classList.add('just-bookmarked');
+                    setTimeout(() => btn.classList.remove('just-bookmarked'), 400);
+                }
+                
+                saveBookmarks(bookmarks);
+            });
+        }
+        
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) {
+                btn.classList.add('bookmarked');
+                icon.className = 'ti ti-heart-filled';
+                btn.title = 'הסר מהמועדפים';
+            } else {
+                btn.classList.remove('bookmarked');
+                icon.className = 'ti ti-heart';
+                btn.title = 'הוסף למועדפים';
+            }
+        }
+        
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

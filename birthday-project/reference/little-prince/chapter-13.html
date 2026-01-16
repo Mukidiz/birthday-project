@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 13 | איש העסקים</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Critical palette for The Businessman */
+            --primary: #CD5C5C;
+            --secondary: #A94442;
+            --accent: #8B3A3A;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND - CSS Only */
+        .stars-container { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 40%; 
+            pointer-events: none; 
+            z-index: 0; 
+        }
+        .star { 
+            position: absolute; 
+            color: #FFD700; 
+            opacity: 0.6; 
+            animation: twinkle 3s ease-in-out infinite; 
+            font-size: 12px;
+        }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: sway 4s ease-in-out infinite; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 800px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(205, 92, 92, 0.1), rgba(139, 58, 58, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* COUNTING DISPLAY */
+        .counting-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #CD5C5C, #A94442);
+            border-radius: 20px;
+            color: white;
+        }
+        .counting-number {
+            font-size: 3rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .counting-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .counting-items {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .counting-item {
+            font-size: 1.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        .counting-item:nth-child(2) { animation-delay: 0.1s; }
+        .counting-item:nth-child(3) { animation-delay: 0.2s; }
+        .counting-item:nth-child(4) { animation-delay: 0.3s; }
+        .counting-item:nth-child(5) { animation-delay: 0.4s; }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn { background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .home-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .chapter-bookmark-btn { background: white; border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - CSS Only Version -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-briefcase"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 13</p>
+        <p class="chapter-title">איש העסקים</p>
+        <span class="mood-badge"><i class="ti ti-calculator"></i> ספירה אינסופית</span>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>הכוכב הרביעי היה של איש עסקים. האיש הזה היה כל כך עסוק עד שאפילו לא הרים את ראשו כשהגיע הנסיך הקטן. זהו אחד הפרקים הארוכים יותר במסע בין הכוכבים, ואולי גם אחד הכואבים - כי בניגוד למלך, לשאפתן ולשיכור, איש העסקים נראה לכאורה הגיוני, יעיל, "נורמלי". וזה בדיוק מה שהופך אותו למפחיד כל כך.</p>
+                
+                <p>"חמש מאות אחד מיליון שש מאות עשרים ושניים אלף שבע מאות שלושים ואחד." כך קיבל איש העסקים את הנסיך - בלי להסתכל עליו, בלי לברך אותו, ממשיך לספור. "חמש מאות מיליון מה?" שאל הנסיך, שמעולם לא ויתר על שאלה ברגע שהתחיל לשאול אותה.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"אני רציני, אני, אין לי זמן לזבובים."<br><br>"מה אתה עושה עם הכוכבים האלה?"<br>"מה אני עושה איתם?"<br>"כן."<br>"כלום. אני מחזיק בהם."<br>"אתה מחזיק בכוכבים?"<br>"כן."<br>"אבל ראיתי מלך ש-"<br>"מלכים לא מחזיקים. הם 'מושלים'. זה שונה לגמרי."</p>
+                    <p class="quote-analysis">כאן נחשף הפער העצום בין "להחזיק" לבין "להתקשר". איש העסקים מחזיק בכוכבים באותו אופן שמחזיקים במניות או בנכסים - כנתון במאזן, כמספר בספר חשבונות. הוא לא מסתכל עליהם, לא נהנה מהם, לא מתקשר אליהם. הם שלו כי הוא החליט שהם שלו.</p>
+                </div>
+                
+                <div class="counting-display">
+                    <div class="counting-number">501,622,731</div>
+                    <div class="counting-label">כוכבים שאיש העסקים "מחזיק"</div>
+                    <div class="counting-items">
+                        <span class="counting-item">⭐</span>
+                        <span class="counting-item">⭐</span>
+                        <span class="counting-item">⭐</span>
+                        <span class="counting-item">⭐</span>
+                        <span class="counting-item">⭐</span>
+                    </div>
+                </div>
+
+                <p>איש העסקים הסביר את עצמו בסבלנות מפתיעה. הוא היה הראשון שגילה את הכוכבים לפני הרבה שנים, וכיוון שאף אחד לפניו לא תבע אותם, הם שלו. כמו שמי שמוצא יהלום ללא בעלים יכול לקחת אותו. הוא סופר אותם, רושם את המספר על פתק קטן, ומכניס את הפתק למגירה ונועל אותה.</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"ולמה זה מועיל שתחזיק בכוכבים?"<br>"זה עושה אותי עשיר."<br>"ולמה זה מועיל להיות עשיר?"<br>"כדי לקנות כוכבים אחרים, אם מישהו ימצא."</p>
+                    <p class="quote-analysis">והנה המעגל הסגור של איש העסקים - שונה מזה של השיכור אבל לא פחות אבסורדי. הוא סופר כוכבים כדי להיות עשיר, כדי שיוכל לקנות עוד כוכבים, כדי להיות עוד יותר עשיר. זו אינסופיות בלי מטרה, צמיחה בלי כיוון, הצטברות בלי משמעות.</p>
+                </div>
+
+                <p>הנסיך הקטן השווה את איש העסקים לאדם אחר שפגש: "זה בדיוק כמו ההיגיון של השיכור." אבל זו אמירה מכובסת. מה שהנסיך באמת מנסה להגיד הוא שאיש העסקים, למרות ה"רצינות" שלו, למרות הלוגיקה המסודרת, לכוד באותו סוג של אבסורד - פעילות שנראית הגיונית אבל לא מובילה לשום מקום.</p>
+
+                <h3>מה קורה מתחת לפני השטח</h3>
+                
+                <p>הנסיך מציג לאיש העסקים אלטרנטיבה: בעלות שמבוססת על קשר, על אחריות, על נתינה. "אני מחזיק בפרח ששותה אותו כל בוקר. אני מחזיק בהרי געש שמנקה אותם כל שבוע. אני שימושי עבורם." זו תפיסת בעלות הפוכה לחלוטין - לא "מה שלי משרת אותי" אלא "אני משרת את מה ששלי".</p>
+
+                <div class="character-grid">
+                    <div class="character-card">
+                        <i class="ti ti-briefcase"></i>
+                        <h3>איש העסקים</h3>
+                        <p>אדם עסוק מדי להרים את הראש. הוא ספר, מנהל, בעל נכסים - אבל הוא לא חי. הוא קיים בתוך חישובים, בתוך מספרים, בתוך רישומים. הוא לא מסתכל על הכוכבים; הוא רק סופר אותם.</p>
+                        <p class="symbolic-role">מייצג את התרבות שמודדת הצלחה בכמות ולא באיכות</p>
+                    </div>
+                    <div class="character-card">
+                        <i class="ti ti-flower"></i>
+                        <h3>הנסיך וההשוואה</h3>
+                        <p>הנסיך מביא את עצמו כדוגמה נגדית. הוא "מחזיק" בפרח אחד ובשלושה הרי געש - אבל הבעלות שלו מבוססת על טיפול, על קשר, על זמן ותשומת לב. הוא עשיר בדרך אחרת לגמרי.</p>
+                        <p class="symbolic-role">מייצג בעלות שמבוססת על קשר ולא על שליטה</p>
+                    </div>
+                </div>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>יש משהו מטריד במיוחד באיש העסקים: הוא נראה נורמלי. המלך היה גרוטסקי, השאפתן מגוחך, השיכור טרגי - אבל איש העסקים? הוא עובד קשה, מסודר, רציני. הוא מזכיר לנו אנשים שאנחנו מכירים. הוא מזכיר לנו את עצמנו.</p>
+                        
+                        <p>איש העסקים הוא הביקורת הכי חדה של סן-אכזופרי על העולם המודרני. לא על עריצות (המלך), לא על יהירות (השאפתן), לא על התמכרות (השיכור) - אלא על משהו הרבה יותר נפוץ ומקובל: על צבירה בשם צבירה, על עיסוק בשם עיסוק, על "להיות עסוק" כערך בפני עצמו.</p>
+                        
+                        <p>שאלה קשה: כמה שעות ביום אנחנו "סופרים כוכבים"? כמה מהעיסוקים שלנו באמת מועילים למשהו, ולמישהו - כולל לנו עצמנו? וכמה מהם הם פשוט ספירה - מיילים, לייקים, פולואורים, שקלים בחשבון - שנותנת לנו את ההרגשה שאנחנו עושים משהו, בלי שנעשה כלום באמת?</p>
+                        
+                        <p>הנסיך עוזב את איש העסקים עם משפט שוקט אבל הרסני: "המבוגרים באמת יוצאי דופן לגמרי." והוא ממשיך במסע שלו - כי אי אפשר לעזור למי שלא מרים את הראש, למי שלא מסתכל, למי שעסוק מדי לראות שהוא מפסיד את הכל.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <i class="ti ti-stars"></i>
+                        <h3>הכוכבים הנספרים</h3>
+                        <p>מיליונים של כוכבים שהפכו למספר על פתק</p>
+                        <div class="deep-meaning">
+                            <p>הכוכבים הם סמל קלאסי ליופי, לחלום, לאינסוף. ילדים מביטים בכוכבים ומתפעלים; מאוהבים נודרים נדרים לאור כוכבים; ימאים מתמצאים לאורם. כוכבים הם משהו שמזמין אותנו להרים את הראש, לחלום, להתפלא.</p>
+                            <p>איש העסקים עשה משהו מפלצתי: הוא הפך כוכבים למספרים. הוא לקח את האינסוף והכניס אותו לגיליון אלקטרוני. הוא לא מסתכל על הכוכבים - הוא סופר אותם. זה לא שהוא לא רואה את היופי; הוא לא יודע שיש שם יופי לראות.</p>
+                            <p><strong>קשר לחיים:</strong> כמה דברים יפים הפכנו למספרים? כמה חוויות מדדנו במקום לחוות? "כמה לייקים קיבלת?" "כמה כסף הרווחת?" "כמה מדינות ביקרת?" - לפעמים הספירה מחליפה את החוויה.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-calculator"></i>
+                        <h3>הספירה האינסופית</h3>
+                        <p>פעולה שחוזרת על עצמה בלי מטרה</p>
+                        <div class="deep-meaning">
+                            <p>איש העסקים סופר ומונה, שוב ושוב. ברגע שהוא מסיים, הוא צריך לספור שוב - כי מה אם טעה? הספירה היא פעילות אינסופית שמילאה את כל חייו.</p>
+                            <p>הספירה נותנת לו משהו: תחושה של שליטה, של סדר, של "עשייה". כשאתה סופר, אתה עסוק. כשאתה עסוק, אתה לא צריך לשאול שאלות קשות כמו "למה?" או "לשם מה?".</p>
+                            <p>זהו מנגנון הגנה מתוחכם: העיסוק כבריחה. לא בריחה לתוך בקבוק כמו השיכור, אלא בריחה לתוך גיליון אקסל. יותר מקובל חברתית, אבל לא פחות בעייתי.</p>
+                            <p><strong>קשר לפרק 12:</strong> גם השיכור וגם איש העסקים נמצאים במעגל סגור. אבל השיכור לפחות מודע לכך שהוא בורח ממשהו. איש העסקים חושב שהוא עושה משהו חשוב.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-lock"></i>
+                        <h3>המגירה הנעולה</h3>
+                        <p>המקום שבו "נשמרים" הכוכבים</p>
+                        <div class="deep-meaning">
+                            <p>איש העסקים כותב את מספר הכוכבים על פתק, מכניס למגירה, ונועל. זו "הבעלות" שלו - פתק בתוך מגירה נעולה. הכוכבים עצמם? הם עדיין שם, בשמיים, לא יודעים ולא אכפת להם מהפתק.</p>
+                            <p>המגירה הנעולה מסמלת אשליית השליטה. אנחנו חושבים שאם יש לנו מסמך, חוזה, רישום - אז הדבר "שלנו". אבל מה זה אומר? הכוכבים לא השתנו. השמיים לא השתנו. רק איש העסקים השתנה - הוא מרגיש "עשיר".</p>
+                            <p><strong>קשר לחיים:</strong> כמה מהנכסים שלנו הם באמת "שלנו"? הבית שאנחנו "מחזיקים" שייך גם לבנק ולעירייה ולמדינה. הכסף בחשבון הוא מספרים במחשב. מה באמת שלנו? אולי רק מה שאנחנו נותנים.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-clock-x"></i>
+                        <h3>"אין לי זמן"</h3>
+                        <p>התירוץ האולטימטיבי של המבוגרים</p>
+                        <div class="deep-meaning">
+                            <p>"אני רציני, אין לי זמן לזבובים." איש העסקים לא יכול אפילו להרים את הראש לרגע. הוא כל כך עסוק בספירה שאין לו זמן לחיים - לשיחה, ליופי, לילד שעומד לפניו ושואל שאלות.</p>
+                            <p>"אין לי זמן" היא אמירה מעניינת. לכולנו יש בדיוק אותו כמות של זמן - 24 שעות ביום. השאלה היא לא כמה זמן יש לנו, אלא למה אנחנו בוחרים להקדיש אותו.</p>
+                            <p>איש העסקים בחר להקדיש את כל זמנו לספירה - פעולה שלא מועילה לאף אחד, כולל לו. הוא "עסוק", אבל הוא לא "עושה". הוא ממלא את הזמן, אבל לא חי אותו.</p>
+                            <p><strong>שאלה:</strong> כמה פעמים אמרת "אין לי זמן" השבוע? לאיזה דברים? ולאיזה דברים כן מצאת זמן?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-flower"></i>
+                        <h3>הפרח ששותים אותו</h3>
+                        <p>הבעלות של הנסיך - האלטרנטיבה</p>
+                        <div class="deep-meaning">
+                            <p>הנסיך מציג מודל אחר של "בעלות": הוא מחזיק בפרח כי הוא משקה אותו. הוא מחזיק בהרי געש כי הוא מנקה אותם. הבעלות שלו מבוססת על נתינה, לא על לקיחה.</p>
+                            <p>זו הפיכה מהפכנית של הרעיון: לא "מה הדבר הזה נותן לי?" אלא "מה אני נותן לדבר הזה?". לא "מה אני מרוויח מהקשר?" אלא "מה אני תורם לקשר?".</p>
+                            <p>הפרח זקוק לנסיך - והנסיך זקוק לפרח. זהו קשר דו-כיווני, תלות הדדית מבורכת. איש העסקים, לעומת זאת, לא זקוק לכוכבים והכוכבים לא זקוקים לו. אין קשר, אין משמעות.</p>
+                            <p><strong>קשר לפרק 8:</strong> הוורד, למרות כל הקשיים, נתן לנסיך משהו - ודרש ממנו משהו. הקשר הזה, המורכב והכואב, הוא מה שעושה את הוורד "שלו" באמת.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>הגעה לכוכב הרביעי</h3>
+                        <p>הנסיך מגיע ומוצא אדם רכון על שולחן, ממלמל מספרים. אין ברכה, אין מבט, אין הכרה בנוכחות האורח. רק ספירה בלתי פוסקת.</p>
+                        <span class="emotion-tag">בלבול</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הפרעה ראשונה</h3>
+                        <p>"מה אתה סופר?" - הנסיך שואל, מפריע לספירה. איש העסקים רק רוצה שיעזבו אותו במנוחה. יש כאן התנגשות בין סקרנות ילדותית לבין עיסוק "מבוגר".</p>
+                        <span class="emotion-tag">התנגדות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>גילוי הכוכבים</h3>
+                        <p>הנסיך מבין שאיש העסקים סופר כוכבים - וטוען שהם שלו. יש כאן רגע של הפתעה, אולי אפילו התרגשות. אבל מה עושים עם כל הכוכבים האלה?</p>
+                        <span class="emotion-tag">סקרנות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>השאלות הקשות</h3>
+                        <p>"למה זה מועיל?" - הנסיך דוחף, שוב ושוב. איש העסקים מנסה להסביר, אבל ההסברים מתפרקים. עשיר → לקנות עוד כוכבים → עוד יותר עשיר → לקנות עוד...</p>
+                        <span class="emotion-tag">חשיפה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>ההשוואה לשיכור</h3>
+                        <p>הנסיך מזהה את המעגל הסגור - "זה כמו ההיגיון של השיכור". הוא רואה את הדמיון בין שתי צורות הבריחה, למרות ההבדלים החיצוניים.</p>
+                        <span class="emotion-tag">הבנה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הצגת האלטרנטיבה</h3>
+                        <p>הנסיך מספר על הפרח שלו, על הרי הגעש. הוא מציג בעלות אחרת - מבוססת על טיפול ואחריות. איש העסקים לא מגיב; הוא אפילו לא מקשיב באמת.</p>
+                        <span class="emotion-tag">ניסיון</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>עזיבה</h3>
+                        <p>הנסיך עוזב, שוב עם הערה על "מבוגרים מוזרים". הוא לא כועס, לא עצוב כמו אצל השיכור - יותר מבולבל, מתוסכל. אי אפשר להגיע לאדם שלא מוכן להרים את הראש.</p>
+                        <span class="emotion-tag">תסכול שקט</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>יש כאן משהו שונה מהפרקים הקודמים. הנסיך לא רחם על איש העסקים כמו שרחם על השיכור. למה? אולי כי איש העסקים לא סובל - הוא מרוצה מעצמו, שקוע בעבודתו, חושב שהוא עושה משהו חשוב. אין פה כאב גלוי לרחם עליו.</p>
+                    <p>אבל אולי יש כאן רגש אחר: הכרה מטרידה. הנסיך עצמו ברח מהכוכב שלו, מהפרח שלו. הוא נודד בין כוכבים במקום לטפל במה שבאמת שלו. האם הוא לא גם "מחזיק" במשהו בלי לתת לו את מה שהוא צריך?</p>
+                    <p>ואולי יש גם כעס שלא בא לידי ביטוי - כעס על עולם שמעריך "עיסוק" ו"בעלות" יותר מקשר ומשמעות. כעס על מבוגרים שלימדו אותנו לספור במקום להסתכל, למדוד במקום לחוות.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>עבודה כהתמכרות</h3>
+                    <p>בפסיכולוגיה מודרנית מכירים ב"וורקוהוליזם" - התמכרות לעבודה. זו התמכרות מיוחדת כי החברה מעודדת אותה. "עובד קשה" נחשב מחמאה, לא תיאור של בעיה.</p>
+                    <p>איש העסקים מציג את כל הסימנים: חוסר יכולת להפסיק ("אין לי זמן"), הזנחת יחסים (לא מסתכל על הנסיך), אובססיביות (סופר שוב ושוב), והעדר הנאה מהפעולה עצמה (הוא לא נהנה מהכוכבים, רק סופר אותם).</p>
+                    <p>ההבדל מהתמכרויות אחרות: איש העסקים מקבל חיזוק חברתי. הוא "רציני", "עסוק", "מצליח". אף אחד לא יגיד לו שיש לו בעיה - חוץ מילד קטן שמגיע מכוכב אחר ושואל שאלות תמימות.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>בריחה מחופש אל עיסוק</h3>
+                    <p>סארטר וקאמי כתבו על האבסורד - על חיים ללא משמעות מובנית. התגובות לאבסורד שונות: אפשר לקבל אותו, אפשר למרוד בו, אפשר ליצור משמעות משלך. ואפשר גם לברוח ממנו.</p>
+                    <p>איש העסקים בורח אל העיסוק. כל עוד הוא סופר, הוא לא צריך לשאול "למה?". כל עוד יש לו משימה, הוא לא צריך להתמודד עם השאלה הגדולה של מה הטעם בכל זה. הספירה נותנת לו תחושה של תכלית, גם אם התכלית עצמה ריקה.</p>
+                    <p>זו מה שהפילוסופים קוראים "bad faith" (אמונה רעה) - הונאה עצמית שמאפשרת לנו להתחמק מהחירות ומהאחריות שלנו. איש העסקים משכנע את עצמו שהוא חייב לספור, שזה חשוב, שזו "עבודה". אבל הוא בחר בזה, והוא יכול לבחור אחרת.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>סן-אכזופרי והקפיטליזם</h3>
+                    <p>סן-אכזופרי היה אריסטוקרט שחי בעידן של קפיטליזם מתפתח, בין שתי מלחמות עולם. הוא ראה את הערכים הישנים - כבוד, אחריות, יחסי אדון-עבד (במובן הפיאודלי) - מתפוררים ומוחלפים ביחסי קונה-מוכר, בהערכה על פי עושר.</p>
+                    <p>איש העסקים מייצג את העולם החדש הזה: עולם שבו הערך של דבר נמדד במחירו, בו יחסים הם עסקאות, בו "להחזיק" זה לרשום במאזן. סן-אכזופרי לא היה סוציאליסט או קומוניסט - אבל הוא היה ביקורתי עמוקות כלפי תרבות של צריכה וצבירה.</p>
+                    <p>הטייסים, האנשים שהעריץ, היו ההיפך מאנשי עסקים: הם לא צברו, הם סיכנו. הם לא החזיקו, הם נתנו. הם לא ספרו כוכבים - הם ניווטו לאורם.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>עבודת אלילים מודרנית</h3>
+                    <p>במסורות רוחניות רבות, עבודת אלילים היא לא בהכרח פסלים וקורבנות - היא כל דבר שאנחנו שמים במקום האלוהי, כל דבר שאנחנו עובדים כאילו הוא המשמעות העליונה.</p>
+                    <p>איש העסקים עובד את הספירה, את המספרים, את הבעלות. הוא נותן להם את כל הזמן שלו, את כל תשומת הלב שלו, את כל המשמעות שלו. הכוכבים - שבמסורות רבות מייצגים את האלוהי, את האינסוף, את היופי שמעבר - הפכו אצלו לנתונים בטבלה.</p>
+                    <p>הטרגדיה הרוחנית: הכוכבים עדיין שם, מנצנצים, יפים, מזמינים להרים אליהם מבט. אבל איש העסקים רכון על השולחן, סופר, רושם, נועל במגירה. הקדושה נמצאת ממש מול העיניים שלו - אבל הוא עסוק מדי לראות אותה.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים קודמים:</p>
+                        <p>ארבעת הכוכבים הראשונים מציגים ארבע צורות של בריחה מבוגרת: המלך בורח אל שליטה מדומה, השאפתן אל הערצה מדומה, השיכור אל שכחה מדומה, ואיש העסקים אל בעלות מדומה. כולם מנסים להרגיש משמעותיים באמצעים שלא עובדים.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים הבאים:</p>
+                        <p>בפרק 14 נפגוש את מדליק הפנסים - הראשון שאיש העסקים היה יכול להיות חבר שלו, לפי הנסיך. ההבדל: מדליק הפנסים עושה משהו בשביל אחרים (מאיר להם), לא רק בשביל עצמו. העיסוק שלו יש לו תכלית מעבר לעצמו.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-calculator"></i>
+                        "אני סופר אותם ושוב סופר אותם. זו עבודה קשה. אבל אני אדם רציני."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>איש העסקים "מחזיק" ב-500 מיליון כוכבים, אבל אין לו כלום. הנסיך "מחזיק" רק בפרח אחד ושלושה הרי געש, אבל הוא עשיר באמת. מה ההבדל? הנסיך מחזיק במה שהוא נותן לו. איש העסקים מחזיק במה שאף פעם לא יוכל לקבל ממנו. מי מהם באמת "בעל"?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>הפרק הזה נוגע במשהו מאוד עכשווי - בתרבות של עיסוק, של "להיות עסוק" כערך, של למדוד הכל במספרים. השאלות הבאות מזמינות אותך לבדוק מה אתה סופר בחייך, ומה אתה מפסיד בזמן הספירה.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-calculator"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>מה אתה סופר?</h3>
+                            <p>כולנו סופרים משהו - לייקים, פולואורים, כסף בחשבון, קילומטרים של ריצה, שעות עבודה, ימים עד החופשה. מה אתה סופר? ומה הספירה הזו נותנת לך - באמת?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>נסה לחשוב על הדבר האחרון שבדקת "כמה" ממנו יש לך. כמה הודעות לא נקראו, כמה כסף בחשבון, כמה צעדים היום. עכשיו שאל: האם הידיעה הזו שינתה משהו? האם אתה מרגיש אחרת אחרי שאתה יודע את המספר?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>הבעלות שלא נותנת כלום</h3>
+                            <p>איש העסקים "מחזיק" ב-500 מיליון כוכבים. מה זה נותן לו? הוא לא יכול לגעת בהם, ליהנות מהם, לחלוק אותם עם מישהו. הוא רק יודע שהם "שלו". האם יש דברים שאתה "מחזיק" בהם אבל לא ממש נהנה מהם? בגדים בארון, ספרים שלא נקראו, אפליקציות בטלפון?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>עשה סיור קצר בחדר שלך או בטלפון שלך. כמה דברים יש לך שלא השתמשת בהם בחודש האחרון? בשנה האחרונה? מה גרם לך להחזיק אותם? מה היית מרגיש אם היו נעלמים?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>"אין לי זמן"</h3>
+                            <p>איש העסקים אמר "אין לי זמן לזבובים" - לדברים שנראים לו לא חשובים. כמה פעמים אמרת "אין לי זמן" השבוע? למה אמרת את זה? ואם היית מסתכל על היומן שלך, האם באמת "אין לך זמן" - או שאתה בוחר להשקיע את הזמן במקום אחר?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>המשפט "אין לי זמן" הוא כמעט תמיד לא מדויק. יותר מדויק לומר "זו לא בעדיפות מספיק גבוהה בשבילי". נסה להחליף "אין לי זמן ל-X" ב"אני בוחר להשקיע את הזמן שלי במקום אחר ולא ב-X". איך זה מרגיש?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>מה אתה נותן למה ש"שלך"?</h3>
+                            <p>הנסיך אמר שהוא "מחזיק" בפרח כי הוא משקה אותו, ובהרי געש כי הוא מנקה אותם. הבעלות שלו מבוססת על מה שהוא נותן, לא על מה שהוא לוקח. חשוב על משהו שאתה אומר שהוא "שלך" - מערכת יחסים, תחום עניין, חפץ. מה אתה נותן לו?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>נסה לחשוב על חברות קרובה. מה אתה "נותן" לה - זמן, תשומת לב, תמיכה? ועכשיו חשוב על משהו שאתה אומר שאתה "אוהב" אבל לא ממש משקיע בו - תחביב ישן, חלום שנשכח. מה ההבדל?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>עיסוק או משמעות?</h3>
+                            <p>איש העסקים עסוק מאוד - אבל העיסוק שלו ריק ממשמעות. מצד שני, יש אנשים שחייהם מלאי משמעות אבל הם "לא עושים כלום" במובן המסורתי. מה עדיף? האם אפשר להיות גם עסוק וגם בעל משמעות? איך יודעים ההבדל?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על יום "עמוס" שעבר עליך - מה נשאר ממנו אחרי שבוע? חודש? ועכשיו חשוב על רגע שלא היית "עסוק" בכלל - שיחה עם חבר, שקיעה שראית, ספר שקראת. מה נשאר ממנו? לפעמים הרגעים הכי "ריקים" הם הכי מלאים.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-eye"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>להרים את הראש</h3>
+                            <p>איש העסקים אף פעם לא הרים את הראש - לא כדי להסתכל על הכוכבים שהוא "מחזיק", ולא כדי להסתכל על הילד שעמד מולו. מה אתה מפסיד כשהראש רכון? מתי בפעם האחרונה הסתכלת למעלה, באמת הסתכלת, על שמיים או עצים או פנים של מישהו?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>אתגר קטן: היום, בדרך לאיפשהו, הרם את הראש מהטלפון לדקה אחת. הסתכל על השמיים, על הבניינים, על הפנים של אנשים. מה אתה רואה? מה פספסת עד עכשיו?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-12.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 12
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-14.html" class="book-nav-btn" id="nextChapter">
+                פרק 14
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 13 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - CSS Stars Version (No SVG) -->
+    <script>
+        // Create stars using icons instead of SVG
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElement('i');
+                star.className = 'ti ti-star-filled star';
+                const size = (Math.random() * 10 + 8) + 'px';
+                star.style.fontSize = size;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 13; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 13;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 פספוסים - מאחורי הקלעים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            --text-light: #f0e6d3;
+            --accent-gold: #ffd700;
+            --accent-red: #ff6b6b;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-light);
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent-gold);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+        
+        .blooper-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px dashed var(--accent-red);
+            transition: transform 0.3s ease;
+        }
+        
+        .blooper-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .blooper-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .version-badge {
+            background: var(--accent-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .blooper-card h2 {
+            color: var(--accent-gold);
+            font-size: 1.4rem;
+        }
+        
+        .problems {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .problems li {
+            padding: 8px 0;
+            padding-right: 25px;
+            position: relative;
+        }
+        
+        .problems li::before {
+            content: "❌";
+            position: absolute;
+            right: 0;
+        }
+        
+        .blooper-link {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: #1a1a2e;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .blooper-link:hover {
+            transform: scale(1.05);
+        }
+        
+        .final-note {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+        
+        .final-note h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+        
+        .emoji-big {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji-big" style="text-align: center;">🎬</div>
+        <h1>פספוסים - מאחורי הקלעים</h1>
+        <p class="subtitle">כל הניסיונות הכושלים ליצור את הדמויות שלנו</p>
+        
+        <!-- V1 -->
+        <div class="blooper-card">
+            <div class="blooper-header">
+                <span class="version-badge">V1</span>
+                <h2>הניסיון הראשון</h2>
+            </div>
+            <ul class="problems">
+                <li>דמויות מסובכות מדי</li>
+                <li>זקנים ענקיים לשנינו</li>
+                <li>גל בחולצה כחולה?!</li>
+                <li>בכלל לא דומים לנו</li>
+            </ul>
+            <a href="character-demo-v1.html" class="blooper-link">👀 לצפייה בפספוס</a>
+        </div>
+        
+        <!-- V2 -->
+        <div class="blooper-card">
+            <div class="blooper-header">
+                <span class="version-badge">V2</span>
+                <h2>יותר מדי פרטים</h2>
+            </div>
+            <ul class="problems">
+                <li>ניסיתי לצייר לפי תיאור מפורט מאוד</li>
+                <li>הוספתי עגיל בגבה לבן, עגיל באוזן לגל</li>
+                <li>זקנים עדיין ענקיים</li>
+                <li>עדיין מסובך מדי</li>
+            </ul>
+            <a href="character-demo-v2.html" class="blooper-link">👀 לצפייה בפספוס</a>
+        </div>
+        
+        <!-- V3 -->
+        <div class="blooper-card">
+            <div class="blooper-header">
+                <span class="version-badge">V3</span>
+                <h2>ראש מרובע?!</h2>
+            </div>
+            <ul class="problems">
+                <li>הורדתי את הזקנים</li>
+                <li>עשיתי לגל ראש מרובע</li>
+                <li>שיער מוזר</li>
+                <li>עדיין לא עבד</li>
+            </ul>
+            <a href="character-demo-v3.html" class="blooper-link">👀 לצפייה בפספוס</a>
+        </div>
+        
+        <div class="final-note">
+            <h3>✨ ואז הגיע V4!</h3>
+            <p>
+                אחרי 3 ניסיונות כושלים, הבנו שהפתרון הוא פשטות.<br>
+                במקום לנסות לצייר את כל הפרטים - פשוט שיער שחור מול חום, עיניים חומות מול ירוקות.<br>
+                וזהו! 💕
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Character Demo V4 - Simple Little Prince Style</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(180deg, #98D8C8 0%, #FDF8EE 40%, #F5E6C8 100%);
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --text-primary: #5D4E37;
+            --accent: #5FBAA8;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            opacity: 0.7;
+        }
+        
+        .characters-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 80px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .character-box {
+            text-align: center;
+        }
+        
+        .character-box h2 {
+            margin-top: 15px;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+        
+        .character-box p {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+        
+        .scene-box {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .scene-box h2 {
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+        
+        .note {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+            background: rgba(255,255,255,0.5);
+            border-radius: 15px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating { animation: float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body>
+    <!-- Stars -->
+    <svg class="stars-container" viewBox="0 0 100 50" preserveAspectRatio="xMidYMid slice">
+        <circle cx="10" cy="8" r="0.5" fill="#FFD700" opacity="0.6"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+        <circle cx="25" cy="15" r="0.4" fill="#FFD700" opacity="0.5"><animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="45" cy="5" r="0.5" fill="#FFD700" opacity="0.7"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/></circle>
+        <circle cx="70" cy="12" r="0.4" fill="#FFD700" opacity="0.6"><animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/></circle>
+        <circle cx="85" cy="8" r="0.5" fill="#FFD700" opacity="0.5"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.8s" repeatCount="indefinite"/></circle>
+        <circle cx="55" cy="20" r="0.3" fill="#FFD700" opacity="0.4"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/></circle>
+    </svg>
+    
+    <div class="container">
+        <h1>הדגמת דמויות - סגנון הנסיך הקטן</h1>
+        <p class="subtitle">פשוט ומינימליסטי | ההבדל: צבע שיער ועיניים</p>
+        
+        <!-- Characters Side by Side -->
+        <div class="characters-row">
+            
+            <!-- GAL - Black hair, Brown eyes -->
+            <div class="character-box">
+                <svg width="150" height="200" viewBox="0 0 150 200">
+                    <defs>
+                        <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFE4B5"/>
+                            <stop offset="100%" style="stop-color:#F5D5B5"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Simple body -->
+                    <rect x="55" y="130" width="40" height="50" rx="8" fill="#5D4E37"/>
+                    
+                    <!-- Neck -->
+                    <rect x="67" y="115" width="16" height="20" fill="url(#skin)"/>
+                    
+                    <!-- Head - simple circle -->
+                    <circle cx="75" cy="75" r="40" fill="url(#skin)"/>
+                    
+                    <!-- Hair - BLACK - simple shape on top -->
+                    <ellipse cx="75" cy="50" rx="35" ry="22" fill="#1a1a1a"/>
+                    <path d="M40 65 Q45 40 75 35 Q105 40 110 65" fill="#1a1a1a"/>
+                    
+                    <!-- Eyes - BROWN - simple dots -->
+                    <circle cx="60" cy="75" r="5" fill="white"/>
+                    <circle cx="90" cy="75" r="5" fill="white"/>
+                    <circle cx="60" cy="76" r="3" fill="#5D4037"/>
+                    <circle cx="90" cy="76" r="3" fill="#5D4037"/>
+                    <circle cx="61" cy="75" r="1" fill="white" opacity="0.8"/>
+                    <circle cx="91" cy="75" r="1" fill="white" opacity="0.8"/>
+                    
+                    <!-- Simple nose - just a small line -->
+                    <path d="M75 80 L75 90" stroke="#D4A88A" stroke-width="2" stroke-linecap="round"/>
+                    
+                    <!-- Simple smile -->
+                    <path d="M65 100 Q75 108 85 100" stroke="#C4846C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Ears -->
+                    <ellipse cx="35" cy="75" rx="5" ry="8" fill="url(#skin)"/>
+                    <ellipse cx="115" cy="75" rx="5" ry="8" fill="url(#skin)"/>
+                </svg>
+                <h2>גל</h2>
+                <p>שיער שחור • עיניים חומות</p>
+            </div>
+            
+            <!-- BEN - Brown hair, Green eyes -->
+            <div class="character-box">
+                <svg width="150" height="200" viewBox="0 0 150 200">
+                    <!-- Simple body -->
+                    <rect x="55" y="130" width="40" height="50" rx="8" fill="#7A6B55"/>
+                    
+                    <!-- Neck -->
+                    <rect x="67" y="115" width="16" height="20" fill="url(#skin)"/>
+                    
+                    <!-- Head - simple circle -->
+                    <circle cx="75" cy="75" r="40" fill="url(#skin)"/>
+                    
+                    <!-- Hair - BROWN - simple shape on top -->
+                    <ellipse cx="75" cy="50" rx="35" ry="22" fill="#6B4423"/>
+                    <path d="M40 65 Q45 40 75 35 Q105 40 110 65" fill="#6B4423"/>
+                    
+                    <!-- Eyes - GREEN - simple dots -->
+                    <circle cx="60" cy="75" r="5" fill="white"/>
+                    <circle cx="90" cy="75" r="5" fill="white"/>
+                    <circle cx="60" cy="76" r="3" fill="#4A8B5C"/>
+                    <circle cx="90" cy="76" r="3" fill="#4A8B5C"/>
+                    <circle cx="61" cy="75" r="1" fill="white" opacity="0.8"/>
+                    <circle cx="91" cy="75" r="1" fill="white" opacity="0.8"/>
+                    
+                    <!-- Simple nose -->
+                    <path d="M75 80 L75 90" stroke="#D4A88A" stroke-width="2" stroke-linecap="round"/>
+                    
+                    <!-- Bigger smile for Ben -->
+                    <path d="M62 100 Q75 112 88 100" stroke="#C4846C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Ears -->
+                    <ellipse cx="35" cy="75" rx="5" ry="8" fill="url(#skin)"/>
+                    <ellipse cx="115" cy="75" rx="5" ry="8" fill="url(#skin)"/>
+                </svg>
+                <h2>בן</h2>
+                <p>שיער חום • עיניים ירוקות</p>
+            </div>
+        </div>
+        
+        <!-- Spaceship Scene -->
+        <div class="scene-box">
+            <h2>החללית עם שנינו</h2>
+            <svg class="floating" width="400" height="220" viewBox="0 0 400 220">
+                <defs>
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6D3"/>
+                        <stop offset="100%" style="stop-color:#E8D4C0"/>
+                    </linearGradient>
+                    <linearGradient id="windowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7EB8DA"/>
+                        <stop offset="100%" style="stop-color:#5A9BC7"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Small stars -->
+                <circle cx="30" cy="30" r="2" fill="#FFD700" opacity="0.7"/>
+                <circle cx="370" cy="40" r="1.5" fill="#FFD700" opacity="0.6"/>
+                <circle cx="50" cy="180" r="1.5" fill="#FFD700" opacity="0.5"/>
+                <circle cx="350" cy="170" r="2" fill="#FFD700" opacity="0.6"/>
+                
+                <!-- Spaceship body - simple ellipse -->
+                <ellipse cx="200" cy="110" rx="100" ry="45" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                
+                <!-- Dome -->
+                <ellipse cx="200" cy="80" rx="60" ry="30" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                
+                <!-- Heart window -->
+                <path d="M200 60 C200 50, 185 45, 175 55 C165 65, 165 80, 200 100 C235 80, 235 65, 225 55 C215 45, 200 50, 200 60" 
+                      fill="url(#windowBlue)" stroke="#4A90A4" stroke-width="2"/>
+                
+                <!-- GAL inside (black hair) - left -->
+                <circle cx="185" cy="75" r="10" fill="#1a1a1a"/>
+                <circle cx="185" cy="82" r="6" fill="#FFE4B5"/>
+                <circle cx="183" cy="81" r="1.5" fill="#5D4037"/>
+                <circle cx="187" cy="81" r="1.5" fill="#5D4037"/>
+                
+                <!-- BEN inside (brown hair) - right -->
+                <circle cx="215" cy="75" r="10" fill="#6B4423"/>
+                <circle cx="215" cy="82" r="6" fill="#FFE4B5"/>
+                <circle cx="213" cy="81" r="1.5" fill="#4A8B5C"/>
+                <circle cx="217" cy="81" r="1.5" fill="#4A8B5C"/>
+                
+                <!-- Wings -->
+                <path d="M100 110 L60 140 L60 150 L105 125" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                <path d="M300 110 L340 140 L340 150 L295 125" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                
+                <!-- Flames - simple -->
+                <ellipse cx="170" cy="165" rx="8" ry="15" fill="#FFD700" opacity="0.8"/>
+                <ellipse cx="200" cy="170" rx="10" ry="20" fill="#FFD700" opacity="0.8"/>
+                <ellipse cx="230" cy="165" rx="8" ry="15" fill="#FFD700" opacity="0.8"/>
+                <ellipse cx="170" cy="170" rx="5" ry="10" fill="#FF9966"/>
+                <ellipse cx="200" cy="175" rx="6" ry="12" fill="#FF9966"/>
+                <ellipse cx="230" cy="170" rx="5" ry="10" fill="#FF9966"/>
+                
+                <!-- Flag -->
+                <line x1="200" y1="50" x2="200" y2="25" stroke="#C4A080" stroke-width="2"/>
+                <polygon points="200,25 225,32 200,40" fill="#FFD700"/>
+            </svg>
+        </div>
+        
+        <!-- Stars -->
+        <div class="scene-box">
+            <h2>הכוכבים</h2>
+            <svg width="500" height="80" viewBox="0 0 500 80">
+                <defs>
+                    <filter id="starGlow">
+                        <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- 12 simple stars in different colors -->
+                <g filter="url(#starGlow)">
+                    <!-- Star 1 - Gold -->
+                    <polygon points="25,10 28,20 38,20 30,27 33,38 25,32 17,38 20,27 12,20 22,20" fill="#FFD700"/>
+                    <!-- Star 2 - Pink -->
+                    <polygon points="65,12 68,21 77,21 70,27 72,36 65,31 58,36 60,27 53,21 62,21" fill="#FF9EB5"/>
+                    <!-- Star 3 - Purple -->
+                    <polygon points="105,10 108,20 118,20 110,27 113,38 105,32 97,38 100,27 92,20 102,20" fill="#A78BFA"/>
+                    <!-- Star 4 - Blue -->
+                    <polygon points="145,12 148,21 157,21 150,27 152,36 145,31 138,36 140,27 133,21 142,21" fill="#60A5FA"/>
+                    <!-- Star 5 - Yellow -->
+                    <polygon points="185,10 188,20 198,20 190,27 193,38 185,32 177,38 180,27 172,20 182,20" fill="#FBBF24"/>
+                    <!-- Star 6 - Green -->
+                    <polygon points="225,12 228,21 237,21 230,27 232,36 225,31 218,36 220,27 213,21 222,21" fill="#34D399"/>
+                    <!-- Star 7 - Pink -->
+                    <polygon points="265,10 268,20 278,20 270,27 273,38 265,32 257,38 260,27 252,20 262,20" fill="#F9A8D4"/>
+                    <!-- Star 8 - Yellow -->
+                    <polygon points="305,12 308,21 317,21 310,27 312,36 305,31 298,36 300,27 293,21 302,21" fill="#FCD34D"/>
+                    <!-- Star 9 - Lime -->
+                    <polygon points="345,10 348,20 358,20 350,27 353,38 345,32 337,38 340,27 332,20 342,20" fill="#A3E635"/>
+                    <!-- Star 10 - Orange -->
+                    <polygon points="385,12 388,21 397,21 390,27 392,36 385,31 378,36 380,27 373,21 382,21" fill="#FDBA74"/>
+                    <!-- Star 11 - Lavender -->
+                    <polygon points="425,10 428,20 438,20 430,27 433,38 425,32 417,38 420,27 412,20 422,20" fill="#C4B5FD"/>
+                    <!-- Star 12 - Red (Love) - bigger -->
+                    <polygon points="470,5 475,20 490,20 478,30 483,45 470,36 457,45 462,30 450,20 465,20" fill="#FF6B6B"/>
+                </g>
+                
+                <!-- Labels -->
+                <text x="25" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">יצירתיות</text>
+                <text x="65" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">לב טוב</text>
+                <text x="105" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">תמיד שם</text>
+                <text x="145" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">התמדה</text>
+                <text x="185" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">מוכשרות</text>
+                <text x="225" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">הקשבה</text>
+                <text x="265" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">יופי</text>
+                <text x="305" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">בדיחות</text>
+                <text x="345" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">סדר</text>
+                <text x="385" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">בוקר</text>
+                <text x="425" y="55" text-anchor="middle" font-size="7" fill="#5D4E37">שגרה</text>
+                <text x="470" y="60" text-anchor="middle" font-size="8" fill="#5D4E37" font-weight="500">אהבה</text>
+            </svg>
+        </div>
+        
+        <!-- Together on a star -->
+        <div class="scene-box">
+            <h2>יחד על כוכב</h2>
+            <svg width="300" height="200" viewBox="0 0 300 200">
+                <!-- Background stars -->
+                <circle cx="20" cy="30" r="2" fill="#FFD700" opacity="0.5"/>
+                <circle cx="280" cy="25" r="1.5" fill="#FFD700" opacity="0.6"/>
+                <circle cx="50" cy="80" r="1" fill="#FFD700" opacity="0.4"/>
+                <circle cx="250" cy="70" r="1.5" fill="#FFD700" opacity="0.5"/>
+                
+                <!-- Small planet/star they're sitting on -->
+                <ellipse cx="150" cy="160" rx="70" ry="25" fill="#F5E6C8" stroke="#E8D4A8" stroke-width="2"/>
+                <ellipse cx="150" cy="155" rx="65" ry="20" fill="#FDF8EE"/>
+                
+                <!-- GAL sitting (left) - black hair, brown eyes -->
+                <g transform="translate(110, 100)">
+                    <!-- Body sitting -->
+                    <path d="M0 35 L5 15 L25 15 L30 35" fill="#5D4E37"/>
+                    <!-- Legs -->
+                    <path d="M5 35 L0 55" stroke="#5D4E37" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M25 35 L30 55" stroke="#5D4E37" stroke-width="8" stroke-linecap="round"/>
+                    <!-- Head -->
+                    <circle cx="15" cy="0" r="18" fill="#FFE4B5"/>
+                    <!-- Hair - BLACK -->
+                    <ellipse cx="15" cy="-10" rx="16" ry="12" fill="#1a1a1a"/>
+                    <path d="M-1 0 Q2 -15 15 -18 Q28 -15 31 0" fill="#1a1a1a"/>
+                    <!-- Eyes - BROWN -->
+                    <circle cx="9" cy="0" r="2.5" fill="#5D4037"/>
+                    <circle cx="21" cy="0" r="2.5" fill="#5D4037"/>
+                    <circle cx="10" cy="-1" r="0.8" fill="white"/>
+                    <circle cx="22" cy="-1" r="0.8" fill="white"/>
+                    <!-- Smile -->
+                    <path d="M10 8 Q15 12 20 8" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                </g>
+                
+                <!-- BEN sitting (right) - brown hair, green eyes -->
+                <g transform="translate(155, 100)">
+                    <!-- Body sitting -->
+                    <path d="M0 35 L5 15 L25 15 L30 35" fill="#7A6B55"/>
+                    <!-- Legs -->
+                    <path d="M5 35 L0 55" stroke="#7A6B55" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M25 35 L30 55" stroke="#7A6B55" stroke-width="8" stroke-linecap="round"/>
+                    <!-- Head -->
+                    <circle cx="15" cy="0" r="18" fill="#FFE4B5"/>
+                    <!-- Hair - BROWN -->
+                    <ellipse cx="15" cy="-10" rx="16" ry="12" fill="#6B4423"/>
+                    <path d="M-1 0 Q2 -15 15 -18 Q28 -15 31 0" fill="#6B4423"/>
+                    <!-- Eyes - GREEN -->
+                    <circle cx="9" cy="0" r="2.5" fill="#4A8B5C"/>
+                    <circle cx="21" cy="0" r="2.5" fill="#4A8B5C"/>
+                    <circle cx="10" cy="-1" r="0.8" fill="white"/>
+                    <circle cx="22" cy="-1" r="0.8" fill="white"/>
+                    <!-- Bigger smile -->
+                    <path d="M8 8 Q15 14 22 8" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="note">
+            <strong>סגנון הנסיך הקטן:</strong> פשוט, מינימליסטי, חמים<br>
+            <strong>ההבדל העיקרי:</strong> גל = שיער שחור + עיניים חומות | בן = שיער חום + עיניים ירוקות
+        </div>
+    </div>
+</body>
+</html>
+

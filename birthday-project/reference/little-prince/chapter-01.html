@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 1 | הבואה קונסטריקטור</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Innocence/Childhood palette */
+            --primary: #98D8C8;
+            --secondary: #7FC8B8;
+            --accent: #5FBAA8;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: sway 4s ease-in-out infinite; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 800px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(95, 186, 168, 0.1), rgba(127, 200, 184, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .home-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .home-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .chapter-bookmark-btn {
+            background: white;
+            border: 2px solid #E8A0A0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .chapter-bookmark-btn i {
+            font-size: 1.3rem;
+            color: #E8A0A0;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-bookmark-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            border-color: #C77878;
+        }
+        
+        .chapter-bookmark-btn:hover i {
+            color: #C77878;
+        }
+        
+        .chapter-bookmark-btn.bookmarked {
+            background: #E8A0A0;
+            border-color: #E8A0A0;
+        }
+        
+        .chapter-bookmark-btn.bookmarked i {
+            color: white;
+        }
+        
+        .chapter-bookmark-btn.bookmarked:hover {
+            background: #C77878;
+            border-color: #C77878;
+        }
+        
+        @keyframes heartPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .chapter-bookmark-btn.just-bookmarked i {
+            animation: heartPop 0.4s ease;
+        }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+        
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+
+        /* ILLUSTRATION STYLES */
+        .illustration-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        .illustration-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+        }
+        .illustration-float-right {
+            float: left;
+            margin: 0 25px 15px 0;
+            max-width: 200px;
+        }
+        .illustration-float-left {
+            float: right;
+            margin: 0 0 15px 25px;
+            max-width: 200px;
+        }
+        .illustration-center {
+            display: block;
+            margin: 30px auto;
+            max-width: 350px;
+        }
+        .illustration-wide {
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
+            display: block;
+        }
+        .illustration-small {
+            width: 120px;
+            height: 120px;
+        }
+        @media (max-width: 600px) {
+            .illustration-float-right,
+            .illustration-float-left {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-eye"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 1</p>
+        <p class="chapter-title">הבואה קונסטריקטור</p>
+        <span class="mood-badge"><i class="ti ti-mood-sad"></i> אובדן התמימות</span>
+        
+        <!-- Drawing #1 and #2 Illustration -->
+        <div class="illustration-container">
+            <svg viewBox="0 0 450 180" xmlns="http://www.w3.org/2000/svg" style="max-width: 450px;">
+                <defs>
+                    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#98D8C8"/>
+                        <stop offset="100%" style="stop-color:#FDF8EE"/>
+                    </linearGradient>
+                    <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#5D8A66"/>
+                        <stop offset="100%" style="stop-color:#3D5A40"/>
+                    </linearGradient>
+                    <linearGradient id="elephantGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#A0A0A0"/>
+                        <stop offset="100%" style="stop-color:#707070"/>
+                    </linearGradient>
+                    <filter id="softShadow">
+                        <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.2"/>
+                    </filter>
+                </defs>
+                
+                <!-- Background -->
+                <rect width="450" height="180" fill="url(#skyGradient)" rx="10"/>
+                
+                <!-- Stars -->
+                <circle cx="30" cy="25" r="2" fill="#FFD700" opacity="0.6">
+                    <animate attributeName="opacity" values="0.3;0.9;0.3" dur="2.5s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="420" cy="30" r="1.5" fill="#FFD700" opacity="0.7">
+                    <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                </circle>
+                <circle cx="225" cy="20" r="2" fill="#FFD700" opacity="0.5">
+                    <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                
+                <!-- Drawing #1 - Closed (Hat shape) -->
+                <g transform="translate(110, 90)" filter="url(#softShadow)">
+                    <!-- The famous hat/boa shape -->
+                    <path d="M-70 30 Q-70 -10 -40 -25 Q0 -45 40 -25 Q70 -10 70 30 Z" 
+                          fill="url(#snakeGradient)" stroke="#2D4A30" stroke-width="2"/>
+                    <!-- Eye -->
+                    <circle cx="-55" cy="10" r="4" fill="#FFD700"/>
+                    <circle cx="-55" cy="10" r="2" fill="#1a1a1a"/>
+                    <!-- Tongue -->
+                    <path d="M-72 18 L-82 15 M-72 18 L-82 22" stroke="#C41E3A" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Label -->
+                    <text x="0" y="55" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#5D4E37">ציור מספר 1</text>
+                    <text x="0" y="70" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">"כובע?"</text>
+                </g>
+                
+                <!-- Arrow between drawings -->
+                <g transform="translate(225, 90)">
+                    <line x1="-15" y1="0" x2="15" y2="0" stroke="#5FBAA8" stroke-width="2" stroke-dasharray="4,2"/>
+                    <polygon points="18,0 10,-5 10,5" fill="#5FBAA8"/>
+                </g>
+                
+                <!-- Drawing #2 - Open (Cross section with elephant) -->
+                <g transform="translate(340, 90)" filter="url(#softShadow)">
+                    <!-- Snake body outline (cross section) -->
+                    <path d="M-70 30 Q-70 -10 -40 -25 Q0 -45 40 -25 Q70 -10 70 30 Z" 
+                          fill="none" stroke="#2D4A30" stroke-width="2" stroke-dasharray="6,3"/>
+                    <!-- Elephant inside -->
+                    <g transform="translate(0, 5)">
+                        <!-- Body -->
+                        <ellipse cx="0" cy="0" rx="30" ry="18" fill="url(#elephantGradient)"/>
+                        <!-- Head -->
+                        <circle cx="-30" cy="-5" r="12" fill="#909090"/>
+                        <!-- Trunk -->
+                        <path d="M-40 0 Q-50 5 -55 15 Q-58 20 -52 22" stroke="#909090" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <!-- Ear -->
+                        <ellipse cx="-25" cy="-10" rx="8" ry="10" fill="#808080"/>
+                        <!-- Eye -->
+                        <circle cx="-32" cy="-8" r="2" fill="#1a1a1a"/>
+                        <!-- Legs -->
+                        <rect x="-15" y="12" width="6" height="12" fill="#808080" rx="2"/>
+                        <rect x="5" y="12" width="6" height="12" fill="#808080" rx="2"/>
+                        <!-- Tail -->
+                        <path d="M28 0 Q38 -5 35 8" stroke="#909090" stroke-width="3" fill="none"/>
+                    </g>
+                    <!-- Label -->
+                    <text x="0" y="55" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#5D4E37">ציור מספר 2</text>
+                    <text x="0" y="70" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55">הפיל שבפנים</text>
+                </g>
+            </svg>
+        </div>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>פרק זה נפתח באופן שנראה תמים ופשוט, כמעט ילדותי - אך מי שמקשיב היטב ישמע את הד הטרגדיה שמהדהד בכל מילה. הנה לפנינו מספר בוגר, טייס שהתרסק במדבר, שמביט אחורה לילדותו ומספר על הרגע המדויק שבו העולם גנב ממנו את היכולת לחלום. זהו לא רק פתיח לספר - זוהי הודאה, וידוי, קריאה לעזרה שנכתבה בדיו של זיכרונות.</p>
+                
+                <!-- Jungle Book Illustration -->
+                <svg class="illustration-float-left" viewBox="0 0 150 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="bookCover" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#2D5A27"/>
+                            <stop offset="100%" style="stop-color:#1A3D15"/>
+                        </linearGradient>
+                        <linearGradient id="jungleGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4A7C3F"/>
+                            <stop offset="100%" style="stop-color:#2D5A27"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Book base -->
+                    <rect x="20" y="25" width="110" height="140" fill="url(#bookCover)" rx="3"/>
+                    <rect x="25" y="25" width="5" height="140" fill="#1A3D15"/>
+                    <!-- Book pages -->
+                    <rect x="30" y="30" width="95" height="130" fill="#FDF8EE" rx="2"/>
+                    <!-- Jungle illustration on page -->
+                    <g transform="translate(77, 75)">
+                        <!-- Leaves -->
+                        <ellipse cx="-20" cy="-25" rx="15" ry="8" fill="#4A7C3F" transform="rotate(-30)"/>
+                        <ellipse cx="20" cy="-20" rx="12" ry="6" fill="#5D8A66" transform="rotate(20)"/>
+                        <ellipse cx="0" cy="-30" rx="10" ry="5" fill="#3D6A35" transform="rotate(5)"/>
+                        <!-- Snake coiled -->
+                        <path d="M-25 20 Q-15 0 0 10 Q15 20 25 5 Q30 -10 20 -15 Q10 -20 5 -10" 
+                              stroke="#5D8A66" stroke-width="8" fill="none" stroke-linecap="round"/>
+                        <circle cx="5" cy="-10" r="5" fill="#5D8A66"/>
+                        <circle cx="3" cy="-12" r="1.5" fill="#FFD700"/>
+                        <circle cx="7" cy="-12" r="1.5" fill="#FFD700"/>
+                        <path d="M5 -6 L3 -2 M5 -6 L7 -2" stroke="#C41E3A" stroke-width="1.5"/>
+                    </g>
+                    <!-- Book title -->
+                    <text x="77" y="145" text-anchor="middle" font-family="Heebo, sans-serif" font-size="8" fill="#5D4E37">סיפורים אמיתיים</text>
+                    <!-- Sparkle -->
+                    <circle cx="110" cy="40" r="3" fill="#FFD700" opacity="0.8">
+                        <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+                
+                <p>הסיפור מתחיל כאשר המספר, בן שש, נתקל בספר על הג'ונגל הבתולי בשם "סיפורים אמיתיים". שם הוא רואה תמונה של נחש בואה קונסטריקטור בולע חיה שלמה. התמונה הזו - של טורף שבולע את טרפו ללא לעיסה - חורטת את עצמה בנפשו. אך מה שבאמת מסעיר אותו אינו האלימות של הטבע, אלא הגילוי שיש דברים שניתן לבלוע אותם שלמים, להכיל אותם בתוכנו מבלי לפרק אותם לחלקים. הילד רואה בכך משהו פואטי, כמעט מיסטי.</p>
+
+                <!-- Child Drawing Illustration -->
+                <svg class="illustration-float-right" viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFFEF5"/>
+                            <stop offset="100%" style="stop-color:#FDF8EE"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Paper -->
+                    <rect x="25" y="80" width="110" height="85" fill="url(#paperGrad)" stroke="#E8D4A8" stroke-width="1" rx="2"/>
+                    <!-- Drawing on paper - the boa -->
+                    <path d="M45 140 Q50 115 70 110 Q95 100 115 110 Q125 115 120 140" 
+                          fill="#5D8A66" stroke="#3D5A40" stroke-width="1.5"/>
+                    <circle cx="48" cy="130" r="2" fill="#FFD700"/>
+                    <circle cx="48" cy="130" r="1" fill="#1a1a1a"/>
+                    
+                    <!-- Child -->
+                    <g transform="translate(80, 50)">
+                        <!-- Body -->
+                        <rect x="-18" y="15" width="36" height="30" fill="#7FC8B8" rx="5"/>
+                        <!-- Arms drawing -->
+                        <path d="M18 25 L35 50" stroke="#FFE4B5" stroke-width="6" stroke-linecap="round"/>
+                        <path d="M-18 25 L-30 45" stroke="#FFE4B5" stroke-width="6" stroke-linecap="round"/>
+                        <!-- Pencil in hand -->
+                        <rect x="30" y="45" width="20" height="5" fill="#FFD700" transform="rotate(30 35 47)"/>
+                        <polygon points="50,50 55,52 50,55" fill="#F5E6C8" transform="rotate(30 35 47)"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="0" r="18" fill="#FFE4B5"/>
+                        <!-- Hair -->
+                        <ellipse cx="0" cy="-12" rx="15" ry="10" fill="#8B4513"/>
+                        <circle cx="-10" cy="-8" r="5" fill="#8B4513"/>
+                        <circle cx="10" cy="-8" r="5" fill="#8B4513"/>
+                        <!-- Face -->
+                        <circle cx="-6" cy="-2" r="2.5" fill="#5D4E37"/>
+                        <circle cx="6" cy="-2" r="2.5" fill="#5D4E37"/>
+                        <!-- Happy smile -->
+                        <path d="M-6 8 Q0 14 6 8" stroke="#C4846C" stroke-width="2" fill="none"/>
+                        <!-- Blush -->
+                        <ellipse cx="-12" cy="5" rx="4" ry="2" fill="#FFB6C1" opacity="0.5"/>
+                        <ellipse cx="12" cy="5" rx="4" ry="2" fill="#FFB6C1" opacity="0.5"/>
+                    </g>
+                    
+                    <!-- Sparkles of creativity -->
+                    <circle cx="130" cy="75" r="3" fill="#FFD700">
+                        <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="35" cy="85" r="2" fill="#FFD700">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
+                
+                <p>בהשראה מהתמונה הזו, הילד מצייר את יצירתו הראשונה: ציור מספר 1. הוא מצייר נחש בואה קונסטריקטור שבלע פיל - אך מבחוץ, הציור נראה כמו כובע. וכאן מתחילה הטרגדיה האמיתית. הילד, מלא התלהבות וגאווה ביצירתו, מראה את הציור למבוגרים וישאל: "האם הציור שלי מפחיד?" המבוגרים, בחוסר דמיון כרוני, עונים: "למה שכובע יפחיד?"</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"המבוגרים השיבו לי: 'להיבהל? מכובע?'"</p>
+                    <p class="quote-analysis">שימו לב לסימן השאלה הכפול. המבוגרים לא רק לא הבינו את הציור - הם לא הבינו את עצם השאלה. הם לא יכלו לתפוס שמישהו רואה משהו אחר ממה שהם רואים. זוהי לא רק עיוורון אמנותי, זוהי עיוורון אונטולוגי - חוסר יכולת להכיר בקיומו של מציאות שונה.</p>
+                </div>
+                
+                <!-- What Adults See vs What the Child Sees -->
+                <svg class="illustration-center" viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="adultBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#E8E8E8"/>
+                            <stop offset="100%" style="stop-color:#D0D0D0"/>
+                        </linearGradient>
+                        <linearGradient id="childBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#98D8C8"/>
+                            <stop offset="100%" style="stop-color:#7FC8B8"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Left side - Adult view -->
+                    <g transform="translate(95, 100)">
+                        <!-- Background circle -->
+                        <circle cx="0" cy="0" r="70" fill="url(#adultBg)" opacity="0.5"/>
+                        
+                        <!-- Hat (what adults see) -->
+                        <path d="M-45 20 Q-45 -10 -25 -20 Q0 -35 25 -20 Q45 -10 45 20 Z" 
+                              fill="#5D4E37" stroke="#3D3020" stroke-width="2"/>
+                        <!-- Hat band -->
+                        <path d="M-42 15 Q0 5 42 15" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                        
+                        <!-- Question marks floating -->
+                        <text x="50" y="-30" font-size="18" fill="#7A6B55" opacity="0.7">?</text>
+                        <text x="-55" y="-25" font-size="14" fill="#7A6B55" opacity="0.5">?</text>
+                        
+                        <!-- Label -->
+                        <text x="0" y="60" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#5D4E37">מה שהמבוגרים רואים</text>
+                        <text x="0" y="75" text-anchor="middle" font-family="Heebo, sans-serif" font-size="13" fill="#7A6B55" font-weight="500">"כובע"</text>
+                    </g>
+                    
+                    <!-- Dividing line -->
+                    <line x1="190" y1="30" x2="190" y2="170" stroke="#5FBAA8" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- Right side - Child view -->
+                    <g transform="translate(285, 100)">
+                        <!-- Background circle -->
+                        <circle cx="0" cy="0" r="70" fill="url(#childBg)" opacity="0.3"/>
+                        
+                        <!-- Boa with elephant (what child sees) - transparent view -->
+                        <path d="M-45 20 Q-45 -10 -25 -20 Q0 -35 25 -20 Q45 -10 45 20 Z" 
+                              fill="none" stroke="#3D5A40" stroke-width="2" stroke-dasharray="4,2"/>
+                        
+                        <!-- Elephant inside -->
+                        <g transform="translate(0, 0) scale(0.7)">
+                            <ellipse cx="0" cy="5" rx="25" ry="15" fill="#A0A0A0"/>
+                            <circle cx="-22" cy="0" r="10" fill="#909090"/>
+                            <path d="M-30 5 Q-38 10 -42 18" stroke="#909090" stroke-width="5" fill="none" stroke-linecap="round"/>
+                            <ellipse cx="-18" cy="-5" rx="6" ry="8" fill="#808080"/>
+                            <circle cx="-24" cy="-2" r="2" fill="#1a1a1a"/>
+                            <rect x="-12" y="15" width="5" height="10" fill="#808080" rx="2"/>
+                            <rect x="5" y="15" width="5" height="10" fill="#808080" rx="2"/>
+                        </g>
+                        
+                        <!-- Snake eye -->
+                        <circle cx="-38" cy="10" r="4" fill="#FFD700"/>
+                        <circle cx="-38" cy="10" r="2" fill="#1a1a1a"/>
+                        
+                        <!-- Sparkles -->
+                        <circle cx="45" cy="-35" r="3" fill="#FFD700">
+                            <animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="-50" cy="-40" r="2" fill="#FFD700">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <!-- Label -->
+                        <text x="0" y="60" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#5D4E37">מה שהילד רואה</text>
+                        <text x="0" y="75" text-anchor="middle" font-family="Heebo, sans-serif" font-size="13" fill="#5FBAA8" font-weight="500">"פיל בתוך בואה"</text>
+                    </g>
+                </svg>
+
+                <p>הילד לא מוותר. הוא מצייר ציור מספר 2 - אותו נחש בדיוק, אך הפעם בחתך רוחב, כך שניתן לראות את הפיל בתוך בטנו של הנחש. הוא מקווה שאם יראה להם את ה"פנים", את האמת הגלויה, סוף סוף יבינו. אך תגובת המבוגרים הורסת עוד יותר: הם ממליצים לו "להניח בצד את ציורי נחשי הבואה קונסטריקטור, הפתוחים והסגורים, ולהתעניין יותר בגאוגרפיה, בהיסטוריה, בחשבון ובדקדוק."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"כך נטשתי, בגיל שש, קריירה מזהירה של צייר."</p>
+                    <p class="quote-analysis">המילה "קריירה" היא אירונית עד כאב. ילד בן שש לא חושב במונחים של קריירה - המבוגרים חושבים כך. המספר משתמש בשפה שלהם כדי לתאר את מה שהם עשו לו. הוא "מתרגם" את הפצע שלו לשפה שהם עשויים להבין - אך גם בכך יש עקיצה: האם הם בכלל יבינו את האירוניה?</p>
+                </div>
+
+                <p>מה שקורה כאן אינו רק כישלון אמנותי. זוהי רציחה סימבולית. המבוגרים לא פסלו ציור - הם פסלו דרך שלמה לראות את העולם. הם לימדו את הילד שהדמיון הוא מיותר, שהאמת הנסתרת אינה חשובה, ושמה שלא ניתן לראות במבט ראשון - פשוט לא קיים. הילד הזה, שיגדל להיות טייס, יבלה את שאר חייו בודד - לא כי אין אנשים סביבו, אלא כי אין אף אחד שרואה את מה שהוא רואה.</p>
+
+                <p>המספר מודה שכל חייו הוא נושא איתו את שני הציורים האלה. כשהוא פוגש מבוגר שנראה לו "מעט יותר פקח מהאחרים", הוא מראה לו את ציור מספר 1 ומחכה. אם המבוגר אומר "זה כובע" - המספר יודע שאין טעם לדבר איתו על נחשי בואה קונסטריקטור, על יערות בתולים, על כוכבים. הוא יורד לרמתו ומדבר איתו על ברידג', גולף, פוליטיקה ועניבות. והמבוגר, כמובן, שמח מאוד להכיר "אדם כה הגיוני".</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"...הייתי יורד לרמתו. הייתי מדבר אתו על ברידג', על גולף, על פוליטיקה ועל עניבות. והמבוגר היה מרוצה מאוד מהכרותו עם אדם כה הגיוני."</p>
+                    <p class="quote-analysis">כאן הטרגדיה מגיעה לשיאה. המספר למד לא רק להסתיר את עצמו האמיתי, אלא ליצור גרסה מזויפת של עצמו שתתקבל חברתית. הוא הפך למומחה בלהיות "הגיוני" - כלומר, חסר דמיון, משעמם, צפוי. הוא למד לשרוד על ידי בגידה בעצמו.</p>
+                </div>
+
+                <h3>מה נמצא מתחת לפני השטח</h3>
+                
+                <p>סן-אכזופרי לא כתב את הפרק הזה במקרה כפתיחה. הוא יצר מעין מבחן כניסה לקוראיו. אם אתה קורא את הפרק הזה ורואה רק סיפור חמוד על ילד וציור - אתה המבוגר שבסיפור. אם אתה קורא ומרגיש דקירה בלב, תחושה של הזדהות כואבת - אתה עדיין יכול להינצל.</p>
+
+                <p>יש כאן גם רובד ביוגרפי עמוק. סן-אכזופרי עצמו היה ילד חולמני שהמבוגרים בחייו - במיוחד לאחר מות אביו - ציפו ממנו "להתבגר". הוא למד לטוס, הפך לטייס דואר אמיץ, אך תמיד הרגיש זר בעולם המבוגרים. כשכתב את "הנסיך הקטן" בניו יורק ב-1942, בגלות מצרפת הכבושה, הוא היה גבר שבור שהתגעגע לילדות שאיבד ולעולם שלא הבין אותו.</p>
+
+                <p>הפיל בבטן הנחש הוא גם מטפורה לכל האמיתות הגדולות שאנחנו נושאים בתוכנו - אהבות, חלומות, כאבים - שמבחוץ נראות כמו "כובעים" לאלה שלא יודעים להסתכל. כולנו מסתובבים עם פילים בתוכנו שאף אחד לא רואה.</p>
+
+                <div class="character-grid">
+                    <div class="character-card">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                            <circle cx="50" cy="50" r="45" fill="#98D8C8" opacity="0.2"/>
+                            <!-- Child body -->
+                            <rect x="35" y="55" width="30" height="25" fill="#7FC8B8" rx="5"/>
+                            <!-- Head -->
+                            <circle cx="50" cy="40" r="16" fill="#FFE4B5"/>
+                            <!-- Hair -->
+                            <ellipse cx="50" cy="30" rx="14" ry="10" fill="#8B4513"/>
+                            <circle cx="38" cy="34" r="5" fill="#8B4513"/>
+                            <circle cx="62" cy="34" r="5" fill="#8B4513"/>
+                            <!-- Eyes (bright, curious) -->
+                            <circle cx="44" cy="38" r="3" fill="#5D4E37"/>
+                            <circle cx="56" cy="38" r="3" fill="#5D4E37"/>
+                            <circle cx="44" cy="37" r="1" fill="white"/>
+                            <circle cx="56" cy="37" r="1" fill="white"/>
+                            <!-- Big smile -->
+                            <path d="M43 48 Q50 55 57 48" stroke="#C4846C" stroke-width="2" fill="none"/>
+                            <!-- Pencil in hand -->
+                            <rect x="62" y="60" width="15" height="4" fill="#FFD700" transform="rotate(-30 65 62)"/>
+                            <!-- Sparkle -->
+                            <circle cx="75" cy="30" r="4" fill="#FFD700">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        <h3>המספר כילד</h3>
+                        <p>אמן קטן בעל דמיון פורה שרוצה לשתף את חזונו עם העולם, רק כדי לגלות שהעולם לא מעוניין.</p>
+                        <p class="symbolic-role">מייצג את הניצוץ היצירתי שיש בכל ילד</p>
+                    </div>
+                    <div class="character-card">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 80px; height: 80px; margin-bottom: 10px;">
+                            <circle cx="50" cy="50" r="45" fill="#E8D4A8" opacity="0.3"/>
+                            <!-- Three adult figures (simplified, faceless) -->
+                            <!-- Left adult -->
+                            <rect x="15" y="50" width="20" height="30" fill="#5D4E37" rx="3"/>
+                            <circle cx="25" cy="38" r="10" fill="#D4C4A8"/>
+                            <rect x="18" y="30" width="14" height="5" fill="#4A3F2F"/>
+                            <!-- Middle adult -->
+                            <rect x="40" y="45" width="20" height="35" fill="#7A6B55" rx="3"/>
+                            <circle cx="50" cy="33" r="11" fill="#D4C4A8"/>
+                            <ellipse cx="50" cy="26" rx="10" ry="5" fill="#3D3020"/>
+                            <!-- Right adult -->
+                            <rect x="65" y="50" width="20" height="30" fill="#5D4E37" rx="3"/>
+                            <circle cx="75" cy="38" r="10" fill="#D4C4A8"/>
+                            <rect x="68" y="30" width="14" height="5" fill="#4A3F2F"/>
+                            <!-- No faces - blank expressions -->
+                            <!-- Question marks above -->
+                            <text x="25" y="20" font-size="10" fill="#7A6B55">?</text>
+                            <text x="50" y="15" font-size="12" fill="#7A6B55">?</text>
+                            <text x="75" y="20" font-size="10" fill="#7A6B55">?</text>
+                        </svg>
+                        <h3>המבוגרים</h3>
+                        <p>קולקטיב חסר פנים של אנשים "הגיוניים" שמעדיפים גאוגרפיה על דמיון ובטחון על פלא.</p>
+                        <p class="symbolic-role">מייצגים את המערכת שמוחקת יצירתיות</p>
+                    </div>
+                </div>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>האם שמת לב שהמספר מעולם לא מנסה לצייר משהו אחר? הוא לא אומר "אז ניסיתי לצייר סוסים" או "אז עברתי לפסל". הוא פשוט הפסיק. ציור מספר 1 וציור מספר 2 הם היצירות היחידות שלו - ויחד עם זאת הוא נושא אותן איתו כל חייו.</p>
+                        
+                        <p>זה מעלה שאלה מטרידה: האם הנחש שבלע את הפיל הוא בעצם המבוגרים שבלעו את הילד? האם הילד הזה, בן השש, עדיין נמצא איפשהו בתוך הטייס הבוגר, שלם אך בלתי נראה, ממתין שמישהו סוף סוף יראה אותו?</p>
+                        
+                        <p>ואולי הפרדוקס המטריד ביותר: המספר כותב ספר שלם כדי להסביר למבוגרים למה הם לא מבינים - אך אם הם באמת לא מבינים, האם הם בכלל יכולים להבין את הספר? האם "הנסיך הקטן" הוא לא עוד ציור מספר 1, שהמבוגרים יקראו ויאמרו "ספר ילדים נחמד"?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#98D8C8" opacity="0.2"/>
+                            <!-- Coiled snake -->
+                            <path d="M20 50 Q25 30 40 35 Q55 40 55 55 Q55 65 45 65 Q35 65 35 55 Q35 45 45 45" 
+                                  stroke="#5D8A66" stroke-width="8" fill="none" stroke-linecap="round"/>
+                            <!-- Head -->
+                            <circle cx="45" cy="45" r="6" fill="#5D8A66"/>
+                            <!-- Eyes -->
+                            <circle cx="43" cy="43" r="2" fill="#FFD700"/>
+                            <circle cx="47" cy="43" r="2" fill="#FFD700"/>
+                            <circle cx="43" cy="43" r="1" fill="#1a1a1a"/>
+                            <circle cx="47" cy="43" r="1" fill="#1a1a1a"/>
+                            <!-- Tongue -->
+                            <path d="M45 50 L43 56 M45 50 L47 56" stroke="#C41E3A" stroke-width="1.5"/>
+                        </svg>
+                        <h3>נחש הבואה קונסטריקטור</h3>
+                        <p>טורף שבולע את טרפו שלם, ללא לעיסה</p>
+                        <div class="deep-meaning">
+                            <p>הנחש מייצג את הכוח שבולע דברים מבלי להבין אותם. כמו המבוגרים שבולעים עובדות, מידע, "ידע מעשי" - אך מעולם לא מעכלים אותם באמת. הם מכילים הכל אך לא מבינים כלום. הנחש גם מסמל את העולם הבוגר שבולע ילדים שלמים והופך אותם למבוגרים - מבלי לשנות את מה שבפנים, רק להסתיר אותו.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> הנחש יופיע שוב בפרק 17, הפעם כיצור מסתורי ומסוכן שנושא את הסוד של החזרה הביתה.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#98D8C8" opacity="0.2"/>
+                            <!-- Elephant -->
+                            <ellipse cx="40" cy="42" rx="22" ry="14" fill="#A0A0A0"/>
+                            <circle cx="22" cy="38" r="10" fill="#909090"/>
+                            <!-- Trunk -->
+                            <path d="M14 42 Q8 50 12 58" stroke="#909090" stroke-width="5" fill="none" stroke-linecap="round"/>
+                            <!-- Ear -->
+                            <ellipse cx="28" cy="32" rx="7" ry="9" fill="#808080"/>
+                            <!-- Eye -->
+                            <circle cx="20" cy="36" r="2" fill="#1a1a1a"/>
+                            <!-- Legs -->
+                            <rect x="28" y="52" width="6" height="12" fill="#808080" rx="2"/>
+                            <rect x="46" y="52" width="6" height="12" fill="#808080" rx="2"/>
+                            <!-- Tail -->
+                            <path d="M60 42 Q68 38 66 50" stroke="#909090" stroke-width="3" fill="none"/>
+                            <!-- Sparkle indicating hidden -->
+                            <circle cx="65" cy="25" r="3" fill="#FFD700" opacity="0.7">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        <h3>הפיל הנסתר</h3>
+                        <p>החיה הענקית שנמצאת בתוך הנחש, בלתי נראית מבחוץ</p>
+                        <div class="deep-meaning">
+                            <p>הפיל הוא כל מה שאנחנו נושאים בתוכנו שאחרים לא רואים: חלומות, כאבים, אהבות, פחדים. הוא גדול, משמעותי, תופס מקום עצום בנפשנו - ובכל זאת בלתי נראה למי שמסתכל רק על המעטפת החיצונית. הפיל גם מייצג את האמת: גדולה, ברורה, בלתי אפשרית להתעלם ממנה - אלא אם כן אתה מבוגר שלמד לא לראות.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> מוטיב ה"בלתי נראה" יחזור בפרק 21 עם משפט המפתח: "הדברים החשובים ביותר אינם נראים לעין."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#E8D4A8" opacity="0.3"/>
+                            <!-- Hat shape -->
+                            <path d="M15 55 Q15 30 28 22 Q40 12 52 22 Q65 30 65 55 Z" 
+                                  fill="#5D4E37" stroke="#3D3020" stroke-width="2"/>
+                            <!-- Hat band -->
+                            <path d="M18 50 Q40 42 62 50" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                            <!-- Brim -->
+                            <ellipse cx="40" cy="55" rx="28" ry="6" fill="#4A3F2F"/>
+                            <!-- Question mark -->
+                            <text x="40" y="72" text-anchor="middle" font-size="12" fill="#7A6B55">?</text>
+                        </svg>
+                        <h3>הכובע</h3>
+                        <p>מה שהמבוגרים רואים כשהם מסתכלים על הציור</p>
+                        <div class="deep-meaning">
+                            <p>הכובע הוא הפרשנות השטחית, הבטוחה, הנוחה. הוא מייצג את הנטייה האנושית לראות מה שאנחנו מצפים לראות, לא מה שבאמת נמצא שם. המבוגרים רואים כובע כי כובע הוא דבר מוכר, שימושי, לא מאיים. הכובע הוא גם מטפורה למסכות שאנחנו עוטים - צורות חיצוניות שמסתירות את האמת הפנימית.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> הפער בין מראה חיצוני לתוכן פנימי יעמוד במרכז הסיפור על הוורד בפרק 8, ועל השועל בפרק 21.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#98D8C8" opacity="0.2"/>
+                            <!-- Paper 1 -->
+                            <rect x="8" y="20" width="30" height="38" fill="#FDF8EE" stroke="#E8D4A8" stroke-width="1" rx="2"/>
+                            <!-- Drawing 1 - closed -->
+                            <path d="M13 48 Q15 35 23 33 Q31 30 35 48" fill="#5D8A66" stroke="#3D5A40" stroke-width="1"/>
+                            <text x="23" y="62" text-anchor="middle" font-size="7" fill="#7A6B55">1#</text>
+                            
+                            <!-- Paper 2 -->
+                            <rect x="42" y="22" width="30" height="38" fill="#FDF8EE" stroke="#E8D4A8" stroke-width="1" rx="2"/>
+                            <!-- Drawing 2 - open with elephant -->
+                            <path d="M47 50 Q49 37 57 35 Q65 32 69 50" fill="none" stroke="#3D5A40" stroke-width="1" stroke-dasharray="2,1"/>
+                            <ellipse cx="57" cy="42" rx="8" ry="5" fill="#A0A0A0"/>
+                            <circle cx="52" cy="40" r="3" fill="#909090"/>
+                            <text x="57" y="64" text-anchor="middle" font-size="7" fill="#7A6B55">2#</text>
+                            
+                            <!-- Pencil -->
+                            <rect x="55" y="8" width="18" height="5" fill="#FFD700" transform="rotate(30 64 10)"/>
+                            <polygon points="73,12 78,14 73,17" fill="#F5E6C8" transform="rotate(30 64 10)"/>
+                        </svg>
+                        <h3>שני הציורים</h3>
+                        <p>ציור מספר 1 (סגור) וציור מספר 2 (פתוח)</p>
+                        <div class="deep-meaning">
+                            <p>שני הציורים מייצגים שתי דרכים לתקשר: הדרך האמנותית, שמניחה שהצופה ישתמש בדמיון ויראה מעבר למה שמצויר, והדרך הישירה, שחושפת הכל בפירוש. הטרגדיה היא שאפילו כשהילד מראה את הציור הפתוח, המבוגרים עדיין לא מתעניינים. הבעיה אינה בהבנה אלא בנכונות להבין.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> המספר ישתמש שוב בציורים כמבחן לאורך הספר, כולל הציור של השה בקופסה בפרק 2.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <svg class="illustration-small" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="35" fill="#4A7C3F" opacity="0.15"/>
+                            <!-- Book -->
+                            <rect x="18" y="20" width="44" height="50" fill="#2D5A27" rx="2"/>
+                            <rect x="22" y="20" width="3" height="50" fill="#1A3D15"/>
+                            <!-- Pages -->
+                            <rect x="25" y="24" width="34" height="42" fill="#FDF8EE" rx="1"/>
+                            <!-- Jungle leaves on cover -->
+                            <ellipse cx="42" cy="38" rx="10" ry="5" fill="#4A7C3F" transform="rotate(-20 42 38)"/>
+                            <ellipse cx="42" cy="45" rx="8" ry="4" fill="#5D8A66" transform="rotate(15 42 45)"/>
+                            <!-- Small snake -->
+                            <path d="M35 50 Q42 45 48 50 Q52 55 48 58" stroke="#5D8A66" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <circle cx="48" cy="58" r="2" fill="#5D8A66"/>
+                            <circle cx="47" cy="57" r="0.8" fill="#FFD700"/>
+                            <circle cx="49" cy="57" r="0.8" fill="#FFD700"/>
+                        </svg>
+                        <h3>ספר הג'ונגל</h3>
+                        <p>"סיפורים אמיתיים" - הספר שהילד קרא בגיל שש</p>
+                        <div class="deep-meaning">
+                            <p>הספר מייצג את שער הכניסה לעולם הדמיון. זה לא ספר פיקציה אלא ספר על "סיפורים אמיתיים" מהג'ונגל - כלומר, הילד גילה שהמציאות עצמה יכולה להיות פנטסטית, מדהימה, מעוררת פחד והשתאות. הג'ונגל הבתולי הוא מקום שמבוגרים לא נוגעים בו, טבע לא מאולף - כמו הדמיון של ילד.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> המדבר בו יתרסק הטייס (פרק 2 ואילך) הוא סוג של ג'ונגל בתולי משלו - מקום פראי שבו הכללים של המבוגרים לא עובדים.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>גילוי והשתאות</h3>
+                        <p>ילד בן שש מגלה ספר על הג'ונגל ונפעם מתמונה של נחש בולע. זהו רגע של פתיחות מוחלטת לעולם, של סקרנות טהורה ללא מסננים.</p>
+                        <span class="emotion-tag">פליאה ילדית</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>יצירה והתלהבות</h3>
+                        <p>הילד מצייר את יצירתו הראשונה, מלא ביטחון וגאווה. הוא רוצה לשתף את העולם בחזון שלו, בטוח שגם אחרים יראו את מה שהוא רואה.</p>
+                        <span class="emotion-tag">שמחת היוצר</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>התנפצות והלם</h3>
+                        <p>המבוגרים לא מבינים. הם רואים כובע. הילד מנסה שוב עם ציור מפורש יותר - וגם זה לא עוזר. זוהי הפגיעה הראשונה והקשה ביותר: הגילוי שלא כולם רואים את העולם כמוך.</p>
+                        <span class="emotion-tag">אכזבה מרה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>נסיגה והסתגרות</h3>
+                        <p>הילד מחליט לוותר על הציור ו"לעסוק בדברים רציניים". הוא לומד טייס, מתבגר, אך נשאר בודד. הוא נושא את הציורים איתו כמו צלקות.</p>
+                        <span class="emotion-tag">כניעה שקטה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>בדידות כרונית</h3>
+                        <p>המספר הבוגר עדיין בודח מבוגרים באמצעות ציור מספר 1. כל שיחה על "ברידג' וגולף" היא תזכורת כואבת לפיל שאף אחד לא רואה.</p>
+                        <span class="emotion-tag">ריקנות מוסווית</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>מתחת לנרטיב מסתתרים רגשות שהמספר לא מבטא ישירות: זעם עמוק על המבוגרים שגנבו ממנו את חלומו, בושה על כך שוויתר כל כך בקלות, ואולי יותר מכל - געגוע לילד שהיה פעם ושאיבד קשר איתו. יש גם פחד מוסתר: מה אם הוא עצמו הפך לאחד מהם? מה אם גם הוא כבר לא יכול לראות פילים בתוך נחשים?</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגיה יונגיאנית</span>
+                    <h3>הילד הפנימי והארכיטיפ של התמימות</h3>
+                    <p>מנקודת מבט יונגיאנית, הילד בן השש מייצג את ה"ילד הפנימי" - ארכיטיפ של תמימות, יצירתיות וקשר ישיר לתת-מודע. המבוגרים מייצגים את ה"פרסונה" - המסכה החברתית שאנו בונים כדי להתאים לציפיות. הפרק מתאר את הרגע הטראומטי שבו הפרסונה מתחילה להיבנות על חשבון הילד הפנימי. הציור עצמו הוא ניסיון של הילד להביא תוכן מהתת-מודע (הנחש, הפיל - סמלים ארכיטיפיים עוצמתיים) לעולם המודע, והדחייה מצד המבוגרים היא דחייה של כל העולם הפנימי הזה. הטרגדיה המתמשכת היא שהמספר הבוגר עדיין נושא את הציורים - הילד הפנימי עדיין קיים, אך ללא קול.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליזם</span>
+                    <h3>הבדידות האנושית והאבסורד של התקשורת</h3>
+                    <p>מזווית אקזיסטנציאליסטית, הפרק מציג את אחת הטרגדיות הבסיסיות של הקיום האנושי: אנחנו לכודים בתוך התודעה שלנו, ואף פעם לא יכולים באמת להעביר את החוויה הפנימית שלנו לאחר. הילד מצייר משהו שהוא רואה בצורה ברורה לחלוטין, ובכל זאת - אף אחד לא רואה. זה לא כישלון טכני (הציור השני הוכיח את זה) אלא כישלון קיומי. קאמי היה אומר שזהו האבסורד: החיפוש הבלתי פוסק אחר משמעות ותקשורת בעולם שמסרב לענות. המספר הבוגר ממשיך לבדוח אנשים עם הציור - זהו מעשה סיזיפי, חזרה אינסופית על אותה תקווה נכזבת.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפי</span>
+                    <h3>סן-אכזופרי והילדות שאיבד</h3>
+                    <p>אנטואן דה סן-אכזופרי כתב את "הנסיך הקטן" ב-1942, בגלות בניו יורק, רחוק מצרפת הכבושה ומאשתו קונסואלו. הוא היה בשנות הארבעים לחייו, טייס שגופו נשחק ממשימות מסוכנות, ולבו נשחק מהמלחמה והגעגוע. הילד שבפרק הוא ככל הנראה הוא עצמו: ילד חולמני שאביו מת כשהיה בן ארבע, שגדל בטירה עתיקה עם אמו הספרותית, ושתמיד הרגיש מנותק מהעולם "הרציני" של המבוגרים. הציורים בספר צוירו בידי סן-אכזופרי עצמו - והם אכן נראים כמו ציורי ילד. אולי הוא ניסה לחזור לעצמו בן השש, לרפא את הפצע הישן.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחני/מיסטי</span>
+                    <h3>הראייה הפנימית וסודות היקום</h3>
+                    <p>ברובד הרוחני, הפרק עוסק בשני סוגי ראייה: ראיית העיניים וראיית הלב. הילד רואה בלב - הוא רואה את הפיל בתוך הנחש כי הוא צופה במהות, לא במעטפת. המבוגרים רואים רק בעיניים - הם צופים בצורה ומפרשים אותה לפי הקטגוריות המוכרות להם. במסורות רוחניות רבות, ילדים נחשבים קרובים יותר לאמת האלוהית כי התודעה שלהם עדיין לא "התלכלכה" בקונספציות ובהרגלי חשיבה. ה"עיניים של מבוגר" הן מעין רעלה שנופלת ומסתירה את האמת. השאלה היא: האם ניתן להסיר את הרעלה? האם יש דרך חזרה?</p>
+                </div>
+                
+                <!-- The Lonely Narrator Illustration -->
+                <svg class="illustration-wide" viewBox="0 0 500 180" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="lonelySky" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a1a2e"/>
+                            <stop offset="40%" style="stop-color:#3D5A68"/>
+                            <stop offset="100%" style="stop-color:#98D8C8"/>
+                        </linearGradient>
+                        <filter id="glowEffect">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="500" height="180" fill="url(#lonelySky)" rx="10"/>
+                    
+                    <!-- Stars -->
+                    <g fill="#FFD700">
+                        <circle cx="40" cy="25" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+                        <circle cx="100" cy="40" r="1.5"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="2s" repeatCount="indefinite"/></circle>
+                        <circle cx="180" cy="20" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/></circle>
+                        <circle cx="280" cy="35" r="1.5"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+                        <circle cx="350" cy="25" r="2"><animate attributeName="opacity" values="0.4;1;0.4" dur="1.8s" repeatCount="indefinite"/></circle>
+                        <circle cx="420" cy="40" r="1.5"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.8s" repeatCount="indefinite"/></circle>
+                        <circle cx="460" cy="20" r="2"><animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/></circle>
+                    </g>
+                    
+                    <!-- Ground -->
+                    <rect x="0" y="140" width="500" height="40" fill="#F5E6C8" rx="0"/>
+                    
+                    <!-- Adult narrator sitting alone -->
+                    <g transform="translate(250, 120)">
+                        <!-- Body sitting -->
+                        <path d="M-20 25 L-15 0 L15 0 L20 25 Z" fill="#5D4E37"/>
+                        <!-- Legs -->
+                        <path d="M-15 25 L-25 45 L-18 45" fill="#4A3F2F"/>
+                        <path d="M15 25 L25 45 L18 45" fill="#4A3F2F"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="-15" r="14" fill="#FFE4B5"/>
+                        <!-- Hair (grown up) -->
+                        <ellipse cx="0" cy="-25" rx="12" ry="8" fill="#6B4423"/>
+                        <!-- Tired eyes -->
+                        <ellipse cx="-5" cy="-16" rx="2" ry="1.5" fill="#5D4E37"/>
+                        <ellipse cx="5" cy="-16" rx="2" ry="1.5" fill="#5D4E37"/>
+                        <!-- Slight frown -->
+                        <path d="M-4 -8 Q0 -10 4 -8" stroke="#8B7355" stroke-width="1.5" fill="none"/>
+                    </g>
+                    
+                    <!-- Drawing #1 on ground (left) -->
+                    <g transform="translate(150, 145)">
+                        <rect x="-25" y="-15" width="50" height="35" fill="#FDF8EE" stroke="#E8D4A8" stroke-width="1" rx="2"/>
+                        <path d="M-15 12 Q-10 -5 0 -8 Q10 -12 15 12" fill="#5D8A66"/>
+                        <text x="0" y="28" text-anchor="middle" font-size="8" fill="#7A6B55">ציור 1#</text>
+                    </g>
+                    
+                    <!-- Drawing #2 on ground (right) -->
+                    <g transform="translate(350, 145)">
+                        <rect x="-25" y="-15" width="50" height="35" fill="#FDF8EE" stroke="#E8D4A8" stroke-width="1" rx="2"/>
+                        <path d="M-15 12 Q-10 -5 0 -8 Q10 -12 15 12" fill="none" stroke="#3D5A40" stroke-width="1" stroke-dasharray="2,1"/>
+                        <ellipse cx="0" cy="2" rx="10" ry="6" fill="#A0A0A0"/>
+                        <text x="0" y="28" text-anchor="middle" font-size="8" fill="#7A6B55">ציור 2#</text>
+                    </g>
+                    
+                    <!-- Ghostly child figure (memory) -->
+                    <g transform="translate(70, 115)" opacity="0.4" filter="url(#glowEffect)">
+                        <rect x="-10" y="10" width="20" height="20" fill="#7FC8B8" rx="3"/>
+                        <circle cx="0" cy="0" r="10" fill="#FFE4B5"/>
+                        <ellipse cx="0" cy="-8" rx="8" ry="6" fill="#8B4513"/>
+                        <circle cx="-3" cy="-1" r="1.5" fill="#5D4E37"/>
+                        <circle cx="3" cy="-1" r="1.5" fill="#5D4E37"/>
+                        <path d="M-3 5 Q0 8 3 5" stroke="#C4846C" stroke-width="1" fill="none"/>
+                    </g>
+                    
+                    <!-- Text at bottom -->
+                    <text x="250" y="172" text-anchor="middle" font-family="Heebo, sans-serif" font-size="10" fill="#5D4E37">"חייתי לבד, ללא מישהו שאוכל לדבר עמו באמת..."</text>
+                </svg>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים אחרים:</p>
+                        <p>הנחש יופיע שוב בפרק 17 ויציע לנסיך את הדרך הביתה. הפער בין "לראות" ל"להבין" יגיע לשיאו בפרק 21 עם המשפט המפורסם "רואים טוב רק בלב". ציור השה בקופסה בפרק 2 יהיה המבחן הראשון שהמספר סוף סוף עובר - מישהו שמבין ציורים.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לחיים האמיתיים:</p>
+                        <p>כל אחד מאיתנו חווה רגע שבו משהו שהיה יקר לנו נדחה על ידי "מבוגרים" - בין אם היו אלה הורים, מורים, או החברה. כמה מאיתנו המשיכו לצייר למרות הביקורת? כמה ויתרו? וכמה עדיין נושאים ציורים ישנים, ממתינים למישהו שיראה?</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-star"></i>
+                        "כל המבוגרים היו פעם ילדים, אבל מעטים מהם זוכרים את זה."
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>הספר נכתב למבוגרים - כדי להזכיר להם שהם היו ילדים. אבל אם המבוגרים באמת שכחו, האם הם יכולים להבין ספר שמדבר על מה ששכחו? האם "הנסיך הקטן" הוא לא עוד ציור מספר 1, שהמבוגרים יקראו ויגידו "ספר ילדים נחמד"?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>אני יודע שאתה אוהב לחפור לעומק, לשאול שאלות שאין להן תשובות קלות, ולהרגיש את אי-הנוחות שמגיעה כשנוגעים במשהו אמיתי. הנה כמה אתגרים שנבנו במיוחד בשבילך. אל תחפש תשובות "נכונות" - חפש תשובות כנות.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-link"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>הציור שלך שאף אחד לא ראה</h3>
+                            <p>לכל אחד יש "ציור מספר 1" משלו - משהו שניסה לשתף עם העולם ונדחה. אולי זה היה רעיון, חלום, יצירה, או אפילו רגש. מה הציור שלך? מתי לראשונה הראית אותו למישהו ונאמר לך שזה "רק כובע"?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>נסה לחשוב על רגע ספציפי מהילדות שבו היית בטוח במשהו - ואז מישהו "הסביר" לך שאתה טועה. לא בהכרח בכוונה רעה, אולי אפילו "למענך". מה קרה לאותו ביטחון?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>האם אתה כבר מבוגר?</h3>
+                            <p>המספר בודק מבוגרים עם ציור מספר 1 כדי לדעת אם שווה לדבר איתם. אם מישהו היה מראה לך ציור שנראה כמו כובע ושואל אם זה מפחיד - מה היית אומר? תהיה כנה. האם היית שואל "מה זה אמור להיות?" או שהיית אומר "כובע לא מפחיד"? האם יש סיכוי שגם אתה, בלי לשים לב, הפכת לאחד מהמבוגרים שסן-אכזופרי מדבר עליהם?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>השאלה היא לא אם אתה מסוגל לדמיין פיל בתוך נחש. השאלה היא אם הייתה לך סבלנות לעצור ולשאול. מבוגרים לא טועים כי הם טיפשים - הם טועים כי הם ממהרים.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>הבעיה עם ציור מספר 2</h3>
+                            <p>הילד צייר ציור מספר 2 כי חשב שהבעיה היא שהמבוגרים לא הבינו. אז הוא הסביר, פירט, חשף. אבל גם אז הם לא התעניינו. האם הבעיה הייתה באמת ההבנה? או שהבעיה הייתה משהו אחר לגמרי - והציור השני רק הוכיח שלילד אין מושג מה הבעיה האמיתית?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>מה ההבדל בין "לא להבין" לבין "לא לרצות להבין"? האם תמיד אפשר להבחין ביניהם? ומה זה אומר על כל הפעמים שאנחנו "מסבירים יותר טוב" כשמישהו לא מקבל את מה שאנחנו אומרים?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>העולם ללא ילדים פנימיים</h3>
+                            <p>דמיין עולם שבו כל הילדים הפנימיים באמת מתו - לא רק נרדמו, אלא נעלמו לחלוטין. עולם שבו אף אחד לא זוכר איך לראות פילים בתוך נחשים. איך היה נראה אותו עולם? מה היה חסר? האם היו בו עדיין ספרים? מוזיקה? אהבה?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על הדברים בחיים שלך שמביאים לך את השמחה הכי גדולה. כמה מהם דורשים את היכולת לראות מעבר למה שנראה? כמה מהם דורשים דמיון, אמון, פליאה?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>לשמור או לחשוף?</h3>
+                            <p>המספר נושא את הציורים איתו כל חייו ובודק בהם אנשים. אבל הוא גם למד "לרדת לרמתם" ולדבר על ברידג' וגולף. האם זו בגידה בעצמו - או הישרדות חכמה? האם עדיף לשמור על הילד הפנימי חבוי ובטוח, או לחשוף אותו שוב ושוב גם אם זה כואב?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על זה: הילד הפסיק לצייר אחרי הדחייה, אבל המספר עדיין מראה את הציור למבוגרים חדשים. האם זה אומר שהוא לא באמת ויתר? או שזו רק צורה אחרת של כניעה - לבדוק במקום לשתף?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-message-circle-question"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>האשמה של המבוגרים</h3>
+                            <p>קל להאשים את המבוגרים בפרק. הם עיוורים, הם משעממים, הם הרגו את חלומו של ילד. אבל שים לב: הם לא היו אכזריים. הם לא צחקו עליו. הם פשוט לא הבינו, ואז המליצו לו לעשות משהו "שימושי". האם הם באמת אשמים? או שהם עצמם קורבנות של אותו מנגנון - ילדים שהפילים שלהם נבלעו מזמן?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>סן-אכזופרי פותח את הספר בהקדשה לחברו ליאון וורט "כשהיה ילד קטן". הוא לא כתב "לילד שבתוך ליאון" אלא לליאון עצמו, כמו שהיה פעם. האם המבוגרים בפרק הם עדיין אותם ילדים, רק שכחו?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="#" class="book-nav-btn disabled" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 00
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-02.html" class="book-nav-btn" id="nextChapter">
+                פרק 02
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700 !important; vertical-align: middle; display: inline-block;">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            הנסיך הקטן - פרק 1 מתוך 27
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700 !important; vertical-align: middle; display: inline-block;">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with inline SVG for GitHub Pages compatibility
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                star.setAttribute('viewBox', '0 0 24 24');
+                star.classList.add('star');
+                const size = (Math.random() * 10 + 8) + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.fill = '#FFD700';
+                star.innerHTML = '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation with directional slide animation
+        let currentTabIndex = 0;
+        const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+        
+        document.querySelectorAll('.nav-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.dataset.section;
+                const newIndex = tabs.indexOf(sectionId);
+                const direction = newIndex > currentTabIndex ? 'slide-right' : 'slide-left';
+                
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.section').forEach(s => {
+                    s.classList.remove('active', 'slide-right', 'slide-left');
+                });
+                
+                const newSection = document.getElementById(sectionId);
+                newSection.classList.add('active', direction);
+                
+                currentTabIndex = newIndex;
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 1; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+        
+        // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 1;
+        
+        function getBookmarks() {
+            try {
+                const stored = localStorage.getItem(BOOKMARKS_KEY);
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        
+        function saveBookmarks(bookmarks) {
+            try {
+                localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+            } catch (e) {
+                console.warn('Could not save bookmarks');
+            }
+        }
+        
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark');
+            if (!btn) return;
+            
+            const bookmarks = getBookmarks();
+            const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            
+            updateBookmarkButton(btn, isBookmarked);
+            
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks();
+                const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                
+                if (index > -1) {
+                    bookmarks.splice(index, 1);
+                    updateBookmarkButton(btn, false);
+                } else {
+                    bookmarks.push(CURRENT_CHAPTER);
+                    updateBookmarkButton(btn, true);
+                    btn.classList.add('just-bookmarked');
+                    setTimeout(() => btn.classList.remove('just-bookmarked'), 400);
+                }
+                
+                saveBookmarks(bookmarks);
+            });
+        }
+        
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) {
+                btn.classList.add('bookmarked');
+                icon.className = 'ti ti-heart-filled';
+                btn.title = 'הסר מהמועדפים';
+            } else {
+                btn.classList.remove('bookmarked');
+                icon.className = 'ti ti-heart';
+                btn.title = 'הוסף למועדפים';
+            }
+        }
+        
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>

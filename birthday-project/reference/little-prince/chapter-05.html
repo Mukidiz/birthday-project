@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 5: הבאובבים</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <style>
+        :root {
+            --primary-color: #8FBC8F;
+            --secondary-color: #7DAF7D;
+            --accent-color: #6BA26B;
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --text-primary: #eee;
+            --text-secondary: #aaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f1a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .chapter-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 3rem;
+        }
+
+        .chapter-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .chapter-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .chapter-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .section-header i {
+            font-size: 1.8rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+        }
+
+        /* Quote boxes */
+        .quote-box {
+            background: rgba(143, 188, 143, 0.1);
+            border-right: 3px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-analysis {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Symbol cards */
+        .symbols-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .symbol-card {
+            background: rgba(143, 188, 143, 0.05);
+            border: 1px solid rgba(143, 188, 143, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .symbol-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            background: rgba(143, 188, 143, 0.1);
+        }
+
+        .symbol-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .symbol-name {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .symbol-meaning {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .symbol-deep {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(143, 188, 143, 0.2);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .symbol-card.active .symbol-deep {
+            display: block;
+        }
+
+        /* Journey stages */
+        .journey-timeline {
+            position: relative;
+            padding-right: 2rem;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        }
+
+        .journey-stage {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(143, 188, 143, 0.05);
+            border-radius: 10px;
+        }
+
+        .journey-stage::before {
+            content: '';
+            position: absolute;
+            right: -2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .stage-title {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-description {
+            color: var(--text-secondary);
+        }
+
+        /* Interpretations */
+        .interpretation-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            background: rgba(143, 188, 143, 0.1);
+            border: 1px solid rgba(143, 188, 143, 0.3);
+            color: var(--text-secondary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        .interpretation-content {
+            display: none;
+            padding: 1.5rem;
+            background: rgba(143, 188, 143, 0.05);
+            border-radius: 10px;
+        }
+
+        .interpretation-content.active {
+            display: block;
+        }
+
+        /* Challenge cards */
+        .challenge-card {
+            background: rgba(143, 188, 143, 0.08);
+            border: 1px solid rgba(143, 188, 143, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenge-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .challenge-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .challenge-type {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .challenge-question {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .challenge-hint {
+            display: none;
+            padding: 1rem;
+            background: rgba(143, 188, 143, 0.1);
+            border-radius: 8px;
+            margin-top: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .hint-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .hint-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(143, 188, 143, 0.2);
+            margin-top: 2rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(143, 188, 143, 0.1);
+            border: 1px solid rgba(143, 188, 143, 0.3);
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn-fixed { background: rgba(255,255,255,0.1); border: 2px solid var(--primary-color); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: inherit; font-size: 0.9rem; color: var(--primary-color); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .home-btn-fixed:hover { background: var(--primary-color); color: var(--bg-dark); }
+        .chapter-bookmark-btn { background: rgba(255,255,255,0.1); border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; background: rgba(232,160,160,0.2); }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+        /* Illustration */
+        .illustration {
+            text-align: center;
+            padding: 1rem;
+            margin: 2rem auto;
+        }
+
+        .illustration svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+            border-radius: 15px;
+        }
+
+        /* Reveal button */
+        .reveal-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            border: 1px dashed var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-btn:hover {
+            background: rgba(143, 188, 143, 0.1);
+        }
+
+        .hidden-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(143, 188, 143, 0.05);
+            border-radius: 8px;
+        }
+
+        .hidden-content.revealed {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 2rem;
+            }
+
+            .symbols-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn-fixed">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    <div class="container">
+        <!-- Header -->
+        <header class="chapter-header">
+            <div class="chapter-icon">
+                <i class="ti ti-tree"></i>
+            </div>
+            <div class="chapter-number">פרק חמישי</div>
+            <h1 class="chapter-title">הבאובבים</h1>
+            <p class="chapter-subtitle">על אחריות, דחיינות, וזרעי ההרס שאנו מטפחים בתוכנו</p>
+        </header>
+
+        <!-- Main Illustration: The Baobabs - Care vs. Destruction -->
+        <div class="illustration" style="max-width: 600px; margin: 2rem auto; padding: 0;">
+            <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 600px;">
+                <defs>
+                    <!-- Gradients -->
+                    <linearGradient id="spaceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0a0a1a"/>
+                        <stop offset="50%" style="stop-color:#1a1a2e"/>
+                        <stop offset="100%" style="stop-color:#16213e"/>
+                    </linearGradient>
+                    <linearGradient id="healthyPlanet" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6C8"/>
+                        <stop offset="100%" style="stop-color:#E8D4A8"/>
+                    </linearGradient>
+                    <linearGradient id="dyingPlanet" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#8B7355"/>
+                        <stop offset="100%" style="stop-color:#5D4E37"/>
+                    </linearGradient>
+                    <linearGradient id="baobabTrunk" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#5D4E37"/>
+                        <stop offset="50%" style="stop-color:#8B7355"/>
+                        <stop offset="100%" style="stop-color:#5D4E37"/>
+                    </linearGradient>
+                    <linearGradient id="baobabLeaves" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#6BA26B"/>
+                        <stop offset="100%" style="stop-color:#8FBC8F"/>
+                    </linearGradient>
+                    <linearGradient id="roseGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#C41E3A"/>
+                        <stop offset="100%" style="stop-color:#FF6B8A"/>
+                    </linearGradient>
+                    <filter id="planetGlow">
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="crackShadow">
+                        <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="#000" flood-opacity="0.5"/>
+                    </filter>
+                </defs>
+                
+                <!-- Background: Deep space -->
+                <rect width="600" height="320" fill="url(#spaceGradient)" rx="15"/>
+                
+                <!-- Twinkling Stars -->
+                <g fill="#FFD700">
+                    <circle cx="30" cy="40" r="1.5"><animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="80" cy="25" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle>
+                    <circle cx="150" cy="50" r="1"><animate attributeName="opacity" values="0.4;0.9;0.4" dur="3s" repeatCount="indefinite"/></circle>
+                    <circle cx="200" cy="20" r="1.5"><animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite"/></circle>
+                    <circle cx="300" cy="35" r="2"><animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/></circle>
+                    <circle cx="400" cy="25" r="1.5"><animate attributeName="opacity" values="0.4;1;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
+                    <circle cx="450" cy="50" r="2"><animate attributeName="opacity" values="0.3;0.9;0.3" dur="2s" repeatCount="indefinite"/></circle>
+                    <circle cx="520" cy="30" r="1"><animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/></circle>
+                    <circle cx="570" cy="45" r="1.5"><animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.3s" repeatCount="indefinite"/></circle>
+                    <circle cx="250" cy="15" r="1"><animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.7s" repeatCount="indefinite"/></circle>
+                    <circle cx="350" cy="60" r="1"><animate attributeName="opacity" values="0.4;0.8;0.4" dur="1.9s" repeatCount="indefinite"/></circle>
+                </g>
+                
+                <!-- ========== LEFT SIDE: Healthy Planet with Little Prince ========== -->
+                <g transform="translate(150, 180)">
+                    <!-- The healthy planet -->
+                    <circle cx="0" cy="0" r="65" fill="url(#healthyPlanet)" filter="url(#planetGlow)"/>
+                    <!-- Surface details -->
+                    <ellipse cx="-25" cy="-20" rx="15" ry="8" fill="#E8D4A8" opacity="0.5"/>
+                    <ellipse cx="30" cy="15" rx="10" ry="6" fill="#E8D4A8" opacity="0.4"/>
+                    <ellipse cx="-10" cy="35" rx="8" ry="5" fill="#E8D4A8" opacity="0.3"/>
+                    
+                    <!-- Small volcanoes (capped) -->
+                    <g transform="translate(-40, -30)">
+                        <path d="M0 0 L-6 -12 L6 -12 Z" fill="#8B7355"/>
+                        <ellipse cx="0" cy="-12" rx="6" ry="2" fill="#5D4E37"/>
+                    </g>
+                    <g transform="translate(35, -25)">
+                        <path d="M0 0 L-4 -8 L4 -8 Z" fill="#8B7355"/>
+                        <ellipse cx="0" cy="-8" rx="4" ry="1.5" fill="#5D4E37"/>
+                    </g>
+                    
+                    <!-- The Rose (protected, healthy) -->
+                    <g transform="translate(20, -55)">
+                        <!-- Glass dome -->
+                        <path d="M-15 5 Q-15 -25 0 -30 Q15 -25 15 5" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                        <ellipse cx="0" cy="5" rx="15" ry="4" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                        <!-- Rose stem -->
+                        <line x1="0" y1="5" x2="0" y2="-10" stroke="#228B22" stroke-width="2"/>
+                        <!-- Rose flower -->
+                        <circle cx="0" cy="-14" r="7" fill="url(#roseGradient)"/>
+                        <ellipse cx="-5" cy="-12" rx="4" ry="5" fill="#FF6B8A" opacity="0.8"/>
+                        <ellipse cx="5" cy="-12" rx="4" ry="5" fill="#FF6B8A" opacity="0.8"/>
+                        <ellipse cx="0" cy="-18" rx="3" ry="4" fill="#C41E3A"/>
+                        <!-- Rose leaves -->
+                        <ellipse cx="-6" cy="0" rx="5" ry="2" fill="#228B22" transform="rotate(-30 -6 0)"/>
+                        <ellipse cx="6" cy="-2" rx="4" ry="2" fill="#228B22" transform="rotate(25 6 -2)"/>
+                    </g>
+                    
+                    <!-- Small seedlings being cared for (one tiny baobab being pulled) -->
+                    <g transform="translate(-30, -50)">
+                        <line x1="0" y1="0" x2="0" y2="-8" stroke="#6BA26B" stroke-width="1.5"/>
+                        <ellipse cx="0" cy="-10" rx="4" ry="3" fill="#8FBC8F"/>
+                    </g>
+                    
+                    <!-- The Little Prince (caring for his planet) -->
+                    <g transform="translate(-45, -65)">
+                        <!-- Body -->
+                        <rect x="-8" y="8" width="16" height="22" fill="#5FBAA8" rx="3"/>
+                        <!-- Head -->
+                        <circle cx="0" cy="0" r="11" fill="#FFE4B5"/>
+                        <!-- Golden spiky hair -->
+                        <path d="M-9 -5 L-6 -15 L-3 -6 L0 -18 L3 -6 L6 -14 L9 -5" fill="#FFD700"/>
+                        <!-- Happy face (caring expression) -->
+                        <circle cx="-4" cy="-2" r="2" fill="#5D4E37"/>
+                        <circle cx="4" cy="-2" r="2" fill="#5D4E37"/>
+                        <path d="M-4 5 Q0 9 4 5" stroke="#C4846C" stroke-width="1.5" fill="none"/>
+                        <!-- Scarf -->
+                        <path d="M9 12 Q18 10 22 18 Q26 25 23 32" stroke="#5FBAA8" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        <!-- Arm reaching to pull seedling -->
+                        <line x1="8" y1="15" x2="18" y2="8" stroke="#FFE4B5" stroke-width="4" stroke-linecap="round"/>
+                        <!-- Hand -->
+                        <circle cx="20" cy="6" r="3" fill="#FFE4B5"/>
+                    </g>
+                    
+                    <!-- Uprooted baby baobab in hand -->
+                    <g transform="translate(-20, -60)">
+                        <line x1="0" y1="0" x2="0" y2="-6" stroke="#6BA26B" stroke-width="1"/>
+                        <ellipse cx="0" cy="-7" rx="3" ry="2" fill="#7DAF7D"/>
+                        <!-- Roots showing (pulled out) -->
+                        <path d="M0 0 L-2 4 M0 0 L2 3 M0 0 L0 5" stroke="#8B7355" stroke-width="0.5"/>
+                    </g>
+                    
+                    <!-- Label -->
+                    <text x="0" y="95" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#8FBC8F">אחריות יומיומית</text>
+                    <text x="0" y="110" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55" font-style="italic">"לעקור בעודם קטנים"</text>
+                </g>
+                
+                <!-- ========== CENTER: The VS divider with seedlings comparison ========== -->
+                <g transform="translate(300, 160)">
+                    <!-- Vertical dashed line -->
+                    <line x1="0" y1="-100" x2="0" y2="60" stroke="#8FBC8F" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
+                    
+                    <!-- VS circle -->
+                    <circle cx="0" cy="-20" r="15" fill="#16213e" stroke="#8FBC8F" stroke-width="2"/>
+                    <text x="0" y="-16" text-anchor="middle" font-family="Heebo" font-size="10" fill="#8FBC8F">או</text>
+                    
+                    <!-- Time arrow showing progression -->
+                    <g transform="translate(0, 30)">
+                        <text x="0" y="0" text-anchor="middle" font-family="Heebo, sans-serif" font-size="8" fill="#7A6B55">זמן →</text>
+                        <!-- Small seedling (both look the same at start) -->
+                        <g transform="translate(-30, 15)">
+                            <line x1="0" y1="0" x2="0" y2="-8" stroke="#6BA26B" stroke-width="1.5"/>
+                            <ellipse cx="0" cy="-10" rx="3" ry="2" fill="#8FBC8F"/>
+                            <text x="0" y="12" text-anchor="middle" font-family="Heebo" font-size="7" fill="#7A6B55">?</text>
+                        </g>
+                        <g transform="translate(30, 15)">
+                            <line x1="0" y1="0" x2="0" y2="-8" stroke="#6BA26B" stroke-width="1.5"/>
+                            <ellipse cx="0" cy="-10" rx="3" ry="2" fill="#8FBC8F"/>
+                            <text x="0" y="12" text-anchor="middle" font-family="Heebo" font-size="7" fill="#7A6B55">?</text>
+                        </g>
+                        <text x="0" y="30" text-anchor="middle" font-family="Heebo" font-size="7" fill="#8FBC8F">"נראים אותו דבר בהתחלה"</text>
+                    </g>
+                </g>
+                
+                <!-- ========== RIGHT SIDE: Destroyed Planet (The Lazy Man's Planet) ========== -->
+                <g transform="translate(450, 180)">
+                    <!-- The dying/cracking planet -->
+                    <circle cx="0" cy="0" r="65" fill="url(#dyingPlanet)"/>
+                    
+                    <!-- Deep cracks across the planet -->
+                    <g stroke="#1a1a1a" stroke-width="2" filter="url(#crackShadow)">
+                        <path d="M-50 -30 Q-30 -10 -20 -40 Q0 -20 20 -35 Q40 -15 55 -25" fill="none"/>
+                        <path d="M-40 20 Q-20 0 0 25 Q20 10 45 30" fill="none"/>
+                        <path d="M-30 -10 L-10 15 L10 -5 L30 20" fill="none"/>
+                        <path d="M-55 0 Q-40 20 -25 5" fill="none"/>
+                        <path d="M35 -10 Q50 10 55 -5" fill="none"/>
+                    </g>
+                    
+                    <!-- Glowing cracks (magma showing through) -->
+                    <g stroke="#C41E3A" stroke-width="1" opacity="0.4">
+                        <path d="M-48 -28 Q-28 -8 -18 -38" fill="none"/>
+                        <path d="M-38 22 Q-18 2 2 27" fill="none"/>
+                    </g>
+                    
+                    <!-- Giant Baobab Trees destroying the planet -->
+                    <!-- Tree 1 (left) -->
+                    <g transform="translate(-30, -45)">
+                        <!-- Massive trunk -->
+                        <path d="M-12 50 Q-20 25 -15 0 Q-12 -20 -8 -40 L8 -40 Q12 -20 15 0 Q20 25 12 50" fill="url(#baobabTrunk)"/>
+                        <!-- Roots breaking through planet -->
+                        <g stroke="#5D4E37" stroke-width="4" fill="none">
+                            <path d="M-10 50 Q-30 70 -45 60"/>
+                            <path d="M-5 50 Q-15 80 -30 85"/>
+                            <path d="M5 50 Q15 75 10 90"/>
+                            <path d="M10 50 Q25 65 35 55"/>
+                        </g>
+                        <!-- Crown -->
+                        <ellipse cx="-15" cy="-50" rx="20" ry="15" fill="url(#baobabLeaves)" opacity="0.9"/>
+                        <ellipse cx="15" cy="-50" rx="18" ry="14" fill="url(#baobabLeaves)" opacity="0.85"/>
+                        <ellipse cx="0" cy="-60" rx="22" ry="18" fill="#7DAF7D"/>
+                    </g>
+                    
+                    <!-- Tree 2 (right) -->
+                    <g transform="translate(25, -35)">
+                        <!-- Trunk -->
+                        <path d="M-8 45 Q-14 20 -10 0 Q-8 -15 -5 -30 L5 -30 Q8 -15 10 0 Q14 20 8 45" fill="url(#baobabTrunk)"/>
+                        <!-- Roots -->
+                        <g stroke="#5D4E37" stroke-width="3" fill="none">
+                            <path d="M-6 45 Q-20 60 -30 50"/>
+                            <path d="M0 48 Q5 70 15 75"/>
+                            <path d="M6 45 Q20 55 30 45"/>
+                        </g>
+                        <!-- Crown -->
+                        <ellipse cx="-10" cy="-40" rx="15" ry="12" fill="url(#baobabLeaves)" opacity="0.9"/>
+                        <ellipse cx="10" cy="-38" rx="14" ry="11" fill="url(#baobabLeaves)" opacity="0.85"/>
+                        <ellipse cx="0" cy="-48" rx="18" ry="15" fill="#7DAF7D"/>
+                    </g>
+                    
+                    <!-- Tree 3 (back, smaller - depth) -->
+                    <g transform="translate(0, -60)" opacity="0.7">
+                        <path d="M-6 40 Q-10 20 -7 5 L7 5 Q10 20 6 40" fill="#6B5344"/>
+                        <ellipse cx="0" cy="-5" rx="12" ry="10" fill="#6BA26B"/>
+                    </g>
+                    
+                    <!-- Pieces breaking off the planet -->
+                    <g fill="#5D4E37">
+                        <circle cx="-70" cy="20" r="5" opacity="0.8">
+                            <animate attributeName="cx" values="-70;-85" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="20;35" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.8;0" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="65" cy="-15" r="4" opacity="0.7">
+                            <animate attributeName="cx" values="65;80" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="-15;-5" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.7;0" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="55" cy="40" r="3" opacity="0.6">
+                            <animate attributeName="cx" values="55;70" dur="2.5s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="40;55" dur="2.5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.6;0" dur="2.5s" repeatCount="indefinite"/>
+                        </circle>
+                    </g>
+                    
+                    <!-- The lazy man's ghost/absence (just a small figure looking helpless) -->
+                    <g transform="translate(60, 35)" opacity="0.5">
+                        <circle cx="0" cy="0" r="4" fill="#aaa"/>
+                        <line x1="0" y1="4" x2="0" y2="12" stroke="#aaa" stroke-width="2"/>
+                        <!-- Arms up in despair -->
+                        <line x1="0" y1="6" x2="-5" y2="2" stroke="#aaa" stroke-width="1.5"/>
+                        <line x1="0" y1="6" x2="5" y2="2" stroke="#aaa" stroke-width="1.5"/>
+                    </g>
+                    
+                    <!-- Label -->
+                    <text x="0" y="95" text-anchor="middle" font-family="Heebo, sans-serif" font-size="11" fill="#C41E3A">הזנחה</text>
+                    <text x="0" y="110" text-anchor="middle" font-family="Heebo, sans-serif" font-size="9" fill="#7A6B55" font-style="italic">"שלוש פעמים דחה..."</text>
+                </g>
+                
+                <!-- Bottom quote -->
+                <text x="300" y="300" text-anchor="middle" font-family="Heebo, sans-serif" font-size="12" fill="#8FBC8F" font-style="italic">"ילדים! היזהרו מהבאובבים!"</text>
+            </svg>
+        </div>
+
+        <!-- Section 1: Summary -->
+        <section class="section" id="summary">
+            <div class="section-header">
+                <i class="ti ti-book"></i>
+                <h2>תמצית הפרק</h2>
+            </div>
+            
+            <p>בכל יום אנו זורעים זרעים. חלקם פורחים לוורדים וחלקם גדלים לבאובבים. הנסיך הקטן מגלה לנו את הסוד המפחיד ביותר של הקיום: ההבדל בין השניים אינו ניכר בהתחלה, והמחיר של הזנחה הוא מוחלט ובלתי הפיך.</p>
+
+            <p>על כוכבו הזעיר של הנסיך, שבו כל דבר גדל למימדים קטנים ונשלטים, מופיעים זרעים מסוכנים במיוחד — זרעי הבאובב. עצי ענק אלה, שבכדור הארץ הם מפוארים ומרשימים, הופכים על כוכב קטן לאסון קיומי. שורשיהם חודרים עמוק לתוך הקרקע, מפצלים אותה ומפוררים אותה עד שהכוכב כולו מתפרק. אין דרך חזרה. אין תיקון אפשרי. יש רק מניעה — ורק אם היא מתבצעת בזמן.</p>
+
+            <p>הנסיך מתאר את הפולחן היומי שלו: בכל בוקר, לאחר שהתרחץ והתכונן ליום, הוא מנקה את כוכבו. זוהי לא עבודה מרגשת. זוהי לא הרפתקה. זהו הפעולה הפשוטה והמשעממת ביותר — עקירת שתילים קטנים בעוד הם רכים. אך דווקא בפשטות הזו טמונה האמת העמוקה ביותר: האחריות אינה פעולה הרואית חד-פעמית, אלא משמעת יומיומית של תשומת לב.</p>
+
+            <div class="quote-box">
+                <div class="quote-text">"זוהי שאלה של משמעת. אחרי שגומרים את הטואלטה של הבוקר, צריך לעשות בזהירות את הטואלטה של הכוכב."</div>
+                <div class="quote-analysis">המילה "טואלטה" — רחצה, ניקיון — משמשת הן לגוף והן לכוכב. סן-אכזופרי משווה במכוון בין הדאגה לעצמי לבין הדאגה לעולם. שניהם דורשים את אותה רמה של תשומת לב יומית, ושניהם סובלים מאותו סוג של הזנחה.</div>
+            </div>
+
+            <p>הנסיך מספר על כוכב אחד שבו חי איש עצלן. האיש הזה דחה שלוש פעמים את עקירת שלושה שתילים. רק שלוש פעמים. רק שלושה שתילים. אך זה היה מספיק. הבאובבים גדלו, השורשים התפשטו, והכוכב נהרס לחלוטין. הסיפור הקצר הזה הוא אולי המשפט הכי מפחיד בספר כולו — לא בגלל מה שהוא אומר, אלא בגלל מה שהוא משאיר לנו להבין לבד.</p>
+
+            <div class="quote-box">
+                <div class="quote-text">"ילדים! היזהרו מהבאובבים!"</div>
+                <div class="quote-analysis">הטייס פונה ישירות לקוראים — לא לילדים בלבד, אלא לילד שבתוך כל מבוגר. הקריאה הנואשת הזו עוברת את הקיר הרביעי של הסיפור. סן-אכזופרי יודע שהוא מדבר על משהו גדול יותר מעצים, והוא מתחנן שנבין.</div>
+            </div>
+
+            <p>הפרק מסתיים בבקשה — הטייס מבקש מאיתנו לשמור את הציור שלו, ציור הבאובבים הורסים כוכב. הוא צייר אותו בקפידה רבה, עבד עליו קשה, כי הוא האמין שזה חשוב. חשוב שנראה. חשוב שנבין. חשוב שנזכור. כי הזרעים כבר נזרעו, ורק אנחנו יכולים להחליט אם לעקור אותם היום — או לגלות מחר שכבר מאוחר מדי.</p>
+
+            <button class="reveal-btn" onclick="toggleReveal('summary-deep')">
+                <i class="ti ti-eye"></i>
+                לעומק נוסף
+            </button>
+            <div id="summary-deep" class="hidden-content">
+                <p>הפרק הזה נכתב ב-1943, בעיצומה של מלחמת העולם השנייה. סן-אכזופרי, טייס צרפתי שצפה במולדתו נופלת תחת הכיבוש הנאצי, ידע היטב את מחיר ההזנחה. האידיאולוגיות ההרסניות לא צמחו בין לילה — הן היו שתילים קטנים שאיש לא טרח לעקור. הפרק הוא אזהרה היסטורית עטופה במעטה של אגדה, זעקה שקטה של איש שראה לאן מובילה הדחיינות הקולקטיבית של אנושות שלמה.</p>
+            </div>
+        </section>
+
+        <!-- Section 2: Symbols -->
+        <section class="section" id="symbols">
+            <div class="section-header">
+                <i class="ti ti-star"></i>
+                <h2>סמלים ומשמעויות</h2>
+            </div>
+            
+            <div class="symbols-grid">
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-plant"></i></div>
+                    <div class="symbol-name">הבאובבים</div>
+                    <div class="symbol-meaning">נטיות הרסניות, הרגלים רעים, מחשבות שליליות — כל מה שמתחיל קטן ונראה בלתי מזיק</div>
+                    <div class="symbol-deep">הבאובב הוא המטאפורה המרכזית: כל דבר הרסני מתחיל בקטן. התמכרות מתחילה בסיגריה אחת. עריצות מתחילה בפשרה אחת. דיכאון מתחיל במחשבה אחת שלא טופלה. הבאובב אינו רע מטבעו — בכדור הארץ הוא עץ מפואר. אך במקום הלא נכון, בזמן הלא נכון, ללא פיקוח מתאים — הוא הרס.</div>
+                </div>
+
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-seed"></i></div>
+                    <div class="symbol-name">הזרעים</div>
+                    <div class="symbol-meaning">רגעי הבחירה הראשוניים, ההחלטות הקטנות שקובעות עתידות</div>
+                    <div class="symbol-deep">הזרע הוא הפוטנציאל הטהור — עדיין לא טוב ולא רע, רק אפשרות. זה הרגע שבו עדיין אפשר לבחור. זרע הוורד וזרע הבאובב נראים זהים בהתחלה, וזו בדיוק הנקודה: לא תמיד נדע מראש מה יצמח מבחירותינו. לכן נדרשת ערנות מתמדת.</div>
+                </div>
+
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-world"></i></div>
+                    <div class="symbol-name">הכוכב הקטן</div>
+                    <div class="symbol-meaning">הנפש האישית, העולם הפנימי שלנו, תחום האחריות האישית</div>
+                    <div class="symbol-deep">הכוכב כה קטן עד שאי אפשר להתחבא בו, אי אפשר להתעלם, אי אפשר להאשים אחרים. זהו מרחב האחריות המוחלטת. כשהבאובב הורס את הכוכב, אין לאן לברוח — וזו בדיוק המציאות של הנפש האנושית.</div>
+                </div>
+
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-clock"></i></div>
+                    <div class="symbol-name">הבוקר</div>
+                    <div class="symbol-meaning">ההזדמנות המתחדשת, נקודת ההתחלה היומית לתיקון</div>
+                    <div class="symbol-deep">הבוקר הוא לא סתם זמן ביום — הוא מתנה. כל בוקר מחדש ניתנת לנו האפשרות להתחיל, לבדוק, לתקן. הנסיך לא מנקה את כוכבו פעם בשנה או כשיש בעיה — הוא עושה זאת בכל בוקר. המשמעת הזו היא הסוד.</div>
+                </div>
+
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-shovel"></i></div>
+                    <div class="symbol-name">העקירה</div>
+                    <div class="symbol-meaning">העבודה הפנימית, ההתבוננות הכנה, ההתמודדות הישירה</div>
+                    <div class="symbol-deep">לעקור שתיל קטן הוא קל. לעקור עץ ענק הוא בלתי אפשרי. הפער הזה הוא כל ההבדל בין מניעה לבין ניסיון נואש להציל. העקירה דורשת להתכופף, להסתכל מקרוב, לגעת באדמה — כלומר להיות קשוב באמת למה שצומח בתוכנו.</div>
+                </div>
+
+                <div class="symbol-card" onclick="toggleSymbol(this)">
+                    <div class="symbol-icon"><i class="ti ti-user-x"></i></div>
+                    <div class="symbol-name">האיש העצלן</div>
+                    <div class="symbol-meaning">הדחיין שבכולנו, הקול שאומר "מחר", "זה לא כל כך נורא"</div>
+                    <div class="symbol-deep">האיש העצלן לא היה רשע. הוא לא רצה להרוס את כוכבו. הוא פשוט דחה. שלוש פעמים. רק שלוש פעמים. זוהי הדמות המפחידה ביותר בכל הספר כי היא כה מוכרת, כה רגילה, כה אנושית. היא אנחנו.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Emotional Journey -->
+        <section class="section" id="journey">
+            <div class="section-header">
+                <i class="ti ti-heart"></i>
+                <h2>המסע הרגשי</h2>
+            </div>
+            
+            <div class="journey-timeline">
+                <div class="journey-stage">
+                    <div class="stage-title"><i class="ti ti-help"></i> סקרנות</div>
+                    <div class="stage-description">הפרק נפתח בהבחנה ביולוגית פשוטה — על הכוכב יש זרעים טובים ורעים. הקורא מתעורר לסקרנות: מה הם הזרעים הרעים? למה הם מסוכנים? יש תחושה של סוד שעומד להיחשף.</div>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-title"><i class="ti ti-alert-triangle"></i> חרדה גוברת</div>
+                    <div class="stage-description">כשהנסיך מתאר את הסכנה של הבאובבים — איך הם חודרים, איך הם גדלים, איך אין דרך חזרה — מתחילה להצטבר תחושת דחיפות. זה לא סיפור על עצים. זה סיפור על משהו קרוב יותר, אישי יותר.</div>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-title"><i class="ti ti-mood-nervous"></i> זיהוי כואב</div>
+                    <div class="stage-description">הסיפור על האיש העצלן פוגע בנקודה רגישה. הקורא מתחיל לזהות את עצמו — את הפעמים שבהן הוא דחה, התעלם, אמר לעצמו "אח"כ". התחושה היא של אי-נוחות עמוקה, של מבט במראה.</div>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-title"><i class="ti ti-bulb"></i> הבנה</div>
+                    <div class="stage-description">הקריאה הישירה "ילדים! היזהרו!" מעבירה את המסר מרמז לגלוי. זהו רגע של בהירות: הפרק לא עוסק בבוטניקה או באסטרונומיה. הוא עוסק בי. בבחירות שלי. באחריות שלי.</div>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-title"><i class="ti ti-flame"></i> התעוררות</div>
+                    <div class="stage-description">הפרק מסתיים לא בשקט אלא בקריאה לפעולה. הציור של הבאובבים הוא תזכורת ויזואלית — משהו לשמור, לזכור. הקורא יוצא מהפרק עם תחושת דחיפות: מה הם הבאובבים שלי? מה אני צריך לעקור היום?</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interpretations -->
+        <section class="section" id="interpretations">
+            <div class="section-header">
+                <i class="ti ti-brain"></i>
+                <h2>פרשנויות</h2>
+            </div>
+            
+            <div class="interpretation-tabs">
+                <button class="tab-btn active" onclick="showInterpretation('psychological')">
+                    <i class="ti ti-brain"></i> פסיכולוגית
+                </button>
+                <button class="tab-btn" onclick="showInterpretation('existential')">
+                    <i class="ti ti-infinity"></i> אקזיסטנציאליסטית
+                </button>
+                <button class="tab-btn" onclick="showInterpretation('biographical')">
+                    <i class="ti ti-user"></i> ביוגרפית
+                </button>
+                <button class="tab-btn" onclick="showInterpretation('spiritual')">
+                    <i class="ti ti-yin-yang"></i> רוחנית
+                </button>
+            </div>
+
+            <div id="psychological" class="interpretation-content active">
+                <h3>הבאובבים כצל היונגיאני</h3>
+                <p>בפסיכולוגיה של יונג, ה"צל" הוא החלק בנפש שאנו מדחיקים, מתעלמים ממנו, מסרבים להכיר בו. הבאובבים הם ייצוג מושלם של הצל — הם לא מגיעים מבחוץ, הם צומחים מתוך הכוכב עצמו, מתוך האדמה שלו.</p>
+                <p>הדחיינות של האיש העצלן היא מנגנון ההגנה הקלאסי: אם לא אסתכל על הבעיה, היא לא קיימת. אך הצל, כמו הבאובב, לא נעלם כשמתעלמים ממנו — הוא גדל. יונג טען שהדרך היחידה להתמודד עם הצל היא לשלב אותו, להכיר בו, לעבוד איתו. לעקור אותו בעודו קטן.</p>
+                <p>העבודה היומיומית של הנסיך היא מה שיונג היה קורא "עבודת הנפש" — התבוננות פנימית קבועה, לא כשיש משבר אלא כשגרה יומיומית. זוהי ההיגיינה הנפשית הבסיסית ביותר, והיא דורשת משמעת שרוב האנשים לא מפתחים.</p>
+            </div>
+
+            <div id="existential" class="interpretation-content">
+                <h3>האחריות כמהות הקיום</h3>
+                <p>סארטר טען ש"האדם נידון לחופש" — אנחנו אחראים לכל בחירה, גם כשלא בחרנו לבחור. הדחיינות היא בחירה. השתיקה היא בחירה. ההתעלמות היא בחירה. האיש העצלן לא סירב לעקור את הבאובבים — הוא בחר לא לעקור, ובכך בחר בהרס.</p>
+                <p>הכוכב הקטן הוא ה"פרויקט" האקזיסטנציאליסטי — המרחב שבו אנחנו יוצרים משמעות לחיינו. אך הפרויקט דורש תחזוקה מתמדת. אי אפשר לבנות משמעות פעם אחת ולשכוח. הבאובבים מייצגים את כוחות האנטרופיה, את הנטייה הטבעית של כל דבר להתפרק ללא מאמץ מתמיד.</p>
+                <p>הידמאר היה אומר שהדאגה (Sorge) היא מהות הקיום האותנטי — להיות מודאג באמת למה שחשוב. הנסיך מגלם את הדאגה הזו: הוא קם בכל בוקר ומטפל בכוכבו לא כי זה כיף, אלא כי זו האחריות שלו.</p>
+            </div>
+
+            <div id="biographical" class="interpretation-content">
+                <h3>אירופה של 1943 והזרעים שלא נעקרו</h3>
+                <p>סן-אכזופרי כתב את הפרק הזה כשאירופה בערה. הנאציזם לא צמח בין לילה — הוא היה שתיל קטן בשנות העשרים, שאפשר היה לעקור. אך אנשים עצלנים — מנהיגים, אזרחים, מעצמות — דחו, פשרו, התעלמו. עד ש"שלושת השתילים" הפכו לאימפריה של חורבן.</p>
+                <p>הטייס הצרפתי ראה את מולדתו נופלת. הוא ראה את הדחיינות הקולקטיבית במו עיניו — את ההיסוס של צרפת, את האפאסנמנט של בריטניה, את האדישות של אמריקה. הקריאה "ילדים! היזהרו!" היא לא רק עצה פדגוגית — היא זעקה של איש שראה לאן מובילה ההזנחה.</p>
+                <p>הציור שהטייס מבקש מאיתנו לשמור הוא מסמך היסטורי: "אל תשכחו מה קורה כשמזניחים. אל תתנו לזה לקרות שוב."</p>
+            </div>
+
+            <div id="spiritual" class="interpretation-content">
+                <h3>הטואלטה של הנפש</h3>
+                <p>במסורות רוחניות רבות, הפרקטיקה היומיומית היא הבסיס — לא החוויות המיסטיות החד-פעמיות. הזן מדבר על "לשטוף את הקערה" כדרך להארה. היהדות מדברת על תפילת שחרית. האסלאם על חמש תפילות ביום. הנסיך מדבר על ניקוי הכוכב בכל בוקר.</p>
+                <p>הקבלה מזהירה מפני "קליפות" — כוחות שליליים שנדבקים לנפש ומעכבים את האור. הדרך להיפטר מהן היא לא מלחמה דרמטית אלא עבודה עקבית של טיהור. הבאובבים הם הקליפות — הם גדלים כשמזניחים את העבודה הרוחנית היומיומית.</p>
+                <p>המילה "טואלטה" מקבלת כאן משמעות מקודשת: לרחוץ את הגוף ולנקות את הכוכב הם אותה פעולה — דאגה למה שהופקד בידינו. הקדושה אינה בפעולות הגדולות אלא במשמעת הקטנה.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Challenges -->
+        <section class="section" id="challenges">
+            <div class="section-header">
+                <i class="ti ti-bulb"></i>
+                <h2>אתגרי חשיבה</h2>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <i class="ti ti-repeat challenge-icon"></i>
+                    <span class="challenge-type">פרדוקס</span>
+                </div>
+                <div class="challenge-question">
+                    גל, הנסיך אומר שחייבים לעקור את הבאובבים בעודם קטנים כי אי אפשר להבדיל ביניהם לבין ורדים בהתחלה. אם אי אפשר להבדיל — איך יודעים מה לעקור? האם המשמעות היא שצריך לעקור הכל, גם את הטוב, למען הביטחון?
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hint1')">
+                    <i class="ti ti-key"></i> רמז
+                </button>
+                <div id="hint1" class="challenge-hint">
+                    חשוב על ההבדל בין זהירות לפרנויה. הנסיך לא עוקר הכל — הוא מחכה עד שאפשר להבדיל, אך לא רגע יותר. מה זה אומר על התזמון של התערבות? ומה קורה כשמתערבים מוקדם מדי לעומת מאוחר מדי?
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <i class="ti ti-alert-triangle challenge-icon"></i>
+                    <span class="challenge-type">שאלה לא נוחה</span>
+                </div>
+                <div class="challenge-question">
+                    האיש העצלן דחה רק שלוש פעמים. רק שלוש. האם יש משהו שאתה דוחה כבר יותר משלוש פעמים, גל? משהו שאתה יודע שצריך לטפל בו אבל ממשיך להגיד "מחר"? מה עוצר אותך — ומה יעצור אותך מלהמשיך לדחות?
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hint2')">
+                    <i class="ti ti-key"></i> רמז
+                </button>
+                <div id="hint2" class="challenge-hint">
+                    לפעמים אנחנו לא דוחים כי אנחנו עצלנים, אלא כי אנחנו פוחדים ממה שנגלה אם נסתכל מקרוב. מה היית מגלה אם היית מתעמת עם מה שאתה דוחה?
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <i class="ti ti-flask challenge-icon"></i>
+                    <span class="challenge-type">ניסוי מחשבתי</span>
+                </div>
+                <div class="challenge-question">
+                    דמיין שאתה יכול לחזור בזמן לכוכב של האיש העצלן, יום אחד לפני שהבאובבים הפכו לבלתי הפיכים. הוא מסרב להקשיב, משוכנע שזה לא כל כך נורא. מה היית אומר לו? ועכשיו — מה היית אומר לעצמך לפני חמש שנים?
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hint3')">
+                    <i class="ti ti-key"></i> רמז
+                </button>
+                <div id="hint3" class="challenge-hint">
+                    קל לדעת מה היינו אומרים לאחרים. הקושי הוא לשמוע את מה שאנחנו אומרים לעצמנו — ואז להקשיב. מה ה"אתה העתידי" היה אומר ל"אתה של היום"?
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <i class="ti ti-link challenge-icon"></i>
+                    <span class="challenge-type">חיבור אישי</span>
+                </div>
+                <div class="challenge-question">
+                    הנסיך מתאר פולחן בוקר: קודם מתרחצים, אחר כך מנקים את הכוכב. מה הפולחן שלך, גל? יש לך "טואלטה של הנפש" — דבר שאתה עושה בכל בוקר כדי לבדוק מה צומח בתוכך? אם לא — מה זה יכול להיות?
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hint4')">
+                    <i class="ti ti-key"></i> רמז
+                </button>
+                <div id="hint4" class="challenge-hint">
+                    הפולחן לא חייב להיות גדול או מרשים. הנסיך לא מדבר על מדיטציה של שעה או יומן של עשרים עמודים. הוא מדבר על תשומת לב קצרה, ממוקדת, יומיומית. מה ייקח לך חמש דקות בבוקר?
+                </div>
+            </div>
+
+            <div class="challenge-card">
+                <div class="challenge-header">
+                    <i class="ti ti-repeat challenge-icon"></i>
+                    <span class="challenge-type">פרדוקס</span>
+                </div>
+                <div class="challenge-question">
+                    סן-אכזופרי מציג את הבאובבים כרוע מוחלט שצריך להשמיד. אך האם באמת יש רוע מוחלט? אולי הבאובבים הם פשוט... באובבים? עצים שגדלים כי זו הטבע שלהם? האם "לעקור" הוא באמת המענה הנכון, או שאולי צריך למצוא דרך אחרת?
+                </div>
+                <button class="hint-btn" onclick="toggleHint('hint5')">
+                    <i class="ti ti-key"></i> רמז
+                </button>
+                <div id="hint5" class="challenge-hint">
+                    בכדור הארץ, באובבים הם עצים מפוארים. בכוכב קטן, הם הרס. מה עושה משהו ל"רע"? ההקשר? ההשפעה? הכוונה? אולי השאלה היא לא "מה רע" אלא "מה לא מתאים למקום הזה, בזמן הזה"?
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <nav class="navigation">
+            <a href="chapter-04.html" class="nav-btn">
+                <i class="ti ti-arrow-right"></i>
+                <span>פרק קודם</span>
+            </a>
+            <a href="index.html" class="nav-btn">
+                <i class="ti ti-home"></i>
+                <span>ראשי</span>
+            </a>
+            <a href="chapter-06.html" class="nav-btn">
+                <span>פרק הבא</span>
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </nav>
+    </div>
+    </div><!-- END page-wrapper -->
+
+    <script>
+        function toggleSymbol(card) {
+            card.classList.toggle('active');
+        }
+
+        function showInterpretation(id) {
+            document.querySelectorAll('.interpretation-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleHint(id) {
+            const hint = document.getElementById(id);
+            hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleReveal(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('revealed');
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 5; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+            }
+        });
+        
+        // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        updateReadingProgress();
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 5;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        initBookmarkButton();
+    </script>
+</body>
+</html>

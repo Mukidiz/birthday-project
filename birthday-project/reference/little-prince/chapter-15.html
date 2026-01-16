@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן - פרק 15 | הגאוגרף</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES - NEVER CHANGE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            /* THEME COLORS - Critical/Danger palette for the Geographer */
+            --primary: #CD5C5C;
+            --secondary: #A94442;
+            --accent: #8B3A3A;
+            
+            /* FIXED COLORS - NEVER CHANGE */
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--sand-light) 40%, var(--sand) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container { position: fixed; top: 0; left: 0; width: 100%; height: 40%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; color: #FFD700 !important; fill: #FFD700 !important; opacity: 0.6; animation: twinkle 3s ease-in-out infinite; }
+        
+        /* PLANET DECORATION */
+        .planet {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, var(--sand), var(--sand-dark));
+            border-radius: 50%;
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.1);
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon { font-size: 3rem; color: var(--accent); margin-bottom: 15px; animation: sway 4s ease-in-out infinite; }
+        .header h1 { font-size: 2.5rem; font-weight: 300; color: var(--text-primary); margin-bottom: 5px; letter-spacing: 2px; }
+        .header .chapter-number { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; margin-bottom: 5px; }
+        .header .chapter-title { font-size: 1.3rem; color: var(--accent); font-weight: 400; }
+        .header .mood-badge {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        
+        /* NAVIGATION */
+        .nav-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .nav-btn {
+            background: var(--sand-light);
+            border: 2px solid var(--sand-dark);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover { background: var(--sand-dark); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .nav-btn i { font-size: 1.2rem; }
+        
+        /* SECTIONS */
+        .section { display: none; animation: fadeIn 0.6s ease; }
+        .section.active { display: block; }
+        
+        /* CARDS */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.1);
+            border: 1px solid var(--sand-dark);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+        }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .card-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            background: var(--accent);
+            color: white;
+        }
+        .card h2 { font-size: 1.4rem; font-weight: 500; color: var(--text-primary); }
+        .card p { line-height: 1.9; color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 15px; }
+        .card h3 { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); margin: 25px 0 15px 0; }
+        
+        /* QUOTE BOX */
+        .quote-box {
+            background: linear-gradient(135deg, var(--sand-light), var(--sand));
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+            font-style: italic;
+            position: relative;
+        }
+        .quote-box::before {
+            content: '\eb48';
+            font-family: 'tabler-icons';
+            position: absolute;
+            top: -10px; right: 15px;
+            font-size: 2rem;
+            color: var(--accent);
+            opacity: 0.5;
+        }
+        .quote-box .quote-text { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 10px; }
+        .quote-box .quote-analysis { font-size: 0.95rem; color: var(--text-secondary); font-style: normal; margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--sand-dark); }
+        
+        /* REVEAL BUTTON */
+        .reveal-container { margin: 25px 0; text-align: center; }
+        .reveal-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .reveal-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        .reveal-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            background: var(--sand-light);
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+        .reveal-content.open { max-height: 800px; padding: 25px; }
+        .reveal-content p { margin-bottom: 15px; }
+        .reveal-content p:last-child { margin-bottom: 0; }
+        
+        /* CHARACTER GRID */
+        .character-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 25px 0; }
+        .character-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+        }
+        .character-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .character-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .character-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .character-card p { font-size: 0.95rem; color: var(--text-secondary); }
+        .character-card .symbolic-role { font-size: 0.85rem; color: var(--accent); margin-top: 10px; font-weight: 500; }
+        
+        /* SYMBOL GRID */
+        .symbol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 25px 0; }
+        .symbol-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .symbol-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .symbol-card i { font-size: 2.5rem; margin-bottom: 15px; display: block; color: var(--accent); }
+        .symbol-card h3 { font-size: 1.1rem; margin-bottom: 10px; color: var(--text-primary); }
+        .symbol-card p { font-size: 0.9rem; color: var(--text-secondary); }
+        .symbol-card .deep-meaning { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--sand-dark); text-align: right; }
+        .symbol-card.expanded .deep-meaning { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* TIMELINE */
+        .timeline { position: relative; padding-right: 30px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 8px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        .timeline-item { position: relative; padding: 20px 40px 20px 0; opacity: 0; transform: translateX(-20px); transition: all 0.5s ease; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 25px;
+            width: 18px; height: 18px;
+            background: white;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--text-primary); margin-bottom: 8px; font-size: 1.1rem; }
+        .timeline-item p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
+        .timeline-item .emotion-tag {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+        
+        /* HIDDEN EMOTIONS */
+        .hidden-emotions {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(205, 92, 92, 0.1), rgba(139, 58, 58, 0.1));
+            border-radius: 15px;
+            border-right: 4px solid var(--accent);
+        }
+        .hidden-emotions h3 { color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .hidden-emotions p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* INTERPRETATION CARDS */
+        .interpretation-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--accent);
+        }
+        .interpretation-card .approach-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        .interpretation-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .interpretation-card p { color: var(--text-secondary); line-height: 1.8; }
+        
+        /* CHALLENGE CARDS */
+        .challenge-card {
+            background: var(--sand-light);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .challenge-card:hover, .challenge-card.active { border-color: var(--accent); background: white; }
+        .challenge-header { display: flex; align-items: flex-start; gap: 15px; }
+        .challenge-icon {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .challenge-type {
+            display: inline-block;
+            padding: 3px 10px;
+            background: var(--secondary);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            color: white;
+            margin-bottom: 8px;
+        }
+        .challenge-card h3 { color: var(--text-primary); margin-bottom: 10px; }
+        .challenge-card p { color: var(--text-secondary); line-height: 1.8; }
+        .hint-container { margin-top: 15px; display: none; }
+        .challenge-card.active .hint-container { display: block; }
+        .hint-btn {
+            background: white;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hint-content {
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border-right: 3px solid var(--accent);
+        }
+        .hint-content.visible { display: block; animation: fadeIn 0.3s ease; }
+        
+        /* CONNECTIONS BOX */
+        .connections-box {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+        }
+        .connections-box h3 { color: white; margin-bottom: 15px; }
+        .connections-box p { color: white; opacity: 0.9; margin-bottom: 10px; }
+        .connections-box .connection-item { margin-bottom: 15px; }
+        .connections-box .connection-label { font-weight: 500; margin-bottom: 5px; }
+        .universal-message {
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            margin-top: 15px;
+        }
+        .paradox-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .paradox-box .paradox-label { font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        
+        /* PERSONAL GREETING */
+        .personal-greeting {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        .personal-greeting h3 { margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .personal-greeting p { opacity: 0.95; line-height: 1.7; }
+        
+        /* FOOTER */
+        .footer { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-size: 0.9rem; }
+        .footer i { color: var(--accent); margin: 0 5px; }
+        
+        /* TOP NAV BUTTONS - Fixed position */
+        .top-nav { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        .home-btn { background: white; border: 2px solid var(--accent); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--accent); display: flex; align-items: center; gap: 8px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .home-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+        .chapter-bookmark-btn { background: white; border: 2px solid #E8A0A0; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .chapter-bookmark-btn i { font-size: 1.3rem; color: #E8A0A0; transition: all 0.3s ease; }
+        .chapter-bookmark-btn:hover { transform: translateY(-2px) scale(1.05); border-color: #C77878; }
+        .chapter-bookmark-btn:hover i { color: #C77878; }
+        .chapter-bookmark-btn.bookmarked { background: #E8A0A0; border-color: #E8A0A0; }
+        .chapter-bookmark-btn.bookmarked i { color: white; }
+        .chapter-bookmark-btn.bookmarked:hover { background: #C77878; border-color: #C77878; }
+        @keyframes heartPop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+        .chapter-bookmark-btn.just-bookmarked i { animation: heartPop 0.4s ease; }
+
+        /* BOOK NAVIGATION - Updated */
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .book-nav-btn {
+            background: white;
+            border: 2px solid var(--accent);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .book-nav-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        .book-nav-btn.home {
+            padding: 12px 15px;
+        }
+        .book-nav-btn.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        /* KNOWLEDGE VS EXPERIENCE DISPLAY */
+        .knowledge-gap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #CD5C5C, #A94442);
+            border-radius: 20px;
+            color: white;
+        }
+        .gap-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+        }
+        .gap-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            min-width: 150px;
+        }
+        .gap-side i { font-size: 2rem; }
+        .gap-divider {
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+        .gap-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 0.8; transform: scale(1.1); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        @keyframes pageEnter { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .page-wrapper { animation: pageEnter 0.5s ease forwards; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.4s ease; }
+        .section.slide-right { animation: slideInRight 0.4s ease; }
+        .section.slide-left { animation: slideInLeft 0.4s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 1.8rem; }
+            .nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .card { padding: 20px; }
+            .symbol-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: 1fr; }
+            .gap-row { flex-direction: column; }
+        }
+        
+        /* READING PROGRESS INDICATOR */
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+        
+        /* PRINT STYLES FOR BOOK */
+        @media print {
+            .nav-container, .book-nav, .reveal-btn, .hint-btn { display: none; }
+            .section { display: block !important; page-break-inside: avoid; }
+            .reveal-content { max-height: none !important; padding: 25px !important; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+    <!-- READING PROGRESS INDICATOR -->
+    <div class="reading-progress" id="readingProgress"></div>
+    
+    <!-- STARS - Always include -->
+    <div class="stars-container" id="stars"></div>
+    
+    <!-- PLANET - Always include -->
+    <div class="planet"></div>
+    
+    <!-- TOP NAV - Fixed top right -->
+    <div class="top-nav">
+        <a href="index.html" class="home-btn">
+            <i class="ti ti-home"></i>
+            חזרה לתפריט
+        </a>
+        <button class="chapter-bookmark-btn" id="chapterBookmark" title="הוסף למועדפים">
+            <i class="ti ti-heart"></i>
+        </button>
+    </div>
+
+    <!-- PAGE WRAPPER for transitions -->
+    <div class="page-wrapper">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <i class="ti ti-map"></i>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="chapter-number">פרק 15</p>
+        <p class="chapter-title">הגאוגרף</p>
+        <span class="mood-badge"><i class="ti ti-book"></i> ידע ללא חוויה</span>
+    </header>
+    
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        <!-- NAVIGATION - Always 5 tabs -->
+        <nav class="nav-container">
+            <button class="nav-btn active" data-section="summary">
+                <i class="ti ti-book"></i>
+                סיכום
+            </button>
+            <button class="nav-btn" data-section="symbols">
+                <i class="ti ti-sparkles"></i>
+                סמלים
+            </button>
+            <button class="nav-btn" data-section="journey">
+                <i class="ti ti-route"></i>
+                מסע רגשי
+            </button>
+            <button class="nav-btn" data-section="interpretations">
+                <i class="ti ti-bulb"></i>
+                פרשנויות
+            </button>
+            <button class="nav-btn" data-section="challenges">
+                <i class="ti ti-brain"></i>
+                אתגרים לגל
+            </button>
+        </nav>
+        
+        <!-- SECTION 1: SUMMARY -->
+        <section class="section active" id="summary">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-book"></i>
+                    </div>
+                    <h2>סיפור הפרק</h2>
+                </div>
+                
+                <p>הכוכב השישי היה גדול פי עשרה מקודמו, ובו ישב זקן שכתב ספרים ענקיים. כשהנסיך הקטן הגיע, הזקן קרא בהתרגשות: "הנה, חוקר!" הנסיך התיישב, עייף מהמסע הארוך, והביט סביבו בסקרנות. "מה זה הספר הגדול הזה?" שאל. "מה אתה עושה כאן?" הזקן ענה בגאווה: "אני גאוגרף."</p>
+                
+                <p>גאוגרף הוא חכם שיודע היכן נמצאים הימים, הנהרות, הערים, ההרים והמדבריות. הנסיך התרגש - סוף סוף מישהו שעושה מקצוע אמיתי! "הכוכב שלך מאוד יפה," אמר הנסיך. "יש בו אוקיינוסים?" הגאוגרף ענה: "אני לא יכול לדעת." "אה! ואיפה נמצאים ההרים?" "גם את זה אני לא יודע." "ומה עם ערים, נהרות, מדבריות?" "גם את זה אני לא יודע."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"אבל אתה גאוגרף!"<br>"בדיוק," ענה הגאוגרף. "אבל אני לא חוקר. אני חסר לחלוטין חוקרים. הגאוגרף לא הולך לספור את הערים, את הנהרות, את ההרים, את הימים ואת האוקיינוסים. הגאוגרף חשוב מכדי לשוטט. הוא לא עוזב את שולחן הכתיבה שלו."</p>
+                    <p class="quote-analysis">כאן נחשפת הטרגדיה של הגאוגרף: הוא "יודע" על העולם בלי שראה אותו פעם אחת. הספרים שלו מלאים במידע שקיבל מאחרים, אבל הוא עצמו - מאחורי השולחן, תמיד מאחורי השולחן. הידע שלו הוא ידע ממוצע, מסונן, מעובד. הוא לא מריח את הים, לא מרגיש את הרוח על ההר. הוא רק רושם.</p>
+                </div>
+                
+                <div class="knowledge-gap">
+                    <div class="gap-row">
+                        <div class="gap-side">
+                            <i class="ti ti-book-2"></i>
+                            <span>ידע תיאורטי</span>
+                        </div>
+                        <div class="gap-divider">≠</div>
+                        <div class="gap-side">
+                            <i class="ti ti-walk"></i>
+                            <span>חוויה ישירה</span>
+                        </div>
+                    </div>
+                    <div class="gap-label">הפער שהגאוגרף לא מוכן לגשר עליו</div>
+                </div>
+
+                <p>הגאוגרף הסביר: כשמגיע חוקר, הגאוגרף עורך חקירה לגבי מוסריותו. כי חוקר שמשקר יגרום לאסון בספרי הגאוגרפיה. וגם חוקר ששותה יותר מדי. "למה?" שאל הנסיך. "כי שיכורים רואים כפול. אז הגאוגרף ירשום שני הרים במקום אחד."</p>
+
+                <p>הגאוגרף התעניין: "אתה בא מרחוק. אתה חוקר! תתאר לי את הכוכב שלך!" הנסיך סיפר על הכוכב הקטן, על שלושת הרי הגעש, ועל הפרח. "אנחנו לא רושמים פרחים," אמר הגאוגרף. "למה? זה הדבר הכי יפה!" "כי פרחים הם ארעיים."</p>
+
+                <div class="quote-box">
+                    <p class="quote-text">"מה פירוש 'ארעי'?"<br>"ספרי גאוגרפיה הם הספרים היקרים מכל הספרים. הם לא יוצאים מהאופנה לעולם. נדיר מאוד שהר משנה את מקומו. נדיר מאוד שאוקיינוס מתרוקן ממימיו. אנחנו רושמים דברים נצחיים."<br>"אבל הרי געש כבויים יכולים להתעורר," הפריע הנסיך. "מה זה משנה לנו אם הוא כבוי או לא? מה שחשוב לנו זה ההר. הוא לא משתנה."<br>"ומה פירוש 'ארעי'?" חזר הנסיך על שאלתו, שמעולם בחייו לא ויתר על שאלה ששאל.<br>"זה אומר 'מאויים בהיכחדות קרובה'."<br>"הפרח שלי מאויים בהיכחדות קרובה?"<br>"כמובן."</p>
+                    <p class="quote-analysis">זהו הרגע המכונן של הפרק. המילה "ארעי" - ephemeral - פוגעת בנסיך כמו רעם. פתאום הוא מבין שהוורד שלו, הפרח היחיד שלו, יכול להיעלם. שהיא לא נצחית. שבזמן שהוא נודד בין כוכבים, היא שם, לבד, פגיעה, ארעית. זו פעם ראשונה שהנסיך מתמודד עם המוות כאפשרות ממשית, וזה קורה דווקא בכוכב של מי שמתעלם מכל דבר שאינו נצחי.</p>
+                </div>
+
+                <p>"הפרח שלי ארעי," אמר הנסיך לעצמו, "ויש לה רק ארבעה קוצים להגן על עצמה מפני העולם! ואני השארתי אותה לבדה אצלי!"</p>
+                
+                <p>זו הייתה הפעם הראשונה שהתחרט על עזיבתו. אבל התאושש ושאל: "לאן אתה ממליץ לי ללכת?" הגאוגרף ענה: "לכוכב הארץ. יש לו מוניטין טוב."</p>
+
+                <h3>מה קורה מתחת לפני השטח</h3>
+                
+                <p>הגאוגרף הוא הדמות האחרונה לפני שהנסיך מגיע לכדור הארץ, ולא במקרה. הוא מייצג את השיא של הניתוק מהמציאות: לא כמו המלך שחי באשליה, או השאפתן שחי בניפוח עצמי. הגאוגרף חי בידע מופשט, במידע שאין לו קשר לחוויה. הוא יודע הכל ולא מכיר כלום.</p>
+
+                <p>אבל יש בפרק הזה משהו עמוק יותר: הוא מכריח את הנסיך - ואותנו - להתמודד עם הזמניות. הגאוגרף מתעלם מפרחים כי הם ארעיים. אבל דווקא הארעיות הזו היא מה שהופך את הפרח ליקר. דווקא כי הוורד יכולה למות, האהבה אליה חשובה. דווקא כי הזמן מוגבל, כל רגע ספור.</p>
+
+                <p>הנסיך עוזב את הפרק הזה משתנה. הוא מבין שהבריחה שלו מהוורד הייתה טעות. הוא מבין שהוא השאיר משהו יקר, פגיע, ארעי - לבד. זו נקודת המפנה: מכאן והלאה, המסע הופך ממסע של בריחה למסע של חזרה.</p>
+
+                <div class="character-grid">
+                    <div class="character-card">
+                        <i class="ti ti-map"></i>
+                        <h3>הגאוגרף</h3>
+                        <p>זקן שיושב מאחורי שולחן כתיבה וכותב ספרים ענקיים על עולם שמעולם לא ראה. הוא גאה בידע שלו, אבל הידע הזה ריק מחוויה. הוא מתעלם מהפרחים כי הם ארעיים - ובכך מפספס את היפה ביותר.</p>
+                        <p class="symbolic-role">מייצג את האקדמיה המנותקת, את הידע שאינו חכמה</p>
+                    </div>
+                    <div class="character-card">
+                        <i class="ti ti-heart"></i>
+                        <h3>הנסיך המתעורר</h3>
+                        <p>לראשונה במסע, הנסיך מרגיש חרטה. המילה "ארעי" פוקחת את עיניו לכך שהוורד שלו, היצור היקר לו ביותר, פגיעה. הוא מבין שברח ממשהו שהיה צריך להישאר ולהגן עליו.</p>
+                        <p class="symbolic-role">מייצג את רגע ההתעוררות - כשאנחנו מבינים מה באמת חשוב</p>
+                    </div>
+                </div>
+
+                <div class="reveal-container">
+                    <button class="reveal-btn" onclick="toggleReveal(this)">
+                        <i class="ti ti-eye"></i>
+                        הרובד העמוק ביותר
+                    </button>
+                    <div class="reveal-content">
+                        <p>יש איזשהו אבסורד מוזר בדמות הגאוגרף: הוא מומחה לעולם, אבל הוא יושב על כוכב בודד בחלל. הוא רושם מידע על ימים ונהרות, אבל הכוכב שלו ככל הנראה יבש ושומם. הוא כותב על העולם מתוך ריחוק מוחלט מהעולם. זו לא סתם אירוניה - זו ביקורת חריפה על מודל ידע מסוים.</p>
+                        
+                        <p>סן-אכזופרי, כטייס, הכיר היטב את המתח בין מפות למציאות. מפה יכולה להראות הר, אבל היא לא יכולה להראות את הרוח שמכה בפנים כשאתה טס מעליו. היא יכולה לסמן מדבר, אבל לא את הצמא, לא את החום, לא את הפחד. הגאוגרף מייצג את המפה - מדויקת, שימושית, אבל חסרת חיים.</p>
+                        
+                        <p>והנה הפרדוקס המטריד ביותר: הגאוגרף שולח את הנסיך לכדור הארץ כי "יש לו מוניטין טוב". אבל מניין לו לדעת? הוא לא היה שם. הוא לא ראה. הוא רק קרא מה חוקרים כתבו. כל הידע שלו הוא ידע מכלי שני, שלישי, עשירי. ובכל זאת הוא ממליץ, מכוון, שולח. יש בזה משהו מסוכן: להנחות אחרים למקומות שמעולם לא ביקרת בהם.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 2: SYMBOLS -->
+        <section class="section" id="symbols">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-sparkles"></i>
+                    </div>
+                    <h2>סמלים ומשמעויות</h2>
+                </div>
+                
+                <p>לחצו על כל סמל כדי לחשוף את המשמעות העמוקה שלו</p>
+                
+                <div class="symbol-grid">
+                    <div class="symbol-card">
+                        <i class="ti ti-notebook"></i>
+                        <h3>הספרים הענקיים</h3>
+                        <p>כרכים עצומים מלאים במידע שאף אחד לא חווה</p>
+                        <div class="deep-meaning">
+                            <p>הספרים הענקיים הם סמל לידע מצטבר - דורות של מידע שנאסף, עובד, נכתב. יש בהם משהו מרשים: הם "לא יוצאים מהאופנה לעולם". אבל יש בהם גם משהו מת: הם מכילים רק מה שנחשב "נצחי", רק מה שלא משתנה.</p>
+                            <p>הפרדוקס: ספרים אלה מתעדים את העולם, אבל מתעלמים מהחיים. הם רושמים הרים אבל לא פרחים, אוקיינוסות אבל לא גלים. הם שומרים על ה"קבוע" ומוחקים את המשתנה - ובכך מוחקים את החיים עצמם.</p>
+                            <p><strong>קשר לחיים:</strong> כמה מהידע שאנחנו אוספים הוא כזה? מידע "יציב" ו"אמין" שמפספס את הדינמי, את החי, את מה שמשתנה כל הזמן?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-armchair"></i>
+                        <h3>שולחן הכתיבה</h3>
+                        <p>המקום שממנו הגאוגרף לא זז לעולם</p>
+                        <div class="deep-meaning">
+                            <p>"הגאוגרף חשוב מכדי לשוטט. הוא לא עוזב את שולחן הכתיבה שלו." המשפט הזה חושף הכל: השולחן הוא כלא מכובד. הגאוגרף כלוא בו, אבל הוא חושב שזו בחירה של חשיבות, לא של פחד או עצלות.</p>
+                            <p>השולחן מייצג את הנקודה הקבועה שממנה "מתבוננים" בעולם בלי לגעת בו. זו עמדת הצופה הנצחי - בטוח, מרוחק, "אובייקטיבי". אבל האובייקטיביות הזו היא גם ניתוק.</p>
+                            <p><strong>קשר לפרקים אחרים:</strong> כל המבוגרים בכוכבים לכודים במקום אחד - המלך על כיסאו, השאפתן על הבמה, השיכור מול הבקבוקים. השולחן הוא הכלא של הגאוגרף.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-hourglass"></i>
+                        <h3>הארעי</h3>
+                        <p>המילה שמשנה הכל - "מאויים בהיכחדות קרובה"</p>
+                        <div class="deep-meaning">
+                            <p>המילה "ארעי" (éphémère בצרפתית) היא נקודת המפנה של הפרק ואולי של כל הספר. היא מכריחה את הנסיך - ואותנו - להתמודד עם זמניות, עם מוות, עם העובדה שמה שאנחנו אוהבים לא יהיה כאן לנצח.</p>
+                            <p>אבל יש כאן היפוך מפתיע: הגאוגרף מתעלם מהארעי כי הוא לא "חשוב" מספיק לתיעוד. אבל דווקא הארעי הוא מה שהכי חשוב לאהוב. אנחנו לא אוהבים את ההרים כי הם נצחיים - אנחנו אוהבים את הפרחים, את האנשים, את הרגעים, כי הם חולפים.</p>
+                            <p><strong>קשר לחיים:</strong> מה בחיים שלך הוא "ארעי"? מערכות יחסים, רגעים, הזדמנויות? האם אתה נותן להם את תשומת הלב שהם ראויים לה - דווקא כי הם לא יהיו כאן לנצח?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-users"></i>
+                        <h3>החוקרים</h3>
+                        <p>אלה שבאמת רואים את העולם - אבל רק מספרים עליו</p>
+                        <div class="deep-meaning">
+                            <p>הגאוגרף תלוי בחוקרים - הם עיניו ורגליו. הם הולכים, רואים, חווים, ואז חוזרים ומספרים. הוא רושם. יש כאן מבנה היררכי מוזר: מי שחווה נחשב פחות חשוב ממי שרושם.</p>
+                            <p>אבל יש בעיה: החוקרים יכולים לשקר, יכולים לטעות, יכולים להיות שיכורים. הגאוגרף "בודק את מוסריותם", אבל איך אפשר לבדוק אם מישהו אומר אמת על מקום שמעולם לא ראית?</p>
+                            <p><strong>קשר לתקשורת:</strong> כמה מהידע שלנו על העולם מגיע מ"חוקרים" - עיתונאים, מומחים, משפיענים? כמה אנחנו סומכים על מה שהם מספרים לנו על מקומות שמעולם לא ביקרנו בהם?</p>
+                        </div>
+                    </div>
+                    
+                    <div class="symbol-card">
+                        <i class="ti ti-flower"></i>
+                        <h3>הפרח שלא נרשם</h3>
+                        <p>היפה ביותר - שנמחק מהספרים</p>
+                        <div class="deep-meaning">
+                            <p>הנסיך אומר: "הפרחים הם הדבר הכי יפה!" אבל הגאוגרף לא רושם אותם. יש כאן תובנה מטרידה: המערכת של הידע האנושי מתעלמת מהיפה ביותר כי הוא לא "יציב" מספיק.</p>
+                            <p>הפרח מייצג את כל מה שנמחק מההיסטוריה, מהמדע, מהזיכרון הקולקטיבי - כי זה היה "רק" רגעי, "רק" אישי, "רק" רגשי. כמה יופי, כמה אהבה, כמה רגעים מופלאים נשכחו כי אף אחד לא חשב שהם חשובים מספיק לתיעוד?</p>
+                            <p><strong>קשר לוורד:</strong> הוורד של הנסיך לא תהיה אף פעם בספרי הגאוגרפיה. היא תימחק מההיסטוריה הגדולה. אבל היא היא שחשובה.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 3: EMOTIONAL JOURNEY -->
+        <section class="section" id="journey">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-route"></i>
+                    </div>
+                    <h2>המסע הרגשי</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>תקווה ראשונית</h3>
+                        <p>לראשונה מאז תחילת המסע, הנסיך פוגש מישהו שנראה כמו בעל מקצוע "אמיתי". גאוגרף! מישהו שיודע על העולם, על ימים ונהרות והרים. אולי סוף סוף יש פה מבוגר הגיוני.</p>
+                        <span class="emotion-tag">התרגשות</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>בלבול ראשון</h3>
+                        <p>"אני לא יודע" - התשובה חוזרת שוב ושוב. הגאוגרף לא יודע אם יש אוקיינוסים בכוכב שלו, לא יודע על הרים, לא יודע על ערים. איך גאוגרף לא יודע? הבלבול מתחיל להפוך לאכזבה.</p>
+                        <span class="emotion-tag">בלבול</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הבנת הפרדוקס</h3>
+                        <p>"הגאוגרף חשוב מכדי לשוטט" - הנסיך מבין שהגאוגרף לא יודע כלום מניסיון עצמו. הוא רק רושם מה אחרים מספרים לו. זה ידע ריק, ידע ללא חוויה, ידע שאינו מכיר.</p>
+                        <span class="emotion-tag">אכזבה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>הזדמנות לספר</h3>
+                        <p>הגאוגרף רוצה לשמוע על הכוכב של הנסיך. סוף סוף מישהו מתעניין! הנסיך מספר על ההרים, על הר הגעש הכבוי, ועל הפרח שלו - הדבר הכי יפה שיש.</p>
+                        <span class="emotion-tag">גאווה</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>המכה</h3>
+                        <p>"אנחנו לא רושמים פרחים... פרחים הם ארעיים... מאויימים בהיכחדות קרובה." המילים האלה פוגעות בנסיך כמו רעם. הפרח שלו - ארעי. הוורד שלו - יכולה למות. היא שם לבד, פגיעה, וארבעת הקוצים שלה לא יגנו עליה.</p>
+                        <span class="emotion-tag">הלם</span>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h3>חרטה ראשונה</h3>
+                        <p>לראשונה מאז שעזב את הכוכב, הנסיך מתחרט. הוא הבין משהו: הוא ברח מהוורד, אבל היא נשארה שם, פגיעה, ארעית, לבד. הוא היה צריך להישאר, להגן, לאהוב - לא לברוח.</p>
+                        <span class="emotion-tag">חרטה</span>
+                    </div>
+                </div>
+                
+                <div class="hidden-emotions">
+                    <h3><i class="ti ti-eye-off"></i> הרגשות שלא נאמרו</h3>
+                    <p>מתחת לחרטה יש פחד עמוק יותר - הפחד מאובדן. עד עכשיו הנסיך יכול היה לדמיין שהוורד מחכה לו, בטוחה, נצחית. המילה "ארעי" מנפצת את האשליה הזו. פתאום יש שעון, יש סוף, יש אפשרות שכשיחזור - היא לא תהיה שם.</p>
+                    <p>יש גם כעס לא מבוטא - כעס על הגאוגרף שהעניק לו את הידע הזה בקור רוח, כאילו זה סתם עובדה. "פרחים הם ארעיים" - נאמר באותה נימה כמו "הרים לא זזים". אבל זה לא אותו דבר. זה לא סתם מידע. זה גזר דין.</p>
+                    <p>ומעבר לכל - יש געגוע. געגוע חדש, אמיתי, לוורד שנשארה מאחור. זו לא עוד בריחה "מ" משהו, זו התחלה של חזרה "אל" משהו. המסע משתנה כאן מיסודו.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 4: INTERPRETATIONS -->
+        <section class="section" id="interpretations">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-bulb"></i>
+                    </div>
+                    <h2>פרשנויות</h2>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">פסיכולוגית</span>
+                    <h3>ההתעוררות למודעות המוות</h3>
+                    <p>מנקודת מבט פסיכולוגית, הפרק הזה מתאר רגע קריטי בהתפתחות: ההתמודדות הראשונה עם מודעות למוות של מי שאנחנו אוהבים. ילדים חיים באשליה של נצחיות - ההורים תמיד יהיו שם, הבית תמיד יישאר, האהבה לא תיגמר.</p>
+                    <p>המילה "ארעי" מנפצת את האשליה הזו. הנסיך מבין שהוורד שלו יכולה למות, ולא סתם למות - למות בזמן שהוא לא שם, בזמן שהוא משוטט בכוכבים, בזמן שהוא עסוק בדברים שנראים חשובים אבל לא באמת.</p>
+                    <p>זו לא רק מודעות למוות - זו מודעות לאחריות. הנסיך מבין שהבריחה שלו הייתה בחירה, ושלבחירות יש מחיר. הוא לא יכול לחזור בזמן, אבל הוא יכול להפסיק לברוח ולהתחיל לחזור.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">אקזיסטנציאליסטית</span>
+                    <h3>הארעיות כמקור המשמעות</h3>
+                    <p>היידגר כתב על "היות-לקראת-מוות" כמה שמגדיר את הקיום האנושי. דווקא כי אנחנו בני תמותה, כי הזמן מוגבל, כי הכל חולף - יש לדברים משמעות. אם היינו חיים לנצח, שום רגע לא היה חשוב באמת.</p>
+                    <p>הגאוגרף מייצג ניסיון לברוח מהארעיות - לתעד רק את ה"נצחי", לעסוק רק במה שלא משתנה. אבל בבריחה הזו הוא מפספס את החיים עצמם. הוא יודע על הרים, אבל מעולם לא טיפס על אחד. הוא רושם על אוקיינוסים, אבל מעולם לא שחה בים.</p>
+                    <p>הנסיך מבין - אולי לראשונה - שהארעיות של הוורד היא לא חולשה שלה, אלא מה שהופך את האהבה אליה לדחופה, לחשובה, לאמיתית. דווקא כי היא יכולה להיעלם, האהבה אליה לא יכולה לחכות.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">ביוגרפית</span>
+                    <h3>הטייס והמפות</h3>
+                    <p>סן-אכזופרי כטייס הכיר היטב את המתח בין מפה למציאות. מפות הן כלים חיוניים - בלעדיהן אי אפשר לטוס. אבל מפה היא לא השטח. היא מתעלמת מהרוח, מהעננים, מהאור המשתנה, מהפחד והריגוש של הטיסה עצמה.</p>
+                    <p>הגאוגרף מייצג את מי שמתבלבל בין המפה לשטח - חושב שאם יש לך את המידע, יש לך את הדבר. סן-אכזופרי ידע שזה לא נכון. הוא ידע שרגע אחד של טיסה מעל המדבר שווה יותר מאלף ספרי גאוגרפיה.</p>
+                    <p>יש גם היבט אישי: סן-אכזופרי כתב את הספר בגלות, רחוק מצרפת הכבושה, רחוק מאשתו קונסואלו. הוא ידע מה זה להיות רחוק ממישהי שאוהבים, לדאוג לה, להבין שהיא "ארעית" ושהוא לא שם להגן עליה.</p>
+                </div>
+                
+                <div class="interpretation-card">
+                    <span class="approach-tag">רוחנית</span>
+                    <h3>הנצחי מול הרגעי</h3>
+                    <p>במסורות רוחניות רבות יש מתח בין "הנצחי" ל"רגעי" - בין האלוהי שלא משתנה לבין העולם הגשמי שכולו שינוי. הגאוגרף מייצג גישה שמעריכה רק את הנצחי ומזלזלת ברגעי.</p>
+                    <p>אבל יש מסורות אחרות - במיוחד במזרח - שמדגישות שדווקא ברגעי, בחולף, במשתנה, אפשר למצוא את האמת העמוקה ביותר. פרח שנובל הוא לא פחות קדוש מהר שעומד לנצח. אולי יותר.</p>
+                    <p>הוורד, עם ארעיותה, מזכירה לנסיך - ולנו - שהקדושה נמצאת ברגע הזה, לא בנצח מופשט. האהבה קורית עכשיו, ההגנה נדרשת עכשיו, הנוכחות חשובה עכשיו. מחר אולי יהיה מאוחר מדי.</p>
+                </div>
+                
+                <div class="connections-box">
+                    <h3><i class="ti ti-link"></i> חיבורים</h3>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים קודמים:</p>
+                        <p>הגאוגרף הוא הדמות האחרונה בסדרת כוכבי המבוגרים. כמו המלך (10), השאפתן (11), השיכור (12), איש העסקים (13) ומדליק הפנסים (14), גם הוא לכוד במשהו. אבל הוא הראשון שמשפיע ישירות על הנסיך - המילה "ארעי" משנה את כל המסע.</p>
+                    </div>
+                    
+                    <div class="connection-item">
+                        <p class="connection-label">קשר לפרקים הבאים:</p>
+                        <p>הגאוגרף שולח את הנסיך לכדור הארץ - המקום שבו כל השיעורים יתחברו. שם הנסיך יפגוש את השועל (21) וילמד ש"רואים טוב רק בלב", ואת הנחש שיחזיר אותו הביתה. החרטה שנולדה כאן תהפוך למוטיבציה לחזרה.</p>
+                    </div>
+                    
+                    <div class="universal-message">
+                        <i class="ti ti-hourglass"></i>
+                        "הפרח שלי ארעי, ויש לו רק ארבעה קוצים להגן על עצמו מפני העולם!"
+                    </div>
+                    
+                    <div class="paradox-box">
+                        <p class="paradox-label"><i class="ti ti-infinity"></i> הפרדוקס הבלתי פתור:</p>
+                        <p>הגאוגרף מתעלם מפרחים כי הם ארעיים. אבל הספרים שלו - הספרים ש"לא יוצאים מהאופנה לעולם" - מה ערכם אם אף אחד לא קורא אותם? מה ערכו של ידע על הרים אם אף אחד לא מטפס עליהם? האם "ידע נצחי" שאף אחד לא משתמש בו לא "ארעי" יותר מפרח שמישהו אוהב?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5: THINKING CHALLENGES -->
+        <section class="section" id="challenges">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="ti ti-brain"></i>
+                    </div>
+                    <h2>אתגרי חשיבה</h2>
+                </div>
+                
+                <div class="personal-greeting">
+                    <h3><i class="ti ti-star"></i> גל, זה בשבילך</h3>
+                    <p>הפרק הזה נוגע בשאלות קשות על ידע וחוויה, על הנצחי והארעי, על מה באמת חשוב. השאלות הבאות מזמינות אותך לבחון את הידע שלך, את מה שאתה מתעלם ממנו, ואת מה שאתה אולי משאיר מאחור.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-link"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">חיבור אישי</span>
+                            <h3>הידע הריק שלך</h3>
+                            <p>על מה אתה "יודע" בלי שבאמת חווית? יכול להיות מקום שאתה מכיר רק מתמונות, אדם שאתה "מכיר" רק מסיפורים של אחרים, תחום שאתה מרגיש מומחה בו למרות שמעולם לא התנסית בו. מה היית מגלה אם היית יוצא מ"שולחן הכתיבה" והולך לחוות את זה בעצמך?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על נושא שאתה אוהב לדבר עליו, להביע דעות עליו, אולי אפילו לייעץ לאחרים בו - אבל שאין לך ניסיון אישי אמיתי בו. יכול להיות נסיעות למקום מסוים, זוגיות, הורות, עבודה בתחום ספציפי. מה אתה חושב שהיית מגלה אם היית חווה את זה בפועל?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-infinity"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">פרדוקס</span>
+                            <h3>הארעי שנשכח</h3>
+                            <p>הגאוגרף לא רושם פרחים כי הם ארעיים. אבל כמה מהדברים הכי משמעותיים בחיים שלך הם "ארעיים"? שיחה שנשכחה, מבט שחלף, רגע של חיבור שלא חזר. האם העובדה שהם ארעיים הופכת אותם לפחות חשובים - או דווקא יותר?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>נסה להיזכר ברגע משמעותי מהחיים שלך - לא אירוע גדול בהכרח, אלא רגע קטן שנשאר איתך. אולי שיחה עם מישהו, רגע של יופי פתאומי, תחושה שעלתה ונעלמה. האם היית "מתעד" את הרגע הזה בספר גאוגרפיה? כנראה שלא. אז למה הוא חשוב?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-alert-triangle"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה לא נוחה</span>
+                            <h3>מה השארת מאחור?</h3>
+                            <p>הנסיך מתעורר לכך שהשאיר את הוורד לבד, פגיעה, ארעית. יש מישהו או משהו שאתה "השארת מאחור" - לא בכוונה רעה, אולי אפילו בלי לשים לב? מערכת יחסים שהזנחת, חלום שוויתרת עליו, חלק מעצמך שהפסקת לטפח? האם עוד לא מאוחר?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>הנסיך לא עזב את הוורד מתוך אכזריות - הוא ברח כי היא פגעה בו, כי מערכת היחסים הייתה מסובכת. לפעמים אנחנו עוזבים דברים לא כי הם לא חשובים, אלא כי הם מאוד חשובים וגם מאוד קשים. יש משהו כזה בחיים שלך?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-flask"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">ניסוי מחשבתי</span>
+                            <h3>אם הכל היה נצחי</h3>
+                            <p>דמיין עולם שבו כלום לא ארעי - אנשים לא מתים, פרחים לא נובלים, רגעים לא חולפים. איך זה היה משנה את הערך של דברים? האם אהבה הייתה משמעותית באותה מידה? האם היית מעריך את מה שיש לך, או שהיית דוחה הכל ל"מתישהו"?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על משהו שאתה דוחה כי "עוד יש זמן" - שיחה עם מישהו, טיול למקום, פרויקט שרצית להתחיל. האם היית ממשיך לדחות אם ידעת שיש זמן אינסופי? או שדווקא הידיעה שהזמן מוגבל היא מה שנותן לדברים דחיפות?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-arrows-split"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">דילמה</span>
+                            <h3>ידע או חוויה?</h3>
+                            <p>הגאוגרף יודע על העולם יותר מכל חוקר בודד - יש לו את כל המידע מכל החוקרים. אבל הוא מעולם לא ראה כלום בעצמו. מה עדיף: לדעת הרבה על הרבה דברים מבלי לחוות אותם, או לחוות מעט דברים לעומק? האם אפשר למצוא איזון?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>חשוב על זה בהקשר של הלימודים שלך, או של איך שאתה צורך מידע. האם אתה מעדיף לקרוא על 100 ספרים או לקרוא 10 ספרים לעומק? לראות 50 סרטונים קצרים על נושא או להתנסות בו פעם אחת? מה נותן לך יותר "ידע" אמיתי?</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-header">
+                        <div class="challenge-icon">
+                            <i class="ti ti-door-exit"></i>
+                        </div>
+                        <div>
+                            <span class="challenge-type">שאלה פתוחה</span>
+                            <h3>מתי לחזור?</h3>
+                            <p>הנסיך מבין שהוא צריך לחזור לוורד. אבל הוא עדיין ממשיך במסע - ילך לכדור הארץ, יפגוש את השועל, יעבור עוד הרבה. למה לא לחזור מיד? האם יש דברים שצריך לעבור לפני שחוזרים? או שזו עוד דחייה, עוד בריחה במסווה של מסע?</p>
+                        </div>
+                    </div>
+                    <div class="hint-container">
+                        <button class="hint-btn">
+                            <i class="ti ti-lightbulb"></i>
+                            צריך רמז?
+                        </button>
+                        <div class="hint-content">
+                            <p>לפעמים אנחנו יודעים שמשהו מחכה לנו, שמישהו צריך אותנו, שיש לאן לחזור - ובכל זאת ממשיכים הלאה. לפעמים זה הכרחי (צריך לסיים משהו קודם), לפעמים זה בריחה. איך מבדילים? ומה קורה אצלך - יש משהו שאתה יודע שצריך לחזור אליו ועדיין ממשיך לדחות?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BOOK NAVIGATION -->
+        <div class="book-nav">
+            <a href="chapter-14.html" class="book-nav-btn" id="prevChapter">
+                <i class="ti ti-arrow-right"></i>
+                פרק 14
+            </a>
+            <a href="index.html" class="book-nav-btn home">
+                <i class="ti ti-home"></i>
+            </a>
+            <a href="chapter-16.html" class="book-nav-btn" id="nextChapter">
+                פרק 16
+                <i class="ti ti-arrow-left"></i>
+            </a>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    </div><!-- END page-wrapper -->
+    <footer class="footer">
+        <p>
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+            הנסיך הקטן - פרק 15 מתוך 27
+            <i class="ti ti-star-filled" style="color: #FFD700;"></i>
+        </p>
+    </footer>
+    
+    <!-- JAVASCRIPT - Always include this exact script -->
+    <script>
+        // Create stars with inline SVG for GitHub Pages compatibility
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 25; i++) {
+                const star = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                star.setAttribute('viewBox', '0 0 24 24');
+                star.classList.add('star');
+                const size = (Math.random() * 10 + 8) + 'px';
+                star.style.width = size;
+                star.style.height = size;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.fill = '#FFD700';
+                star.innerHTML = '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>';
+                container.appendChild(star);
+            }
+        }
+        
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const sectionId = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(sectionId).classList.add('active');
+                if (sectionId === 'journey') animateTimeline();
+            });
+        });
+        
+        // Reveal content
+        function toggleReveal(btn) {
+            const content = btn.nextElementSibling;
+            content.classList.toggle('open');
+            const icon = btn.querySelector('i');
+            icon.className = content.classList.contains('open') ? 'ti ti-eye-off' : 'ti ti-eye';
+        }
+        
+        // Symbol cards
+        document.querySelectorAll('.symbol-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('expanded'));
+        });
+        
+        // Challenge cards
+        document.querySelectorAll('.challenge-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.challenge-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Hint buttons
+        document.querySelectorAll('.hint-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const hint = this.nextElementSibling;
+                hint.classList.toggle('visible');
+                this.innerHTML = hint.classList.contains('visible') 
+                    ? '<i class="ti ti-eye-off"></i> הסתר רמז'
+                    : '<i class="ti ti-lightbulb"></i> צריך רמז?';
+            });
+        });
+        
+        // Timeline animation
+        function animateTimeline() {
+            document.querySelectorAll('.timeline-item').forEach((item, index) => {
+                item.classList.remove('visible');
+                setTimeout(() => item.classList.add('visible'), index * 300);
+            });
+        }
+        
+        // Keyboard Navigation
+        document.addEventListener('keydown', function(e) {
+            // Don't trigger if user is typing in an input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            
+            const currentChapter = 15; // Current chapter number
+            const totalChapters = 27;
+            
+            switch(e.key) {
+                case 'ArrowLeft': // Next chapter (RTL - left is forward)
+                    e.preventDefault();
+                    if (currentChapter < totalChapters) {
+                        const nextChapter = String(currentChapter + 1).padStart(2, '0');
+                        window.location.href = `chapter-${nextChapter}.html`;
+                    }
+                    break;
+                case 'ArrowRight': // Previous chapter (RTL - right is backward)
+                    e.preventDefault();
+                    if (currentChapter > 1) {
+                        const prevChapter = String(currentChapter - 1).padStart(2, '0');
+                        window.location.href = `chapter-${prevChapter}.html`;
+                    }
+                    break;
+                case 'Escape': // Go to home/index
+                    e.preventDefault();
+                    window.location.href = 'index.html';
+                    break;
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                    e.preventDefault();
+                    const tabs = ['summary', 'symbols', 'journey', 'interpretations', 'challenges'];
+                    const tabIndex = parseInt(e.key) - 1;
+                    if (tabIndex < tabs.length) {
+                        // Click the corresponding tab button
+                        const tabBtn = document.querySelector(`[data-section="${tabs[tabIndex]}"]`);
+                        if (tabBtn) tabBtn.click();
+                    }
+                    break;
+            }
+        });
+                // Reading Progress Indicator
+        function updateReadingProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('readingProgress').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateReadingProgress);
+        window.addEventListener('resize', updateReadingProgress);
+        
+        // Bookmark functionality
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        const CURRENT_CHAPTER = 15;
+        function getBookmarks() { try { return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)) || []; } catch(e) { return []; } }
+        function saveBookmarks(b) { try { localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(b)); } catch(e) {} }
+        function initBookmarkButton() {
+            const btn = document.getElementById('chapterBookmark'); if (!btn) return;
+            const bookmarks = getBookmarks(); const isBookmarked = bookmarks.includes(CURRENT_CHAPTER);
+            updateBookmarkButton(btn, isBookmarked);
+            btn.addEventListener('click', function() {
+                const bookmarks = getBookmarks(); const index = bookmarks.indexOf(CURRENT_CHAPTER);
+                if (index > -1) { bookmarks.splice(index, 1); updateBookmarkButton(btn, false); }
+                else { bookmarks.push(CURRENT_CHAPTER); updateBookmarkButton(btn, true); btn.classList.add('just-bookmarked'); setTimeout(() => btn.classList.remove('just-bookmarked'), 400); }
+                saveBookmarks(bookmarks);
+            });
+        }
+        function updateBookmarkButton(btn, isBookmarked) {
+            const icon = btn.querySelector('i');
+            if (isBookmarked) { btn.classList.add('bookmarked'); icon.className = 'ti ti-heart-filled'; btn.title = 'הסר מהמועדפים'; }
+            else { btn.classList.remove('bookmarked'); icon.className = 'ti ti-heart'; btn.title = 'הוסף למועדפים'; }
+        }
+        // Initialize
+        createStars();
+        updateReadingProgress();
+        initBookmarkButton();
+        if (document.getElementById('journey').classList.contains('active')) animateTimeline();
+    </script>
+</body>
+</html>
+

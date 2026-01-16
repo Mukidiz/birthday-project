@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הנסיך הקטן | פרשנות אינטראקטיבית לגל</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/fonts/tabler-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --sand: #F5E6C8;
+            --sand-light: #FDF8EE;
+            --sand-dark: #E8D4A8;
+            --sky-blue: #87CEEB;
+            --sky-dark: #5BA3C6;
+            --rose-pink: #E8A0A0;
+            --rose-dark: #C77878;
+            --text-primary: #5D4E37;
+            --text-secondary: #7A6B55;
+            --star-gold: #FFD700;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, #1a1a2e 0%, #16213e 30%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* STARS BACKGROUND */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        .star svg {
+            width: 100%;
+            height: 100%;
+            fill: #FFD700;
+            filter: drop-shadow(0 0 3px #FFD700);
+        }
+        
+        /* PLANET DECORATIONS */
+        .planet {
+            position: fixed;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        .planet-1 {
+            bottom: 10%;
+            left: 5%;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #F5E6C8, #E8D4A8);
+            box-shadow: inset -15px -15px 30px rgba(0,0,0,0.2);
+        }
+        .planet-2 {
+            top: 15%;
+            right: 8%;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #E8A0A0, #C77878);
+            box-shadow: inset -8px -8px 20px rgba(0,0,0,0.2);
+            animation-delay: -2s;
+        }
+        .planet-3 {
+            top: 40%;
+            left: 3%;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, #87CEEB, #5BA3C6);
+            box-shadow: inset -5px -5px 15px rgba(0,0,0,0.2);
+            animation-delay: -4s;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+        .header-icon {
+            font-size: 5rem;
+            color: #FFD700 !important;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        }
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: white;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: #F5E6C8;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        .header .dedication {
+            font-size: 1rem;
+            color: #E8A0A0;
+            font-style: italic;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 25px;
+            display: inline-block;
+        }
+        
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* QUOTE */
+        .main-quote {
+            text-align: center;
+            padding: 30px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .main-quote blockquote {
+            font-size: 1.4rem;
+            font-style: italic;
+            color: #F5E6C8;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        .main-quote cite {
+            font-size: 0.9rem;
+            color: #7A6B55;
+        }
+        
+        /* CHAPTERS GRID */
+        .chapters-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .chapters-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #5D4E37;
+            margin-bottom: 30px;
+        }
+        .chapters-section h2 i {
+            color: #E8A0A0;
+            margin-left: 10px;
+        }
+        
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 20px;
+        }
+        
+        .chapter-card {
+            background: #FDF8EE;
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #5D4E37;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--chapter-color, #E8A0A0);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .chapter-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--chapter-color, #E8A0A0);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        .chapter-card:hover::before {
+            opacity: 1;
+        }
+        .chapter-card .chapter-number {
+            font-size: 0.85rem;
+            color: #7A6B55;
+            margin-bottom: 8px;
+        }
+        .chapter-card .chapter-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
+            transition: transform 0.3s ease;
+            color: var(--chapter-color, #E8A0A0) !important;
+        }
+        .chapter-card:hover .chapter-icon {
+            transform: scale(1.15);
+        }
+        .chapter-card .chapter-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #5D4E37;
+            line-height: 1.4;
+        }
+        
+        /* CHAPTER STATUS */
+        .chapter-card.available {
+            cursor: pointer;
+        }
+        .chapter-card.coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .chapter-card.coming-soon::after {
+            content: 'בקרוב';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.7rem;
+            background: #7A6B55;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+        }
+        
+        /* PROGRESS SECTION */
+        .progress-section {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 25px 30px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .progress-info {
+            color: white;
+        }
+        .progress-info h3 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        .progress-info p {
+            font-size: 0.9rem;
+            color: #F5E6C8;
+        }
+        .progress-bar {
+            flex: 1;
+            min-width: 200px;
+            max-width: 400px;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #E8A0A0, #FFD700);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        /* LOADING STATE */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #7A6B55;
+            grid-column: 1 / -1;
+        }
+        .loading i {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+            display: block;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ERROR STATE */
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #CD5C5C;
+            background: #FDF8EE;
+            border-radius: 15px;
+            grid-column: 1 / -1;
+        }
+        .error i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        /* SEARCH & FILTER */
+        .search-filter-container {
+            margin-bottom: 25px;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            border: 2px solid var(--sand-dark);
+            border-radius: 30px;
+            background: var(--sand-light);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            direction: rtl;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #E8A0A0;
+            box-shadow: 0 0 0 3px rgba(232, 160, 160, 0.2);
+        }
+        
+        .search-box input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+        
+        .search-box .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+        
+        .search-box .clear-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            padding: 5px;
+        }
+        
+        .search-box .clear-btn.visible {
+            opacity: 1;
+        }
+        
+        .search-box .clear-btn:hover {
+            color: #CD5C5C;
+        }
+        
+        .mood-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .mood-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.9rem;
+            border: 2px solid var(--sand-dark);
+            border-radius: 20px;
+            background: var(--sand-light);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mood-btn i {
+            font-size: 1rem;
+        }
+        
+        .mood-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .mood-btn.active {
+            background: var(--btn-color, #E8A0A0);
+            border-color: var(--btn-color, #E8A0A0);
+            color: white;
+        }
+        
+        .mood-btn .count {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-right: 4px;
+        }
+        
+        .mood-btn.active .count {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* BOOKMARKS SECTION */
+        .bookmarks-section {
+            background: linear-gradient(135deg, rgba(232, 160, 160, 0.15), rgba(255, 215, 0, 0.1));
+            border: 2px solid rgba(232, 160, 160, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .bookmarks-section.has-bookmarks {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .bookmarks-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .bookmarks-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .bookmarks-title i {
+            color: var(--rose-pink);
+            font-size: 1.4rem;
+        }
+        
+        .bookmarks-count {
+            background: var(--rose-pink);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .clear-bookmarks-btn {
+            background: transparent;
+            border: 1px solid var(--sand-dark);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-bookmarks-btn:hover {
+            background: rgba(205, 92, 92, 0.1);
+            border-color: #CD5C5C;
+            color: #CD5C5C;
+        }
+        
+        .bookmarks-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .bookmarked-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 2px solid var(--sand-dark);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .bookmarked-chip:hover {
+            transform: translateY(-3px);
+            border-color: var(--rose-pink);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .bookmarked-chip i {
+            color: var(--rose-pink);
+        }
+        
+        .bookmarked-chip .chip-number {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: var(--sand-light);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* BOOKMARK BUTTON ON CARDS */
+        .bookmark-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .bookmark-btn i {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-card:hover .bookmark-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .bookmark-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        .bookmark-btn:hover i {
+            color: var(--rose-pink);
+        }
+        
+        .bookmark-btn.bookmarked {
+            opacity: 1;
+            background: var(--rose-pink);
+        }
+        
+        .bookmark-btn.bookmarked i {
+            color: white;
+        }
+        
+        .bookmark-btn.bookmarked:hover {
+            background: #CD5C5C;
+        }
+        
+        /* Bookmark animation */
+        @keyframes bookmarkPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        .bookmark-btn.just-bookmarked {
+            animation: bookmarkPop 0.4s ease;
+        }
+        
+        /* NO RESULTS */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.5;
+        }
+        
+        .no-results p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .no-results .suggestion {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* FILTERED STATE - fade out non-matching */
+        .chapter-card.filtered-out {
+            display: none;
+        }
+        
+        /* RESULT COUNT */
+        .result-count {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .result-count.visible {
+            opacity: 1;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 50px 20px;
+            color: #F5E6C8;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+        .footer i {
+            color: #FFD700 !important;
+            margin: 0 8px;
+        }
+        .footer p {
+            margin-bottom: 10px;
+        }
+        .footer .credit {
+            font-size: 0.8rem;
+            color: #7A6B55;
+            margin-top: 15px;
+        }
+        .footer .credit i {
+            color: #E8A0A0 !important;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .header-icon { font-size: 4rem; }
+            .chapters-section { padding: 25px; }
+            .chapters-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+            .chapter-card { padding: 20px 12px; }
+            .chapter-card .chapter-icon { font-size: 2rem; }
+            .planet-1 { width: 80px; height: 80px; }
+            .planet-2, .planet-3 { display: none; }
+        }
+        
+        @media (max-width: 480px) {
+            .chapters-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        /* PAGE TRANSITION ANIMATIONS */
+        .page-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: pageEnter 0.6s ease forwards;
+        }
+        
+        @keyframes pageEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chapter-card {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        
+        .chapter-card.animate-in {
+            animation: cardEnter 0.4s ease forwards;
+        }
+        
+        @keyframes cardEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Page exit animation */
+        body.page-exit .page-content {
+            animation: pageExit 0.3s ease forwards;
+        }
+        
+        @keyframes pageExit {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- STARS -->
+    <div class="stars-container" id="stars"></div>
+
+    <!-- PLANETS -->
+    <div class="planet planet-1"></div>
+    <div class="planet planet-2"></div>
+    <div class="planet planet-3"></div>
+
+    <!-- PAGE CONTENT WRAPPER for transitions -->
+    <div class="page-content">
+    
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 80px; height: 80px; color: #FFD700; filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));">
+                <path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z" />
+            </svg>
+        </div>
+        <h1>הנסיך הקטן</h1>
+        <p class="subtitle">פרשנות אינטראקטיבית</p>
+        <span class="dedication">
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #E8A0A0; vertical-align: middle; margin-left: 5px;"><path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.033 .034l.033 -.034a6 6 0 0 1 9.927 6.472l-.028 .07l-7.255 7.323a1 1 0 0 1 -1.41 .013l-7.322 -7.336a6 6 0 0 1 .034 -7.967z"/></svg>
+            מוקדש לגל
+        </span>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <!-- QUOTE -->
+        <div class="main-quote">
+            <blockquote>"אין רואים יפה אלא בלב. העיקר נסתר מעיני בשר."</blockquote>
+            <cite>— אנטואן דה סאן-טגזופרי</cite>
+        </div>
+        
+        <!-- CHAPTERS GRID -->
+        <section class="chapters-section">
+            <h2>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#E8A0A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; vertical-align: middle; margin-left: 10px;">
+                    <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                    <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+                    <path d="M3 6l0 13" />
+                    <path d="M12 6l0 13" />
+                    <path d="M21 6l0 13" />
+                </svg>
+                בחר פרק
+            </h2>
+            
+            <!-- BOOKMARKS SECTION -->
+            <div class="bookmarks-section" id="bookmarks-section">
+                <div class="bookmarks-header">
+                    <div class="bookmarks-title">
+                        <i class="ti ti-heart-filled"></i>
+                        <span>הפרקים שאהבתי</span>
+                        <span class="bookmarks-count" id="bookmarks-count">0</span>
+                    </div>
+                    <button class="clear-bookmarks-btn" id="clear-bookmarks">
+                        <i class="ti ti-trash"></i>
+                        נקה הכל
+                    </button>
+                </div>
+                <div class="bookmarks-grid" id="bookmarks-grid">
+                    <!-- Bookmarked chapters will be inserted here -->
+                </div>
+            </div>
+            
+            <!-- SEARCH & FILTER -->
+            <div class="search-filter-container">
+                <div class="search-box">
+                    <i class="ti ti-search search-icon"></i>
+                    <input type="text" id="chapter-search" placeholder="חפש פרק לפי שם..." autocomplete="off">
+                    <button class="clear-btn" id="clear-search" aria-label="נקה חיפוש">
+                        <i class="ti ti-x"></i>
+                    </button>
+                </div>
+                <div class="mood-filters" id="mood-filters">
+                    <!-- Mood buttons will be inserted here by JavaScript -->
+                </div>
+                <p class="result-count" id="result-count"></p>
+            </div>
+            
+            <div class="chapters-grid" id="chapters-grid">
+                <!-- Loading state -->
+                <div class="loading" id="loading-state">
+                    <i class="ti ti-loader-2"></i>
+                    <p>טוען פרקים...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- PROGRESS -->
+        <div class="progress-section">
+            <div class="progress-info">
+                <h3>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; vertical-align: middle; margin-left: 5px;">
+                        <path d="M4 19l16 0" />
+                        <path d="M4 15l4 -6l4 2l4 -5l4 4" />
+                    </svg>
+                    התקדמות
+                </h3>
+                <p><span id="completed-count">0</span> מתוך 27 פרקים זמינים</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+            </div>
+        </div>
+    </main>
+
+    </div><!-- END page-content -->
+    
+    <!-- KEYBOARD HINTS -->
+    <div class="keyboard-hints" style="text-align: center; padding: 20px; margin-top: 30px; background: rgba(255,255,255,0.05); border-radius: 15px; color: #F5E6C8; font-size: 0.85rem;">
+        <p style="margin-bottom: 10px; opacity: 0.8;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; vertical-align: middle; margin-left: 5px;">
+                <path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />
+                <path d="M6 10l0 .01" /><path d="M10 10l0 .01" /><path d="M14 10l0 .01" /><path d="M18 10l0 .01" />
+                <path d="M6 14l0 .01" /><path d="M18 14l0 .01" /><path d="M10 14l4 0" />
+            </svg>
+            קיצורי מקלדת זמינים בדפי הפרקים:
+        </p>
+        <p style="opacity: 0.6;">
+            <kbd style="background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; margin: 0 3px;">←</kbd> פרק הבא &nbsp;|&nbsp;
+            <kbd style="background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; margin: 0 3px;">→</kbd> פרק קודם &nbsp;|&nbsp;
+            <kbd style="background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; margin: 0 3px;">1-5</kbd> מעבר בין טאבים &nbsp;|&nbsp;
+            <kbd style="background: rgba(255,255,255,0.15); padding: 3px 8px; border-radius: 4px; margin: 0 3px;">Esc</kbd> חזרה לכאן
+        </p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700; vertical-align: middle; margin: 0 8px;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            הנסיך הקטן - פרשנות אינטראקטיבית
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: #FFD700; vertical-align: middle; margin: 0 8px;"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </p>
+        <p class="credit">
+            נוצר באהבה עבור גל
+            <svg viewBox="0 0 24 24" style="width: 14px; height: 14px; fill: #E8A0A0; vertical-align: middle; margin-right: 5px;"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/></svg>
+        </p>
+    </footer>
+
+    <script>
+        // Global state
+        let chaptersData = [];
+        let moodsData = [];
+        let currentMood = 'all';
+        let currentSearch = '';
+        let bookmarks = [];
+        
+        // Bookmarks localStorage key
+        const BOOKMARKS_KEY = 'little-prince-bookmarks';
+        
+        // Load bookmarks from localStorage
+        function loadBookmarks() {
+            try {
+                const stored = localStorage.getItem(BOOKMARKS_KEY);
+                bookmarks = stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                bookmarks = [];
+            }
+        }
+        
+        // Save bookmarks to localStorage
+        function saveBookmarks() {
+            try {
+                localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+            } catch (e) {
+                console.warn('Could not save bookmarks');
+            }
+        }
+        
+        // Toggle bookmark for a chapter
+        function toggleBookmark(chapterNum, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const index = bookmarks.indexOf(chapterNum);
+            const btn = document.querySelector(`.bookmark-btn[data-chapter="${chapterNum}"]`);
+            
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+                if (btn) {
+                    btn.classList.remove('bookmarked');
+                }
+            } else {
+                bookmarks.push(chapterNum);
+                if (btn) {
+                    btn.classList.add('bookmarked', 'just-bookmarked');
+                    setTimeout(() => btn.classList.remove('just-bookmarked'), 400);
+                }
+            }
+            
+            saveBookmarks();
+            renderBookmarksSection();
+        }
+        
+        // Render bookmarks section
+        function renderBookmarksSection() {
+            const section = document.getElementById('bookmarks-section');
+            const grid = document.getElementById('bookmarks-grid');
+            const countEl = document.getElementById('bookmarks-count');
+            
+            if (bookmarks.length === 0) {
+                section.classList.remove('has-bookmarks');
+                return;
+            }
+            
+            section.classList.add('has-bookmarks');
+            countEl.textContent = bookmarks.length;
+            
+            // Sort bookmarks by chapter number
+            const sortedBookmarks = [...bookmarks].sort((a, b) => a - b);
+            
+            grid.innerHTML = sortedBookmarks.map(chapterNum => {
+                const chapter = chaptersData.find(c => c.number === chapterNum);
+                if (!chapter) return '';
+                
+                const paddedNum = String(chapterNum).padStart(2, '0');
+                return `
+                    <a href="chapter-${paddedNum}.html" class="bookmarked-chip">
+                        <i class="ti ${chapter.icon}" style="color: ${chapter.color}"></i>
+                        <span>${chapter.title}</span>
+                        <span class="chip-number">פרק ${chapterNum}</span>
+                    </a>
+                `;
+            }).join('');
+        }
+        
+        // Clear all bookmarks
+        function clearAllBookmarks() {
+            if (bookmarks.length === 0) return;
+            
+            if (confirm('האם למחוק את כל הסימניות?')) {
+                bookmarks = [];
+                saveBookmarks();
+                renderBookmarksSection();
+                
+                // Update all bookmark buttons
+                document.querySelectorAll('.bookmark-btn.bookmarked').forEach(btn => {
+                    btn.classList.remove('bookmarked');
+                });
+            }
+        }
+        
+        // Create stars using SVG
+        function createStars() {
+            const container = document.getElementById('stars');
+            const starCount = 80;
+            const starSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = starSVG;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 10 + 6;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Load chapters from JSON
+        async function loadChapters() {
+            const grid = document.getElementById('chapters-grid');
+            const loadingState = document.getElementById('loading-state');
+            
+            // Load bookmarks first
+            loadBookmarks();
+            
+            try {
+                const response = await fetch('chapters.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load chapters');
+                }
+                
+                const data = await response.json();
+                chaptersData = data.chapters;
+                moodsData = data.moods || [];
+                
+                // Remove loading state
+                if (loadingState) {
+                    loadingState.remove();
+                }
+                
+                // Render mood filters
+                renderMoodFilters();
+                
+                // Render chapters
+                renderChapters();
+                
+                // Render bookmarks section
+                renderBookmarksSection();
+                
+                // Setup clear bookmarks button
+                document.getElementById('clear-bookmarks').addEventListener('click', clearAllBookmarks);
+                
+                // Update progress
+                updateProgress(data.chapters);
+                
+                // Setup search and filter handlers
+                setupSearchAndFilter();
+                
+                // Animate cards with staggered delay
+                animateCards();
+                
+            } catch (error) {
+                console.error('Error loading chapters:', error);
+                
+                // Show error state
+                if (loadingState) {
+                    loadingState.innerHTML = `
+                        <div class="error">
+                            <i class="ti ti-alert-circle"></i>
+                            <p>לא ניתן לטעון את הפרקים</p>
+                            <p style="font-size: 0.85rem; margin-top: 10px;">וודא שקובץ chapters.json קיים באותה תיקייה</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        // Render mood filter buttons
+        function renderMoodFilters() {
+            const container = document.getElementById('mood-filters');
+            if (!container || !moodsData.length) return;
+            
+            // Calculate counts for each mood
+            const moodCounts = {};
+            chaptersData.forEach(ch => {
+                moodCounts[ch.mood] = (moodCounts[ch.mood] || 0) + 1;
+            });
+            
+            moodsData.forEach(mood => {
+                const btn = document.createElement('button');
+                btn.className = 'mood-btn' + (mood.id === 'all' ? ' active' : '');
+                btn.dataset.mood = mood.id;
+                btn.style.setProperty('--btn-color', mood.color);
+                
+                const count = mood.id === 'all' ? chaptersData.length : (moodCounts[mood.id] || 0);
+                
+                btn.innerHTML = `
+                    <i class="ti ${mood.icon}"></i>
+                    <span>${mood.name}</span>
+                    <span class="count">${count}</span>
+                `;
+                
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentMood = mood.id;
+                    filterChapters();
+                });
+                
+                container.appendChild(btn);
+            });
+        }
+        
+        // Render chapters to the grid
+        function renderChapters() {
+            const grid = document.getElementById('chapters-grid');
+            grid.innerHTML = '';
+            
+            chaptersData.forEach(chapter => {
+                const chapterNum = String(chapter.number).padStart(2, '0');
+                const statusClass = chapter.available ? 'available' : 'coming-soon';
+                const isBookmarked = bookmarks.includes(chapter.number);
+                
+                const card = document.createElement('a');
+                card.href = `chapter-${chapterNum}.html`;
+                card.className = `chapter-card ${statusClass}`;
+                card.style.setProperty('--chapter-color', chapter.color);
+                card.dataset.title = chapter.title.toLowerCase();
+                card.dataset.mood = chapter.mood;
+                card.dataset.number = chapter.number;
+                
+                card.innerHTML = `
+                    <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
+                            data-chapter="${chapter.number}" 
+                            aria-label="${isBookmarked ? 'הסר מהמועדפים' : 'הוסף למועדפים'}"
+                            title="${isBookmarked ? 'הסר מהמועדפים' : 'הוסף למועדפים'}">
+                        <i class="ti ${isBookmarked ? 'ti-heart-filled' : 'ti-heart'}"></i>
+                    </button>
+                    <span class="chapter-number">פרק ${chapter.number}</span>
+                    <i class="ti ${chapter.icon} chapter-icon"></i>
+                    <span class="chapter-title">${chapter.title}</span>
+                `;
+                
+                // Prevent navigation for coming soon chapters
+                if (!chapter.available) {
+                    card.addEventListener('click', function(e) {
+                        e.preventDefault();
+                    });
+                }
+                
+                // Add bookmark button click handler
+                const bookmarkBtn = card.querySelector('.bookmark-btn');
+                bookmarkBtn.addEventListener('click', function(e) {
+                    toggleBookmark(chapter.number, e);
+                    // Update icon
+                    const icon = this.querySelector('i');
+                    const isNowBookmarked = bookmarks.includes(chapter.number);
+                    icon.className = `ti ${isNowBookmarked ? 'ti-heart-filled' : 'ti-heart'}`;
+                    this.setAttribute('aria-label', isNowBookmarked ? 'הסר מהמועדפים' : 'הוסף למועדפים');
+                    this.setAttribute('title', isNowBookmarked ? 'הסר מהמועדפים' : 'הוסף למועדפים');
+                });
+                
+                grid.appendChild(card);
+            });
+        }
+        
+        // Setup search and filter handlers
+        function setupSearchAndFilter() {
+            const searchInput = document.getElementById('chapter-search');
+            const clearBtn = document.getElementById('clear-search');
+            
+            // Search input handler
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value.trim().toLowerCase();
+                clearBtn.classList.toggle('visible', currentSearch.length > 0);
+                filterChapters();
+            });
+            
+            // Clear button handler
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                currentSearch = '';
+                clearBtn.classList.remove('visible');
+                filterChapters();
+                searchInput.focus();
+            });
+            
+            // Keyboard shortcut: Escape to clear search
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    currentSearch = '';
+                    clearBtn.classList.remove('visible');
+                    filterChapters();
+                    this.blur();
+                }
+            });
+        }
+        
+        // Filter chapters based on search and mood
+        function filterChapters() {
+            const cards = document.querySelectorAll('.chapter-card');
+            let visibleCount = 0;
+            
+            cards.forEach(card => {
+                const title = card.dataset.title;
+                const mood = card.dataset.mood;
+                const number = card.dataset.number;
+                
+                // Check mood filter
+                const moodMatch = currentMood === 'all' || mood === currentMood;
+                
+                // Check search filter (search in title and number)
+                const searchMatch = !currentSearch || 
+                    title.includes(currentSearch) || 
+                    number.includes(currentSearch) ||
+                    `פרק ${number}`.includes(currentSearch);
+                
+                if (moodMatch && searchMatch) {
+                    card.classList.remove('filtered-out');
+                    visibleCount++;
+                } else {
+                    card.classList.add('filtered-out');
+                }
+            });
+            
+            // Update result count
+            updateResultCount(visibleCount);
+            
+            // Show/hide no results message
+            showNoResultsMessage(visibleCount === 0);
+            
+            // Re-animate visible cards
+            animateVisibleCards();
+        }
+        
+        // Update result count display
+        function updateResultCount(count) {
+            const resultCount = document.getElementById('result-count');
+            const hasFilter = currentMood !== 'all' || currentSearch.length > 0;
+            
+            if (hasFilter) {
+                resultCount.textContent = `מציג ${count} מתוך ${chaptersData.length} פרקים`;
+                resultCount.classList.add('visible');
+            } else {
+                resultCount.classList.remove('visible');
+            }
+        }
+        
+        // Show no results message
+        function showNoResultsMessage(show) {
+            const grid = document.getElementById('chapters-grid');
+            let noResults = grid.querySelector('.no-results');
+            
+            if (show && !noResults) {
+                noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = `
+                    <i class="ti ti-search-off"></i>
+                    <p>לא נמצאו פרקים תואמים</p>
+                    <p class="suggestion">נסה לחפש משהו אחר או לבחור קטגוריה אחרת</p>
+                `;
+                grid.appendChild(noResults);
+            } else if (!show && noResults) {
+                noResults.remove();
+            }
+        }
+        
+        // Animate visible cards
+        function animateVisibleCards() {
+            const visibleCards = document.querySelectorAll('.chapter-card:not(.filtered-out)');
+            visibleCards.forEach((card, index) => {
+                card.classList.remove('animate-in');
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 20);
+            });
+        }
+        
+        // Update progress bar
+        function updateProgress(chapters) {
+            const availableCount = chapters.filter(ch => ch.available).length;
+            const totalChapters = 27;
+            const percentage = (availableCount / totalChapters) * 100;
+            
+            document.getElementById('completed-count').textContent = availableCount;
+            document.getElementById('progress-fill').style.width = percentage + '%';
+        }
+        
+        // Animate cards with staggered delay
+        function animateCards() {
+            const cards = document.querySelectorAll('.chapter-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 30);
+            });
+        }
+        
+        // Page transition on chapter click
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.chapter-card.available:not(.filtered-out)');
+            if (card) {
+                e.preventDefault();
+                const href = card.getAttribute('href');
+                document.body.classList.add('page-exit');
+                setTimeout(() => {
+                    window.location.href = href;
+                }, 300);
+            }
+        });
+        
+        // Initialize
+        createStars();
+        loadChapters();
+    </script>
+</body>
+</html>

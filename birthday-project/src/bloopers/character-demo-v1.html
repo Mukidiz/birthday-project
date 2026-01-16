@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 Character Demo V1 - BLOOPER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a1a;
+            --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a1a2a 100%);
+            --star-glow: #ffeebb;
+            --text-light: #f0e6d3;
+            --accent-gold: #ffd700;
+            --accent-pink: #ff9eb5;
+            --accent-blue: #7eb8da;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: var(--star-glow);
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+        
+        .blooper-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .character-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .character-card h2 {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+        }
+        
+        .character-card p {
+            margin-top: 15px;
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .character-svg {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+        }
+        
+        .note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 107, 107, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.95rem;
+            border: 2px dashed #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="blooper-badge">🎬 BLOOPER - V1</div>
+        <h1>הדגמת דמויות V1</h1>
+        <p class="subtitle">הניסיון הראשון - יצא מוזר 😅</p>
+        
+        <div class="characters-grid">
+            <!-- Ben Character - V1 -->
+            <div class="character-card">
+                <svg class="character-svg" viewBox="0 0 200 250">
+                    <defs>
+                        <linearGradient id="skinGradientBen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffe4d0"/>
+                            <stop offset="100%" style="stop-color:#f5d0b5"/>
+                        </linearGradient>
+                        <linearGradient id="hairGradientBen" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8B6914"/>
+                            <stop offset="100%" style="stop-color:#654321"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Body -->
+                    <ellipse cx="100" cy="220" rx="45" ry="35" fill="#2a2a2a"/>
+                    <rect x="65" y="160" width="70" height="65" rx="10" fill="#333"/>
+                    
+                    <!-- Neck -->
+                    <rect x="88" y="140" width="24" height="25" fill="url(#skinGradientBen)"/>
+                    
+                    <!-- Head -->
+                    <ellipse cx="100" cy="100" rx="42" ry="48" fill="url(#skinGradientBen)"/>
+                    
+                    <!-- Hair -->
+                    <ellipse cx="100" cy="65" rx="38" ry="25" fill="url(#hairGradientBen)"/>
+                    <path d="M62 85 Q65 55 100 50 Q135 55 138 85" fill="url(#hairGradientBen)"/>
+                    
+                    <!-- Beard -->
+                    <ellipse cx="100" cy="130" rx="25" ry="18" fill="#654321" opacity="0.7"/>
+                    <path d="M75 115 Q100 155 125 115" fill="#654321" opacity="0.6"/>
+                    
+                    <!-- Eyes - Green -->
+                    <ellipse cx="82" cy="95" rx="10" ry="12" fill="white"/>
+                    <ellipse cx="118" cy="95" rx="10" ry="12" fill="white"/>
+                    <circle cx="82" cy="97" r="6" fill="#2E8B57"/>
+                    <circle cx="118" cy="97" r="6" fill="#2E8B57"/>
+                    <circle cx="84" cy="95" r="2" fill="white"/>
+                    <circle cx="120" cy="95" r="2" fill="white"/>
+                    
+                    <!-- Eyebrows -->
+                    <path d="M72 82 Q82 78 92 82" stroke="#654321" stroke-width="2" fill="none"/>
+                    <path d="M108 82 Q118 78 128 82" stroke="#654321" stroke-width="2" fill="none"/>
+                    
+                    <!-- Eyebrow piercing -->
+                    <circle cx="125" cy="80" r="2.5" fill="none" stroke="#C0C0C0" stroke-width="1.5"/>
+                    <circle cx="127" cy="79" r="1" fill="#C0C0C0"/>
+                    
+                    <!-- Nose -->
+                    <path d="M100 100 Q105 110 100 115" stroke="#d4a574" stroke-width="2" fill="none"/>
+                    
+                    <!-- Smile -->
+                    <path d="M88 125 Q100 135 112 125" stroke="#c4846a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Ears -->
+                    <ellipse cx="58" cy="100" rx="6" ry="10" fill="url(#skinGradientBen)"/>
+                    <ellipse cx="142" cy="100" rx="6" ry="10" fill="url(#skinGradientBen)"/>
+                </svg>
+                <h2>בן 💚</h2>
+                <p>
+                    ❌ שיער מוזר<br>
+                    ❌ זקן ענק<br>
+                    ❌ מסובך מדי
+                </p>
+            </div>
+            
+            <!-- Gal Character - V1 -->
+            <div class="character-card">
+                <svg class="character-svg" viewBox="0 0 200 250">
+                    <defs>
+                        <linearGradient id="skinGradientGal" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f5d0b5"/>
+                            <stop offset="100%" style="stop-color:#e8c4a0"/>
+                        </linearGradient>
+                        <linearGradient id="hairGradientGal" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a1a1a"/>
+                            <stop offset="100%" style="stop-color:#0a0a0a"/>
+                        </linearGradient>
+                    </defs>
+                    
+                    <!-- Body -->
+                    <ellipse cx="100" cy="220" rx="50" ry="35" fill="#4a6fa5"/>
+                    <rect x="58" y="155" width="84" height="70" rx="10" fill="#5a8ac7"/>
+                    
+                    <!-- Arms hint -->
+                    <ellipse cx="52" cy="180" rx="15" ry="25" fill="#5a8ac7"/>
+                    <ellipse cx="148" cy="180" rx="15" ry="25" fill="#5a8ac7"/>
+                    
+                    <!-- Neck -->
+                    <rect x="85" y="138" width="30" height="22" fill="url(#skinGradientGal)"/>
+                    
+                    <!-- Head -->
+                    <ellipse cx="100" cy="98" rx="44" ry="50" fill="url(#skinGradientGal)"/>
+                    
+                    <!-- Hair -->
+                    <ellipse cx="100" cy="60" rx="40" ry="28" fill="url(#hairGradientGal)"/>
+                    <path d="M60 82 Q65 48 100 45 Q135 48 140 82" fill="url(#hairGradientGal)"/>
+                    
+                    <!-- Beard -->
+                    <ellipse cx="100" cy="130" rx="28" ry="20" fill="#1a1a1a" opacity="0.8"/>
+                    <path d="M72 112 Q100 158 128 112" fill="#1a1a1a" opacity="0.7"/>
+                    
+                    <!-- Eyes - Brown -->
+                    <ellipse cx="82" cy="93" rx="11" ry="13" fill="white"/>
+                    <ellipse cx="118" cy="93" rx="11" ry="13" fill="white"/>
+                    <circle cx="82" cy="95" r="7" fill="#5D4037"/>
+                    <circle cx="118" cy="95" r="7" fill="#5D4037"/>
+                    <circle cx="84" cy="93" r="2.5" fill="white"/>
+                    <circle cx="120" cy="93" r="2.5" fill="white"/>
+                    
+                    <!-- Eyebrows -->
+                    <path d="M70 78 Q82 73 94 78" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                    <path d="M106 78 Q118 73 130 78" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+                    
+                    <!-- Nose -->
+                    <path d="M100 98 Q106 108 100 114" stroke="#c4956a" stroke-width="2.5" fill="none"/>
+                    
+                    <!-- Smile -->
+                    <path d="M85 125 Q100 137 115 125" stroke="#b4745a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    
+                    <!-- Ears -->
+                    <ellipse cx="56" cy="98" rx="7" ry="11" fill="url(#skinGradientGal)"/>
+                    <ellipse cx="144" cy="98" rx="7" ry="11" fill="url(#skinGradientGal)"/>
+                </svg>
+                <h2>גל 💙</h2>
+                <p>
+                    ❌ חולצה כחולה?!<br>
+                    ❌ זקן ענק<br>
+                    ❌ לא דומה
+                </p>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>🎬 למה זה פספוס?</strong><br><br>
+            הדמויות יצאו מסובכות מדי, עם זקנים ענקיים, והכי חשוב - לא דומות לנו! 😂<br>
+            אחרי 4 איטרציות הגענו לעיצוב פשוט ומינימליסטי שעובד הרבה יותר טוב.
+        </div>
+    </div>
+    
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
+</body>
+</html>
+
