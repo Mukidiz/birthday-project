@@ -66,8 +66,8 @@
 
 **Stars to write:**
 1. ✅ היצירתיות - `src/star-01.html`
-2. ⬜ הלב הטוב ← **הבא בתור!**
-3. ⬜ תמיד שם
+2. ✅ הלב הטוב - `src/star-02.html`
+3. ⬜ תמיד שם ← **הבא בתור!**
 4. ⬜ ההתמדה
 5. ⬜ המוכשרות
 6. ⬜ ההקשבה
@@ -204,6 +204,7 @@
 | TASK-001 | 2026-01-16 | Concept + character design approved. See `character-demo-v4.html` |
 | Opening Page | 2026-01-17 | `src/opening.html` - דף פתיחה עם טקסט, חללית, כוכבים וכפתור המראה |
 | Star 1 | 2026-01-17 | `src/star-01.html` - כוכב היצירתיות ✅ |
+| Star 2 | 2026-01-17 | `src/star-02.html` - כוכב טוב הלב ✅ |
 
 ---
 
