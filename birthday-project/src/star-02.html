@@ -248,13 +248,48 @@
             transition: all 0.3s ease;
         }
         
-        .progress-dot.active {
-            background: var(--heart-pink);
-            box-shadow: 0 0 10px var(--heart-pink);
+        /* Unique colors for each star */
+        .progress-dot.star-creativity {
+            background: linear-gradient(135deg, #FFD700, #FF8C42, #FF6B9D, #9D4EDD, #4EA8DE);
+        }
+        .progress-dot.star-heart {
+            background: #FF9EB5;
+        }
+        .progress-dot.star-persistence {
+            background: #FFD700;
+        }
+        .progress-dot.star-humor {
+            background: #FF9F43;
+        }
+        .progress-dot.star-courage {
+            background: #FF6B6B;
+        }
+        .progress-dot.star-wisdom {
+            background: #4A90A4;
+        }
+        .progress-dot.star-dreams {
+            background: #A29BFE;
+        }
+        .progress-dot.star-strength {
+            background: #C0C0C0;
+        }
+        .progress-dot.star-love {
+            background: #FF6B8A;
+        }
+        .progress-dot.star-generosity {
+            background: #06D6A0;
+        }
+        .progress-dot.star-ours {
+            background: linear-gradient(135deg, #FFD700, #FF9EB5, #FF6B6B, #A29BFE, #06D6A0);
         }
         
-        .progress-dot.completed {
-            background: var(--star-gold);
+        .progress-dot.active {
+            box-shadow: 0 0 12px currentColor;
+            transform: scale(1.2);
+        }
+        
+        .progress-dot:not(.visited):not(.active) {
+            opacity: 0.3;
         }
         
         /* ===== ANIMATIONS ===== */
@@ -655,17 +690,19 @@
             </a>
         </div>
         
-        <!-- Progress Dots - Updated to 9 stars -->
+        <!-- Progress Dots - Updated to 11 stars -->
         <div class="progress">
-            <div class="progress-dot completed" title="יצירתיות"></div>
-            <div class="progress-dot active" title="לב טוב"></div>
-            <div class="progress-dot" title="התמדה"></div>
-            <div class="progress-dot" title="יופי"></div>
-            <div class="progress-dot" title="בדיחות גרועות"></div>
-            <div class="progress-dot" title="סדר"></div>
-            <div class="progress-dot" title="בוקר"></div>
-            <div class="progress-dot" title="שגרה מתוקה"></div>
-            <div class="progress-dot" title="אהבה"></div>
+            <div class="progress-dot star-creativity visited" title="יצירתיות"></div>
+            <div class="progress-dot star-heart active" title="טוב הלב"></div>
+            <div class="progress-dot star-persistence" title="התמדה"></div>
+            <div class="progress-dot star-humor" title="הומור"></div>
+            <div class="progress-dot star-courage" title="אומץ"></div>
+            <div class="progress-dot star-wisdom" title="חוכמה"></div>
+            <div class="progress-dot star-dreams" title="חלומות"></div>
+            <div class="progress-dot star-strength" title="כוח פנימי"></div>
+            <div class="progress-dot star-love" title="אהבה"></div>
+            <div class="progress-dot star-generosity" title="נדיבות"></div>
+            <div class="progress-dot star-ours" title="השלנו"></div>
         </div>
         
     </div>
