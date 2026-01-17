@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌙 כוכב החלומות</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0D1B2A;
+            --bg-deeper: #080F1A;
+            --text-light: #F5E6D3;
+            --text-cream: #FDF8EE;
+            --star-gold: #FFD700;
+            --accent-blue: #7EB8DA;
+            --accent-warm: #E8D4C0;
+            
+            /* Dreams Star Colors - Purple, Pink & Light Blue */
+            --dream-purple: #9B72CF;
+            --dream-purple-deep: #6B4C9A;
+            --dream-purple-dark: #2D1B4E;
+            --dream-pink: #E8A4C9;
+            --dream-pink-light: #F5C6E0;
+            --dream-blue: #7EC8E3;
+            --dream-blue-light: #B8E4F0;
+            --dream-glow: #D4B8E8;
+            --dream-mist: rgba(155, 114, 207, 0.3);
+            --bubble-shine: rgba(255, 255, 255, 0.4);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--dream-purple-dark) 50%, var(--bg-deeper) 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ===== STARS BACKGROUND ===== */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star-dot {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        /* ===== FLOATING DREAM SYMBOLS ===== */
+        .floating-dreams {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-symbol {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.2;
+            animation: dreamFloat var(--duration, 20s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes dreamFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.8); 
+                opacity: 0;
+            }
+            10% { opacity: 0.3; }
+            50% { opacity: 0.25; }
+            90% { opacity: 0.1; }
+            100% { 
+                transform: translateY(-20vh) rotate(15deg) scale(0.6); 
+                opacity: 0;
+            }
+        }
+        
+        /* ===== DREAM MIST OVERLAY ===== */
+        .dream-mist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(155, 114, 207, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(232, 164, 201, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(126, 200, 227, 0.05) 0%, transparent 60%);
+            animation: mistShift 15s ease-in-out infinite;
+        }
+        
+        @keyframes mistShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        
+        /* ===== STAR TITLE ===== */
+        .star-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--dream-purple);
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out 0.3s forwards;
+        }
+        
+        .star-title span {
+            font-size: 2rem;
+        }
+        
+        /* ===== SCENE - SPACESHIP ABOVE DREAMS STAR ===== */
+        .scene-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.6s forwards;
+            direction: ltr;
+        }
+        
+        .scene-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+        
+        /* ===== MESSAGE BOX ===== */
+        .message-box {
+            background: rgba(155, 114, 207, 0.08);
+            border: 1px solid rgba(155, 114, 207, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+        
+        .message-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .message-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message-box .highlight {
+            color: var(--dream-purple);
+            font-weight: 500;
+        }
+        
+        .message-box .emphasis {
+            font-weight: 500;
+        }
+        
+        .dream-point {
+            color: var(--dream-pink-light);
+            font-weight: 400;
+        }
+        
+        .method-line {
+            color: var(--dream-blue-light);
+            font-weight: 400;
+        }
+        
+        .manifest-line {
+            color: var(--dream-purple);
+            font-style: italic;
+            opacity: 0.95;
+        }
+        
+        .tailor-line {
+            color: var(--dream-pink);
+            font-weight: 400;
+        }
+        
+        .together-line {
+            color: var(--dream-glow);
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            padding: 0 10px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.5s forwards;
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(155, 114, 207, 0.15);
+            border-color: var(--dream-purple);
+            transform: scale(1.02);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, rgba(155, 114, 207, 0.2) 0%, rgba(232, 164, 201, 0.2) 100%);
+            border-color: var(--dream-purple);
+        }
+        
+        .nav-btn.next:hover {
+            background: linear-gradient(135deg, rgba(155, 114, 207, 0.35) 0%, rgba(232, 164, 201, 0.35) 100%);
+            box-shadow: 0 4px 20px rgba(155, 114, 207, 0.3);
+        }
+        
+        /* ===== PROGRESS DOTS ===== */
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.8s forwards;
+        }
+        
+        .progress-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        /* Unique colors for each star */
+        .progress-dot.star-creativity {
+            background: linear-gradient(135deg, #FFD700, #FF8C42, #FF6B9D, #9D4EDD, #4EA8DE);
+        }
+        .progress-dot.star-heart {
+            background: #FF9EB5;
+        }
+        .progress-dot.star-persistence {
+            background: #FFD700;
+        }
+        .progress-dot.star-humor {
+            background: #FF9F43;
+        }
+        .progress-dot.star-courage {
+            background: #FF6B6B;
+        }
+        .progress-dot.star-wisdom {
+            background: #4A90A4;
+        }
+        .progress-dot.star-dreams {
+            background: linear-gradient(135deg, #9B72CF, #E8A4C9, #7EC8E3);
+        }
+        .progress-dot.star-strength {
+            background: #C0C0C0;
+        }
+        .progress-dot.star-love {
+            background: #FF6B8A;
+        }
+        .progress-dot.star-generosity {
+            background: #06D6A0;
+        }
+        .progress-dot.star-ours {
+            background: linear-gradient(135deg, #FFD700, #FF9EB5, #FF6B6B, #A29BFE, #06D6A0);
+        }
+        
+        .progress-dot.active {
+            box-shadow: 0 0 12px currentColor;
+            transform: scale(1.2);
+        }
+        
+        .progress-dot:not(.visited):not(.active) {
+            opacity: 0.3;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow-dream {
+            0%, 100% { filter: drop-shadow(0 0 10px var(--dream-purple)); }
+            50% { filter: drop-shadow(0 0 25px var(--dream-purple)); }
+        }
+        
+        @keyframes bubble-float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.05); }
+        }
+        
+        @keyframes portal-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes star-born {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes dream-shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .star-title {
+                font-size: 1.3rem;
+            }
+            
+            .star-title span {
+                font-size: 1.6rem;
+            }
+            
+            .message-box {
+                padding: 25px 20px;
+            }
+            
+            .message-box p {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .nav-btn {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- STARS BACKGROUND -->
+    <div class="stars-bg">
+        <div class="star-dot" style="top: 5%; left: 10%; width: 2px; height: 2px; --duration: 3s; --delay: 0s;"></div>
+        <div class="star-dot" style="top: 12%; left: 85%; width: 3px; height: 3px; --duration: 2.5s; --delay: 0.5s;"></div>
+        <div class="star-dot" style="top: 25%; left: 20%; width: 2px; height: 2px; --duration: 4s; --delay: 1s;"></div>
+        <div class="star-dot" style="top: 18%; left: 65%; width: 2px; height: 2px; --duration: 3.5s; --delay: 0.3s;"></div>
+        <div class="star-dot" style="top: 35%; left: 92%; width: 2px; height: 2px; --duration: 2.8s; --delay: 0.7s;"></div>
+        <div class="star-dot" style="top: 45%; left: 5%; width: 3px; height: 3px; --duration: 3.2s; --delay: 1.2s;"></div>
+        <div class="star-dot" style="top: 55%; left: 78%; width: 2px; height: 2px; --duration: 2.6s; --delay: 0.4s;"></div>
+        <div class="star-dot" style="top: 65%; left: 15%; width: 2px; height: 2px; --duration: 3.8s; --delay: 0.9s;"></div>
+        <div class="star-dot" style="top: 75%; left: 88%; width: 2px; height: 2px; --duration: 3s; --delay: 1.5s;"></div>
+        <div class="star-dot" style="top: 82%; left: 40%; width: 3px; height: 3px; --duration: 2.4s; --delay: 0.2s;"></div>
+        <div class="star-dot" style="top: 90%; left: 70%; width: 2px; height: 2px; --duration: 3.4s; --delay: 0.8s;"></div>
+        <div class="star-dot" style="top: 8%; left: 45%; width: 2px; height: 2px; --duration: 2.9s; --delay: 1.1s;"></div>
+    </div>
+    
+    <!-- DREAM MIST OVERLAY -->
+    <div class="dream-mist"></div>
+    
+    <!-- FLOATING DREAM SYMBOLS -->
+    <div class="floating-dreams">
+        <div class="floating-symbol" style="left: 5%; --duration: 22s; --delay: 0s;">💭</div>
+        <div class="floating-symbol" style="left: 15%; --duration: 25s; --delay: 3s;">✨</div>
+        <div class="floating-symbol" style="left: 28%; --duration: 20s; --delay: 5s;">🌙</div>
+        <div class="floating-symbol" style="left: 42%; --duration: 28s; --delay: 1s;">🔮</div>
+        <div class="floating-symbol" style="left: 58%; --duration: 24s; --delay: 4s;">⭐</div>
+        <div class="floating-symbol" style="left: 72%; --duration: 21s; --delay: 2s;">💫</div>
+        <div class="floating-symbol" style="left: 88%; --duration: 26s; --delay: 6s;">🌟</div>
+    </div>
+    
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        
+        <!-- Star Title -->
+        <h1 class="star-title">
+            <span>🌙</span> כוכב החלומות <span>🌙</span>
+        </h1>
+        
+        <!-- Scene: Spaceship floating above dreams star / portal -->
+        <div class="scene-container">
+            <svg viewBox="0 0 500 580" xmlns="http://www.w3.org/2000/svg" style="direction: ltr;">
+                <defs>
+                    <!-- Gradients -->
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6D3"/>
+                        <stop offset="100%" style="stop-color:#E8D4C0"/>
+                    </linearGradient>
+                    <linearGradient id="windowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7EB8DA"/>
+                        <stop offset="100%" style="stop-color:#5A9BC7"/>
+                    </linearGradient>
+                    <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFE4B5"/>
+                        <stop offset="100%" style="stop-color:#F5D5B5"/>
+                    </linearGradient>
+                    
+                    <!-- Dream Star Gradients -->
+                    <linearGradient id="dreamGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#9B72CF"/>
+                        <stop offset="35%" style="stop-color:#E8A4C9"/>
+                        <stop offset="65%" style="stop-color:#7EC8E3"/>
+                        <stop offset="100%" style="stop-color:#9B72CF"/>
+                    </linearGradient>
+                    <radialGradient id="portalGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#2D1B4E"/>
+                        <stop offset="40%" style="stop-color:#6B4C9A"/>
+                        <stop offset="70%" style="stop-color:#9B72CF"/>
+                        <stop offset="100%" style="stop-color:#E8A4C9"/>
+                    </radialGradient>
+                    <linearGradient id="dreamGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D4B8E8"/>
+                        <stop offset="100%" style="stop-color:#9B72CF"/>
+                    </linearGradient>
+                    <radialGradient id="bubbleGradient" cx="30%" cy="30%" r="60%">
+                        <stop offset="0%" style="stop-color:rgba(255,255,255,0.4)"/>
+                        <stop offset="50%" style="stop-color:rgba(212,184,232,0.2)"/>
+                        <stop offset="100%" style="stop-color:rgba(155,114,207,0.1)"/>
+                    </radialGradient>
+                    <linearGradient id="mistGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#9B72CF" stop-opacity="0.3"/>
+                        <stop offset="50%" style="stop-color:#E8A4C9" stop-opacity="0.2"/>
+                        <stop offset="100%" style="stop-color:#7EC8E3" stop-opacity="0.3"/>
+                    </linearGradient>
+                    
+                    <!-- Glow filters -->
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="softGlow">
+                        <feGaussianBlur stdDeviation="6" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="dreamGlowFilter">
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                        <feFlood flood-color="#9B72CF" flood-opacity="0.4"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="bubbleGlowFilter">
+                        <feGaussianBlur stdDeviation="2" result="blur"/>
+                        <feFlood flood-color="#E8A4C9" flood-opacity="0.3"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- ===== THE DREAMS STAR - PORTAL SHAPE ===== -->
+                <g transform="translate(250, 380)">
+                    <!-- Outer glow aura - dream energy -->
+                    <ellipse cx="0" cy="0" rx="140" ry="125" fill="url(#dreamGlow)" opacity="0.12">
+                        <animate attributeName="rx" values="135;145;135" dur="6s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.1;0.15;0.1" dur="6s" repeatCount="indefinite"/>
+                    </ellipse>
+                    
+                    <!-- Rotating dream rings -->
+                    <g opacity="0.2">
+                        <ellipse cx="0" cy="0" rx="115" ry="100" fill="none" stroke="url(#dreamGradient)" stroke-width="2" stroke-dasharray="10 5">
+                            <animateTransform attributeName="transform" type="rotate" values="0;360" dur="30s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="0" rx="125" ry="110" fill="none" stroke="url(#dreamGradient)" stroke-width="1" stroke-dasharray="15 8">
+                            <animateTransform attributeName="transform" type="rotate" values="360;0" dur="40s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Colorful mist clouds around -->
+                    <g opacity="0.4">
+                        <!-- Purple mist left -->
+                        <ellipse cx="-70" cy="30" rx="35" ry="20" fill="#9B72CF" opacity="0.3">
+                            <animate attributeName="opacity" values="0.2;0.4;0.2" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="rx" values="33;38;33" dur="5s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <!-- Pink mist right -->
+                        <ellipse cx="65" cy="20" rx="30" ry="18" fill="#E8A4C9" opacity="0.3">
+                            <animate attributeName="opacity" values="0.25;0.45;0.25" dur="4.5s" repeatCount="indefinite" begin="1s"/>
+                        </ellipse>
+                        <!-- Blue mist bottom -->
+                        <ellipse cx="0" cy="60" rx="40" ry="15" fill="#7EC8E3" opacity="0.25">
+                            <animate attributeName="opacity" values="0.2;0.35;0.2" dur="5s" repeatCount="indefinite" begin="2s"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Dream bubbles with content floating -->
+                    <g filter="url(#bubbleGlowFilter)">
+                        <!-- Bubble 1 - left top - with small stars inside -->
+                        <g transform="translate(-75, -45)" style="animation: bubble-float 4s ease-in-out infinite;">
+                            <circle cx="0" cy="0" r="22" fill="url(#bubbleGradient)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                            <circle cx="-6" cy="-6" r="4" fill="rgba(255,255,255,0.4)"/>
+                            <!-- Star inside -->
+                            <polygon points="0,5 2,0 7,0 3,-3 5,-8 0,-5 -5,-8 -3,-3 -7,0 -2,0" fill="#FFD700" transform="scale(0.5)" opacity="0.7">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/>
+                            </polygon>
+                        </g>
+                        
+                        <!-- Bubble 2 - right - with future symbol -->
+                        <g transform="translate(80, -35)" style="animation: bubble-float 4.5s ease-in-out infinite; animation-delay: 0.5s;">
+                            <circle cx="0" cy="0" r="18" fill="url(#bubbleGradient)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+                            <circle cx="-5" cy="-5" r="3" fill="rgba(255,255,255,0.35)"/>
+                            <!-- Arrow pointing up/forward - future -->
+                            <path d="M0 5 L0 -5 M-4 -2 L0 -6 L4 -2" stroke="#7EC8E3" stroke-width="1.5" fill="none" opacity="0.8"/>
+                        </g>
+                        
+                        <!-- Bubble 3 - top center - with dream cloud -->
+                        <g transform="translate(0, -65)" style="animation: bubble-float 5s ease-in-out infinite; animation-delay: 1s;">
+                            <circle cx="0" cy="0" r="20" fill="url(#bubbleGradient)" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+                            <circle cx="-5" cy="-5" r="3.5" fill="rgba(255,255,255,0.38)"/>
+                            <!-- Small cloud - dreams -->
+                            <g transform="scale(0.6)">
+                                <ellipse cx="-5" cy="0" rx="6" ry="4" fill="#E8A4C9" opacity="0.6"/>
+                                <ellipse cx="5" cy="0" rx="5" ry="4" fill="#E8A4C9" opacity="0.6"/>
+                                <ellipse cx="0" cy="-3" rx="6" ry="5" fill="#E8A4C9" opacity="0.6"/>
+                            </g>
+                        </g>
+                        
+                        <!-- Bubble 4 - bottom left - with heart -->
+                        <g transform="translate(-50, 55)" style="animation: bubble-float 3.8s ease-in-out infinite; animation-delay: 1.5s;">
+                            <circle cx="0" cy="0" r="15" fill="url(#bubbleGradient)" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+                            <circle cx="-4" cy="-4" r="2.5" fill="rgba(255,255,255,0.35)"/>
+                            <!-- Tiny heart -->
+                            <path d="M0 3 C0 0, -4 -2, -4 -4 C-4 -6, -2 -7, 0 -5 C2 -7, 4 -6, 4 -4 C4 -2, 0 0, 0 3" fill="#E8A4C9" opacity="0.7" transform="scale(0.7)"/>
+                        </g>
+                        
+                        <!-- Bubble 5 - bottom right -->
+                        <g transform="translate(55, 50)" style="animation: bubble-float 4.2s ease-in-out infinite; animation-delay: 2s;">
+                            <circle cx="0" cy="0" r="16" fill="url(#bubbleGradient)" stroke="rgba(255,255,255,0.24)" stroke-width="1"/>
+                            <circle cx="-4" cy="-4" r="3" fill="rgba(255,255,255,0.36)"/>
+                            <!-- Sparkle -->
+                            <g stroke="#FFD700" stroke-width="1" opacity="0.7">
+                                <line x1="-4" y1="0" x2="4" y2="0"/>
+                                <line x1="0" y1="-4" x2="0" y2="4"/>
+                                <line x1="-3" y1="-3" x2="3" y2="3" opacity="0.5"/>
+                                <line x1="3" y1="-3" x2="-3" y2="3" opacity="0.5"/>
+                            </g>
+                        </g>
+                    </g>
+                    
+                    <!-- Small stars being born - manifesting -->
+                    <g fill="#FFD700" opacity="0.6">
+                        <circle cx="-95" cy="-20" r="2">
+                            <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="r" values="0;3;0" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="90" cy="-15" r="2">
+                            <animate attributeName="opacity" values="0;1;0" dur="3.5s" repeatCount="indefinite" begin="1s"/>
+                            <animate attributeName="r" values="0;2.5;0" dur="3.5s" repeatCount="indefinite" begin="1s"/>
+                        </circle>
+                        <circle cx="-85" cy="45" r="2">
+                            <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+                            <animate attributeName="r" values="0;2;0" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+                        </circle>
+                        <circle cx="95" cy="40" r="2">
+                            <animate attributeName="opacity" values="0;1;0" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+                            <animate attributeName="r" values="0;2.5;0" dur="2.8s" repeatCount="indefinite" begin="1.5s"/>
+                        </circle>
+                    </g>
+                    
+                    <!-- Main portal / dream star core -->
+                    <g filter="url(#dreamGlowFilter)">
+                        <!-- Portal outer edge -->
+                        <ellipse cx="0" cy="0" rx="65" ry="65" fill="none" stroke="url(#dreamGradient)" stroke-width="8" opacity="0.8"/>
+                        
+                        <!-- Portal inner - looks like a window to another dimension -->
+                        <ellipse cx="0" cy="0" rx="55" ry="55" fill="url(#portalGradient)"/>
+                        
+                        <!-- Portal swirl effect -->
+                        <g opacity="0.3">
+                            <path d="M0 -40 Q30 -30, 40 0 Q30 30, 0 40 Q-30 30, -40 0 Q-30 -30, 0 -40" fill="none" stroke="#E8A4C9" stroke-width="2">
+                                <animateTransform attributeName="transform" type="rotate" values="0;360" dur="20s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M0 -30 Q20 -20, 30 0 Q20 20, 0 30 Q-20 20, -30 0 Q-20 -20, 0 -30" fill="none" stroke="#7EC8E3" stroke-width="1.5">
+                                <animateTransform attributeName="transform" type="rotate" values="360;0" dur="15s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Stars visible through the portal - the future -->
+                        <g>
+                            <circle cx="-15" cy="-15" r="2" fill="white" opacity="0.8">
+                                <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="10" cy="-20" r="1.5" fill="white" opacity="0.7">
+                                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+                            </circle>
+                            <circle cx="20" cy="5" r="1.5" fill="white" opacity="0.6">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="1s"/>
+                            </circle>
+                            <circle cx="-10" cy="15" r="2" fill="white" opacity="0.7">
+                                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+                            </circle>
+                            <circle cx="0" cy="0" r="2.5" fill="#FFD700" opacity="0.9">
+                                <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- Door frame hint - gateway to dreams -->
+                        <g opacity="0.4">
+                            <rect x="-18" y="-35" width="36" height="55" rx="18" ry="18" fill="none" stroke="#D4B8E8" stroke-width="2"/>
+                            <!-- Door handle -->
+                            <circle cx="12" cy="5" r="3" fill="#FFD700" opacity="0.6"/>
+                        </g>
+                    </g>
+                    
+                    <!-- Telescope looking at the future - on the side -->
+                    <g transform="translate(100, -10)" opacity="0.5">
+                        <!-- Telescope body -->
+                        <ellipse cx="0" cy="0" rx="8" ry="5" fill="#6B4C9A"/>
+                        <rect x="-5" y="-20" width="10" height="20" fill="#6B4C9A" rx="2"/>
+                        <!-- Telescope lens -->
+                        <ellipse cx="0" cy="-22" rx="7" ry="4" fill="#7EC8E3" stroke="#9B72CF" stroke-width="1"/>
+                        <!-- Lens shine -->
+                        <ellipse cx="-2" cy="-23" rx="2" ry="1" fill="rgba(255,255,255,0.5)"/>
+                        <!-- Tripod hint -->
+                        <line x1="-5" y1="3" x2="-10" y2="20" stroke="#6B4C9A" stroke-width="2"/>
+                        <line x1="5" y1="3" x2="10" y2="20" stroke="#6B4C9A" stroke-width="2"/>
+                        <!-- Looking at light/future -->
+                        <line x1="0" y1="-26" x2="0" y2="-40" stroke="#FFD700" stroke-width="1" stroke-dasharray="3 2" opacity="0.4">
+                            <animate attributeName="opacity" values="0.2;0.6;0.2" dur="2s" repeatCount="indefinite"/>
+                        </line>
+                    </g>
+                    
+                    <!-- Dream sparkles -->
+                    <g fill="#E8A4C9" filter="url(#glow)">
+                        <polygon points="-100,10 -98,14 -94,14 -97,17 -96,21 -100,18 -104,21 -103,17 -106,14 -102,14" transform="scale(0.6)" opacity="0.6">
+                            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/>
+                        </polygon>
+                        <polygon points="105,15 107,19 111,19 108,22 109,26 105,23 101,26 102,22 99,19 103,19" transform="scale(0.5)" opacity="0.5">
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                        </polygon>
+                    </g>
+                </g>
+                
+                <!-- ===== SPACESHIP FLOATING ABOVE ===== -->
+                <g transform="translate(250, 100)">
+                    <animateTransform 
+                        attributeName="transform" 
+                        type="translate" 
+                        values="250,100; 250,88; 250,100" 
+                        dur="5s" 
+                        repeatCount="indefinite"
+                        additive="replace"/>
+                    <!-- Engine flames (dreamy colors) -->
+                    <g transform="translate(0, 45)">
+                        <ellipse cx="-25" cy="25" rx="6" ry="12" fill="#9B72CF" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.3s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="28" rx="8" ry="15" fill="#E8A4C9" opacity="0.9">
+                            <animate attributeName="ry" values="12;18;12" dur="0.25s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="25" cy="25" rx="6" ry="12" fill="#7EC8E3" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.35s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <!-- Inner flame -->
+                        <ellipse cx="0" cy="26" rx="4" ry="10" fill="#D4B8E8" opacity="0.9">
+                            <animate attributeName="ry" values="8;12;8" dur="0.2s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Spaceship body -->
+                    <ellipse cx="0" cy="25" rx="55" ry="28" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Dome -->
+                    <ellipse cx="0" cy="8" rx="35" ry="20" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Heart window with Gal & Ben inside -->
+                    <path d="M0 -5 C0 -12, -10 -15, -17 -8 C-24 -1, -24 10, 0 25 C24 10, 24 -1, 17 -8 C10 -15, 0 -12, 0 -5" 
+                          fill="url(#windowBlue)" stroke="#4A90A4" stroke-width="1.5"/>
+                    
+                    <!-- Gal inside (left) - small, simple -->
+                    <g transform="translate(-8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#1a1a1a"/>
+                        <circle cx="-2" cy="0" r="1" fill="#5D4037"/>
+                        <circle cx="2" cy="0" r="1" fill="#5D4037"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Ben inside (right) - small, simple -->
+                    <g transform="translate(8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#6B4423"/>
+                        <circle cx="-2" cy="0" r="1" fill="#4A8B5C"/>
+                        <circle cx="2" cy="0" r="1" fill="#4A8B5C"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Wings -->
+                    <path d="M-55 25 L-80 45 L-80 52 L-52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    <path d="M55 25 L80 45 L80 52 L52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    
+                    <!-- Flag (dream purple) -->
+                    <line x1="0" y1="-12" x2="0" y2="-30" stroke="#C4A080" stroke-width="1.5"/>
+                    <polygon points="0,-30 15,-25 0,-19" fill="#9B72CF"/>
+                </g>
+                
+                <!-- Extra sparkles around the scene -->
+                <g fill="#9B72CF" filter="url(#glow)">
+                    <polygon points="80,150 82,156 88,156 83,160 85,166 80,162 75,166 77,160 72,156 78,156" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" repeatCount="indefinite"/>
+                    </polygon>
+                    <polygon points="420,130 421,134 425,134 422,137 423,141 420,138 417,141 418,137 415,134 419,134" opacity="0.4">
+                        <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                    </polygon>
+                </g>
+                
+                <!-- Pink dream stars -->
+                <g fill="#E8A4C9" filter="url(#glow)">
+                    <polygon points="55,300 56,303 59,303 57,305 58,308 55,306 52,308 53,305 51,303 54,303" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.8s" repeatCount="indefinite" begin="1s"/>
+                    </polygon>
+                    <polygon points="445,280 446,284 450,284 447,287 448,291 445,288 442,291 443,287 440,284 444,284" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+                    </polygon>
+                </g>
+            </svg>
+        </div>
+        
+        <!-- Message Box -->
+        <div class="message-box">
+            <p>
+                <span class="highlight">כוכב החלומות</span> אחראי על אותם חלומות שגורמים לך לא לקום בבוקר גם כשכל השעונים בבית מצלצלים, אבל הוא בעיקר מסמל את <span class="dream-point">היכולת שלך לדמיין את העתיד שאתה רוצה בפירוט מדהים</span>.
+            </p>
+            <p>
+                כוכב החלומות הוא <span class="dream-point">הכוכב הכי צבעוני</span> במסע שלנו, הוא מלא באפשרויות, בדמיון ובעתיד שעדיין לא קרה אבל יקרה.
+            </p>
+            <p class="manifest-line">
+                כוכב החלומות שלך משנה את הצורה שלו כל הזמן מחלום למציאות.
+            </p>
+            <p class="tailor-line">
+                TailorPlayed התחיל כחלום. החיים שלנו היום התחילו כחלום. וכל מה שעוד יבוא - .
+            </p>
+            <p class="together-line">
+                בוצ, תמשיך לחלום. אני אהיה שם איתך כשהחלומות הופכים למציאות, ונחלום ביחד את החלום הבא. 💜
+            </p>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="navigation">
+            <a href="star-06.html" class="nav-btn prev">
+                → חזרה
+            </a>
+            <a href="star-08.html" class="nav-btn next">
+                לכוכב הבא ←
+            </a>
+        </div>
+        
+        <!-- Progress Dots - 11 stars -->
+        <div class="progress">
+            <div class="progress-dot star-creativity visited" title="יצירתיות"></div>
+            <div class="progress-dot star-heart visited" title="טוב הלב"></div>
+            <div class="progress-dot star-persistence visited" title="התמדה"></div>
+            <div class="progress-dot star-humor visited" title="הומור"></div>
+            <div class="progress-dot star-courage visited" title="אומץ"></div>
+            <div class="progress-dot star-wisdom visited" title="חוכמה"></div>
+            <div class="progress-dot star-dreams active" title="חלומות"></div>
+            <div class="progress-dot star-strength" title="כוח פנימי"></div>
+            <div class="progress-dot star-love" title="אהבה"></div>
+            <div class="progress-dot star-generosity" title="נדיבות"></div>
+            <div class="progress-dot star-ours" title="השלנו"></div>
+        </div>
+        
+    </div>
+</body>
+</html>
+
