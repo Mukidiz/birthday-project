@@ -1,7 +1,7 @@
 # 📋 Task List - Birthday Project
 
-> **Last Updated:** 2026-01-16  
-> **Current Phase:** Planning → Content
+> **Last Updated:** 2026-01-17  
+> **Current Phase:** Content Writing (Star 3 next)
 
 ---
 
@@ -43,7 +43,7 @@
 - ליצור ולאשר עיצוב דמויות
 
 **Output:** 
-- ✅ `CHAPTERS-OUTLINE.md` - קונספט מסע בכוכבים, 12 כוכבים = 12 תכונות
+- ✅ `CHAPTERS-OUTLINE.md` - קונספט מסע בכוכבים, 9 כוכבים (עודכן מ-12)
 - ✅ `PROJECT-BRIEF.md` - עודכן עם הקונספט והדמויות
 - ✅ `src/character-demo-v4.html` - **עיצוב דמויות מאושר**
 - ✅ `ASSETS-LIST.md` - עודכן עם כללי העיצוב
@@ -64,19 +64,16 @@
 
 **Opening page:** ✅ Done - `src/opening.html`
 
-**Stars to write:**
+**Stars to write (עודכן ל-9 כוכבים):**
 1. ✅ היצירתיות - `src/star-01.html`
 2. ✅ הלב הטוב - `src/star-02.html`
-3. ⬜ תמיד שם ← **הבא בתור!**
-4. ⬜ ההתמדה
-5. ⬜ המוכשרות
-6. ⬜ ההקשבה
-7. ⬜ היופי
-8. ⬜ הבדיחות הגרועות
-9. ⬜ הסדר (והאי-סדר)
-10. ⬜ הבוקר
-11. ⬜ השגרה המתוקה
-12. ⬜ האהבה (סיכום)
+3. ✅ ההתמדה - `src/star-03.html`
+4. ⬜ היופי ← **הבא בתור!**
+5. ⬜ הבדיחות הגרועות
+6. ⬜ הסדר (והאי-סדר)
+7. ⬜ הבוקר
+8. ⬜ השגרה המתוקה
+9. ⬜ האהבה (סיכום)
 
 **Output:** Complete `CHAPTERS-OUTLINE.md` with full text
 
@@ -150,7 +147,7 @@
 **Status:** ⬜ Pending  
 **Depends on:** TASK-007, TASK-002  
 **Description:**
-- לשכפל את התבנית לכל 12 הכוכבים
+- לשכפל את התבנית לכל 9 הכוכבים
 - להכניס את התוכן הספציפי
 - להוסיף את האיורים
 
@@ -205,6 +202,7 @@
 | Opening Page | 2026-01-17 | `src/opening.html` - דף פתיחה עם טקסט, חללית, כוכבים וכפתור המראה |
 | Star 1 | 2026-01-17 | `src/star-01.html` - כוכב היצירתיות ✅ |
 | Star 2 | 2026-01-17 | `src/star-02.html` - כוכב טוב הלב ✅ |
+| Star 3 | 2026-01-17 | `src/star-03.html` - כוכב ההתמדה ✅ |
 
 ---
 
