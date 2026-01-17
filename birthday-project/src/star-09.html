@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ כוכב האהבה</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0D1B2A;
+            --bg-deeper: #0A0F18;
+            --bg-warm: #1A0A10;
+            --text-light: #F5E6D3;
+            --text-cream: #FDF8EE;
+            --star-gold: #FFD700;
+            --accent-blue: #7EB8DA;
+            --accent-warm: #E8D4C0;
+            
+            /* Love Star Colors - Pink, Red, Gold - Warm & Loving */
+            --love-pink: #FF6B8A;
+            --love-pink-light: #FF8FA8;
+            --love-pink-soft: #FFB6C8;
+            --love-red: #E63946;
+            --love-red-light: #FF5A67;
+            --love-red-deep: #C41E3A;
+            --love-gold: #FFD700;
+            --love-gold-light: #FFE55C;
+            --love-gold-warm: #FFAA33;
+            --love-warm: #FF9E80;
+            --love-glow: #FFC0CB;
+            --love-core: #FFE4E8;
+            --love-mist: rgba(255, 107, 138, 0.3);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #150810 50%, var(--bg-warm) 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ===== STARS BACKGROUND ===== */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star-dot {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        /* ===== FLOATING LOVE SYMBOLS ===== */
+        .floating-love {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-symbol {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.2;
+            animation: loveFloat var(--duration, 20s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes loveFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.8); 
+                opacity: 0;
+            }
+            10% { opacity: 0.25; }
+            50% { opacity: 0.2; }
+            90% { opacity: 0.1; }
+            100% { 
+                transform: translateY(-20vh) rotate(10deg) scale(0.6); 
+                opacity: 0;
+            }
+        }
+        
+        /* ===== WARMTH GLOW OVERLAY - LOVING ATMOSPHERE ===== */
+        .warmth-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 50% 70%, rgba(255, 107, 138, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 50%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 40%, rgba(230, 57, 70, 0.08) 0%, transparent 45%);
+            animation: warmthPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes warmthPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        
+        /* ===== STAR TITLE ===== */
+        .star-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--love-pink);
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out 0.3s forwards;
+        }
+        
+        .star-title span {
+            font-size: 2rem;
+        }
+        
+        /* ===== SCENE - SPACESHIP ABOVE LOVE STAR ===== */
+        .scene-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.6s forwards;
+            direction: ltr;
+        }
+        
+        .scene-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+        
+        /* ===== MESSAGE BOX ===== */
+        .message-box {
+            background: rgba(255, 107, 138, 0.06);
+            border: 1px solid rgba(255, 107, 138, 0.25);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+        
+        .message-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .message-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message-box .highlight {
+            color: var(--love-pink);
+            font-weight: 500;
+        }
+        
+        .message-box .emphasis {
+            font-weight: 500;
+        }
+        
+        .warm-line {
+            color: var(--love-gold);
+            font-weight: 400;
+        }
+        
+        .heart-line {
+            color: var(--love-red-light);
+            font-weight: 400;
+        }
+        
+        .soft-line {
+            color: var(--love-pink-soft);
+            font-style: italic;
+        }
+        
+        .deep-line {
+            color: var(--love-pink-light);
+            font-weight: 400;
+        }
+        
+        .gratitude-line {
+            color: var(--love-gold-light);
+            font-style: italic;
+        }
+        
+        .next-line {
+            color: var(--love-pink-soft);
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            padding: 0 10px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.5s forwards;
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 107, 138, 0.15);
+            border-color: var(--love-pink);
+            transform: scale(1.02);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, rgba(255, 107, 138, 0.2) 0%, rgba(255, 215, 0, 0.15) 100%);
+            border-color: var(--love-pink);
+        }
+        
+        .nav-btn.next:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 138, 0.35) 0%, rgba(255, 215, 0, 0.25) 100%);
+            box-shadow: 0 4px 20px rgba(255, 107, 138, 0.3);
+        }
+        
+        /* ===== PROGRESS DOTS ===== */
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.8s forwards;
+        }
+        
+        .progress-dot {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .progress-dot:hover {
+            transform: scale(1.4);
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        /* Unique colors for each star */
+        .progress-dot.star-creativity {
+            background: linear-gradient(135deg, #FFD700, #FF8C42, #FF6B9D, #9D4EDD, #4EA8DE);
+        }
+        .progress-dot.star-heart {
+            background: #FF9EB5;
+        }
+        .progress-dot.star-persistence {
+            background: #FFD700;
+        }
+        .progress-dot.star-humor {
+            background: #FF9F43;
+        }
+        .progress-dot.star-courage {
+            background: #FF6B6B;
+        }
+        .progress-dot.star-wisdom {
+            background: #4A90A4;
+        }
+        .progress-dot.star-dreams {
+            background: linear-gradient(135deg, #9B72CF, #E8A4C9, #7EC8E3);
+        }
+        .progress-dot.star-generosity {
+            background: linear-gradient(135deg, #06D6A0, #FFD700);
+        }
+        .progress-dot.star-love {
+            background: linear-gradient(135deg, #FF6B8A, #E63946, #FFD700);
+        }
+        .progress-dot.star-ours {
+            background: linear-gradient(135deg, #FFD700, #FF9EB5, #FF6B6B, #A29BFE, #06D6A0);
+        }
+        
+        .progress-dot.active {
+            box-shadow: 0 0 12px currentColor;
+            transform: scale(1.2);
+        }
+        
+        .progress-dot:not(.visited):not(.active) {
+            opacity: 0.3;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes pulse-glow-love {
+            0%, 100% { filter: drop-shadow(0 0 15px var(--love-pink)); }
+            50% { filter: drop-shadow(0 0 35px var(--love-red)); }
+        }
+        
+        @keyframes heartbeat-strong {
+            0%, 100% { transform: scale(1); }
+            10% { transform: scale(1.08); }
+            20% { transform: scale(1); }
+            30% { transform: scale(1.05); }
+            40% { transform: scale(1); }
+        }
+        
+        @keyframes rays-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes warmth-wave {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.15); }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .star-title {
+                font-size: 1.3rem;
+            }
+            
+            .star-title span {
+                font-size: 1.6rem;
+            }
+            
+            .message-box {
+                padding: 25px 20px;
+            }
+            
+            .message-box p {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .nav-btn {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- STARS BACKGROUND -->
+    <div class="stars-bg">
+        <div class="star-dot" style="top: 5%; left: 10%; width: 2px; height: 2px; --duration: 3s; --delay: 0s;"></div>
+        <div class="star-dot" style="top: 12%; left: 85%; width: 3px; height: 3px; --duration: 2.5s; --delay: 0.5s;"></div>
+        <div class="star-dot" style="top: 25%; left: 20%; width: 2px; height: 2px; --duration: 4s; --delay: 1s;"></div>
+        <div class="star-dot" style="top: 18%; left: 65%; width: 2px; height: 2px; --duration: 3.5s; --delay: 0.3s;"></div>
+        <div class="star-dot" style="top: 35%; left: 92%; width: 2px; height: 2px; --duration: 2.8s; --delay: 0.7s;"></div>
+        <div class="star-dot" style="top: 45%; left: 5%; width: 3px; height: 3px; --duration: 3.2s; --delay: 1.2s;"></div>
+        <div class="star-dot" style="top: 55%; left: 78%; width: 2px; height: 2px; --duration: 2.6s; --delay: 0.4s;"></div>
+        <div class="star-dot" style="top: 65%; left: 15%; width: 2px; height: 2px; --duration: 3.8s; --delay: 0.9s;"></div>
+        <div class="star-dot" style="top: 75%; left: 88%; width: 2px; height: 2px; --duration: 3s; --delay: 1.5s;"></div>
+        <div class="star-dot" style="top: 82%; left: 40%; width: 3px; height: 3px; --duration: 2.4s; --delay: 0.2s;"></div>
+        <div class="star-dot" style="top: 90%; left: 70%; width: 2px; height: 2px; --duration: 3.4s; --delay: 0.8s;"></div>
+        <div class="star-dot" style="top: 8%; left: 45%; width: 2px; height: 2px; --duration: 2.9s; --delay: 1.1s;"></div>
+    </div>
+    
+    <!-- WARMTH GLOW OVERLAY -->
+    <div class="warmth-glow"></div>
+    
+    <!-- FLOATING LOVE SYMBOLS -->
+    <div class="floating-love">
+        <div class="floating-symbol" style="left: 5%; --duration: 22s; --delay: 0s;">❤️</div>
+        <div class="floating-symbol" style="left: 18%; --duration: 25s; --delay: 3s;">💕</div>
+        <div class="floating-symbol" style="left: 32%; --duration: 20s; --delay: 5s;">💗</div>
+        <div class="floating-symbol" style="left: 45%; --duration: 28s; --delay: 1s;">💛</div>
+        <div class="floating-symbol" style="left: 60%; --duration: 24s; --delay: 4s;">💖</div>
+        <div class="floating-symbol" style="left: 75%; --duration: 21s; --delay: 2s;">❤️</div>
+        <div class="floating-symbol" style="left: 88%; --duration: 26s; --delay: 6s;">💝</div>
+    </div>
+    
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        
+        <!-- Star Title -->
+        <h1 class="star-title">
+            <span>❤️</span> כוכב האהבה <span>❤️</span>
+        </h1>
+        
+        <!-- Scene: Spaceship floating above Love Star - like a warm glowing sun -->
+        <div class="scene-container">
+            <svg viewBox="0 0 500 620" xmlns="http://www.w3.org/2000/svg" style="direction: ltr;">
+                <defs>
+                    <!-- Gradients -->
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6D3"/>
+                        <stop offset="100%" style="stop-color:#E8D4C0"/>
+                    </linearGradient>
+                    <linearGradient id="windowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7EB8DA"/>
+                        <stop offset="100%" style="stop-color:#5A9BC7"/>
+                    </linearGradient>
+                    <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFE4B5"/>
+                        <stop offset="100%" style="stop-color:#F5D5B5"/>
+                    </linearGradient>
+                    
+                    <!-- Love Star Gradients - Warm Sun-like Heart -->
+                    <radialGradient id="loveStarCore" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFE4E8"/>
+                        <stop offset="30%" style="stop-color:#FF8FA8"/>
+                        <stop offset="60%" style="stop-color:#FF6B8A"/>
+                        <stop offset="100%" style="stop-color:#E63946"/>
+                    </radialGradient>
+                    <radialGradient id="loveGlowInner" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFF0F3"/>
+                        <stop offset="50%" style="stop-color:#FFB6C8"/>
+                        <stop offset="100%" style="stop-color:rgba(255,107,138,0)"/>
+                    </radialGradient>
+                    <radialGradient id="loveGlowOuter" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:rgba(255,215,0,0.4)"/>
+                        <stop offset="50%" style="stop-color:rgba(255,107,138,0.2)"/>
+                        <stop offset="100%" style="stop-color:rgba(230,57,70,0)"/>
+                    </radialGradient>
+                    <linearGradient id="rayGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFD700"/>
+                        <stop offset="50%" style="stop-color:#FF6B8A"/>
+                        <stop offset="100%" style="stop-color:#E63946"/>
+                    </linearGradient>
+                    <linearGradient id="warmthWave" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFD700"/>
+                        <stop offset="50%" style="stop-color:#FF8FA8"/>
+                        <stop offset="100%" style="stop-color:#FF6B8A"/>
+                    </linearGradient>
+                    
+                    <!-- Glow filters -->
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="softGlow">
+                        <feGaussianBlur stdDeviation="6" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="loveGlowFilter">
+                        <feGaussianBlur stdDeviation="12" result="blur"/>
+                        <feFlood flood-color="#FF6B8A" flood-opacity="0.5"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="warmGlowFilter">
+                        <feGaussianBlur stdDeviation="5" result="blur"/>
+                        <feFlood flood-color="#FFD700" flood-opacity="0.35"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="strongGlow">
+                        <feGaussianBlur stdDeviation="15" result="blur"/>
+                        <feFlood flood-color="#FF6B8A" flood-opacity="0.6"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <!-- ===== THE LOVE STAR - WARM GLOWING HEART SUN ===== -->
+                <g transform="translate(250, 400)">
+                    
+                    <!-- Outermost warmth aura - very soft, expansive -->
+                    <ellipse cx="0" cy="0" rx="170" ry="160" fill="url(#loveGlowOuter)" opacity="0.3">
+                        <animate attributeName="rx" values="165;180;165" dur="6s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.2;0.4;0.2" dur="6s" repeatCount="indefinite"/>
+                    </ellipse>
+                    
+                    <!-- Warmth waves - radiating love energy -->
+                    <g opacity="0.2">
+                        <ellipse cx="0" cy="0" rx="130" ry="125" fill="none" stroke="url(#warmthWave)" stroke-width="2" stroke-dasharray="10 5">
+                            <animate attributeName="rx" values="125;140;125" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.2;0.4;0.2" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="0" rx="145" ry="140" fill="none" stroke="#FFD700" stroke-width="1" stroke-dasharray="15 8">
+                            <animate attributeName="rx" values="140;155;140" dur="5s" repeatCount="indefinite" begin="1s"/>
+                            <animate attributeName="opacity" values="0.15;0.3;0.15" dur="5s" repeatCount="indefinite" begin="1s"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Soft light rays - like a warm sun -->
+                    <g opacity="0.35">
+                        <animateTransform attributeName="transform" type="rotate" values="0;360" dur="60s" repeatCount="indefinite"/>
+                        <!-- Ray 1 -->
+                        <polygon points="0,-85 -8,-120 0,-145 8,-120" fill="url(#rayGradient)" opacity="0.5">
+                            <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
+                        </polygon>
+                        <!-- Ray 2 -->
+                        <polygon points="60,-60 68,-88 85,-100 78,-80" fill="url(#rayGradient)" opacity="0.45" transform="rotate(45)">
+                            <animate attributeName="opacity" values="0.25;0.55;0.25" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
+                        </polygon>
+                        <!-- Ray 3 -->
+                        <polygon points="85,0 120,-8 145,0 120,8" fill="url(#rayGradient)" opacity="0.5" transform="rotate(90)">
+                            <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.2s" repeatCount="indefinite" begin="0.3s"/>
+                        </polygon>
+                        <!-- Ray 4 -->
+                        <polygon points="60,60 88,68 100,85 80,78" fill="url(#rayGradient)" opacity="0.45" transform="rotate(135)">
+                            <animate attributeName="opacity" values="0.25;0.55;0.25" dur="3.8s" repeatCount="indefinite" begin="0.8s"/>
+                        </polygon>
+                        <!-- Ray 5 -->
+                        <polygon points="0,85 -8,120 0,145 8,120" fill="url(#rayGradient)" opacity="0.5" transform="rotate(180)">
+                            <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.1s" repeatCount="indefinite" begin="0.2s"/>
+                        </polygon>
+                        <!-- Ray 6 -->
+                        <polygon points="-60,60 -68,88 -85,100 -78,80" fill="url(#rayGradient)" opacity="0.45" transform="rotate(225)">
+                            <animate attributeName="opacity" values="0.25;0.55;0.25" dur="3.6s" repeatCount="indefinite" begin="0.6s"/>
+                        </polygon>
+                        <!-- Ray 7 -->
+                        <polygon points="-85,0 -120,-8 -145,0 -120,8" fill="url(#rayGradient)" opacity="0.5" transform="rotate(270)">
+                            <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3.3s" repeatCount="indefinite" begin="0.4s"/>
+                        </polygon>
+                        <!-- Ray 8 -->
+                        <polygon points="-60,-60 -88,-68 -100,-85 -80,-78" fill="url(#rayGradient)" opacity="0.45" transform="rotate(315)">
+                            <animate attributeName="opacity" values="0.25;0.55;0.25" dur="3.4s" repeatCount="indefinite" begin="0.7s"/>
+                        </polygon>
+                    </g>
+                    
+                    <!-- Inner glow aura -->
+                    <ellipse cx="0" cy="0" rx="105" ry="100" fill="url(#loveGlowInner)" opacity="0.5">
+                        <animate attributeName="rx" values="100;110;100" dur="3s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.4;0.6;0.4" dur="3s" repeatCount="indefinite"/>
+                    </ellipse>
+                    
+                    <!-- Main heart-shaped star - pulsing with love -->
+                    <g filter="url(#strongGlow)">
+                        <g style="animation: heartbeat-strong 2.5s ease-in-out infinite;">
+                            <!-- Heart shape - the warm glowing star -->
+                            <path d="M0 -55 
+                                     C0 -80, -40 -95, -70 -60 
+                                     C-105 -20, -105 30, 0 85 
+                                     C105 30, 105 -20, 70 -60 
+                                     C40 -95, 0 -80, 0 -55" 
+                                  fill="url(#loveStarCore)"/>
+                            
+                            <!-- Inner highlight - bright core -->
+                            <path d="M0 -40 
+                                     C0 -58, -25 -68, -45 -45 
+                                     C-68 -20, -68 15, 0 55 
+                                     C68 15, 68 -20, 45 -45 
+                                     C25 -68, 0 -58, 0 -40" 
+                                  fill="rgba(255,255,255,0.25)"/>
+                            
+                            <!-- Very bright center -->
+                            <ellipse cx="0" cy="0" rx="25" ry="22" fill="#FFF0F3" opacity="0.6">
+                                <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2s" repeatCount="indefinite"/>
+                            </ellipse>
+                        </g>
+                    </g>
+                    
+                    <!-- Small glowing hearts floating around - love emanating -->
+                    <g filter="url(#glow)">
+                        <!-- Heart 1 - top left, larger -->
+                        <g transform="translate(-80, -65)">
+                            <animateTransform attributeName="transform" type="translate" values="-80,-65; -85,-72; -80,-65" dur="4s" repeatCount="indefinite"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#FF6B8A" opacity="0.8" transform="scale(0.6)">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Heart 2 - top right -->
+                        <g transform="translate(75, -60)">
+                            <animateTransform attributeName="transform" type="translate" values="75,-60; 80,-68; 75,-60" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#FFD700" opacity="0.75" transform="scale(0.5)">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.5s" repeatCount="indefinite" begin="0.3s"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Heart 3 - left -->
+                        <g transform="translate(-95, 15)">
+                            <animateTransform attributeName="transform" type="translate" values="-95,15; -100,10; -95,15" dur="5s" repeatCount="indefinite" begin="1s"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#FF8FA8" opacity="0.7" transform="scale(0.45)">
+                                <animate attributeName="opacity" values="0.5;0.85;0.5" dur="4s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Heart 4 - right -->
+                        <g transform="translate(90, 20)">
+                            <animateTransform attributeName="transform" type="translate" values="90,20; 95,12; 90,20" dur="4.2s" repeatCount="indefinite" begin="0.8s"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#E63946" opacity="0.7" transform="scale(0.55)">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.2s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Heart 5 - bottom left -->
+                        <g transform="translate(-70, 70)">
+                            <animateTransform attributeName="transform" type="translate" values="-70,70; -75,65; -70,70" dur="3.8s" repeatCount="indefinite" begin="1.5s"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#FFD700" opacity="0.65" transform="scale(0.4)">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4.5s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                        
+                        <!-- Heart 6 - bottom right -->
+                        <g transform="translate(65, 75)">
+                            <animateTransform attributeName="transform" type="translate" values="65,75; 70,68; 65,75" dur="4.8s" repeatCount="indefinite" begin="0.3s"/>
+                            <path d="M0 -8 C0 -15, -12 -18, -18 -10 C-24 -2, -24 8, 0 22 C24 8, 24 -2, 18 -10 C12 -18, 0 -15, 0 -8" 
+                                  fill="#FF6B8A" opacity="0.6" transform="scale(0.35)">
+                                <animate attributeName="opacity" values="0.4;0.75;0.4" dur="3.8s" repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                    </g>
+                    
+                    <!-- Warm sparkles around the heart -->
+                    <g fill="#FFD700" filter="url(#glow)">
+                        <polygon points="-110,-35 -108,-30 -103,-30 -107,-27 -105,-22 -110,-25 -115,-22 -113,-27 -117,-30 -112,-30" transform="scale(0.7)">
+                            <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/>
+                        </polygon>
+                        <polygon points="115,-25 117,-20 122,-20 118,-17 120,-12 115,-15 110,-12 112,-17 108,-20 113,-20" transform="scale(0.65)">
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                        </polygon>
+                        <polygon points="-100,55 -98,59 -94,59 -97,62 -95,66 -100,63 -105,66 -103,62 -106,59 -102,59" transform="scale(0.6)">
+                            <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.8s" repeatCount="indefinite" begin="1s"/>
+                        </polygon>
+                        <polygon points="105,50 107,54 111,54 108,57 110,61 105,58 100,61 102,57 99,54 103,54" transform="scale(0.55)">
+                            <animate attributeName="opacity" values="0.4;0.85;0.4" dur="3.2s" repeatCount="indefinite" begin="0.3s"/>
+                        </polygon>
+                    </g>
+                    
+                    <!-- Rising warmth particles - love spreading -->
+                    <g fill="#FF8FA8" opacity="0.7">
+                        <circle cx="-55" cy="60" r="2.5">
+                            <animate attributeName="cy" values="60;20;60" dur="5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0;0.8;0" dur="5s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="50" cy="55" r="2">
+                            <animate attributeName="cy" values="55;10;55" dur="6s" repeatCount="indefinite" begin="1s"/>
+                            <animate attributeName="opacity" values="0;0.7;0" dur="6s" repeatCount="indefinite" begin="1s"/>
+                        </circle>
+                        <circle cx="-30" cy="65" r="2">
+                            <animate attributeName="cy" values="65;25;65" dur="5.5s" repeatCount="indefinite" begin="2s"/>
+                            <animate attributeName="opacity" values="0;0.75;0" dur="5.5s" repeatCount="indefinite" begin="2s"/>
+                        </circle>
+                        <circle cx="35" cy="60" r="1.5">
+                            <animate attributeName="cy" values="60;15;60" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                            <animate attributeName="opacity" values="0;0.65;0" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                        </circle>
+                        <circle cx="0" cy="70" r="2">
+                            <animate attributeName="cy" values="70;30;70" dur="5.2s" repeatCount="indefinite" begin="1.5s"/>
+                            <animate attributeName="opacity" values="0;0.7;0" dur="5.2s" repeatCount="indefinite" begin="1.5s"/>
+                        </circle>
+                    </g>
+                    
+                    <!-- Golden warmth particles -->
+                    <g fill="#FFD700" opacity="0.6">
+                        <circle cx="-70" cy="40" r="1.5">
+                            <animate attributeName="cy" values="40;0;40" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+                            <animate attributeName="opacity" values="0;0.6;0" dur="6s" repeatCount="indefinite" begin="0.3s"/>
+                        </circle>
+                        <circle cx="65" cy="45" r="2">
+                            <animate attributeName="cy" values="45;5;45" dur="5.8s" repeatCount="indefinite" begin="0.8s"/>
+                            <animate attributeName="opacity" values="0;0.65;0" dur="5.8s" repeatCount="indefinite" begin="0.8s"/>
+                        </circle>
+                    </g>
+                </g>
+                
+                <!-- ===== SPACESHIP FLOATING ABOVE ===== -->
+                <g transform="translate(250, 100)">
+                    <animateTransform 
+                        attributeName="transform" 
+                        type="translate" 
+                        values="250,100; 250,88; 250,100" 
+                        dur="5s" 
+                        repeatCount="indefinite"
+                        additive="replace"/>
+                    <!-- Engine flames (love colors - pink/gold) -->
+                    <g transform="translate(0, 45)">
+                        <ellipse cx="-25" cy="25" rx="6" ry="12" fill="#FF6B8A" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.3s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="28" rx="8" ry="15" fill="#FFD700" opacity="0.9">
+                            <animate attributeName="ry" values="12;18;12" dur="0.25s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="25" cy="25" rx="6" ry="12" fill="#FF6B8A" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.35s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <!-- Inner flame - bright core -->
+                        <ellipse cx="0" cy="26" rx="4" ry="10" fill="#FFE4E8" opacity="0.9">
+                            <animate attributeName="ry" values="8;12;8" dur="0.2s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Spaceship body -->
+                    <ellipse cx="0" cy="25" rx="55" ry="28" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Dome -->
+                    <ellipse cx="0" cy="8" rx="35" ry="20" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Heart window with Gal & Ben inside -->
+                    <path d="M0 -5 C0 -12, -10 -15, -17 -8 C-24 -1, -24 10, 0 25 C24 10, 24 -1, 17 -8 C10 -15, 0 -12, 0 -5" 
+                          fill="url(#windowBlue)" stroke="#4A90A4" stroke-width="1.5"/>
+                    
+                    <!-- Gal inside (left) - small, simple -->
+                    <g transform="translate(-8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#1a1a1a"/>
+                        <circle cx="-2" cy="0" r="1" fill="#5D4037"/>
+                        <circle cx="2" cy="0" r="1" fill="#5D4037"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Ben inside (right) - small, simple -->
+                    <g transform="translate(8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#6B4423"/>
+                        <circle cx="-2" cy="0" r="1" fill="#4A8B5C"/>
+                        <circle cx="2" cy="0" r="1" fill="#4A8B5C"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Wings -->
+                    <path d="M-55 25 L-80 45 L-80 52 L-52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    <path d="M55 25 L80 45 L80 52 L52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    
+                    <!-- Flag (love pink/red) -->
+                    <line x1="0" y1="-12" x2="0" y2="-30" stroke="#C4A080" stroke-width="1.5"/>
+                    <polygon points="0,-30 15,-25 0,-19" fill="#FF6B8A"/>
+                </g>
+                
+                <!-- Extra sparkles around the scene -->
+                <g fill="#FF6B8A" filter="url(#glow)">
+                    <polygon points="80,150 82,156 88,156 83,160 85,166 80,162 75,166 77,160 72,156 78,156" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" repeatCount="indefinite"/>
+                    </polygon>
+                    <polygon points="420,130 421,134 425,134 422,137 423,141 420,138 417,141 418,137 415,134 419,134" opacity="0.4">
+                        <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+                    </polygon>
+                </g>
+                
+                <!-- Gold sparkles -->
+                <g fill="#FFD700" filter="url(#glow)">
+                    <polygon points="55,300 56,303 59,303 57,305 58,308 55,306 52,308 53,305 51,303 54,303" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.8s" repeatCount="indefinite" begin="1s"/>
+                    </polygon>
+                    <polygon points="445,280 446,284 450,284 447,287 448,291 445,288 442,291 443,287 440,284 444,284" opacity="0.5">
+                        <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+                    </polygon>
+                </g>
+            </svg>
+        </div>
+        
+        <!-- Message Box -->
+        <div class="message-box">
+            <p>
+                <span class="highlight">כוכב האהבה</span> הוא <span class="warm-line">הכוכב החם ביותר במסע שלנו</span>. הוא זוהר, מקרין חום, ופשוט... אוהב.
+            </p>
+            <p class="soft-line">
+                בוצ, איך אני מסביר את האהבה שלך?
+            </p>
+            <p style="margin-bottom: 8px;">
+                את האנשים הקרובים אלייך אתה <span class="heart-line">שם במקום הראשון ואוהב ללא תנאי</span>.
+            </p>
+            <p>
+                כוכב האהבה שלך <span class="deep-line">לא שואל "מה אני מקבל בחזרה?"</span>.
+            </p>
+            <p style="margin-bottom: 8px;">
+                ואני, <span class="warm-line">בוצ שלי</span>, אני אחד האנשים שמקבלים את האהבה הזאת כל יום. ולפעמים אני לא יודע כמה אני בר מזל.
+            </p>
+            <p class="gratitude-line">
+                תודה שאתה אוהב אותי ככה. תודה שאתה מראה לי מה זה אומר לאהוב באמת. ❤️
+            </p>
+            <p class="next-line">
+                הכוכב הבא הוא הכוכב האחרון במסע יום הולדת שלך... והכוכב האהוב עליי. מוכן?
+            </p>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="navigation">
+            <a href="star-08.html" class="nav-btn prev">
+                → חזרה
+            </a>
+            <a href="star-10.html" class="nav-btn next">
+                לכוכב הבא ←
+            </a>
+        </div>
+        
+        <!-- Progress Dots - 10 stars -->
+        <div class="progress">
+            <a href="star-01.html" class="progress-dot star-creativity visited" title="יצירתיות"></a>
+            <a href="star-02.html" class="progress-dot star-heart visited" title="טוב הלב"></a>
+            <a href="star-03.html" class="progress-dot star-persistence visited" title="התמדה"></a>
+            <a href="star-04.html" class="progress-dot star-humor visited" title="הומור"></a>
+            <a href="star-05.html" class="progress-dot star-courage visited" title="אומץ"></a>
+            <a href="star-06.html" class="progress-dot star-wisdom visited" title="חוכמה"></a>
+            <a href="star-07.html" class="progress-dot star-dreams visited" title="חלומות"></a>
+            <a href="star-08.html" class="progress-dot star-generosity visited" title="נדיבות"></a>
+            <a href="star-09.html" class="progress-dot star-love active" title="אהבה"></a>
+            <a href="star-10.html" class="progress-dot star-ours" title="השלנו"></a>
+        </div>
+        
+    </div>
+</body>
+</html>
+

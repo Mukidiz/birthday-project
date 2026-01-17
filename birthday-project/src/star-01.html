@@ -208,11 +208,19 @@
         }
         
         .progress-dot {
+            display: block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .progress-dot:hover {
+            transform: scale(1.4);
+            box-shadow: 0 0 10px currentColor;
         }
         
         /* Unique colors for each star */
@@ -581,16 +589,19 @@
         <!-- Message Box -->
         <div class="message-box">
             <p>
-                הכוכב הראשון במסע שלנו הוא הכוכב שבזכותו התאהבתי בך... <span class="highlight">כוכב היצירתיות</span>.
+                הכוכב הראשון במסע שלנו הוא הכוכב שבזכותו התאהבתי בך...
+            </p>
+            <p class="highlight" style="margin-top: -10px;">
+                כוכב היצירתיות.
             </p>
             <p>
                 אתה זוכר שאמרתי לך שאתה מאוד יצירתי? אי שם לפני 7 שנים במארק שאגל 21.
             </p>
-            <p>
-                אז <span class="mokid">מוקיד</span>, תרשה לי לתקן את מה שאמרתי - זה לא שאתה מאוד יצירתי, אלא שאתה <span class="emphasis">הכי</span> יצירתי. הכי יצירתי מבין כולם, וזה פשוט זורם ממך בצורה כל כך טבעית.
+            <p style="margin-top: -5px;">
+                אז <span class="mokid">מוקיד</span>, תרשה לי לתקן את מה שאמרתי, זה לא שאתה מאוד יצירתי, אלא שאתה <span class="emphasis">הכי</span> יצירתי. הכי יצירתי מבין כולם, וזה פשוט זורם ממך בצורה כל כך טבעית.
             </p>
             <p>
-                <span class="mokid">מוקיד</span> שלי, שלימד אותי לצייר, לחשוב מחוץ לקופסא, ולמצוא פתרונות יצירתיים לכל דבר - בין אם זה חורים בקיר שעשיתי ושאתה הופך לאמנות, ובין אם זה עוד אטב כביסה שנשבר ואתה מצליח איכשהו להחזיר לחיים.
+                <span class="mokid">מוקיד</span> שלי, שלימד אותי לצייר, לחשוב מחוץ לקופסא, ולמצוא פתרונות יצירתיים לכל דבר, בין אם זה פח במטבח שנשלף מארון ובין אם זה עוד אטב כביסה שנשבר ואתה מצליח איכשהו להחזיר לחיים.
             </p>
             <p class="palette-line">
                 מזל שיש את מוקיד היצירתי. פלטת הצבעים של החיים שלי.
@@ -598,8 +609,8 @@
             <p>
                 ואם תסתכל עמוק בכוכב, תגלה שבבסיסו היכולת שלך לראות דברים מדהימים בכל דבר שקיים...
             </p>
-            <p style="text-align: center; margin-top: 25px; color: var(--star-gold);">
-                מה שמוביל אותנו לכוכב הבא.
+            <p style="text-align: right; margin-top: 25px; color: var(--star-gold);">
+                מה שמוביל אותנו לכוכב הבא
             </p>
         </div>
         
@@ -615,17 +626,16 @@
         
         <!-- Progress Dots -->
         <div class="progress">
-            <div class="progress-dot star-creativity active" title="יצירתיות"></div>
-            <div class="progress-dot star-heart" title="טוב הלב"></div>
-            <div class="progress-dot star-persistence" title="התמדה"></div>
-            <div class="progress-dot star-humor" title="הומור"></div>
-            <div class="progress-dot star-courage" title="אומץ"></div>
-            <div class="progress-dot star-wisdom" title="חוכמה"></div>
-            <div class="progress-dot star-dreams" title="חלומות"></div>
-            <div class="progress-dot star-strength" title="כוח פנימי"></div>
-            <div class="progress-dot star-love" title="אהבה"></div>
-            <div class="progress-dot star-generosity" title="נדיבות"></div>
-            <div class="progress-dot star-ours" title="השלנו"></div>
+            <a href="star-01.html" class="progress-dot star-creativity active" title="יצירתיות"></a>
+            <a href="star-02.html" class="progress-dot star-heart" title="טוב הלב"></a>
+            <a href="star-03.html" class="progress-dot star-persistence" title="התמדה"></a>
+            <a href="star-04.html" class="progress-dot star-humor" title="הומור"></a>
+            <a href="star-05.html" class="progress-dot star-courage" title="אומץ"></a>
+            <a href="star-06.html" class="progress-dot star-wisdom" title="חוכמה"></a>
+            <a href="star-07.html" class="progress-dot star-dreams" title="חלומות"></a>
+            <a href="star-08.html" class="progress-dot star-generosity" title="נדיבות"></a>
+            <a href="star-09.html" class="progress-dot star-love" title="אהבה"></a>
+            <a href="star-10.html" class="progress-dot star-ours" title="השלנו"></a>
         </div>
         
     </div>

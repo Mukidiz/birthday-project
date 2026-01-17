@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏠 הכוכב שלנו</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0D1B2A;
+            --bg-deeper: #0A0F18;
+            --text-light: #F5E6D3;
+            --text-cream: #FDF8EE;
+            --star-gold: #FFD700;
+            --accent-blue: #7EB8DA;
+            --accent-warm: #E8D4C0;
+            
+            /* "Our Star" Colors - All colors united */
+            /* Serious Star (Left) */
+            --serious-blue: #4A6FA5;
+            --serious-gray: #6B7B8C;
+            --serious-silver: #C0C0C0;
+            --serious-dark: #2C3E50;
+            
+            /* Playful Star (Right) */
+            --playful-pink: #FF9EB5;
+            --playful-orange: #FF9F43;
+            --playful-yellow: #FFE066;
+            --playful-warm: #FFB6C8;
+            
+            /* Meeting Point - Home (All colors united) */
+            --home-glow: #FFF8E7;
+            --home-warm: #FFE4B5;
+            
+            /* Colors from ALL previous stars */
+            --star1-creative: #FF6B9D;    /* Pink - Creativity */
+            --star2-heart: #FF9EB5;       /* Soft Pink - Kind Heart */
+            --star3-persist: #FFD700;     /* Gold - Persistence */
+            --star4-humor: #FF9F43;       /* Orange - Humor */
+            --star5-courage: #FF6B6B;     /* Red - Courage */
+            --star6-wisdom: #4A90A4;      /* Blue - Wisdom */
+            --star7-dreams: #9B72CF;      /* Purple - Dreams */
+            --star8-generous: #06D6A0;    /* Green - Generosity */
+            --star9-love: #E63946;        /* Deep Red - Love */
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0F1525 30%, #151020 60%, #0D1B2A 100%);
+            min-height: 100vh;
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* ===== STARS BACKGROUND ===== */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star-dot {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 3s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+        
+        /* ===== FLOATING SYMBOLS - ALL PREVIOUS STARS ===== */
+        .floating-symbols {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-symbol {
+            position: absolute;
+            font-size: 1rem;
+            opacity: 0.15;
+            animation: symbolFloat var(--duration, 20s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+        
+        @keyframes symbolFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.7); 
+                opacity: 0;
+            }
+            10% { opacity: 0.2; }
+            50% { opacity: 0.15; }
+            90% { opacity: 0.08; }
+            100% { 
+                transform: translateY(-20vh) rotate(15deg) scale(0.5); 
+                opacity: 0;
+            }
+        }
+        
+        /* ===== UNITY GLOW OVERLAY ===== */
+        .unity-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse at 50% 60%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 50%, rgba(74, 111, 165, 0.06) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 50%, rgba(255, 158, 181, 0.06) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 70%, rgba(255, 248, 231, 0.1) 0%, transparent 35%);
+            animation: unityPulse 10s ease-in-out infinite;
+        }
+        
+        @keyframes unityPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        
+        /* ===== STAR TITLE ===== */
+        .star-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            background: linear-gradient(90deg, var(--serious-blue), var(--star-gold), var(--playful-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInDown 1s ease-out 0.3s forwards;
+        }
+        
+        .star-title span {
+            font-size: 2rem;
+            -webkit-text-fill-color: initial;
+        }
+        
+        /* ===== SCENE - TWO STARS MERGING ===== */
+        .scene-container {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto 25px auto;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.6s forwards;
+            direction: ltr;
+        }
+        
+        .scene-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow: visible;
+        }
+        
+        /* ===== MESSAGE BOX ===== */
+        .message-box {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.05) 0%, rgba(255, 248, 231, 0.08) 50%, rgba(255, 158, 181, 0.05) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 650px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+        
+        .message-box p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .message-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .message-box .highlight {
+            color: var(--star-gold);
+            font-weight: 500;
+        }
+        
+        .section-title {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--star-gold);
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        
+        .serious-text {
+            color: var(--serious-silver);
+            font-weight: 400;
+        }
+        
+        .playful-text {
+            color: var(--playful-pink);
+            font-weight: 400;
+        }
+        
+        .merge-text {
+            background: linear-gradient(90deg, var(--serious-blue), var(--star-gold), var(--playful-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 500;
+        }
+        
+        .home-text {
+            color: var(--home-warm);
+            font-weight: 500;
+        }
+        
+        .warm-text {
+            color: #FFE4B5;
+            font-weight: 400;
+        }
+        
+        .love-text {
+            color: var(--star9-love);
+            font-weight: 400;
+        }
+        
+        .special-text {
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .final-wish {
+            font-size: 1.15rem;
+            color: var(--star-gold);
+            font-weight: 400;
+            text-align: center !important;
+            margin-top: 15px;
+        }
+        
+        /* Stars list style */
+        .stars-description {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            margin: 15px 0;
+            border-right: 3px solid;
+        }
+        
+        .stars-description.serious {
+            border-color: var(--serious-blue);
+        }
+        
+        .stars-description.playful {
+            border-color: var(--playful-pink);
+        }
+        
+        /* ===== NAVIGATION ===== */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 650px;
+            margin-top: 30px;
+            padding: 0 10px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.5s forwards;
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-light);
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--star-gold);
+            transform: scale(1.02);
+        }
+        
+        .nav-btn.next {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.15) 0%, rgba(255, 215, 0, 0.2) 50%, rgba(255, 158, 181, 0.15) 100%);
+            border-color: var(--star-gold);
+        }
+        
+        .nav-btn.next:hover {
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.25) 0%, rgba(255, 215, 0, 0.35) 50%, rgba(255, 158, 181, 0.25) 100%);
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        /* ===== PROGRESS DOTS ===== */
+        .progress {
+            display: flex;
+            gap: 8px;
+            margin-top: 25px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 1.8s forwards;
+        }
+        
+        .progress-dot {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .progress-dot:hover {
+            transform: scale(1.4);
+            box-shadow: 0 0 10px currentColor;
+        }
+        
+        /* Unique colors for each star */
+        .progress-dot.star-creativity {
+            background: linear-gradient(135deg, #FFD700, #FF8C42, #FF6B9D, #9D4EDD, #4EA8DE);
+        }
+        .progress-dot.star-heart {
+            background: #FF9EB5;
+        }
+        .progress-dot.star-persistence {
+            background: #FFD700;
+        }
+        .progress-dot.star-humor {
+            background: #FF9F43;
+        }
+        .progress-dot.star-courage {
+            background: #FF6B6B;
+        }
+        .progress-dot.star-wisdom {
+            background: #4A90A4;
+        }
+        .progress-dot.star-dreams {
+            background: linear-gradient(135deg, #9B72CF, #E8A4C9, #7EC8E3);
+        }
+        .progress-dot.star-generosity {
+            background: linear-gradient(135deg, #06D6A0, #FFD700);
+        }
+        .progress-dot.star-love {
+            background: linear-gradient(135deg, #FF6B8A, #E63946, #FFD700);
+        }
+        .progress-dot.star-ours {
+            background: linear-gradient(135deg, var(--serious-blue), var(--star-gold), var(--playful-pink), var(--star8-generous), var(--star5-courage));
+        }
+        
+        .progress-dot.active {
+            box-shadow: 0 0 15px var(--star-gold);
+            transform: scale(1.3);
+        }
+        
+        .progress-dot:not(.visited):not(.active) {
+            opacity: 0.3;
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes merge-pulse {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes home-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 15px var(--home-warm));
+            }
+            50% { 
+                filter: drop-shadow(0 0 30px var(--star-gold));
+            }
+        }
+        
+        @keyframes collision-wave {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(0.8); opacity: 0.6; }
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .star-title {
+                font-size: 1.3rem;
+            }
+            
+            .star-title span {
+                font-size: 1.6rem;
+            }
+            
+            .message-box {
+                padding: 25px 20px;
+            }
+            
+            .message-box p {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .stars-description {
+                font-size: 0.9rem;
+                padding: 12px;
+            }
+            
+            .nav-btn {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- STARS BACKGROUND -->
+    <div class="stars-bg">
+        <div class="star-dot" style="top: 5%; left: 10%; width: 2px; height: 2px; --duration: 3s; --delay: 0s;"></div>
+        <div class="star-dot" style="top: 12%; left: 85%; width: 3px; height: 3px; --duration: 2.5s; --delay: 0.5s;"></div>
+        <div class="star-dot" style="top: 25%; left: 20%; width: 2px; height: 2px; --duration: 4s; --delay: 1s;"></div>
+        <div class="star-dot" style="top: 18%; left: 65%; width: 2px; height: 2px; --duration: 3.5s; --delay: 0.3s;"></div>
+        <div class="star-dot" style="top: 35%; left: 92%; width: 2px; height: 2px; --duration: 2.8s; --delay: 0.7s;"></div>
+        <div class="star-dot" style="top: 45%; left: 5%; width: 3px; height: 3px; --duration: 3.2s; --delay: 1.2s;"></div>
+        <div class="star-dot" style="top: 55%; left: 78%; width: 2px; height: 2px; --duration: 2.6s; --delay: 0.4s;"></div>
+        <div class="star-dot" style="top: 65%; left: 15%; width: 2px; height: 2px; --duration: 3.8s; --delay: 0.9s;"></div>
+        <div class="star-dot" style="top: 75%; left: 88%; width: 2px; height: 2px; --duration: 3s; --delay: 1.5s;"></div>
+        <div class="star-dot" style="top: 82%; left: 40%; width: 3px; height: 3px; --duration: 2.4s; --delay: 0.2s;"></div>
+        <div class="star-dot" style="top: 90%; left: 70%; width: 2px; height: 2px; --duration: 3.4s; --delay: 0.8s;"></div>
+        <div class="star-dot" style="top: 8%; left: 45%; width: 2px; height: 2px; --duration: 2.9s; --delay: 1.1s;"></div>
+    </div>
+    
+    <!-- UNITY GLOW OVERLAY -->
+    <div class="unity-glow"></div>
+    
+    <!-- FLOATING SYMBOLS FROM ALL STARS -->
+    <div class="floating-symbols">
+        <!-- All star symbols united -->
+        <div class="floating-symbol" style="left: 3%; --duration: 28s; --delay: 0s;">🎨</div>
+        <div class="floating-symbol" style="left: 12%; --duration: 25s; --delay: 2s;">💛</div>
+        <div class="floating-symbol" style="left: 22%; --duration: 30s; --delay: 4s;">⭐</div>
+        <div class="floating-symbol" style="left: 32%; --duration: 24s; --delay: 1s;">😊</div>
+        <div class="floating-symbol" style="left: 42%; --duration: 26s; --delay: 3s;">🦁</div>
+        <div class="floating-symbol" style="left: 52%; --duration: 22s; --delay: 5s;">🦉</div>
+        <div class="floating-symbol" style="left: 62%; --duration: 27s; --delay: 0.5s;">🌙</div>
+        <div class="floating-symbol" style="left: 72%; --duration: 29s; --delay: 2.5s;">🎁</div>
+        <div class="floating-symbol" style="left: 82%; --duration: 23s; --delay: 4.5s;">❤️</div>
+        <div class="floating-symbol" style="left: 92%; --duration: 31s; --delay: 1.5s;">🏠</div>
+    </div>
+    
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        
+        <!-- Star Title -->
+        <h1 class="star-title">
+            <span>🏠</span> הכוכב שלנו <span>🏠</span>
+        </h1>
+        
+        <!-- Scene: Two stars merging into one - Our Home -->
+        <div class="scene-container">
+            <svg viewBox="0 0 550 700" xmlns="http://www.w3.org/2000/svg" style="direction: ltr;">
+                <defs>
+                    <!-- Spaceship gradients -->
+                    <linearGradient id="spaceshipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#F5E6D3"/>
+                        <stop offset="100%" style="stop-color:#E8D4C0"/>
+                    </linearGradient>
+                    <linearGradient id="windowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#7EB8DA"/>
+                        <stop offset="100%" style="stop-color:#5A9BC7"/>
+                    </linearGradient>
+                    <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FFE4B5"/>
+                        <stop offset="100%" style="stop-color:#F5D5B5"/>
+                    </linearGradient>
+                    
+                    <!-- Serious Star (Left) - Blue/Silver/Gray -->
+                    <radialGradient id="seriousStarCore" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#E8EEF4"/>
+                        <stop offset="30%" style="stop-color:#A8BDD4"/>
+                        <stop offset="60%" style="stop-color:#6B8AAF"/>
+                        <stop offset="100%" style="stop-color:#4A6FA5"/>
+                    </radialGradient>
+                    <radialGradient id="seriousGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:rgba(192, 192, 192, 0.5)"/>
+                        <stop offset="100%" style="stop-color:rgba(74, 111, 165, 0)"/>
+                    </radialGradient>
+                    
+                    <!-- Playful Star (Right) - Pink/Orange/Yellow -->
+                    <radialGradient id="playfulStarCore" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFF5E6"/>
+                        <stop offset="30%" style="stop-color:#FFD4A8"/>
+                        <stop offset="60%" style="stop-color:#FFB6C8"/>
+                        <stop offset="100%" style="stop-color:#FF9EB5"/>
+                    </radialGradient>
+                    <radialGradient id="playfulGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:rgba(255, 230, 102, 0.5)"/>
+                        <stop offset="100%" style="stop-color:rgba(255, 158, 181, 0)"/>
+                    </radialGradient>
+                    
+                    <!-- Meeting Point - Home - All colors gradient -->
+                    <radialGradient id="homeCore" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#FFF8E7"/>
+                        <stop offset="20%" style="stop-color:#FFE4B5"/>
+                        <stop offset="50%" style="stop-color:#FFD700"/>
+                        <stop offset="100%" style="stop-color:#FFA500"/>
+                    </radialGradient>
+                    <radialGradient id="homeGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:rgba(255, 248, 231, 0.8)"/>
+                        <stop offset="50%" style="stop-color:rgba(255, 215, 0, 0.4)"/>
+                        <stop offset="100%" style="stop-color:rgba(255, 165, 0, 0)"/>
+                    </radialGradient>
+                    
+                    <!-- Unity gradient - all colors combined -->
+                    <linearGradient id="unityGradient" x1="0%" y1="50%" x2="100%" y2="50%">
+                        <stop offset="0%" style="stop-color:#4A6FA5"/>
+                        <stop offset="15%" style="stop-color:#6B8AAF"/>
+                        <stop offset="30%" style="stop-color:#9B72CF"/>
+                        <stop offset="45%" style="stop-color:#FFD700"/>
+                        <stop offset="60%" style="stop-color:#06D6A0"/>
+                        <stop offset="75%" style="stop-color:#FFB6C8"/>
+                        <stop offset="100%" style="stop-color:#FF9EB5"/>
+                    </linearGradient>
+                    
+                    <!-- All stars colors ring -->
+                    <linearGradient id="allStarsRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF6B9D"/>
+                        <stop offset="11%" style="stop-color:#FF9EB5"/>
+                        <stop offset="22%" style="stop-color:#FFD700"/>
+                        <stop offset="33%" style="stop-color:#FF9F43"/>
+                        <stop offset="44%" style="stop-color:#FF6B6B"/>
+                        <stop offset="55%" style="stop-color:#4A90A4"/>
+                        <stop offset="66%" style="stop-color:#9B72CF"/>
+                        <stop offset="77%" style="stop-color:#06D6A0"/>
+                        <stop offset="88%" style="stop-color:#E63946"/>
+                        <stop offset="100%" style="stop-color:#FFD700"/>
+                    </linearGradient>
+                    
+                    <!-- Collision light gradient -->
+                    <radialGradient id="collisionLight" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:rgba(255, 255, 255, 0.9)"/>
+                        <stop offset="30%" style="stop-color:rgba(255, 215, 0, 0.5)"/>
+                        <stop offset="100%" style="stop-color:rgba(255, 215, 0, 0)"/>
+                    </radialGradient>
+                    
+                    <!-- Glow filters -->
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="softGlow">
+                        <feGaussianBlur stdDeviation="6" result="blur"/>
+                        <feMerge>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="strongGlow">
+                        <feGaussianBlur stdDeviation="10" result="blur"/>
+                        <feFlood flood-color="#FFD700" flood-opacity="0.5"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <filter id="homeGlowFilter">
+                        <feGaussianBlur stdDeviation="12" result="blur"/>
+                        <feFlood flood-color="#FFF8E7" flood-opacity="0.6"/>
+                        <feComposite in2="blur" operator="in"/>
+                        <feMerge>
+                            <feMergeNode/>
+                            <feMergeNode in="blur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    
+                    <!-- Clip path for left half -->
+                    <clipPath id="leftHalf">
+                        <rect x="100" y="280" width="120" height="220"/>
+                    </clipPath>
+                    
+                    <!-- Clip path for right half -->
+                    <clipPath id="rightHalf">
+                        <rect x="330" y="280" width="120" height="220"/>
+                    </clipPath>
+                </defs>
+                
+                <!-- ===== THE MERGED STAR - TWO BECOMING ONE ===== -->
+                <g transform="translate(275, 430)">
+                    
+                    <!-- Outermost aura - all colors united -->
+                    <ellipse cx="0" cy="0" rx="200" ry="180" fill="url(#homeGlow)" opacity="0.25">
+                        <animate attributeName="rx" values="195;210;195" dur="8s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="0.2;0.35;0.2" dur="8s" repeatCount="indefinite"/>
+                    </ellipse>
+                    
+                    <!-- Collision light waves emanating from center -->
+                    <g opacity="0.3">
+                        <ellipse cx="0" cy="0" rx="160" ry="145" fill="none" stroke="url(#allStarsRing)" stroke-width="2" stroke-dasharray="15 8">
+                            <animate attributeName="rx" values="155;175;155" dur="5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.2;0.4;0.2" dur="5s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="0" rx="180" ry="165" fill="none" stroke="url(#unityGradient)" stroke-width="1.5" stroke-dasharray="20 10">
+                            <animate attributeName="rx" values="175;195;175" dur="6s" repeatCount="indefinite" begin="1s"/>
+                            <animate attributeName="opacity" values="0.15;0.3;0.15" dur="6s" repeatCount="indefinite" begin="1s"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- === LEFT HALF - SERIOUS STAR (Gal) === -->
+                    <g transform="translate(-70, 0)">
+                        <!-- Serious star glow -->
+                        <ellipse cx="0" cy="0" rx="85" ry="80" fill="url(#seriousGlow)" opacity="0.4">
+                            <animate attributeName="rx" values="80;90;80" dur="5s" repeatCount="indefinite"/>
+                        </ellipse>
+                        
+                        <!-- Serious star body - geometric, structured -->
+                        <g filter="url(#softGlow)">
+                            <!-- Main body -->
+                            <ellipse cx="0" cy="0" rx="65" ry="60" fill="url(#seriousStarCore)"/>
+                            
+                            <!-- Geometric patterns - lines, structure -->
+                            <g stroke="#C0C0C0" stroke-width="0.5" fill="none" opacity="0.4">
+                                <line x1="-45" y1="-30" x2="45" y2="-30"/>
+                                <line x1="-45" y1="0" x2="45" y2="0"/>
+                                <line x1="-45" y1="30" x2="45" y2="30"/>
+                                <line x1="-20" y1="-50" x2="-20" y2="50"/>
+                                <line x1="20" y1="-50" x2="20" y2="50"/>
+                            </g>
+                            
+                            <!-- Clock symbol - structure and time -->
+                            <g transform="translate(-25, -15)">
+                                <circle cx="0" cy="0" r="10" fill="#E8EEF4" stroke="#6B8AAF" stroke-width="1"/>
+                                <line x1="0" y1="0" x2="0" y2="-6" stroke="#4A6FA5" stroke-width="1.5"/>
+                                <line x1="0" y1="0" x2="4" y2="0" stroke="#4A6FA5" stroke-width="1"/>
+                            </g>
+                            
+                            <!-- Checkmarks - organization -->
+                            <g fill="#4A6FA5" transform="translate(15, -20)">
+                                <path d="M0 0 L3 4 L8 -3" fill="none" stroke="#4A6FA5" stroke-width="1.5"/>
+                            </g>
+                            <g fill="#4A6FA5" transform="translate(15, 5)">
+                                <path d="M0 0 L3 4 L8 -3" fill="none" stroke="#6B8AAF" stroke-width="1.5"/>
+                            </g>
+                            <g fill="#4A6FA5" transform="translate(15, 30)">
+                                <path d="M0 0 L3 4 L8 -3" fill="none" stroke="#A8BDD4" stroke-width="1.5"/>
+                            </g>
+                            
+                            <!-- List lines -->
+                            <g stroke="#A8BDD4" stroke-width="1" opacity="0.6">
+                                <line x1="-35" y1="-18" x2="-10" y2="-18"/>
+                                <line x1="-35" y1="7" x2="-10" y2="7"/>
+                                <line x1="-35" y1="32" x2="-10" y2="32"/>
+                            </g>
+                        </g>
+                        
+                        <!-- "6 hours" indicator - small clock showing 6 -->
+                        <g transform="translate(-35, 45)" opacity="0.6">
+                            <text font-size="8" fill="#C0C0C0" text-anchor="middle">6h</text>
+                        </g>
+                    </g>
+                    
+                    <!-- === RIGHT HALF - PLAYFUL STAR (Ben) === -->
+                    <g transform="translate(70, 0)">
+                        <!-- Playful star glow -->
+                        <ellipse cx="0" cy="0" rx="85" ry="80" fill="url(#playfulGlow)" opacity="0.4">
+                            <animate attributeName="rx" values="80;90;80" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                        </ellipse>
+                        
+                        <!-- Playful star body - organic, wavy, fun -->
+                        <g filter="url(#softGlow)">
+                            <!-- Main body - more organic shape -->
+                            <ellipse cx="0" cy="0" rx="65" ry="60" fill="url(#playfulStarCore)"/>
+                            
+                            <!-- Wavy patterns -->
+                            <g stroke="#FFB6C8" stroke-width="1" fill="none" opacity="0.4">
+                                <path d="M-40,-25 Q-20,-35 0,-25 Q20,-15 40,-25">
+                                    <animate attributeName="d" values="M-40,-25 Q-20,-35 0,-25 Q20,-15 40,-25; M-40,-25 Q-20,-15 0,-25 Q20,-35 40,-25; M-40,-25 Q-20,-35 0,-25 Q20,-15 40,-25" dur="4s" repeatCount="indefinite"/>
+                                </path>
+                                <path d="M-40,5 Q-20,-5 0,5 Q20,15 40,5">
+                                    <animate attributeName="d" values="M-40,5 Q-20,-5 0,5 Q20,15 40,5; M-40,5 Q-20,15 0,5 Q20,-5 40,5; M-40,5 Q-20,-5 0,5 Q20,15 40,5" dur="4.5s" repeatCount="indefinite"/>
+                                </path>
+                            </g>
+                            
+                            <!-- Cookie - playfulness -->
+                            <g transform="translate(-20, -15)">
+                                <circle cx="0" cy="0" r="12" fill="#E8B87D" stroke="#C9915A" stroke-width="1"/>
+                                <circle cx="-4" cy="-3" r="2" fill="#6B4423"/>
+                                <circle cx="3" cy="-2" r="1.5" fill="#6B4423"/>
+                                <circle cx="-2" cy="4" r="2" fill="#6B4423"/>
+                                <circle cx="5" cy="3" r="1.5" fill="#6B4423"/>
+                            </g>
+                            
+                            <!-- Balloon -->
+                            <g transform="translate(25, -20)">
+                                <ellipse cx="0" cy="0" rx="8" ry="10" fill="#FF9EB5">
+                                    <animate attributeName="cy" values="0;-3;0" dur="3s" repeatCount="indefinite"/>
+                                </ellipse>
+                                <path d="M0 10 Q2 15 0 20" stroke="#FF9EB5" stroke-width="1" fill="none"/>
+                            </g>
+                            
+                            <!-- Smiling mini stars -->
+                            <g transform="translate(-30, 25)">
+                                <polygon points="0,-8 2,-3 7,-3 3,0 5,5 0,2 -5,5 -3,0 -7,-3 -2,-3" fill="#FFE066" transform="scale(0.6)"/>
+                                <circle cx="-2" cy="-2" r="1" fill="#FF9F43"/>
+                                <circle cx="2" cy="-2" r="1" fill="#FF9F43"/>
+                                <path d="M-2 1 Q0 3 2 1" stroke="#FF9F43" stroke-width="0.5" fill="none"/>
+                            </g>
+                            <g transform="translate(30, 30)">
+                                <polygon points="0,-8 2,-3 7,-3 3,0 5,5 0,2 -5,5 -3,0 -7,-3 -2,-3" fill="#FFD4A8" transform="scale(0.5)"/>
+                            </g>
+                            
+                            <!-- Cloud puffs -->
+                            <g fill="rgba(255,255,255,0.3)" transform="translate(10, 10)">
+                                <ellipse cx="0" cy="0" rx="8" ry="5"/>
+                                <ellipse cx="6" cy="2" rx="6" ry="4"/>
+                                <ellipse cx="-5" cy="2" rx="5" ry="3"/>
+                            </g>
+                        </g>
+                        
+                        <!-- Fun day indicator -->
+                        <g transform="translate(35, 45)" opacity="0.6">
+                            <text font-size="8" fill="#FFB6C8" text-anchor="middle">🎉</text>
+                        </g>
+                    </g>
+                    
+                    <!-- === CENTER - WHERE THEY MEET - HOME === -->
+                    <g filter="url(#homeGlowFilter)">
+                        <!-- Collision light effect -->
+                        <ellipse cx="0" cy="0" rx="60" ry="55" fill="url(#collisionLight)" opacity="0.6">
+                            <animate attributeName="rx" values="55;65;55" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.4;0.7;0.4" dur="4s" repeatCount="indefinite"/>
+                        </ellipse>
+                        
+                        <!-- The meeting point - golden home core -->
+                        <ellipse cx="0" cy="0" rx="45" ry="42" fill="url(#homeCore)">
+                            <animate attributeName="rx" values="43;47;43" dur="3s" repeatCount="indefinite"/>
+                        </ellipse>
+                        
+                        <!-- Inner bright core -->
+                        <ellipse cx="0" cy="0" rx="28" ry="25" fill="#FFF8E7" opacity="0.7">
+                            <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.5s" repeatCount="indefinite"/>
+                        </ellipse>
+                        
+                        <!-- Home/House symbol at center -->
+                        <g transform="translate(0, -5)">
+                            <!-- House body -->
+                            <rect x="-15" y="0" width="30" height="25" fill="#FFE4B5" stroke="#DEB887" stroke-width="1"/>
+                            <!-- Roof -->
+                            <polygon points="-20,0 0,-18 20,0" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+                            <!-- Door -->
+                            <rect x="-5" y="10" width="10" height="15" fill="#DEB887" stroke="#CD853F" stroke-width="0.5"/>
+                            <!-- Window -->
+                            <rect x="-12" y="5" width="7" height="7" fill="#87CEEB" stroke="#DEB887" stroke-width="0.5"/>
+                            <rect x="5" y="5" width="7" height="7" fill="#87CEEB" stroke="#DEB887" stroke-width="0.5"/>
+                            <!-- Heart on door -->
+                            <path d="M0 15 C0 13, -3 12, -4 14 C-5 16, -5 18, 0 22 C5 18, 5 16, 4 14 C3 12, 0 13, 0 15" 
+                                  fill="#E63946" transform="scale(0.5) translate(0, 10)"/>
+                        </g>
+                        
+                        <!-- Light rays from home -->
+                        <g opacity="0.4">
+                            <line x1="0" y1="-50" x2="0" y2="-70" stroke="#FFD700" stroke-width="2">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="35" y1="-35" x2="50" y2="-50" stroke="#FFD700" stroke-width="2">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+                            </line>
+                            <line x1="-35" y1="-35" x2="-50" y2="-50" stroke="#FFD700" stroke-width="2">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.1s" repeatCount="indefinite" begin="0.5s"/>
+                            </line>
+                            <line x1="50" y1="0" x2="70" y2="0" stroke="#FFD700" stroke-width="2">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.3s" repeatCount="indefinite" begin="0.2s"/>
+                            </line>
+                            <line x1="-50" y1="0" x2="-70" y2="0" stroke="#FFD700" stroke-width="2">
+                                <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+                            </line>
+                        </g>
+                    </g>
+                    
+                    <!-- Ring of all star colors around the merged star -->
+                    <ellipse cx="0" cy="0" rx="130" ry="120" fill="none" stroke="url(#allStarsRing)" stroke-width="3" opacity="0.5">
+                        <animateTransform attributeName="transform" type="rotate" values="0;360" dur="40s" repeatCount="indefinite"/>
+                    </ellipse>
+                    
+                    <!-- Small symbols from all previous stars floating around -->
+                    <g filter="url(#glow)" opacity="0.7">
+                        <!-- Creativity - paintbrush/color -->
+                        <g transform="translate(-120, -60)">
+                            <polygon points="0,-6 1.5,-2 6,-2 2.5,1 4,5 0,2.5 -4,5 -2.5,1 -6,-2 -1.5,-2" fill="#FF6B9D">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite"/>
+                            </polygon>
+                            <animateTransform attributeName="transform" type="translate" values="-120,-60; -125,-65; -120,-60" dur="5s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Heart - kindness -->
+                        <g transform="translate(120, -50)">
+                            <path d="M0 -4 C0 -8, -8 -10, -10 -4 C-12 2, -12 6, 0 14 C12 6, 12 2, 10 -4 C8 -10, 0 -8, 0 -4" fill="#FF9EB5" transform="scale(0.5)">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
+                            </path>
+                            <animateTransform attributeName="transform" type="translate" values="120,-50; 125,-55; 120,-50" dur="4.5s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Gold star - persistence -->
+                        <g transform="translate(-100, 70)">
+                            <polygon points="0,-7 2,-2.5 7,-2.5 3,0.5 5,5.5 0,2.5 -5,5.5 -3,0.5 -7,-2.5 -2,-2.5" fill="#FFD700" transform="scale(0.6)">
+                                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.8s" repeatCount="indefinite"/>
+                            </polygon>
+                            <animateTransform attributeName="transform" type="translate" values="-100,70; -105,65; -100,70" dur="5.5s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Orange circle - humor -->
+                        <g transform="translate(110, 60)">
+                            <circle cx="0" cy="0" r="5" fill="#FF9F43">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.2s" repeatCount="indefinite" begin="0.3s"/>
+                            </circle>
+                            <animateTransform attributeName="transform" type="translate" values="110,60; 115,55; 110,60" dur="4.8s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Red flame - courage -->
+                        <g transform="translate(-85, -100)">
+                            <path d="M0 5 Q-4 0 -2 -5 Q0 -8 2 -5 Q4 0 0 5" fill="#FF6B6B" transform="scale(0.8)">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.5s" repeatCount="indefinite"/>
+                            </path>
+                            <animateTransform attributeName="transform" type="translate" values="-85,-100; -90,-105; -85,-100" dur="4s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Blue drop - wisdom -->
+                        <g transform="translate(90, -95)">
+                            <ellipse cx="0" cy="0" rx="4" ry="5" fill="#4A90A4">
+                                <animate attributeName="opacity" values="0.4;0.85;0.4" dur="3.3s" repeatCount="indefinite" begin="0.8s"/>
+                            </ellipse>
+                            <animateTransform attributeName="transform" type="translate" values="90,-95; 95,-100; 90,-95" dur="5.2s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Purple moon - dreams -->
+                        <g transform="translate(-60, 100)">
+                            <path d="M0 -6 Q4 -6 4 0 Q4 6 0 6 Q-2 4 -2 0 Q-2 -4 0 -6" fill="#9B72CF" transform="scale(0.8)">
+                                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite"/>
+                            </path>
+                            <animateTransform attributeName="transform" type="translate" values="-60,100; -65,95; -60,100" dur="6s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Green leaf - generosity -->
+                        <g transform="translate(70, 95)">
+                            <ellipse cx="0" cy="0" rx="3" ry="6" fill="#06D6A0" transform="rotate(-30)">
+                                <animate attributeName="opacity" values="0.5;0.85;0.5" dur="3.6s" repeatCount="indefinite" begin="0.5s"/>
+                            </ellipse>
+                            <animateTransform attributeName="transform" type="translate" values="70,95; 75,90; 70,95" dur="5s" repeatCount="indefinite"/>
+                        </g>
+                        
+                        <!-- Deep red heart - love -->
+                        <g transform="translate(0, 115)">
+                            <path d="M0 -4 C0 -8, -6 -9, -8 -4 C-10 1, -10 5, 0 12 C10 5, 10 1, 8 -4 C6 -9, 0 -8, 0 -4" fill="#E63946" transform="scale(0.5)">
+                                <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite"/>
+                            </path>
+                            <animateTransform attributeName="transform" type="translate" values="0,115; 0,110; 0,115" dur="4s" repeatCount="indefinite"/>
+                        </g>
+                    </g>
+                    
+                    <!-- Sparkle particles - unity celebration -->
+                    <g fill="#FFD700" filter="url(#glow)">
+                        <circle cx="-80" cy="30" r="2">
+                            <animate attributeName="opacity" values="0;0.8;0" dur="4s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="30;-10;30" dur="4s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="75" cy="40" r="1.5">
+                            <animate attributeName="opacity" values="0;0.7;0" dur="5s" repeatCount="indefinite" begin="1s"/>
+                            <animate attributeName="cy" values="40;0;40" dur="5s" repeatCount="indefinite" begin="1s"/>
+                        </circle>
+                        <circle cx="-40" cy="60" r="2">
+                            <animate attributeName="opacity" values="0;0.75;0" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                            <animate attributeName="cy" values="60;20;60" dur="4.5s" repeatCount="indefinite" begin="0.5s"/>
+                        </circle>
+                        <circle cx="45" cy="55" r="1.5">
+                            <animate attributeName="opacity" values="0;0.65;0" dur="5.5s" repeatCount="indefinite" begin="2s"/>
+                            <animate attributeName="cy" values="55;15;55" dur="5.5s" repeatCount="indefinite" begin="2s"/>
+                        </circle>
+                    </g>
+                </g>
+                
+                <!-- ===== SPACESHIP FLOATING ABOVE THE HOME ===== -->
+                <g transform="translate(275, 95)">
+                    <animateTransform 
+                        attributeName="transform" 
+                        type="translate" 
+                        values="275,95; 275,82; 275,95" 
+                        dur="5s" 
+                        repeatCount="indefinite"
+                        additive="replace"/>
+                    
+                    <!-- Engine flames (home colors - gold/warm) -->
+                    <g transform="translate(0, 45)">
+                        <ellipse cx="-25" cy="25" rx="6" ry="12" fill="#FFD700" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.3s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="0" cy="28" rx="8" ry="15" fill="#FFA500" opacity="0.9">
+                            <animate attributeName="ry" values="12;18;12" dur="0.25s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="25" cy="25" rx="6" ry="12" fill="#FFD700" opacity="0.8">
+                            <animate attributeName="ry" values="10;15;10" dur="0.35s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <!-- Inner flame - bright core -->
+                        <ellipse cx="0" cy="26" rx="4" ry="10" fill="#FFF8E7" opacity="0.9">
+                            <animate attributeName="ry" values="8;12;8" dur="0.2s" repeatCount="indefinite"/>
+                        </ellipse>
+                    </g>
+                    
+                    <!-- Spaceship body -->
+                    <ellipse cx="0" cy="25" rx="55" ry="28" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Dome -->
+                    <ellipse cx="0" cy="8" rx="35" ry="20" fill="url(#spaceshipBody)" stroke="#C4A080" stroke-width="2"/>
+                    
+                    <!-- Heart window with Gal & Ben inside -->
+                    <path d="M0 -5 C0 -12, -10 -15, -17 -8 C-24 -1, -24 10, 0 25 C24 10, 24 -1, 17 -8 C10 -15, 0 -12, 0 -5" 
+                          fill="url(#windowBlue)" stroke="#4A90A4" stroke-width="1.5"/>
+                    
+                    <!-- Gal inside (left) -->
+                    <g transform="translate(-8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#1a1a1a"/>
+                        <circle cx="-2" cy="0" r="1" fill="#5D4037"/>
+                        <circle cx="2" cy="0" r="1" fill="#5D4037"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Ben inside (right) -->
+                    <g transform="translate(8, 5)">
+                        <circle cx="0" cy="0" r="6" fill="url(#skin)"/>
+                        <ellipse cx="0" cy="-4" rx="5" ry="4" fill="#6B4423"/>
+                        <circle cx="-2" cy="0" r="1" fill="#4A8B5C"/>
+                        <circle cx="2" cy="0" r="1" fill="#4A8B5C"/>
+                        <path d="M-2 3 Q0 5 2 3" stroke="#C4846C" stroke-width="0.8" fill="none"/>
+                    </g>
+                    
+                    <!-- Wings -->
+                    <path d="M-55 25 L-80 45 L-80 52 L-52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    <path d="M55 25 L80 45 L80 52 L52 38" fill="#E8D4C0" stroke="#C4A080" stroke-width="1.5"/>
+                    
+                    <!-- Flag (home gold) -->
+                    <line x1="0" y1="-12" x2="0" y2="-30" stroke="#C4A080" stroke-width="1.5"/>
+                    <polygon points="0,-30 15,-25 0,-19" fill="#FFD700"/>
+                </g>
+                
+                <!-- Extra decorative sparkles -->
+                <g fill="#FFD700" filter="url(#glow)">
+                    <polygon points="70,180 72,186 78,186 73,190 75,196 70,192 65,196 67,190 62,186 68,186" opacity="0.4">
+                        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite"/>
+                    </polygon>
+                    <polygon points="480,160 481,164 485,164 482,167 483,171 480,168 477,171 478,167 475,164 479,164" opacity="0.35">
+                        <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3.5s" repeatCount="indefinite" begin="0.5s"/>
+                    </polygon>
+                </g>
+            </svg>
+        </div>
+        
+        <!-- Message Box -->
+        <div class="message-box">
+            <p>
+                <span class="highlight">הכוכב שלנו</span> הוא כוכב מעניין. למדע עדיין אין תשובות לאיך הוא נוצר, אבל הדעה הרווחת היא שהוא התחיל מ-<span class="merge-text">2 כוכבים שונים לחלוטין</span>.
+            </p>
+            
+            <div class="stars-description serious">
+                <strong class="serious-text">כוכב אחד:</strong> רציני תמיד, מסודר כל הזמן. לתושבים בו יש 6 שעות שינה במקסימום (גם בסופ״שים). האדמה בו קשה ולא סלחנית לטעויות, ותמיד יש מישהו בכניסה שבודק שהכל מתבצע כמו שצריך.
+            </div>
+            
+            <div class="stars-description playful">
+                <strong class="playful-text">כוכב שני:</strong> שטותניק גדול. לפעמים מסודר ולפעמים לא. התושבים בו נהנים מיום כיף כל יום. האדמה בו קפיצית, ותמיד יש מישהו בכניסה לכוכב שמחלק עוגיות. 🍪
+            </div>
+            
+            <p class="special-text">
+                אומרים שהיתה הפרעה בזמן ובמרחב והכוכבים האלו <span class="merge-text">נמשכו זה לזה במהירות מטורפת</span>. התנגשו זה בזה, ונהיו <span class="home-text">כוכב אחד</span>.
+            </p>
+            
+            <p>
+                כוכב שבו יש גם מקום לרגשות וגם לפעולות. כוכב שבו יש גם מקום לרשימות מטרות וגם מקום לדמיון ושינויים.
+            </p>
+            
+            <p class="warm-text">
+                זה הכוכב שלנו. 🏠
+            </p>
+            
+            <p>
+                לתושבים של כל אחד מהכוכבים לא היה קל להסתדר זה עם זה בהתחלה. לאלו מהכוכב הראשון היה קשה עם הסלחנות והגמישות של חצי הכוכב השני. לאלו מהכוכב השני היה קשה עם המשטר הקפדני של חצי הכוכב הראשון.
+            </p>
+            
+            <p class="special-text">
+                אבל אז קרה משהו מיוחד.
+            </p>
+            
+            <p>
+                התושבים התחילו ללמוד אחד מהשני. אלו מהכוכב הרציני למדו שאפשר לישון יותר מ-6 שעות ושהעולם לא קורס. אלו מהכוכב השטותי למדו שקצת סדר ומשימות זה בעצם נחמד לפעמים.
+            </p>
+            
+            <p>
+                ובאמצע הכוכב, בדיוק היכן ששני הכוכבים המקוריים נפגשו, <span class="home-text">נוצר משהו חדש לגמרי, נוצר בית</span>.
+            </p>
+            
+            <p>
+                מקום שבו אפשר להיות רציני וגם מצחיק. מסודר וגם ספונטני. מתוכנן וגם גמיש. מקום שבו 6 שעות שינה זה בסדר, אבל 10 שעות זה גם בסדר. מקום שבו יש גם משמעת וגם עוגיות.
+            </p>
+            
+            <p>
+                בוצ, <span class="highlight">הכוכב שלנו הוא הכוכב האהוב עליי בכל היקום</span>.
+            </p>
+            
+            <p class="love-text">
+                כי הוא לא רק שלי ולא רק שלך - הוא שלנו. 💛
+            </p>
+            
+            <p>
+                והוא ממשיך לגדול כל יום. ממשיך להשתנות. ממשיך ללמוד איך להיות הגרסה הטובה ביותר של עצמו.
+            </p>
+            
+            <p class="final-wish">
+                יום הולדת שמח, אהובי. 🎂<br>
+                תודה שבנית איתי את הכוכב הזה. ❤️
+            </p>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="navigation">
+            <a href="star-09.html" class="nav-btn prev">
+                → חזרה
+            </a>
+            <a href="opening.html" class="nav-btn next">
+                סיום המסע 🎂
+            </a>
+        </div>
+        
+        <!-- Progress Dots - 10 stars (clickable) -->
+        <div class="progress">
+            <a href="star-01.html" class="progress-dot star-creativity visited" title="יצירתיות"></a>
+            <a href="star-02.html" class="progress-dot star-heart visited" title="טוב הלב"></a>
+            <a href="star-03.html" class="progress-dot star-persistence visited" title="התמדה"></a>
+            <a href="star-04.html" class="progress-dot star-humor visited" title="הומור"></a>
+            <a href="star-05.html" class="progress-dot star-courage visited" title="אומץ"></a>
+            <a href="star-06.html" class="progress-dot star-wisdom visited" title="חוכמה"></a>
+            <a href="star-07.html" class="progress-dot star-dreams visited" title="חלומות"></a>
+            <a href="star-08.html" class="progress-dot star-generosity visited" title="נדיבות"></a>
+            <a href="star-09.html" class="progress-dot star-love visited" title="אהבה"></a>
+            <a href="star-10.html" class="progress-dot star-ours active" title="השלנו"></a>
+        </div>
+        
+    </div>
+</body>
+</html>
+

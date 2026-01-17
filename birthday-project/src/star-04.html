@@ -253,11 +253,19 @@
         }
         
         .progress-dot {
+            display: block;
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .progress-dot:hover {
+            transform: scale(1.4);
+            box-shadow: 0 0 10px currentColor;
         }
         
         /* Unique colors for each star */
@@ -741,17 +749,16 @@
         
         <!-- Progress Dots - Updated to 11 stars -->
         <div class="progress">
-            <div class="progress-dot star-creativity visited" title="יצירתיות"></div>
-            <div class="progress-dot star-heart visited" title="טוב הלב"></div>
-            <div class="progress-dot star-persistence visited" title="התמדה"></div>
-            <div class="progress-dot star-humor active" title="הומור"></div>
-            <div class="progress-dot star-courage" title="אומץ"></div>
-            <div class="progress-dot star-wisdom" title="חוכמה"></div>
-            <div class="progress-dot star-dreams" title="חלומות"></div>
-            <div class="progress-dot star-strength" title="כוח פנימי"></div>
-            <div class="progress-dot star-love" title="אהבה"></div>
-            <div class="progress-dot star-generosity" title="נדיבות"></div>
-            <div class="progress-dot star-ours" title="השלנו"></div>
+            <a href="star-01.html" class="progress-dot star-creativity visited" title="יצירתיות"></a>
+            <a href="star-02.html" class="progress-dot star-heart visited" title="טוב הלב"></a>
+            <a href="star-03.html" class="progress-dot star-persistence visited" title="התמדה"></a>
+            <a href="star-04.html" class="progress-dot star-humor active" title="הומור"></a>
+            <a href="star-05.html" class="progress-dot star-courage" title="אומץ"></a>
+            <a href="star-06.html" class="progress-dot star-wisdom" title="חוכמה"></a>
+            <a href="star-07.html" class="progress-dot star-dreams" title="חלומות"></a>
+            <a href="star-08.html" class="progress-dot star-generosity" title="נדיבות"></a>
+            <a href="star-09.html" class="progress-dot star-love" title="אהבה"></a>
+            <a href="star-10.html" class="progress-dot star-ours" title="השלנו"></a>
         </div>
         
     </div>
